@@ -4,7 +4,7 @@
 
 @section('content')
 
-<form method="POST" action="/auth/register">
+<form method="POST" action="{{url('/auth/register')}}">
     {!! csrf_field() !!}
 
     <div>
