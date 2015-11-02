@@ -16,6 +16,9 @@
 
         <input type="file" name="importfile" />
         <br/>
+        <input type="checkbox" name="includesheaders" id="includesheaders" /><label for="includesheaders">First row is header row</label>
+        <br/>
+
         <input type="submit" name="submit" value="Upload" class="button"/>
     </form>
 
