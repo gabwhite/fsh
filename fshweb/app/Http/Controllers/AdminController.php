@@ -33,15 +33,16 @@ class AdminController extends Controller
             {
                 // Save file to storage for processing
 
-                $userProductImport = new UserProductImport();
-                $userProductImport->user_id = 1;
-                $userProductImport->uuid = Uuid::uuid4();
-                $userProductImport->filename = $file->getClientOriginalName();
+                $importInfo = array(
+                    'user_id' => $request->user()->id,
+                    'uuid' => Uuid::uuid4(),
+                    'filename' => $file->getClientOriginalName(),
+                    'include_headers' => true
+                    );
 
-                $file->move(storage_path('app/' . $userProductImport->uuid), $userProductImport->filename);
+                $file->move(storage_path('app/' . $importInfo['uuid']), $importInfo['filename']);
 
-                $btest = "btest";
-                //$this->dispatch(new ParseProductImport($file));
+                $this->dispatch(new ParseProductImport($importInfo));
             }
         }
 
