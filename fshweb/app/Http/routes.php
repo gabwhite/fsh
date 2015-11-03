@@ -42,7 +42,7 @@ Route::group(['middleware' => 'auth'], function()
 
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
-Route::post('auth/login', ['middleware' => 'roles', 'uses' => 'Auth\AuthController@postLogin']);
+Route::post('auth/login', ['middleware' => 'redirectonrole', 'uses' => 'Auth\AuthController@postLogin']);
 Route::get('auth/logout', 'Auth\AuthController@getLogout');
 
 // Registration routes...
