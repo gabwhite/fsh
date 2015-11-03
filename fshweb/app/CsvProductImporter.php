@@ -32,12 +32,13 @@ class CsvProductImporter implements iProductImporter
             $csv->setOffset(1); //because we don't want to insert the header
         }
 
-        $recordsProcessed = 0;
+        $recordsAdded = 0;
+        $recordsUpdated = 0;
         $recordsFailed = 0;
 
-        $csv->each(function ($row) use(&$data, &$recordsProcessed, &$recordsFailed) {
+        $csv->each(function ($row) use(&$data, &$recordsAdded, &$recordsUpdated, &$recordsFailed) {
 
-            /*
+            /* Row Structure
              *
              *CSV row format:
              *
@@ -84,16 +85,33 @@ class CsvProductImporter implements iProductImporter
              *
              */
 
-
             if ($row[0] != null)
             {
-                DB::beginTransaction();
+                \DB::beginTransaction();
 
                 try
                 {
-                    $userProduct = new \App\UserProduct();
-                    $userProduct->user_id =             $data['user_id'];
-                    $userProduct->uniquekey =           (isset($row[8])) ? $row[8] : $row[11]; // MPC or GTIN
+                    // Check to see if the record already exists (update)
+                    $userProduct = \App\UserProduct::where('uniquekey', '=', $row[8])
+                                    ->orWhere('uniquekey', '=', $row[11])->first();
+
+                    $isExisting = ($userProduct) ? true : false;
+
+                    if($isExisting)
+                    {
+                        // Clear any existing categories
+                        \DB::table('user_products_categories')->where('product_id', '=', $userProduct->id)->delete();
+
+                        // Clear any existing allergens
+                        \DB::table('user_products_allergens')->where('product_id', '=', $userProduct->id)->delete();
+                    }
+                    else
+                    {
+                        $userProduct = new \App\UserProduct();
+                        $userProduct->user_id = $data['user_id'];
+                        $userProduct->uniquekey = (isset($row[8])) ? $row[8] : $row[11]; // MPC or GTIN
+                    }
+
                     $userProduct->name =                $row[3];
                     $userProduct->brand =               $row[4];
                     $userProduct->pack =                $row[5];
@@ -133,7 +151,11 @@ class CsvProductImporter implements iProductImporter
                     $userProduct->serving_size =        0;
                     $userProduct->vendor_logo =         '';
                     $userProduct->pos_pdf =             '';
-                    $userProduct->published =           false;
+
+                    if(!$isExisting)
+                    {
+                        $userProduct->published = $data['add_as_active'];
+                    }
 
                     $userProduct->save();
 
@@ -157,14 +179,14 @@ class CsvProductImporter implements iProductImporter
                     if($row[32] == 'Y') { $this->createUserAllergen(8, $userProduct->id); }
                     if($row[33] == 'Y') { $this->createUserAllergen(3, $userProduct->id); }
 
-                    DB::commit();
+                    \DB::commit();
 
-                    $recordsProcessed += 1;
+                    ($isExisting) ? $recordsUpdated += 1 : $recordsAdded += 1;
 
                 }
-                catch(Exception $ex)
+                catch(\Exception $ex)
                 {
-                    DB::rollBack();
+                    \DB::rollBack();
                     $recordsFailed +=1 ;
                 }
 
@@ -173,7 +195,7 @@ class CsvProductImporter implements iProductImporter
         });
 
 
-        echo sprintf('Import complete, %s records imported, %s records failed', $recordsProcessed, $recordsFailed);
+        echo sprintf('Import complete, %s records added, %s records updated, %s records failed', $recordsAdded, $recordsUpdated, $recordsFailed);
 
     }
 

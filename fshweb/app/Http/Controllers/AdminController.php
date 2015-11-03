@@ -37,7 +37,8 @@ class AdminController extends Controller
                     'user_id' => $request->user()->id,
                     'uuid' => Uuid::uuid4(),
                     'filename' => $file->getClientOriginalName(),
-                    'include_headers' => $request->input('includesheaders') ? true : false
+                    'include_headers' => $request->input('includesheaders') ? true : false,
+                    'add_as_active' => $request->input('addasactive') ? true : false
                     );
 
                 $file->move(storage_path('app/' . $importInfo['uuid']), $importInfo['filename']);

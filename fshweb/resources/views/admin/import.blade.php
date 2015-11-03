@@ -16,9 +16,10 @@
 
         <input type="file" name="importfile" />
         <br/>
-        <input type="checkbox" name="includesheaders" id="includesheaders" /><label for="includesheaders">First row is header row</label>
+        <input type="checkbox" name="includesheaders" id="includesheaders" checked="checked"/><label for="includesheaders">First row is header row</label>
         <br/>
-
+        <input type="checkbox" name="addasactive" id="addasactive"/><label for="addasactive">Add new entries as active</label>
+        <br/>
         <input type="submit" name="submit" value="Upload" class="button"/>
     </form>
 
