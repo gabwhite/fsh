@@ -20,17 +20,25 @@ Route::get('/Search', function()
     return view('search');
 });
 
-// Admin routes
-Route::get('admin/', 'AdminController@index');
-Route::get('admin/users', 'AdminController@showUsers');
-Route::get('admin/userview/{id}', 'AdminController@viewUser');
-Route::post('admin/edituser', 'AdminController@editUser');
-Route::get('admin/import', 'AdminController@showImport');
-Route::post('admin/import', 'AdminController@doImport');
-Route::get('admin/roles', 'AdminController@showRoles');
-Route::post('admin/roles', 'AdminController@editRoles');
-Route::get('admin/permissions/{id?}', 'AdminController@showPermissions');
-Route::post('admin/permissions', 'AdminController@editPermissions');
+
+Route::group(['middleware' => 'auth'], function()
+{
+
+    // Admin routes
+    Route::get('admin/', 'AdminController@index');
+    Route::get('admin/users', 'AdminController@showUsers');
+    Route::get('admin/userview/{id}', 'AdminController@viewUser');
+    Route::post('admin/edituser', 'AdminController@editUser');
+    Route::get('admin/import', 'AdminController@showImport');
+    Route::post('admin/import', 'AdminController@doImport');
+    Route::get('admin/roles', 'AdminController@showRoles');
+    Route::post('admin/roles', 'AdminController@editRoles');
+    Route::get('admin/permissions/{id?}', 'AdminController@showPermissions');
+    Route::post('admin/permissions', 'AdminController@editPermissions');
+
+});
+
+
 
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
