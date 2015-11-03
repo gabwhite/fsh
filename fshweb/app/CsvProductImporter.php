@@ -32,7 +32,10 @@ class CsvProductImporter implements iProductImporter
             $csv->setOffset(1); //because we don't want to insert the header
         }
 
-        $csv->each(function ($row) use(&$data) {
+        $recordsProcessed = 0;
+        $recordsFailed = 0;
+
+        $csv->each(function ($row) use(&$data, &$recordsProcessed, &$recordsFailed) {
 
             /*
              *
@@ -84,78 +87,93 @@ class CsvProductImporter implements iProductImporter
 
             if ($row[0] != null)
             {
-                $userProduct = new \App\UserProduct();
-                $userProduct->user_id =             $data['user_id'];
-                $userProduct->uniquekey =           (isset($row[8])) ? $row[8] : $row[11]; // MPC or GTIN
-                $userProduct->name =                $row[3];
-                $userProduct->brand =               $row[4];
-                $userProduct->pack =                $row[5];
-                $userProduct->size =                $row[6];
-                $userProduct->uom =                 $row[7];
-                $userProduct->serving_size_uom =    $row[7]; // Not sure this should be duplicated
-                $userProduct->mpc =                 $row[8];
-                $userProduct->broker_contact =      $row[9];
-                $userProduct->gtin =                $row[10];
-                $userProduct->is_halal =            ($row[11] == 'Yes') ? 1 : 0;
-                $userProduct->is_organic =          ($row[12] == 'Yes') ? 1 : 0;
-                $userProduct->is_kosher =           ($row[13] == 'Yes') ? 1 : 0;
-                $userProduct->calc_size =           $row[14];
-                $userProduct->calculation_size_uom = $row[15];
-                $userProduct->calories =            $row[16];
-                $userProduct->calories_from_fat =   $row[17];
-                $userProduct->protein =             $row[18];
-                $userProduct->carbs =               $row[19];
-                $userProduct->fibre =               $row[20];
-                $userProduct->sugar =               $row[21];
-                $userProduct->total_fat =           $row[22];
-                $userProduct->saturated_fats =      $row[23];
-                $userProduct->sodium =              $row[24];
+                DB::beginTransaction();
 
-                //rows 25, 26, 27, 28, 29, 30, 31, 32, 33 are allergens
+                try
+                {
+                    $userProduct = new \App\UserProduct();
+                    $userProduct->user_id =             $data['user_id'];
+                    $userProduct->uniquekey =           (isset($row[8])) ? $row[8] : $row[11]; // MPC or GTIN
+                    $userProduct->name =                $row[3];
+                    $userProduct->brand =               $row[4];
+                    $userProduct->pack =                $row[5];
+                    $userProduct->size =                $row[6];
+                    $userProduct->uom =                 $row[7];
+                    $userProduct->serving_size_uom =    $row[7]; // Not sure this should be duplicated
+                    $userProduct->mpc =                 $row[8];
+                    $userProduct->broker_contact =      $row[9];
+                    $userProduct->gtin =                $row[10];
+                    $userProduct->is_halal =            ($row[11] == 'Yes') ? 1 : 0;
+                    $userProduct->is_organic =          ($row[12] == 'Yes') ? 1 : 0;
+                    $userProduct->is_kosher =           ($row[13] == 'Yes') ? 1 : 0;
+                    $userProduct->calc_size =           $row[14];
+                    $userProduct->calculation_size_uom = $row[15];
+                    $userProduct->calories =            $row[16];
+                    $userProduct->calories_from_fat =   $row[17];
+                    $userProduct->protein =             $row[18];
+                    $userProduct->carbs =               $row[19];
+                    $userProduct->fibre =               $row[20];
+                    $userProduct->sugar =               $row[21];
+                    $userProduct->total_fat =           $row[22];
+                    $userProduct->saturated_fats =      $row[23];
+                    $userProduct->sodium =              $row[24];
 
-                $userProduct->product_image =       $row[34];
-                $userProduct->description =         $row[35];
-                $userProduct->preparation =         $row[36];
-                $userProduct->ingredient_deck =     $row[37];
-                $userProduct->features_benefits =   $row[38];
+                    //rows 25, 26, 27, 28, 29, 30, 31, 32, 33 are allergens
 
-                $userProduct->allergen_disclaimer = '';
-                $userProduct->net_weight =          0;
-                $userProduct->gross_weight =        0;
-                $userProduct->tare_weight =         0;
-                $userProduct->serving_size =        0;
-                $userProduct->vendor_logo =         '';
-                $userProduct->pos_pdf =             '';
-                $userProduct->published =           false;
+                    $userProduct->product_image =       $row[34];
+                    $userProduct->description =         $row[35];
+                    $userProduct->preparation =         $row[36];
+                    $userProduct->ingredient_deck =     $row[37];
+                    $userProduct->features_benefits =   $row[38];
 
-                $userProduct->save();
+                    $userProduct->allergen_disclaimer = '';
+                    $userProduct->net_weight =          0;
+                    $userProduct->gross_weight =        0;
+                    $userProduct->tare_weight =         0;
+                    $userProduct->serving_size =        0;
+                    $userProduct->vendor_logo =         '';
+                    $userProduct->pos_pdf =             '';
+                    $userProduct->published =           false;
 
-                // Create any categories for the user product
-                $catIdRoot = $this->createCategory($row[0], null);
-                $catIdSub1 = $this->createCategory($row[1], $row[0]);
-                $catIdSub2 = $this->createCategory($row[2], $row[1]);
+                    $userProduct->save();
 
-                $this->createUserCategory($catIdRoot, $userProduct->id);
-                $this->createUserCategory($catIdSub1, $userProduct->id);
-                $this->createUserCategory($catIdSub2, $userProduct->id);
+                    // Create any categories for the user product
+                    $catIdRoot = $this->createCategory($row[0], null);
+                    $catIdSub1 = $this->createCategory($row[1], $row[0]);
+                    $catIdSub2 = $this->createCategory($row[2], $row[1]);
 
-                // Create any allergens for the user product
-                if($row[25] == 'Y') { $this->createUserAllergen(6, $userProduct->id); }
-                if($row[26] == 'Y') { $this->createUserAllergen(9, $userProduct->id); }
-                if($row[27] == 'Y') { $this->createUserAllergen(5, $userProduct->id); }
-                if($row[28] == 'Y') { $this->createUserAllergen(4, $userProduct->id); }
-                if($row[29] == 'Y') { $this->createUserAllergen(1, $userProduct->id); }
-                if($row[30] == 'Y') { $this->createUserAllergen(2, $userProduct->id); }
-                if($row[31] == 'Y') { $this->createUserAllergen(7, $userProduct->id); }
-                if($row[32] == 'Y') { $this->createUserAllergen(8, $userProduct->id); }
-                if($row[33] == 'Y') { $this->createUserAllergen(3, $userProduct->id); }
+                    $this->createUserCategory($catIdRoot, $userProduct->id);
+                    $this->createUserCategory($catIdSub1, $userProduct->id);
+                    $this->createUserCategory($catIdSub2, $userProduct->id);
 
-                return true;
+                    // Create any allergens for the user product
+                    if($row[25] == 'Y') { $this->createUserAllergen(6, $userProduct->id); }
+                    if($row[26] == 'Y') { $this->createUserAllergen(9, $userProduct->id); }
+                    if($row[27] == 'Y') { $this->createUserAllergen(5, $userProduct->id); }
+                    if($row[28] == 'Y') { $this->createUserAllergen(4, $userProduct->id); }
+                    if($row[29] == 'Y') { $this->createUserAllergen(1, $userProduct->id); }
+                    if($row[30] == 'Y') { $this->createUserAllergen(2, $userProduct->id); }
+                    if($row[31] == 'Y') { $this->createUserAllergen(7, $userProduct->id); }
+                    if($row[32] == 'Y') { $this->createUserAllergen(8, $userProduct->id); }
+                    if($row[33] == 'Y') { $this->createUserAllergen(3, $userProduct->id); }
 
+                    DB::commit();
+
+                    $recordsProcessed += 1;
+
+                }
+                catch(Exception $ex)
+                {
+                    DB::rollBack();
+                    $recordsFailed +=1 ;
+                }
+
+                return true; // Continue processing file
             }
         });
 
-        echo 'Import complete';
+
+        echo sprintf('Import complete, %s records imported, %s records failed', $recordsProcessed, $recordsFailed);
 
     }
 
