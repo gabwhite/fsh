@@ -14,7 +14,18 @@
 @endsection
 
 @section('content')
-    <p>Search</p>
+
+    <table id="product_list">
+        <thead>
+            <tr>
+                <th></th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody></tbody>
+    </table>
+
 @endsection
 
 @section('scripts')
@@ -23,6 +34,8 @@
 
         $(document).ready(function()
         {
+            var $resultTable = $("#product_list");
+
             $("#jstree_demo_div").jstree({
                 "core" :
                 {
@@ -53,6 +66,20 @@
             $("#jstree_demo_div").off("changed.jstree").on("changed.jstree", function(e, data)
             {
                 console.log(data);
+                var qry = "{{url('ajax/getuserproducts')}}" + "/" + data.node.id;
+                $.getJSON(qry, function(jsonresult)
+                {
+                    //console.log(jsonresult);
+                    var tableRows = "";
+                    $.each(jsonresult, function(idx, val)
+                    {
+                        console.log(val);
+                        tableRows += "<tr><td>" + val.name + "</td><td>" + val.brand + "</td><td></td></tr>";
+                    });
+
+                    $resultTable.html(tableRows);
+                });
+
             });
 
         });

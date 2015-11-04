@@ -51,3 +51,4 @@ Route::post('auth/register', 'Auth\AuthController@postRegister');
 
 // AJAX routes
 Route::get('ajax/getfoodcategories/{format}/{parentId?}', 'AjaxController@getFoodCategoriesForParent');
+Route::get('ajax/getuserproducts/{categoryId}', 'AjaxController@getUserProducts');
