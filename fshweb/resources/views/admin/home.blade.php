@@ -11,7 +11,7 @@
 @section('content')
     <p>This is my admin body content.</p>
 
-
+{{GenerateFoodCategoryTree()}}
 
 
 @endsection
