@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="{{url('/css/foundation.min.css')}}">
 
     <script src="{{url('js/vendor/modernizr.js')}}"></script>
+
+    @yield('css')
+
 </head>
 
 <body>
@@ -49,6 +52,8 @@
 <script>
     $(document).foundation();
 </script>
+
+@yield('scripts')
 
 </body>
 
