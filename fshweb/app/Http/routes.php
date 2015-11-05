@@ -20,6 +20,8 @@ Route::get('/search', function()
     return view('search');
 });
 
+Route::post('fulltextsearch', 'PublicController@fullTextSearch');
+
 
 Route::group(['middleware' => 'auth'], function()
 {
@@ -36,6 +38,8 @@ Route::group(['middleware' => 'auth'], function()
     Route::get('admin/permissions/{id?}', 'AdminController@showPermissions');
     Route::post('admin/permissions', 'AdminController@editPermissions');
 
+    Route::get('admin/lucenesearch', 'AdminController@showLuceneSearch');
+    Route::post('admin/createluceneindex', 'AdminController@createLuceneIndex');
 });
 
 

@@ -10,6 +10,8 @@ use App\Jobs\ParseProductImport;
 use Storage;
 use Ramsey\Uuid\Uuid;
 
+use ZendSearch;
+
 class AdminController extends Controller
 {
     public function index()
@@ -153,6 +155,17 @@ class AdminController extends Controller
 
         return redirect('admin/permissions');
 
+    }
+
+    public function showLuceneSearch()
+    {
+        return view('admin.lucenesearch');
+    }
+
+    public function createLuceneIndex(Request $request)
+    {
+        \ZendSearch\Lucene\Lucene::create(storage_path('app/lucene/' . $request->input('newindex')));
+        return redirect('admin/lucenesearch');
     }
 
 }

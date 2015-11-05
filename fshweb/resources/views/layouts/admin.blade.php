@@ -30,6 +30,7 @@
                 <li><a href="{{url('admin/roles')}}">Roles</a></li>
                 <li><a href="{{url('admin/permissions')}}">Permissions</a></li>
                 <li><a href="{{url('admin/import')}}">Product Import</a></li>
+                <li><a href="{{url('admin/lucenesearch')}}">Lucene Search</a></li>
                 <li><a href="{{url('/')}}" target="_blank">Public Site</a></li>
             </ul>
 

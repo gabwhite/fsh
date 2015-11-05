@@ -64,6 +64,9 @@
       <excludeFolder url="file://$MODULE_DIR$/fshweb/vendor/symfony/var-dumper" />
       <excludeFolder url="file://$MODULE_DIR$/fshweb/vendor/symfony/yaml" />
       <excludeFolder url="file://$MODULE_DIR$/fshweb/vendor/vlucas/phpdotenv" />
+      <excludeFolder url="file://$MODULE_DIR$/fshweb/vendor/zendframework/zend-hydrator" />
+      <excludeFolder url="file://$MODULE_DIR$/fshweb/vendor/zendframework/zend-stdlib" />
+      <excludeFolder url="file://$MODULE_DIR$/fshweb/vendor/zendframework/zendsearch" />
       <excludeFolder url="file://$MODULE_DIR$/fshweb/vendor/zizaco/entrust" />
     </content>
     <orderEntry type="inheritedJdk" />
@@ -133,6 +136,9 @@
           <root url="file://$MODULE_DIR$/fshweb/vendor/symfony/var-dumper" />
           <root url="file://$MODULE_DIR$/fshweb/vendor/symfony/yaml" />
           <root url="file://$MODULE_DIR$/fshweb/vendor/vlucas/phpdotenv" />
+          <root url="file://$MODULE_DIR$/fshweb/vendor/zendframework/zend-hydrator" />
+          <root url="file://$MODULE_DIR$/fshweb/vendor/zendframework/zend-stdlib" />
+          <root url="file://$MODULE_DIR$/fshweb/vendor/zendframework/zendsearch" />
           <root url="file://$MODULE_DIR$/fshweb/vendor/zizaco/entrust" />
         </CLASSES>
         <SOURCES>
@@ -198,6 +204,9 @@
           <root url="file://$MODULE_DIR$/fshweb/vendor/symfony/var-dumper" />
           <root url="file://$MODULE_DIR$/fshweb/vendor/symfony/yaml" />
           <root url="file://$MODULE_DIR$/fshweb/vendor/vlucas/phpdotenv" />
+          <root url="file://$MODULE_DIR$/fshweb/vendor/zendframework/zend-hydrator" />
+          <root url="file://$MODULE_DIR$/fshweb/vendor/zendframework/zend-stdlib" />
+          <root url="file://$MODULE_DIR$/fshweb/vendor/zendframework/zendsearch" />
           <root url="file://$MODULE_DIR$/fshweb/vendor/zizaco/entrust" />
         </SOURCES>
       </library>
