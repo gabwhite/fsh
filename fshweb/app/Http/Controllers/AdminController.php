@@ -3,14 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Jobs\RebuildSearchIndex;
 use App\UserProductImport;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Jobs\ParseProductImport;
 use Storage;
 use Ramsey\Uuid\Uuid;
-
-use ZendSearch;
 
 class AdminController extends Controller
 {
@@ -159,12 +158,18 @@ class AdminController extends Controller
 
     public function showLuceneSearch()
     {
-        return view('admin.lucenesearch');
+        $indexes = Storage::directories('lucene/');
+
+        return view('admin.lucenesearch')->with('indexes', $indexes);
     }
 
     public function createLuceneIndex(Request $request)
     {
-        \ZendSearch\Lucene\Lucene::create(storage_path('app/lucene/' . $request->input('newindex')));
+        $indexInfo = array('index_name' => $request->input('newindex'), 'action' => 'CREATE');
+
+        // Build index on creation
+        $this->dispatch(new RebuildSearchIndex($indexInfo));
+
         return redirect('admin/lucenesearch');
     }
 
