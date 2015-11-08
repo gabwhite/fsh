@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\ProductSearcher;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+
 
 class PublicController extends Controller
 {
@@ -19,9 +21,18 @@ class PublicController extends Controller
         //
     }
 
-    public function fullTextSearch()
+    public function productDetail($id)
     {
-        echo 'Searched';
+        return view('productdetail');
+    }
+
+    public function fullTextSearch(Request $request)
+    {
+        $words = explode(' ', $request->input('searchquery'));
+        $productSearcher = new ProductSearcher();
+        $results = $productSearcher->fullTextSearch('breenindex', $words);
+
+        return view('search')->with('searchresults', $results)->with('query', $request->input('searchquery'));
     }
 
 }

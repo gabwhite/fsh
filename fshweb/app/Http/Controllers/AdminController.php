@@ -53,23 +53,23 @@ class AdminController extends Controller
 
     public function showUsers()
     {
-        $allUsers = \App\User::all();
-        $allRoles = \App\Role::all();
+        $allUsers = \App\Models\User::all();
+        $allRoles = \App\Models\Role::all();
 
         return view('admin.users', ['users' => $allUsers, 'roles' => $allRoles]);
     }
 
     public function viewUser($id)
     {
-        $user = \App\User::find($id);
-        $allRoles = \App\Role::all();
+        $user = \App\Models\User::find($id);
+        $allRoles = \App\Models\Role::all();
 
         return view('admin.userdetail')->with('user', $user)->with('roles', $allRoles);
     }
 
     public function editUser(Request $request)
     {
-        $user = \App\User::find($request->input('userid'));
+        $user = \App\Models\User::find($request->input('userid'));
 
         $user->attachRole($request->input('role'));
 
@@ -78,8 +78,8 @@ class AdminController extends Controller
 
     public function showRoles()
     {
-        $allRoles = \App\Role::all();
-        $allPermissions = \App\Permission::all();
+        $allRoles = \App\Models\Role::all();
+        $allPermissions = \App\Models\Permission::all();
 
         return view('admin.roles', ['roles' => $allRoles, 'permissions' => $allPermissions]);
     }
@@ -89,20 +89,20 @@ class AdminController extends Controller
         $action = $request->input('action');
         if ($action == 'ADD')
         {
-            $role = new \App\Role();
+            $role = new \App\Models\Role();
             $role->name = $request->input('rolename');
             $role->save();
         }
         elseif ($action == 'DELETE')
         {
             $roleId = $request->input('roleid');
-            $role = \App\Role::findOrFail($roleId);
+            $role = \App\Models\Role::findOrFail($roleId);
 
             $role->delete();
         }
         elseif ($action == "EDITPERMS")
         {
-            $role = \App\Role::findOrFail($request->input('roleid'));
+            $role = \App\Models\Role::findOrFail($request->input('roleid'));
             $perms = $request->input('rolepermissions-' . $request->input('roleid'));
 
             $role->perms()->sync($perms);
@@ -115,12 +115,12 @@ class AdminController extends Controller
 
     public function showPermissions($id = null)
     {
-        $allPermissions = \App\Permission::all();
+        $allPermissions = \App\Models\Permission::all();
 
         $p = null;
         if ($id != null)
         {
-            $p = \App\Permission::find($id);
+            $p = \App\Models\Permission::find($id);
         }
 
         return view('admin.permissions', ['permissions' => $allPermissions, 'permission' => $p]);
@@ -131,11 +131,11 @@ class AdminController extends Controller
         $action = $request->input('action');
         if ($action == 'ADD') {
 
-            $permission = new \App\Permission();
+            $permission = new \App\Models\Permission();
 
             if ($request->input('permissionid') != '')
             {
-                $permission = \App\Permission::find($request->input('permissionid'));
+                $permission = \App\Models\Permission::find($request->input('permissionid'));
             }
 
             $permission->name = $request->input('permissionname');
@@ -147,7 +147,7 @@ class AdminController extends Controller
         elseif ($action == 'DELETE')
         {
             $permissionId = $request->input('permissionid');
-            $permission = \App\Permission::findOrFail($permissionId);
+            $permission = \App\Models\Permission::findOrFail($permissionId);
 
             $permission->delete();
         }

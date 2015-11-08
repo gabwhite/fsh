@@ -12,7 +12,7 @@ class AjaxController extends Controller
 
     public function getFoodCategoriesForParent($format, $parentId = null)
     {
-        $categories = \App\Category::where('parent_id', '=', $parentId)->get();
+        $categories = \App\Models\Category::where('parent_id', '=', $parentId)->get();
 
         if($format == 'JSON')
         {

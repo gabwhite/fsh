@@ -14,8 +14,11 @@
 @endsection
 
 @section('content')
-
-    <table id="product_list">
+    <form method="post" action="{{url('fulltextsearch')}}">
+    <input type="text" name="searchquery" id="searchquery" placeholder="Search" value="{{$query or ''}}"/>
+    {!! csrf_field() !!}
+    </form>
+    <table id="product_list" width="100%">
         <thead>
             <tr>
                 <th></th>
@@ -23,7 +26,13 @@
                 <th></th>
             </tr>
         </thead>
-        <tbody></tbody>
+        <tbody>
+        @if (isset($searchresults))
+            @foreach($searchresults as $r)
+            <tr><td><a href="{{url('/productdetail', $r->id)}}">{{$r->name}}</a></td><td>{{$r->brand}}</td></tr>
+            @endforeach
+        @endif
+        </tbody>
     </table>
 
 @endsection
@@ -74,7 +83,7 @@
                     $.each(jsonresult, function(idx, val)
                     {
                         console.log(val);
-                        tableRows += "<tr><td>" + val.name + "</td><td>" + val.brand + "</td><td></td></tr>";
+                        tableRows += "<tr><td><a href='{{url('productdetail')}}/" + val.id + "'>" + val.name + "</a></td><td>" + val.brand + "</td><td></td></tr>";
                     });
 
                     $resultTable.html(tableRows);

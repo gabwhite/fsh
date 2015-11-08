@@ -20,11 +20,17 @@ Route::get('/search', function()
     return view('search');
 });
 
+Route::get('productdetail/{id}', 'PublicController@productDetail');
+
 Route::post('fulltextsearch', 'PublicController@fullTextSearch');
 
 
+// Routes the require authentication
 Route::group(['middleware' => 'auth'], function()
 {
+
+    // Public routes
+
 
     // Admin routes
     Route::get('admin/', 'AdminController@index');
@@ -37,7 +43,6 @@ Route::group(['middleware' => 'auth'], function()
     Route::post('admin/roles', 'AdminController@editRoles');
     Route::get('admin/permissions/{id?}', 'AdminController@showPermissions');
     Route::post('admin/permissions', 'AdminController@editPermissions');
-
     Route::get('admin/lucenesearch', 'AdminController@showLuceneSearch');
     Route::post('admin/createluceneindex', 'AdminController@createLuceneIndex');
 });
