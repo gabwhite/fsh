@@ -48,6 +48,35 @@
 
 <div class="row">
     <div class="small-12 small-text-center large-12 columns">
+
+        <nav class="top-bar" data-topbar role="navigation">
+            <section class="top-bar-section">
+                <ul>
+
+                    <li class="has-dropdown">
+                        <a href="#">Right Button Dropdown</a>
+                        <ul class="dropdown">
+                            <li><a href="#">First link in dropdown</a></li>
+                            <li class="active"><a href="#">Active link in dropdown</a></li>
+                        </ul>
+                    </li>
+                    <li class="has-dropdown">
+                        <a href="#">Right Button Dropdown</a>
+                        <ul class="dropdown">
+                            <li><a href="#">First link in dropdown</a></li>
+                            <li class="active"><a href="#">Active link in dropdown</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+        </nav>
+
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="small-12 small-text-center large-12 columns">
         <section class="main-title">
             <h1 class="page-title">@yield('sectionheader')</h1>
         </section>

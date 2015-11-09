@@ -6,6 +6,9 @@ use Illuminate\Support\ServiceProvider;
 
 class ProductImportProvider extends ServiceProvider
 {
+
+    protected $defer = true;
+
     /**
      * Bootstrap the application services.
      *
@@ -27,5 +30,15 @@ class ProductImportProvider extends ServiceProvider
         {
             return new \App\CsvProductImporter();
         });
+    }
+
+    /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
+    public function provides()
+    {
+        return ['\App\iProductImporter'];
     }
 }

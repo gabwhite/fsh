@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DbCategoryFinder;
 use App\ProductSearcher;
 use Illuminate\Http\Request;
 
@@ -13,7 +14,10 @@ class AjaxController extends Controller
 
     public function getFoodCategoriesForParent($format, $parentId = null)
     {
-        $categories = \App\Models\Category::where('parent_id', '=', $parentId)->get();
+        $categoryFinder = new DbCategoryFinder();
+
+        //$categories = \App\Models\Category::where('parent_id', '=', $parentId)->get();
+        $categories = $categoryFinder->getFoodCategoriesForParent($parentId);
 
         if($format == 'JSON')
         {

@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-class SearchIndexerProvider extends ServiceProvider
+class CategoryProvider extends ServiceProvider
 {
 
     protected $defer = true;
@@ -26,9 +26,9 @@ class SearchIndexerProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('\App\iSearchIndexBuilder', function ($app)
+        $this->app->singleton('\App\iCategoryFinder', function ($app)
         {
-            return new \App\LuceneSearchIndexBuilder();
+            return new \App\DbCategoryFinder();
         });
     }
 
@@ -39,7 +39,6 @@ class SearchIndexerProvider extends ServiceProvider
      */
     public function provides()
     {
-        return ['\App\iSearchIndexBuilder'];
+        return ['\App\iCategoryFinder'];
     }
-
 }

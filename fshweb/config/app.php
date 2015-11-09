@@ -148,7 +148,8 @@ return [
         Zizaco\Entrust\EntrustServiceProvider::class,
 
         App\Providers\ProductImportProvider::class,
-        App\Providers\SearchIndexerProvider::class
+        App\Providers\SearchIndexerProvider::class,
+        App\Providers\CategoryProvider::class
 
     ],
 
