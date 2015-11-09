@@ -6,14 +6,13 @@
     <link rel="stylesheet" href="{{url('/js/vendor/jstree/themes/default/style.min.css')}}">
 @endsection
 
-@section('sidebar')
-    @parent
-
-
-
+@section('sectionheader')
+    FIND YOUR PRODUCTS
 @endsection
 
 @section('content')
+
+    <br/>
 
     <div class="row">
 

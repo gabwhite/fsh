@@ -10,11 +10,11 @@ class UserProduct extends Model
 
     public function allergens()
     {
-        return $this->belongsToMany('App\Allergen', 'user_products_allergens');
+        return $this->belongsToMany('App\Models\Allergen', 'user_products_allergens', 'product_id', 'allergen_id');
     }
 
     public function categories()
     {
-        return $this->belongsToMany('App\Category', 'user_products_categories');
+        return $this->belongsToMany('App\Models\Category', 'user_products_categories', 'product_id', 'category_id');
     }
 }

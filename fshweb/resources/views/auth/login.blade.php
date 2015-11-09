@@ -2,6 +2,10 @@
 
 @section('title', 'Login')
 
+@section('sectionheader')
+    LOGIN
+@endsection
+
 @section('content')
 
 <form method="POST" action="{{url('/auth/login')}}">

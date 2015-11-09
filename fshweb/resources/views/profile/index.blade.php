@@ -6,10 +6,8 @@
 
 @endsection
 
-@section('sidebar')
-    @parent
-
-
+@section('sectionheader')
+    PROFILE
 @endsection
 
 @section('content')
