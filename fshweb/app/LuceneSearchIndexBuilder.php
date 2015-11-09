@@ -34,6 +34,7 @@ class LuceneSearchIndexBuilder implements iSearchIndexBuilder
                 $doc->addField(\ZendSearch\Lucene\Document\Field::text('brand', $p->brand));
                 $doc->addField(\ZendSearch\Lucene\Document\Field::keyword('mpc', $p->mpc));
                 $doc->addField(\ZendSearch\Lucene\Document\Field::keyword('gtin', $p->gtin));
+                $doc->addField(\ZendSearch\Lucene\Document\Field::unStored('ingredient_deck', $p->ingredient_deck));
 
                 //$doc->addField(Zend_Search_Lucene_Field::UnIndexed('entry_id', $p->id));
                 //$doc->addField(Zend_Search_Lucene_Field::Keyword('title', $p->title));

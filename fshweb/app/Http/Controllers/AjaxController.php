@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ProductSearcher;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -38,13 +39,20 @@ class AjaxController extends Controller
 
     public function getUserProducts($categoryId)
     {
-        $products = \DB::table('user_products')
-            ->join('user_products_categories', 'user_products.id', '=', 'user_products_categories.product_id')
-            ->where('user_products_categories.category_id', '=', $categoryId)
-            //->where('user_products.published', '=', true)
-            ->select('user_products.id', 'user_products.name', 'user_products.brand')->get();
+
+        $productSearcher = new ProductSearcher();
+        //$products = $productSearcher->getUserProductsByCategoryPaginated($categoryId, 3, true);
+        $products = $productSearcher->getUserProductsByCategory($categoryId);
 
         return response()->json($products);
+    }
+
+    public function getUserProductsFullText($words)
+    {
+        $productSearcher = new ProductSearcher();
+        $products = $productSearcher->fullTextSearch('productindex', $words);
+
+        return $products;
     }
 
 }

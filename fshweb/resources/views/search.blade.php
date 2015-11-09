@@ -47,6 +47,7 @@
                 @endif
                 </tbody>
             </table>
+
         </div>
 
     </div>
@@ -84,7 +85,7 @@
                         },
                         "data": function(node)
                         {
-                            console.log(node);
+                            //console.log(node);
                         }
                     }
                 }
@@ -92,11 +93,11 @@
 
             $("#jstree_demo_div").off("changed.jstree").on("changed.jstree", function(e, data)
             {
-                console.log(data);
+                //console.log(data);
                 var qry = "{{url('ajax/getuserproducts')}}" + "/" + data.node.id;
                 $.getJSON(qry, function(jsonresult)
                 {
-                    //console.log(jsonresult);
+                    console.log(jsonresult);
                     var tableRows = "";
                     $.each(jsonresult, function(idx, val)
                     {
