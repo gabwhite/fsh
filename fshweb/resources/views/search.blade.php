@@ -9,31 +9,49 @@
 @section('sidebar')
     @parent
 
-    <div id="jstree_demo_div"></div>
+
 
 @endsection
 
 @section('content')
-    <form method="post" action="{{url('fulltextsearch')}}">
-    <input type="text" name="searchquery" id="searchquery" placeholder="Search" value="{{$query or ''}}"/>
-    {!! csrf_field() !!}
-    </form>
-    <table id="product_list" width="100%">
-        <thead>
-            <tr>
-                <th></th>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-        @if (isset($searchresults))
-            @foreach($searchresults as $r)
-            <tr><td><a href="{{url('/productdetail', $r->id)}}">{{$r->name}}</a></td><td>{{$r->brand}}</td></tr>
-            @endforeach
-        @endif
-        </tbody>
-    </table>
+
+    <div class="row">
+
+        <div class="small-2 large-3 columns">
+            <div id="jstree_demo_div"></div>
+        </div>
+
+        <div class="small-10 large-9 columns">
+
+            <form method="post" action="{{url('fulltextsearch')}}">
+                <input type="text" name="searchquery" id="searchquery" placeholder="Search" value="{{$query or ''}}"/>
+                {!! csrf_field() !!}
+            </form>
+            <table id="product_list" width="100%">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                @if (isset($searchresults))
+                    @foreach($searchresults as $r)
+                        <tr>
+                            <td>
+                                <a href="{{url('/productdetail', $r['document']->getFieldValue('id'))}}">{{$r['document']->getFieldValue('name')}}</a>
+                                ({{round($r['score'] * 100)}}%)
+                            </td>
+                            <td>{{$r['document']->getFieldValue('brand')}}</td></tr>
+                    @endforeach
+                @endif
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
 
 @endsection
 
@@ -48,6 +66,7 @@
             $("#jstree_demo_div").jstree({
                 "core" :
                 {
+                    "themes" : { "stripes" : false },
                     "multiple" : false,
                     "animation" : 0,
                     "data" :

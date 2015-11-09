@@ -11,9 +11,20 @@
 @section('content')
     <p>This is my body content.</p>
 
+
     <form name="homesearch" method="post" action="{{url('fulltextsearch')}}">
+
+    <div class="row">
+        <div class="small-10 large-9 columns inline">
+            <input type="text" name="searchquery" id="searchquery"/>
+        </div>
+        <div class="small-2 large-3 columns inline">
+            <input type="submit" class="button tiny" value="Search"/>
+        </div>
+    </div>
+
     {!! csrf_field() !!}
-    <input type="text" name="searchquery" id="searchquery"/>
-    <input type="submit" class="button" value="Search"/>
     </form>
+
+
 @endsection

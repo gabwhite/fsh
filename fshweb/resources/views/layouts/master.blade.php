@@ -18,13 +18,25 @@
 
 <div class="row">
     <div class="small-12 large-12 columns">
-        <h1>Master Page</h1>
+        <h1><a href="{{url('/')}}"><img src="{{url('/img/horizontallogoFoodServiceHound.png')}}"/></a></h1>
+    </div>
+</div>
 
+<div class="row">
+    <div class="small-12 small-text-right large-12 columns">
+        <a href="{{url('/search')}}">Products Search</a>
+        |
+        <a href="#">Industry Forums</a>
+        |
+        <a href="#">Tools &amp; Resources</a>
+        |
         @if (Auth::check())
-            <a href="">My Profile</a>
+            <a href="{{url('profile/')}}">My Profile</a>
             |
             <a href="{{url('auth/logout')}}">Logout</a>
         @else
+            <a href="">Vendor Registration</a>
+
             <a href="{{url('auth/login')}}">Login</a>
             |
             <a href="{{url('auth/register')}}">Register</a>
@@ -35,14 +47,14 @@
 
 <div class="row">
 
-    <div class="small-2 large-3 columns">
-        @section('sidebar')
-            This is the master sidebar.
-        @show
-    </div>
-
-    <div class="small-10 large-9 columns">
+    <div class="small-12 large-12 columns">
         @yield('content')
+    </div>
+</div>
+
+<div class="row">
+    <div class="small-12 small-text-center large-12 columns">
+        <small>&copy; 2015 foodservicehound.com</small>
     </div>
 </div>
 
