@@ -17,7 +17,7 @@
 
 <div class="row">
     <div class="small-12 large-12 columns">
-        <h1>Admininistration</h1>
+        <h1><a href="{{url('/admin')}}">Administration</a></h1>
     </div>
 </div>
 
@@ -30,7 +30,7 @@
                 <li><a href="{{url('admin/roles')}}">Roles</a></li>
                 <li><a href="{{url('admin/permissions')}}">Permissions</a></li>
                 <li><a href="{{url('admin/import')}}">Product Import</a></li>
-                <li><a href="{{url('admin/lucenesearch')}}">Lucene Search</a></li>
+                <li><a href="{{url('admin/searchindexes')}}">Search Indexes</a></li>
                 <li><a href="{{url('/')}}" target="_blank">Public Site</a></li>
             </ul>
 

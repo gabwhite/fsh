@@ -36,9 +36,9 @@
         </table>
 
 
-        <input type="text" name="permissionname" id="permissionname" value="{{$permission->name or ''}}"/>
-        <input type="text" name="permissiondisplay" id="permissiondisplay" value="{{$permission->display_name or ''}}"/>
-        <input type="text" name="permissiondesc" id="permissiondesc" value="{{$permission->description or ''}}"/>
+        <input type="text" name="permissionname" id="permissionname" placeholder="Name" value="{{$permission->name or ''}}"/>
+        <input type="text" name="permissiondisplay" id="permissiondisplay" placeholder="Display Name" value="{{$permission->display_name or ''}}"/>
+        <input type="text" name="permissiondesc" id="permissiondesc" placeholder="Descrption" value="{{$permission->description or ''}}"/>
         <input type="button" name="add" id="add" value="Add/Update" class="button"/>
 
         <input type="hidden" name="permissionid" id="permissionid" value="{{$permission->id or ''}}"/>

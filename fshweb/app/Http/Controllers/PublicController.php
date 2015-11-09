@@ -23,14 +23,23 @@ class PublicController extends Controller
 
     public function productDetail($id)
     {
-        return view('productdetail');
+        $userProduct = \App\Models\UserProduct::where('id', '=', $id)->first();
+
+        return view('productdetail')->with('userproduct', $userProduct);
     }
 
     public function fullTextSearch(Request $request)
     {
         $words = explode(' ', $request->input('searchquery'));
         $productSearcher = new ProductSearcher();
-        $results = $productSearcher->fullTextSearch('breenindex', $words);
+        $hits = $productSearcher->fullTextSearch('productindex', $words);
+
+        $results = array();
+        foreach($hits as $h)
+        {
+            $data = array('score' => $h->score, 'document' => $h->getDocument());
+            array_push($results, $data);
+        }
 
         return view('search')->with('searchresults', $results)->with('query', $request->input('searchquery'));
     }

@@ -8,9 +8,9 @@
 @endsection
 
 @section('content')
-Manage Indexes
+Manage Search Indexes
 
-<form method="post" action="">
+<form id="frmManageIndex" method="post" action="{{url('admin/managesearchindex')}}">
 <table width="100%" id="currentindexes">
     <thead>
         <tr>
@@ -21,21 +21,41 @@ Manage Indexes
     <tbody>
         @foreach ($indexes as $i)
         <tr>
-            <td>{{$i}}</td>
-            <td><a href="#">Rebuild</a></td>
+            <td>{{substr($i, strpos($i, '/') + 1)}}</td>
+            <td><a href="#" data-indexname="{{substr($i, strpos($i, '/') + 1)}}">Rebuild</a></td>
         </tr>
         @endforeach
     </tbody>
 </table>
 {!! csrf_field() !!}
+<input type="hidden" name="indexname" id="indexname"/>
+<input type="hidden" name="indexaction" id="indexaction"/>
 </form>
 
 <hr/>
 
-<form name="frmCreateIndex" method="post" action="{{url('admin/createluceneindex')}}">
+<form name="frmCreateIndex" method="post" action="{{url('admin/createsearchindex')}}">
 <input type="text" name="newindex"/>
-<input type="submit" value="Create Index"/>
+<input type="submit" class="button" value="Create Index"/>
 {!! csrf_field() !!}
 </form>
+
+@endsection
+
+
+@section('scripts')
+
+    <script type="text/javascript">
+        $(document).ready(function()
+        {
+            $("#currentindexes").find("a").off("click").on("click", function(e)
+            {
+                e.preventDefault();
+                $("#indexaction").val("REBUILD");
+                $("#indexname").val($(this).data("indexname"));
+                $("#frmManageIndex").submit();
+            });
+        });
+    </script>
 
 @endsection

@@ -22,7 +22,7 @@ class LuceneSearchIndexBuilder implements iSearchIndexBuilder
         {
             $index = \ZendSearch\Lucene\Lucene::create(storage_path('app/lucene/' . $data['index_name']));
 
-            $productsToIndex = UserProduct::all();
+            $productsToIndex = \App\Models\UserProduct::all();
             foreach($productsToIndex as $p)
             {
                 $doc = new \ZendSearch\Lucene\Document();
@@ -32,13 +32,8 @@ class LuceneSearchIndexBuilder implements iSearchIndexBuilder
                 $doc->addField(\ZendSearch\Lucene\Document\Field::text('name', $p->name));
                 $doc->addField(\ZendSearch\Lucene\Document\Field::unStored('description', $p->description));
                 $doc->addField(\ZendSearch\Lucene\Document\Field::text('brand', $p->brand));
-                $doc->addField(\ZendSearch\Lucene\Document\Field::text('mpc', $p->mpc));
-                $doc->addField(\ZendSearch\Lucene\Document\Field::text('gtin', $p->gtin));
-                $doc->addField(\ZendSearch\Lucene\Document\Field::unStored('allergen_disclaimer', $p->allergen_disclaimer));
-                $doc->addField(\ZendSearch\Lucene\Document\Field::unStored('features_benefits', $p->features_benefits));
-                $doc->addField(\ZendSearch\Lucene\Document\Field::unStored('ingredient_deck', $p->ingredient_deck));
-                $doc->addField(\ZendSearch\Lucene\Document\Field::text('uom', $p->uom));
-                $doc->addField(\ZendSearch\Lucene\Document\Field::unStored('preparation', $p->preparation));
+                $doc->addField(\ZendSearch\Lucene\Document\Field::keyword('mpc', $p->mpc));
+                $doc->addField(\ZendSearch\Lucene\Document\Field::keyword('gtin', $p->gtin));
 
                 //$doc->addField(Zend_Search_Lucene_Field::UnIndexed('entry_id', $p->id));
                 //$doc->addField(Zend_Search_Lucene_Field::Keyword('title', $p->title));
@@ -47,9 +42,13 @@ class LuceneSearchIndexBuilder implements iSearchIndexBuilder
                 $index->addDocument($doc);
             }
         }
-        else
+        else if($data['action'] == 'REBUILD')
         {
             // Update existing index
+            $index = \ZendSearch\Lucene\Lucene::open(storage_path('app/lucene/' . $data['index_name']));
+            $hits = $index->find('path:' . storage_path('app/lucene/' . $data['index_name']));
+            dd($hits);
+
         }
 
 
