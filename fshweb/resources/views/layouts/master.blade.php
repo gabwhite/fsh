@@ -218,16 +218,11 @@
                         </div>
 
                         <strong class="logo">
-                            <a href="http://www.foodservicehound.com">
-
-
-                                <img id="logo_img" title="FoodserviceHound.com" src="http://www.foodservicehound.com/wp-content/uploads/2015/09/horizontallogoFoodServiceHound.png" alt="FoodserviceHound.com">
-
-
+                            <a href="{{url('/')}}">
+                                <img id="logo_img" title="FoodserviceHound.com" src="{{url('/img/horizontallogoFoodServiceHound.png')}}" alt="FoodserviceHound.com">
                             </a>
                         </strong>
                     </div>
-
 
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse nav-collapse">
@@ -236,8 +231,15 @@
                             <li id="menu-item-662" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-662"><a title="Products Search" href="{{url('/search')}}">Products Search</a></li>
                             <li id="menu-item-4594" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4594"><a title="Industry Forums" href="{{url('industryforums')}}">Industry Forums</a></li>
                             <li id="menu-item-224" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-224"><a title="Tools &amp; Resources" href="{{url('toolsresources')}}">Tools &#038; Resources</a></li>
-                            <li id="menu-item-721" class="menu-item menu-item-type-post_type menu-item-object-page current-menu-item page_item page-item-716 current_page_item menu-item-721 active"><a title="Vendor Registration" href="#">Vendor Registration</a></li>
-                            <li id="menu-item-720" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-720"><a title="Login/Register" href="http://www.foodservicehound.com/login-2/">Login/Register</a></li>
+                            <li id="menu-item-721" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-721"><a title="Vendor Registration" href="#">Vendor Registration</a></li>
+
+                            @if (Auth::check())
+                                <li id="menu-item-722" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-722"><a title="Logout" href="{{url('profile/')}}">Profile</a></li>
+                                <li id="menu-item-723" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-723"><a title="Logout" href="{{url('auth/logout')}}">Logout</a></li>
+                            @else
+                                <li id="menu-item-720" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-720"><a title="Login/Register" href="{{url('auth/login')}}">Login/Register</a></li>
+                            @endif
+
                             <li id="nav-menu-item-search" class="menu-item kleo-search-nav"><a class="search-trigger" href="#"><i class="icon icon-search"></i></a>
                                 <div class="kleo-search-wrap searchHidden" id="ajax_search_container">
                                     <form class="form-inline" id="ajax_searchform" action="http://www.foodservicehound.com/" data-context="product">
@@ -257,39 +259,90 @@
 
     </div><!--end header-->
 
-</div>
+    <div id="main">
 
-<div class="container">
+        <section class='container-wrap main-title alternate-color  main-center-title border-bottom'>
+            <div class='container'><h1 class="page-title">@yield('sectionheader')</h1>
+                <div class='breadcrumb-extra'>
+                    <div class="kleo_framework breadcrumb" xmlns:v="http://rdf.data-vocabulary.org/#">
+                        <span typeof="v:Breadcrumb">
+                            <a rel="v:url" property="v:title" href="http://www.foodservicehound.com" title="FoodserviceHound.com" >Home</a>
+                        </span>
+                        <span class="sep"> </span>
+                        <span class="active">@yield('sectionheader')</span>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <div class="row">
+        <section class="container-wrap main-color">
+            <div id="main-container" class="container">
+                <div class="row">
+                    <!-- START MAIN PAGE CONTENT -->
+                    @yield('content')
+                    <!-- END MAIN PAGE CONTENT -->
+                </div>
+            </div><!--end .container-->
+        </section>
 
-        <div class="col-md-12">
-            <section class="main-title">
-                <h1 class="page-title">@yield('sectionheader')</h1>
-            </section>
+    </div><!-- #main -->
+
+    <!--start kleo-quick-contact-wrapper-->
+    <a class="kleo-go-top" href="#"><i class="icon-up-open-big"></i></a>
+    <div class="kleo-quick-contact-wrapper">
+        <a class="kleo-quick-contact-link" href="#"><i class="icon-mail-alt"></i></a>
+        <div id="kleo-quick-contact">
+            <h4 class="kleo-qc-title">CONTACT US</h4>
+            <p>We're not around right now. But you can send us an email and we'll get back to you, asap.</p>
+            <form class="kleo-contact-form" action="#" method="post" novalidate>
+                <input type="text" placeholder="Your Name" required id="contact_name" name="contact_name" class="form-control" value="" tabindex="276" />
+                <input type="email" required placeholder="Your Email" id="contact_email" name="contact_email" class="form-control" value="" tabindex="277"  />
+                <textarea placeholder="Type your message..." required id="contact_content" name="contact_content" class="form-control" tabindex="278"></textarea>
+                <input type="hidden" name="action" value="kleo_sendmail">
+                <button tabindex="279" class="btn btn-default pull-right" type="submit">Send</button>
+                <div class="kleo-contact-loading">Sending <i class="icon-spinner icon-spin icon-large"></i></div>
+                <div class="kleo-contact-success">
+                </div>
+            </form>
+            <div class="bottom-arrow"></div>
         </div>
+    </div><!--end kleo-quick-contact-wrapper-->
 
-    </div>
+    <!-- start footer -->
+    <div id="socket" class="socket-color">
+        <div class="container">
+            <div class="template-page tpl-no col-xs-12 col-sm-12">
+                <div class="wrap-content">
+                    <div class="row">
 
-    <div class="row">
-        <div class="col-md-12">
-        @yield('content')
-        </div>
-    </div>
+                        <div class="col-sm-12">
+                            <div class="gap-10"></div>
+                        </div><!--end widget-->
 
-    <div class="row">
-        <div class="col-md-12 text-center">
-            <small>&copy; 2015 foodservicehound.com</small>
-        </div>
-    </div>
+                        <div class="col-sm-12">
+                            <p id="footer" style="text-align: center;">©2015 foodservicehound.com </p>
+                        </div>
 
-</div>
+                        <div class="col-sm-12">
+                            <div class="gap-10"></div>
+                        </div><!--end widget-->
 
+                    </div><!--end row-->
+
+                </div><!--end wrap-content-->
+            </div><!--end template-page-->
+        </div><!--end container-->
+    </div><!--end footer-->
+
+</div><!-- end kleo page -->
 
 
 <script src="{{url('js/vendor/jquery-1.11.3.min.js')}}"></script>
 <script src="{{url('js/vendor/bootstrap/bootstrap.min.js')}}"></script>
 
+<script src="{{url('js/vendor/magnific-popup/magnific.min.js')}}"></script>
+<script src="{{url('js/vendor/carouFredSel/jquery.carouFredSel-6.2.0-packed.js')}}"></script>
+<script src="{{url('js/vendor/carouFredSel/helper-plugins/jquery.touchSwipe.min.js')}}"></script>
 
 
 @yield('scripts')

@@ -12,15 +12,19 @@
 
 @section('content')
 
-    Currently logged in user: {{Auth::user()->name}} ({{Auth::user()->email}})
-    <br/><br/>
+    <div class="col-md-12">
 
-    @if(Auth::user()->hasRole('admin'))
-        You have <a href="{{url('/admin')}}">administrative</a> access
-    @endif
+        Currently logged in user: {{Auth::user()->name}} ({{Auth::user()->email}})
+        <br/><br/>
 
-    <hr/>
-    More Coming Soon
+        @if(Auth::user()->hasRole('admin'))
+            You have <a href="{{url('/admin')}}">administrative</a> access
+        @endif
+
+        <hr/>
+        More Coming Soon
+
+    </div>
 
 @endsection
 

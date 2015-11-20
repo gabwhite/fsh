@@ -12,46 +12,48 @@
 
 @section('content')
 
-    <br/>
+    <div class="col-md-12">
 
-    <div class="row">
+        <div class="row">
 
-        <div class="col-md-3">
-            <div id="jstree_demo_div"></div>
+            <div class="col-md-3">
+                <div id="jstree_demo_div"></div>
+            </div>
+
+            <div class="col-md-9">
+
+                <form method="post" action="{{url('fulltextsearch')}}">
+                    <input type="text" name="searchquery" id="searchquery" placeholder="Search" value="{{$query or ''}}" class="form-control"/>
+                    {!! csrf_field() !!}
+                </form>
+                <table id="product_list" width="100%" class="table">
+                    <thead>
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @if (isset($searchresults))
+                        @foreach($searchresults as $r)
+                            <tr>
+                                <td>
+                                    <a href="{{url('/productdetail', $r['document']->getFieldValue('id'))}}">{{$r['document']->getFieldValue('name')}}</a>
+                                    ({{round($r['score'] * 100)}}%)
+                                </td>
+                                <td>{{$r['document']->getFieldValue('brand')}}</td></tr>
+                        @endforeach
+                    @endif
+                    </tbody>
+                </table>
+
+            </div>
+
         </div>
 
-        <div class="col-md-9">
-
-            <form method="post" action="{{url('fulltextsearch')}}">
-                <input type="text" name="searchquery" id="searchquery" placeholder="Search" value="{{$query or ''}}" class="form-control"/>
-                {!! csrf_field() !!}
-            </form>
-            <table id="product_list" width="100%" class="table">
-                <thead>
-                <tr>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                </tr>
-                </thead>
-                <tbody>
-                @if (isset($searchresults))
-                    @foreach($searchresults as $r)
-                        <tr>
-                            <td>
-                                <a href="{{url('/productdetail', $r['document']->getFieldValue('id'))}}">{{$r['document']->getFieldValue('name')}}</a>
-                                ({{round($r['score'] * 100)}}%)
-                            </td>
-                            <td>{{$r['document']->getFieldValue('brand')}}</td></tr>
-                    @endforeach
-                @endif
-                </tbody>
-            </table>
-
-        </div>
 
     </div>
-
 
 @endsection
 
