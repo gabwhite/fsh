@@ -37,3 +37,7 @@
 </form>
 
 @endsection
+
+@section('scripts')
+    <script src="{{url('js/vendor/validation/jquery.validate.min.js')}}"></script>
+@endsection
