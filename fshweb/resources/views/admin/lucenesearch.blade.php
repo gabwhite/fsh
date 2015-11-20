@@ -11,7 +11,7 @@
 Manage Search Indexes
 
 <form id="frmManageIndex" method="post" action="{{url('admin/managesearchindex')}}">
-<table width="100%" id="currentindexes">
+<table width="100%" id="currentindexes" class="table">
     <thead>
         <tr>
             <th>Index Name</th>
@@ -35,8 +35,8 @@ Manage Search Indexes
 <hr/>
 
 <form name="frmCreateIndex" method="post" action="{{url('admin/createsearchindex')}}">
-<input type="text" name="newindex"/>
-<input type="submit" class="button" value="Create Index"/>
+<input type="text" name="newindex" class="form-control"/>
+<input type="submit" class="btn btn-primary" value="Create Index"/>
 {!! csrf_field() !!}
 </form>
 

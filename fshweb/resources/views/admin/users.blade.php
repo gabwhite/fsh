@@ -11,7 +11,7 @@
 @section('content')
     <p>This is my admin body content.</p>
 
-    <table>
+    <table class="table">
         <thead>
             <tr>
                 <th>Name</th>

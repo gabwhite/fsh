@@ -12,7 +12,7 @@
 
     <form id="form1" name="form1" method="post" action="{{url('admin/roles')}}">
         {!! csrf_field() !!}
-        <table id="roles" width="100%">
+        <table id="roles" width="100%" class="table">
             <thead>
                 <tr>
                     <th>Role Name</th>
@@ -25,7 +25,7 @@
             <tr>
                 <td valign="top">{{$r->name}}</td>
                 <td>
-                    <select name="rolepermissions-{{$r->id}}[]" multiple="multiple" data-id="{{$r->id}}">
+                    <select name="rolepermissions-{{$r->id}}[]" multiple="multiple" data-id="{{$r->id}}" class="form-control">
                     @foreach ($permissions as $p)
 
                         @if ($r->perms()->where('id', '=', $p->id)->count() == 1)
@@ -45,8 +45,8 @@
         </table>
 
 
-        <input type="text" name="rolename" id="rolename"/>
-        <input type="button" name="add" id="add" value="Add Role" class="button"/>
+        <input type="text" name="rolename" id="rolename" class="form-control"/>
+        <input type="button" name="add" id="add" value="Add Role" class="btn btn-primary"/>
 
         <input type="hidden" name="roleid" id="roleid" value=""/>
         <input type="hidden" name="action" id="action" value=""/>

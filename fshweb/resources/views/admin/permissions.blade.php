@@ -12,7 +12,7 @@
 
     <form id="form1" name="form1" method="post" action="{{url('admin/permissions')}}">
         {!! csrf_field() !!}
-        <table id="permissions">
+        <table id="permissions" class="table">
             <thead>
             <tr>
                 <th>Name</th>
@@ -36,10 +36,10 @@
         </table>
 
 
-        <input type="text" name="permissionname" id="permissionname" placeholder="Name" value="{{$permission->name or ''}}"/>
-        <input type="text" name="permissiondisplay" id="permissiondisplay" placeholder="Display Name" value="{{$permission->display_name or ''}}"/>
-        <input type="text" name="permissiondesc" id="permissiondesc" placeholder="Descrption" value="{{$permission->description or ''}}"/>
-        <input type="button" name="add" id="add" value="Add/Update" class="button"/>
+        <input type="text" name="permissionname" id="permissionname" placeholder="Name" value="{{$permission->name or ''}}" class="form-control"/>
+        <input type="text" name="permissiondisplay" id="permissiondisplay" placeholder="Display Name" value="{{$permission->display_name or ''}}" class="form-control"/>
+        <input type="text" name="permissiondesc" id="permissiondesc" placeholder="Descrption" value="{{$permission->description or ''}}" class="form-control"/>
+        <input type="button" name="add" id="add" value="Add/Update" class="btn btn-primary"/>
 
         <input type="hidden" name="permissionid" id="permissionid" value="{{$permission->id or ''}}"/>
         <input type="hidden" name="action" id="action" value=""/>

@@ -14,7 +14,7 @@
 
 <div class="row">
 
-    <div class="small-2 large-3 columns">
+    <div class="col-md-3">
 
         <div class="nutrition">
 
@@ -90,7 +90,7 @@
 
     </div>
 
-    <div class="small-10 large-9 columns">
+    <div class="col-md-9">
 
         <h1>{{$userproduct->name}}</h1>
 

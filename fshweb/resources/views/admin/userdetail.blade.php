@@ -12,7 +12,7 @@
 
     <form id="form1" name="form1" method="post" action="{{url('admin/edituser')}}">
         {!! csrf_field() !!}
-        <table>
+        <table class="table">
             <tbody>
                 <tr>
                     <td>Name</td>
@@ -25,7 +25,7 @@
                 <tr>
                     <td>Role</td>
                     <td>
-                    <select name="role" id="role">
+                    <select name="role" id="role" class="form-control">
                         <option value="">No Role</option>
                     @foreach ($roles as $r)
 
@@ -43,7 +43,7 @@
             </tbody>
         </table>
         <input type="hidden" name="userid" value="{{$user->id}}"/>
-        <input type="submit" name="save" class="button" value="Update"/>
+        <input type="submit" name="save" class="btn btn-primary" value="Update"/>
 
     </form>
 

@@ -14,13 +14,26 @@
     <form id="form1" name="form1" method="post" action="{{url('admin/import')}}" enctype="multipart/form-data">
         {!! csrf_field() !!}
 
-        <input type="file" name="importfile" />
+        <input type="file" name="importfile"/>
         <br/>
-        <input type="checkbox" name="includesheaders" id="includesheaders" checked="checked"/><label for="includesheaders">First row is header row</label>
+
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" name="includesheaders" id="includesheaders" checked="checked"/>First row is header row
+            </label>
+        </div>
+
         <br/>
-        <input type="checkbox" name="addasactive" id="addasactive"/><label for="addasactive">Add new entries as active</label>
+
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" name="addasactive" id="addasactive"/>Add new entries as active
+            </label>
+        </div>
+
         <br/>
-        <input type="submit" name="submit" value="Upload" class="button"/>
+
+        <input type="submit" name="submit" value="Upload" class="btn btn-primary"/>
     </form>
 
 

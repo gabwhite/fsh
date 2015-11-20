@@ -1,15 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
 
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+
     <title>App Name - @yield('title')</title>
 
-    <link rel="stylesheet" href="{{url('/css/normalize.css')}}">
-    <link rel="stylesheet" href="{{url('/css/foundation.min.css')}}">
-    <link rel="stylesheet" href="{{url('/css/fsh.css')}}">
+    <link rel="stylesheet" href="{{url('/css/bootstrap.min.css')}}">
 
-    <script src="{{url('js/vendor/modernizr.js')}}"></script>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" href="{{url('/css/fsh.css')}}">
 
     @yield('css')
 
@@ -17,93 +27,66 @@
 
 <body>
 
-<div class="row">
-    <div class="small-2 large-3 columns">
-        <h1><a href="{{url('/')}}"><img src="{{url('/img/horizontallogoFoodServiceHound.png')}}"/></a></h1>
+<div class="container">
+
+    <div class="row">
+
+        <div class="col-md-2">
+            <div><a href="{{url('/')}}"><img src="{{url('/img/horizontallogoFoodServiceHound.png')}}" class="img-responsive"/></a></div>
+        </div>
+
+        <div class="col-md-10">
+            <a href="{{url('/search')}}">Products Search</a>
+            |
+            <a href="{{url('industryforums')}}">Industry Forums</a>
+            |
+            <a href="{{url('toolsresources')}}">Tools &amp; Resources</a>
+            |
+            @if (Auth::check())
+                <a href="{{url('profile/')}}">My Profile</a>
+                |
+                <a href="{{url('auth/logout')}}">Logout</a>
+            @else
+                <a href="#">Vendor Registration</a>
+                |
+                <a href="{{url('auth/login')}}">Login</a>
+                |
+                <a href="{{url('auth/register')}}">Register</a>
+            @endif
+
+        </div>
+
     </div>
 
-    <div class="small-10 small-text-right large-9 columns">
-        <a href="{{url('/search')}}">Products Search</a>
-        |
-        <a href="{{url('industryforums')}}">Industry Forums</a>
-        |
-        <a href="{{url('toolsresources')}}">Tools &amp; Resources</a>
-        |
-        @if (Auth::check())
-            <a href="{{url('profile/')}}">My Profile</a>
-            |
-            <a href="{{url('auth/logout')}}">Logout</a>
-        @else
-            <a href="#">Vendor Registration</a>
-            |
-            <a href="{{url('auth/login')}}">Login</a>
-            |
-            <a href="{{url('auth/register')}}">Register</a>
-        @endif
 
-    </div>
+    <div class="row">
 
-</div>
-
-
-<div class="row">
-    <div class="small-12 small-text-center large-12 columns">
-
-        <nav class="top-bar" data-topbar role="navigation">
-            <section class="top-bar-section">
-                <ul>
-
-                    <li class="has-dropdown">
-                        <a href="#">Right Button Dropdown</a>
-                        <ul class="dropdown">
-                            <li><a href="#">First link in dropdown</a></li>
-                            <li class="active"><a href="#">Active link in dropdown</a></li>
-                        </ul>
-                    </li>
-                    <li class="has-dropdown">
-                        <a href="#">Right Button Dropdown</a>
-                        <ul class="dropdown">
-                            <li><a href="#">First link in dropdown</a></li>
-                            <li class="active"><a href="#">Active link in dropdown</a></li>
-                        </ul>
-                    </li>
-                </ul>
+        <div class="col-md-12">
+            <section class="main-title">
+                <h1 class="page-title">@yield('sectionheader')</h1>
             </section>
-        </nav>
+        </div>
 
     </div>
-</div>
 
-
-<div class="row">
-    <div class="small-12 small-text-center large-12 columns">
-        <section class="main-title">
-            <h1 class="page-title">@yield('sectionheader')</h1>
-        </section>
-    </div>
-</div>
-
-<div class="row">
-    <div class="small-12 large-12 columns">
+    <div class="row">
+        <div class="col-md-12">
         @yield('content')
+        </div>
     </div>
+
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <small>&copy; 2015 foodservicehound.com</small>
+        </div>
+    </div>
+
 </div>
 
-<div class="row">
-    <div class="small-12 small-text-center large-12 columns">
-        <small>&copy; 2015 foodservicehound.com</small>
-    </div>
-</div>
 
 
-<script src="{{url('js/vendor/jquery.js')}}"></script>
-<script src="{{url('js/vendor/fastclick.js')}}"></script>
-
-<script src="{{url('js/foundation.min.js')}}"></script>
-<script>
-    $(document).foundation();
-</script>
-
+<script src="{{url('js/vendor/jquery-1.11.3.min.js')}}"></script>
+<script src="{{url('js/vendor/bootstrap/bootstrap.min.js')}}"></script>
 @yield('scripts')
 
 </body>

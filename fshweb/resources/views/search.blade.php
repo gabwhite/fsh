@@ -16,17 +16,17 @@
 
     <div class="row">
 
-        <div class="small-2 large-3 columns">
+        <div class="col-md-3">
             <div id="jstree_demo_div"></div>
         </div>
 
-        <div class="small-10 large-9 columns">
+        <div class="col-md-9">
 
             <form method="post" action="{{url('fulltextsearch')}}">
-                <input type="text" name="searchquery" id="searchquery" placeholder="Search" value="{{$query or ''}}"/>
+                <input type="text" name="searchquery" id="searchquery" placeholder="Search" value="{{$query or ''}}" class="form-control"/>
                 {!! csrf_field() !!}
             </form>
-            <table id="product_list" width="100%">
+            <table id="product_list" width="100%" class="table">
                 <thead>
                 <tr>
                     <th></th>

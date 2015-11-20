@@ -12,35 +12,27 @@
     {!! csrf_field() !!}
 
     <div>
-        <label>Name
-            <input type="text" name="name" value="{{ old('name') }}" required>
-        </label>
-        <small class="error">An name is required.</small>
+        <label for="name">Name</label>
+        <input type="text" name="name" value="{{ old('name') }}" class="form-control">
     </div>
 
     <div>
-        <label>Email
-            <input type="email" name="email" value="{{ old('email') }}" required pattern="email">
-        </label>
-        <small class="error">An email address is required.</small>
+        <label for="email">Email</label>
+        <input type="email" name="email" value="{{ old('email') }}" class="form-control">
     </div>
 
     <div>
-        <label>Password
-            <input type="password" name="password" required>
-        </label>
-        <small class="error">Password is required.</small>
+        <label for="password">Password</label>
+        <input type="password" name="password" class="form-control">
     </div>
 
     <div>
-        <label>Confirm Password
-            <input type="password" name="password_confirmation" required data-equalto="password">
-        </label>
-        <small class="error">The password did not match</small>
+        <label for="password_confirmation">Confirm Password</label>
+        <input type="password" name="password_confirmation" class="form-control">
     </div>
 
     <div>
-        <button type="submit">Register</button>
+        <button type="submit" class="btn btn-primary">Register</button>
     </div>
 </form>
 
