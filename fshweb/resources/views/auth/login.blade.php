@@ -10,17 +10,17 @@
 
     <div class="col-md-12">
 
-        <form method="POST" action="{{url('/auth/login')}}">
+        <form id="form1" name="form1" method="POST" action="{{url('/auth/login')}}">
             {!! csrf_field() !!}
 
             <div>
                 Email
-                <input type="email" name="email" value="{{ old('email') }}" class="form-control">
+                <input type="email" name="email" maxlength="100" value="{{ old('email') }}" class="form-control">
             </div>
 
             <div>
                 Password
-                <input type="password" name="password" id="password" class="form-control">
+                <input type="password" name="password" id="password" maxlength="25" class="form-control">
             </div>
 
             <div class="checkbox">
@@ -43,4 +43,18 @@
 
 @section('scripts')
     <script src="{{url('js/vendor/validation/jquery.validate.min.js')}}"></script>
+    <script type="text/javascript">
+        $(document).ready(function()
+        {
+            $("#form1").validate({
+                errorClass: "validationError",
+                rules:
+                {
+                    email: { required: true, email: true, maxlength: 100 },
+                    password: { required: true, maxlength: 25 }
+                }
+            });
+
+        });
+    </script>
 @endsection
