@@ -13,39 +13,34 @@
 
 @section('content')
 
-    <div class="row">
+    <div class="col-md-12">
 
-        <div id="slider" class="col-md-12">
 
+        <div class="row">
+
+            <div class="col-md-12">
+
+                <form name="homesearch" method="post" action="{{url('fulltextsearch')}}">
+
+                    <div class="row">
+                        <div class="col-md-9">
+                            <input type="text" name="searchquery" id="searchquery" placeholder="Enter a keyword, MPC code" class="form-control"/>
+                        </div>
+                        <div class="col-md-3">
+                            <input type="submit" class="btn btn-primary" value="Search Products"/>
+                        </div>
+                    </div>
+
+                    {!! csrf_field() !!}
+                </form>
+            </div>
         </div>
-    </div>
 
-    <div class="row">
-        <div class="col-md-12">
-
-        </div>
     </div>
 
 @endsection
 
 @section('scripts')
 
-    <script src="{{url('js/vendor/vegas/vegas.min.js')}}"></script>
-    <script type="text/javascript">
 
-        $(document).ready(function() {
-
-            $("#slider").vegas({
-                delay: 20000,
-                timer: false,
-                overlay: false,
-                cover: true,
-                slides: [
-                    {src: "{{url('img/slider/chef-in-kitchen.jpg')}}"},
-                    {src: "{{url('img/slider/Fire-Kitchen.jpg')}}"}
-                ]
-            });
-
-        });
-    </script>
 @endsection
