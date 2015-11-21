@@ -33,6 +33,8 @@ Route::group(['middleware' => 'auth'], function()
 
     // Public routes
     Route::get('/profile', 'ProfileController@index');
+    Route::get('/profile/product/{id?}', 'ProfileController@showProduct');
+    Route::post('/profile/product', 'ProfileController@editProduct');
 
     // Admin routes
     Route::get('admin/', 'AdminController@index');

@@ -21,6 +21,24 @@ class ProfileController extends Controller
         return view('profile.index');
     }
 
+    public function showProduct($id = null)
+    {
+        $userProduct = new \App\Models\UserProduct();
+        if($id != null)
+        {
+            $userProduct = \App\Models\UserProduct::where('id', '=', $id)->first();
+            if($userProduct == null) { $userProduct = new \App\Models\UserProduct(); }
+        }
+
+
+        return view('profile.productedit')->with('userproduct', $userProduct);
+    }
+
+    public function editProduct(Request $request)
+    {
+        echo "EDIT PROD";
+    }
+
     /**
      * Show the form for creating a new resource.
      *
