@@ -17,9 +17,9 @@
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
+    <![endif]-->
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
 
     <!--[if IE 7]>
     <link rel="stylesheet" href="{{url('/css/kleo/fontello-ie7.min.css')}}">
@@ -188,7 +188,7 @@
 
 </head>
 
-<body class="kleo-navbar-fixed">
+<body class="kleo-navbar-fixed navbar-resize">
 
 <div class="kleo-page">
 
@@ -201,6 +201,7 @@
                 <div class="container">
                     <!-- Brand and toggle get grouped for better mobile display -->
                     <div class="navbar-header">
+
                         <div class="kleo-mobile-switch">
 
                             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
@@ -340,9 +341,6 @@
 <script src="{{url('js/vendor/jquery-1.11.3.min.js')}}"></script>
 <script src="{{url('js/vendor/bootstrap/bootstrap.min.js')}}"></script>
 
-<script src="{{url('js/vendor/magnific-popup/magnific.min.js')}}"></script>
-<script src="{{url('js/vendor/carouFredSel/jquery.carouFredSel-6.2.0-packed.js')}}"></script>
-<script src="{{url('js/vendor/carouFredSel/helper-plugins/jquery.touchSwipe.min.js')}}"></script>
 
 
 @yield('scripts')

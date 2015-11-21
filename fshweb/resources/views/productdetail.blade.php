@@ -6,6 +6,9 @@
 
 @endsection
 
+@section('sectionheader')
+    PRODUCT DETAIL
+@endsection
 
 @section('content')
 
