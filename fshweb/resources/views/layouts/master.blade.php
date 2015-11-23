@@ -26,7 +26,7 @@
     <![endif]-->
 
     <link rel="stylesheet" href="{{url('/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" id="kleo-app-css"  href="{{url('/css/kleo/app.min.css?ver=3.0.4')}}" type="text/css" media="all" />
+    <link rel="stylesheet" id="kleo-app-css"  href="{{url('/css/kleo/app.css?ver=3.0.4')}}" type="text/css" media="all" />
     <link rel="stylesheet" id="magnific-popup-css"  href="{{url('/js/vendor/magnific-popup/magnific.css?ver=3.0.4')}}" type="text/css" media="all" />
     <link rel="stylesheet" id="tp-josefin-css"  href="http://fonts.googleapis.com/css?family=Josefin+Slab%3A400%2C100%2C600%2C700%2C300%7CJosefin+Sans%3A400%2C300%2C100%2C600%2C700&#038;ver=4.3.1" type="text/css" media="all" />
     <link rel="stylesheet" id="tp-josefinsans-css"  href="http://fonts.googleapis.com/css?family=Josefin+Sans%3A400%2C300%2C100%2C600%2C700&#038;ver=4.3.1" type="text/css" media="all" />

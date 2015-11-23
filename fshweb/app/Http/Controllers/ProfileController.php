@@ -29,6 +29,35 @@ class ProfileController extends Controller
 
     public function profileUpdate(Request $request)
     {
+
+
+        $user = \App\Models\User::with('userProfile')->find(\Auth::user()->id);
+
+        $userProfile = new \App\Models\UserProfile();
+
+        // Add/Edit metadata
+        if(isset($user->userProfile))
+        {
+            $userProfile = $user->userProfile;
+        }
+
+        $userProfile->firstname = $request->input('firstname');
+        $userProfile->lastname = $request->input('lastname');
+        $userProfile->bio = $request->input('bio');
+
+        // Save / Update user profile
+        if(isset($user->userProfile))
+        {
+            $user->userProfile()->associate($userProfile);
+        }
+        else
+        {
+            $user->userProfile()->save($userProfile);
+        }
+
+
+        $user->save();
+
         echo "pprofile updated";
     }
 

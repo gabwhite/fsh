@@ -13,14 +13,6 @@
 @section('content')
 
 
-
-<div class="row">
-    <div class="col-md-12">
-        <p class="bg-info">You own this product (<a href="#">Edit</a>)</p>
-    </div>
-</div>
-
-
 <div class="row">
 
     <div class="col-md-3">
@@ -101,13 +93,15 @@
 
     <div class="col-md-9">
 
-        <h1>
-            {{$userproduct->name}}
-            @if (Auth::check()
-                && (Auth::user()->hasRole('admin') || (Auth::user()->hasRole('vendor'))))
-            (<a href="{{url('profile/product', $userproduct->id)}}">edit</a>)
-            @endif
-        </h1>
+
+        @if (Auth::check()
+            && (Auth::user()->hasRole('admin') || (Auth::user()->hasRole('vendor') && isUserProductOwner($userproduct->id) )))
+
+            <p class="bg-info">You are an administrator for this product (<a href="{{url('profile/product', $userproduct->id)}}">Edit</a>)</p>
+
+        @endif
+
+        <h1>{{$userproduct->name}}</h1>
 
         <h4>Description</h4>
         {{$userproduct->description}}<br/>
