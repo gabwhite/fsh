@@ -21,6 +21,17 @@ class ProfileController extends Controller
         return view('profile.index');
     }
 
+    public function profileEdit()
+    {
+
+        return view('profile.profileedit');
+    }
+
+    public function profileUpdate()
+    {
+        echo "pprofile updated";
+    }
+
     public function showProduct($id = null)
     {
         $userProduct = new \App\Models\UserProduct();

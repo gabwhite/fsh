@@ -33,6 +33,9 @@ Route::group(['middleware' => 'auth'], function()
 
     // Public routes
     Route::get('/profile', 'ProfileController@index');
+    Route::get('/profile/edit', 'ProfileController@profileEdit');
+    Route::post('/profile/edit', 'ProfileController@profileUpdate');
+
     Route::get('/profile/product/{id?}', 'ProfileController@showProduct');
     Route::post('/profile/product', 'ProfileController@editProduct');
 

@@ -95,7 +95,13 @@
 
     <div class="col-md-9">
 
-        <h1>{{$userproduct->name}}</h1>
+        <h1>
+            {{$userproduct->name}}
+            @if (Auth::check()
+                && (Auth::user()->hasRole('admin') || (Auth::user()->hasRole('vendor'))))
+            (<a href="{{url('profile/product', $userproduct->id)}}">edit</a>)
+            @endif
+        </h1>
 
         <h4>Description</h4>
         {{$userproduct->description}}<br/>
