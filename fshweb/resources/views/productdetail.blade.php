@@ -13,7 +13,13 @@
 @section('content')
 
 
-<hr/>
+
+<div class="row">
+    <div class="col-md-12">
+        <p class="bg-info">You own this product (<a href="#">Edit</a>)</p>
+    </div>
+</div>
+
 
 <div class="row">
 

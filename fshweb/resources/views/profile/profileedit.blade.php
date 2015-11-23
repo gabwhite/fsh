@@ -12,6 +12,8 @@
 
 @section('content')
 
+<div class="row">
+
     <div class="col-md-12">
 
         <form id="form1" name="form1" method="post" action="{{url('profile/edit')}}">
@@ -91,6 +93,8 @@
         </form>
 
     </div>
+
+</div>
 
 @endsection
 

@@ -283,11 +283,9 @@
 
         <section class="container-wrap main-color">
             <div id="main-container" class="container">
-                <div class="row">
-                    <!-- START MAIN PAGE CONTENT -->
-                    @yield('content')
-                    <!-- END MAIN PAGE CONTENT -->
-                </div>
+                <!-- START MAIN PAGE CONTENT -->
+                @yield('content')
+                <!-- END MAIN PAGE CONTENT -->
             </div><!--end .container-->
         </section>
 

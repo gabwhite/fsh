@@ -12,6 +12,8 @@
 
 @section('content')
 
+<div class="row">
+
     <form id="form1" name="form1" method="post" action="{{url('profile/product')}}">
 
     <div class="col-md-12">
@@ -159,6 +161,8 @@
     {!! csrf_field() !!}
 
     </form>
+
+</div>
 
 @endsection
 

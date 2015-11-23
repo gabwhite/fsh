@@ -8,6 +8,8 @@
 
 @section('content')
 
+<div class="row">
+
     <div class="col-md-12">
 
         <form id="form1" name="form1" method="POST" action="{{url('/auth/login')}}">
@@ -38,6 +40,8 @@
         <a href="#">Lost Password</a>
 
     </div>
+
+</div>
 
 @endsection
 

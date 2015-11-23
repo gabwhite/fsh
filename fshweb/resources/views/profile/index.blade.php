@@ -12,6 +12,8 @@
 
 @section('content')
 
+<div class="row">
+
     <div class="col-md-12">
 
         Currently logged in user: {{Auth::user()->name}} ({{Auth::user()->email}})
@@ -28,6 +30,8 @@
         More Coming Soon
 
     </div>
+
+</div>
 
 @endsection
 
