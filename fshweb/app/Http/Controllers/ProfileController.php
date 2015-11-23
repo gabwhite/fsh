@@ -27,7 +27,7 @@ class ProfileController extends Controller
         return view('profile.profileedit');
     }
 
-    public function profileUpdate()
+    public function profileUpdate(Request $request)
     {
         echo "pprofile updated";
     }
