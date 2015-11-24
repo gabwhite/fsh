@@ -237,12 +237,12 @@
                             <li id="menu-item-662" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-662"><a title="Products Search" href="{{url('/search')}}">Products Search</a></li>
                             <li id="menu-item-4594" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4594"><a title="Industry Forums" href="{{url('industryforums')}}">Industry Forums</a></li>
                             <li id="menu-item-224" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-224"><a title="Tools &amp; Resources" href="{{url('toolsresources')}}">Tools &#038; Resources</a></li>
-                            <li id="menu-item-721" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-721"><a title="Vendor Registration" href="#">Vendor Registration</a></li>
 
                             @if (Auth::check())
                                 <li id="menu-item-722" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-722"><a title="Logout" href="{{url('profile/')}}">Profile</a></li>
                                 <li id="menu-item-723" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-723"><a title="Logout" href="{{url('auth/logout')}}">Logout</a></li>
                             @else
+                                <li id="menu-item-721" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-721"><a title="Vendor Registration" href="{{url('auth/vendorregister')}}">Vendor Registration</a></li>
                                 <li id="menu-item-720" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-720"><a title="Login/Register" href="{{url('auth/login')}}">Login/Register</a></li>
                             @endif
 

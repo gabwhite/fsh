@@ -25,6 +25,7 @@ class AuthController extends Controller
 
     protected $redirectPath = '/';
 
+
     /**
      * Create a new authentication controller instance.
      *
@@ -64,5 +65,15 @@ class AuthController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    public function getVendorRegister()
+    {
+        return view('auth.vendorregister');
+    }
+
+    public function postVendorRegister()
+    {
+        echo "vendor posted";
     }
 }
