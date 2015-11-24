@@ -14,8 +14,12 @@ class UserProfile extends Model
 {
     protected $table = 'user_profiles';
 
+    protected $primaryKey = 'user_id';
+
+    protected $fillable = ['firstname', 'lastname', 'bio', 'vendor_id'];
+
     public function user()
     {
-        return $this->belongsTo('App\Model\User', 'user_id');
+        return $this->belongsTo('\App\Model\User', 'id');
     }
 }

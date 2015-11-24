@@ -23,7 +23,7 @@
                     Email
                 </div>
                 <div class="col-md-9">
-                    <input type="text" name="email" placeholder="Email" class="form-control" value="{{Auth::user()->email}}"/>
+                    <input type="text" name="email" placeholder="Email" class="form-control" value="{{Auth::user()->email}}" maxlength="100"/>
                 </div>
             </div>
 
@@ -32,7 +32,7 @@
                     Password
                 </div>
                 <div class="col-md-9">
-                    <input type="password" name="password" placeholder="Password" class="form-control"/>
+                    <input type="password" name="password" placeholder="Password" class="form-control" maxlength="25"/>
                 </div>
             </div>
 
@@ -41,7 +41,7 @@
                     Confirm Password
                 </div>
                 <div class="col-md-9">
-                    <input type="password" name="confirmpassword" placeholder="Confirm Password" class="form-control"/>
+                    <input type="password" name="confirmpassword" placeholder="Confirm Password" class="form-control" maxlength="25"/>
                 </div>
             </div>
 
@@ -61,7 +61,7 @@
                     First Name
                 </div>
                 <div class="col-md-9">
-                    <input type="text" name="firstname" placeholder="First Name" class="form-control" value="{{isset(Auth::user()->userProfile) ? Auth::user()->userProfile->firstname : ''}}"/>
+                    <input type="text" name="firstname" placeholder="First Name" class="form-control" maxlength="100" value="{{isset($profile) ? $profile->firstname : ''}}"/>
                 </div>
             </div>
 
@@ -70,7 +70,7 @@
                     Last Name
                 </div>
                 <div class="col-md-9">
-                    <input type="text" name="lastname" placeholder="Last Name" class="form-control" value="{{isset(Auth::user()->userProfile) ? Auth::user()->userProfile->lastname : ''}}"/>
+                    <input type="text" name="lastname" placeholder="Last Name" class="form-control" maxlength="100" value="{{isset($profile) ? $profile->lastname : ''}}"/>
                 </div>
             </div>
 
@@ -79,7 +79,7 @@
                     Bio
                 </div>
                 <div class="col-md-9">
-                    <textarea name="bio" class="form-control" placeholder="Bio" cols="80" rows="3">{{isset(Auth::user()->userProfile) ? Auth::user()->userProfile->bio : ''}}</textarea>
+                    <textarea name="bio" class="form-control" placeholder="Bio" cols="80" rows="3">{{isset($profile) ? $profile->bio : ''}}</textarea>
                 </div>
             </div>
 
@@ -100,5 +100,20 @@
 
 @section('scripts')
 
+    <script type="text/javascript" src="{{url('js/vendor/validation/jquery.validate.min.js')}}"></script>
+    <script type="text/javascript">
+        $(document).ready(function()
+        {
+            $("#form1").validate({
+                errorClass: "validationError",
+                rules:
+                {
+                    email: { required: true, email: true, maxlength: 100 },
+                    password: { maxlength: 25 },
+                    password_confirmation: { equalTo: "#password", maxlength: 25 }
+                }
+            });
 
+        });
+    </script>
 @endsection

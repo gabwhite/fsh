@@ -16,49 +16,45 @@ class ProfileController extends Controller
      */
     public function index()
     {
-
-
         return view('profile.index');
     }
 
     public function profileEdit()
     {
+        $up = \Auth::user()->userProfile();
+        if(isset($up))
+        {
+            $up = \Auth::user()->userProfile;
+        }
 
-        return view('profile.profileedit');
+        return view('profile.profileedit')->with('profile', $up);
     }
 
     public function profileUpdate(Request $request)
     {
+        $user = \Auth::user();
 
-
-        $user = \App\Models\User::with('userProfile')->find(\Auth::user()->id);
-
-        $userProfile = new \App\Models\UserProfile();
-
-        // Add/Edit metadata
-        if(isset($user->userProfile))
+        if(!is_null($user))
         {
-            $userProfile = $user->userProfile;
+
+
+            if (!is_null($up = $user->userProfile))
+            {
+                $up->firstname = $request->input('firstname');
+                $up->lastname = $request->input('lastname');
+                $up->bio = $request->input('bio');
+                $up->save();
+            }
+            else
+            {
+                $input = $request->only(['firstname', 'lastname', 'bio']);
+                $user->userProfile()->create($input);
+            }
+
+            return redirect('profile/edit');
         }
 
-        $userProfile->firstname = $request->input('firstname');
-        $userProfile->lastname = $request->input('lastname');
-        $userProfile->bio = $request->input('bio');
-
-        // Save / Update user profile
-        if(isset($user->userProfile))
-        {
-            $user->userProfile()->associate($userProfile);
-        }
-        else
-        {
-            $user->userProfile()->save($userProfile);
-        }
-
-
-        $user->save();
-
-        echo "pprofile updated";
+        return redirect('/');
     }
 
     public function showProduct($id = null)

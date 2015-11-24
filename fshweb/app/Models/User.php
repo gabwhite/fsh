@@ -41,6 +41,6 @@ class User extends Model implements AuthenticatableContract,
 
     public function userProfile()
     {
-        return $this->hasOne('App\Models\UserProfile', 'user_id');
+        return $this->hasOne('\App\Models\UserProfile', 'user_id');
     }
 }

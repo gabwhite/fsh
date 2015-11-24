@@ -19,6 +19,10 @@
         Currently logged in user: {{Auth::user()->name}} ({{Auth::user()->email}})
         <br/><br/>
 
+        @if(isEmailInUse('breen.young@gmail.com', 1))
+            cxcxcxc
+        @endif
+
         <a href="{{url('profile/edit')}}">Edit my profile</a>
         <br/><br/>
 
