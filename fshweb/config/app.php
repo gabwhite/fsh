@@ -206,8 +206,9 @@ return [
 
 
     /* Application specific config settings */
-    'role_vendor' => '4',
     'role_admin' => '1',
-    'role_user' => '5',
+    'role_vendor' => '2',
+    'role_user' => '3',
+    'avatar_storage' => storage_path('/avatars'),
 
 ];
