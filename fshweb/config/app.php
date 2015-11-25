@@ -204,4 +204,10 @@ return [
 
     ],
 
+
+    /* Application specific config settings */
+    'role_vendor' => '4',
+    'role_admin' => '1',
+    'role_user' => '5',
+
 ];
