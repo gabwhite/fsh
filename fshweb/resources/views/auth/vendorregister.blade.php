@@ -109,8 +109,8 @@
                     password: { required: true, maxlength: 25, minlength: 6 },
                     password_confirmation: { equalTo: "#password", maxlength: 25, minlength: 6 },
                     company: { required: true, maxlength: 200 },
-                    //country: { required: true },
-                    //state_province: { required: true },
+                    country: { required: true },
+                    state_province: { required: true },
                     city: { required: true, maxlength: 200 },
                     zip_postal: { required: true, maxlength: 50 },
                     contact_name: { required: true, maxlength: 200 }
