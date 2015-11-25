@@ -96,7 +96,8 @@
 @endsection
 
 @section('scripts')
-    <script src="{{url('js/vendor/validation/jquery.validate.min.js')}}"></script>
+
+    <script type="text/javascript" src="{{url('js/vendor/validation/jquery.validate.min.js')}}"></script>
     <script type="text/javascript">
         $(document).ready(function()
         {
@@ -113,7 +114,9 @@
                     state_province: { required: true },
                     city: { required: true, maxlength: 200 },
                     zip_postal: { required: true, maxlength: 50 },
-                    contact_name: { required: true, maxlength: 200 }
+                    contact_name: { required: true, maxlength: 200 },
+                    contact_phone: { maxlength: 200 },
+                    bio: { maxlength: 2000 }
                 }
             });
 

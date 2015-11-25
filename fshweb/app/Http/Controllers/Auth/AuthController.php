@@ -79,13 +79,27 @@ class AuthController extends Controller
      * @param  array  $data
      * @return User
      */
-    protected function create(array $data)
+    protected function create(array $data, $role = null)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+
+        if(!is_null($role))
+        {
+            // Add to 'user' role
+            $user->attachRole($role);
+        }
+        else
+        {
+            // Add to 'user' role
+            $user->attachRole(config('app.role_user'));
+        }
+
+
+        return $user;
     }
 
     protected function createVendorUserProfile($id, array $data)
@@ -125,7 +139,7 @@ class AuthController extends Controller
             DB::beginTransaction();
 
             // Create User first
-            $user = $this->create($request->all());
+            $user = $this->create($request->all(), config('app.role_vendor'));
 
 
             // Now validate / create user profile
@@ -138,9 +152,6 @@ class AuthController extends Controller
             }
 
             $this->createVendorUserProfile($user->id, $request->all());
-
-            // Add to 'vendor' role
-            $user->attachRole(config('app.role_vendor'));
 
             DB::commit();
 

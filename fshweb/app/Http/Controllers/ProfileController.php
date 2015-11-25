@@ -21,13 +21,21 @@ class ProfileController extends Controller
 
     public function profileEdit()
     {
-        $up = \Auth::user()->userProfile();
+        $user = \Auth::user();
+        $up = $user->userProfile();
         if(isset($up))
         {
             $up = \Auth::user()->userProfile;
         }
 
-        return view('profile.profileedit')->with('profile', $up);
+        if($user->hasRole(['admin', 'user']))
+        {
+            return view('profile.profileedit')->with('profile', $up);
+        }
+        else
+        {
+            return view('profile.profileeditvendor')->with('profile', $up);
+        }
     }
 
     public function profileUpdate(Request $request)
@@ -37,11 +45,17 @@ class ProfileController extends Controller
         if(!is_null($user))
         {
 
-
             if (!is_null($up = $user->userProfile))
             {
-                $up->firstname = $request->input('firstname');
-                $up->lastname = $request->input('lastname');
+                $up->firstname = $request->input('firstname') ? $request->input('firstname') : null ;
+                $up->lastname = $request->input('lastname') ? $request->input('lastname') : null;
+                $up->company = $request->input('company') ? $request->input('company') : null;
+                $up->country = $request->input('country') ? $request->input('country') : null;
+                $up->state_province = $request->input('state_province') ? $request->input('state_province') : null;
+                $up->city = $request->input('city') ? $request->input('city') : null;
+                $up->zip_postal = $request->input('zip_postal') ? $request->input('zip_postal') : null;
+                $up->contact_name = $request->input('contact_name') ? $request->input('contact_name') : null;
+                $up->contact_phone = $request->input('contact_phone') ? $request->input('contact_phone') : null;
                 $up->bio = $request->input('bio');
                 $up->save();
             }

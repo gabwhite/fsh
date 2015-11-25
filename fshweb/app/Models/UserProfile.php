@@ -18,7 +18,8 @@ class UserProfile extends Model
 
     protected $fillable =
     [
-        'user_id', 'firstname', 'lastname', 'bio', 'vendor_id',
+        'user_id',
+        'firstname', 'lastname', 'bio', 'vendor_id',
         'company', 'country', 'state_province', 'city', 'zip_postal',
         'contact_name', 'contact_phone', 'logo_image_path'
     ];
