@@ -42,12 +42,16 @@
 
                 <div>
                     <label for="country">Country</label>
-                    <select name="country" class="form-control"></select>
+                    <select name="country" class="form-control">
+                        <option value="1">Canada</option>
+                    </select>
                 </div>
 
                 <div>
-                    <label for="country">State / Province</label>
-                    <select name="stateprovince" class="form-control"></select>
+                    <label for="state_province">State / Province</label>
+                    <select name="state_province" class="form-control">
+                        <option value="1">NS</option>
+                    </select>
                 </div>
 
                 <div>
@@ -56,8 +60,8 @@
                 </div>
 
                 <div>
-                    <label for="zippostal">Zip / Postal</label>
-                    <input type="text" name="zippostal" placeholder="Zip / Postal" maxlength="50" class="form-control"/>
+                    <label for="zip_postal">Zip / Postal</label>
+                    <input type="text" name="zip_postal" placeholder="Zip / Postal" maxlength="50" class="form-control"/>
                 </div>
 
                 <div>
@@ -71,8 +75,8 @@
                 </div>
 
                 <div>
-                    <label for="">Logo Image</label>
-                    <input type="file" name="logo_image"/>
+                    <label for="logo_image_path">Logo Image</label>
+                    <input type="file" name="logo_image_path"/>
                 </div>
 
                 <div>
@@ -102,13 +106,13 @@
                 {
                     name: { required: true, maxlength: 25 },
                     email: { required: true, email: true, maxlength: 100 },
-                    password: { required: true, maxlength: 25 },
-                    password_confirmation: { equalTo: "#password", maxlength: 25 },
+                    password: { required: true, maxlength: 25, minlength: 6 },
+                    password_confirmation: { equalTo: "#password", maxlength: 25, minlength: 6 },
                     company: { required: true, maxlength: 200 },
-                    country: { required: true },
-                    stateprovince: { required: true },
+                    //country: { required: true },
+                    //state_province: { required: true },
                     city: { required: true, maxlength: 200 },
-                    zippostal: { required: true, maxlength: 50 },
+                    zip_postal: { required: true, maxlength: 50 },
                     contact_name: { required: true, maxlength: 200 }
                 }
             });

@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
-use Validator;
+use App\Models\User;
+use App\Models\UserProfile;
 use App\Http\Controllers\Controller;
+
+use Validator;
+
+use Illuminate\Support\Facades\DB;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 
@@ -52,6 +57,22 @@ class AuthController extends Controller
         ]);
     }
 
+    protected function vendorValidator(array $data)
+    {
+        return Validator::make($data, [
+            'bio' => 'max:2000',
+            //'vendor_id' => 'max:6',
+            'company' => 'required|max:200',
+            'country' => 'required|max:6',
+            'state_province' => 'required|max:6',
+            'city' => 'required|max:200',
+            'zip_postal' => 'required|max:50',
+            'contact_name' => 'required|max:200',
+            'contact_phone' => 'max:200',
+            'logo_image_path' => 'max:200',
+        ]);
+    }
+
     /**
      * Create a new user instance after a valid registration.
      *
@@ -67,13 +88,74 @@ class AuthController extends Controller
         ]);
     }
 
+    protected function createVendorUserProfile($id, array $data)
+    {
+        return UserProfile::create([
+            'user_id' => $id,
+            'bio' => $data['bio'],
+            'company' => $data['company'],
+            'country' => $data['country'],
+            'state_province' => $data['state_province'],
+            'city' => $data['city'],
+            'zip_postal' => $data['zip_postal'],
+            'contact_name' => $data['contact_name'],
+            'contact_phone' => $data['contact_phone'],
+            'logo_image_path' => $data['logo_image_path'],
+        ]);
+    }
+
     public function getVendorRegister()
     {
         return view('auth.vendorregister');
     }
 
-    public function postVendorRegister()
+    public function postVendorRegister(Request $request)
     {
-        echo "vendor posted";
+
+        try
+        {
+            $validator = $this->validator($request->all());
+
+            if ($validator->fails())
+            {
+                $this->throwValidationException($request, $validator);
+            }
+
+
+            DB::beginTransaction();
+
+            // Create User first
+            $user = $this->create($request->all());
+
+
+            // Now validate / create user profile
+            $vendorUserProfileValidator = $this->vendorValidator($request->all());
+
+            if ($vendorUserProfileValidator->fails()) {
+                $this->throwValidationException(
+                    $request, $vendorUserProfileValidator
+                );
+            }
+
+            $this->createVendorUserProfile($user->id, $request->all());
+
+            // Add to 'vendor' role
+            $user->attachRole(config('app.role_vendor'));
+
+            DB::commit();
+
+            \Auth::login($user);
+
+        }
+        catch(\Exception $ex)
+        {
+
+            DB::rollBack();
+            throw $ex;
+
+        }
+
+        return redirect($this->redirectPath());
+
     }
 }
