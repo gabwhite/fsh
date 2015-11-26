@@ -18,6 +18,19 @@ class UploadHandler
         return Uuid::uuid4()->toString() . "." . $extension;
     }
 
+    public function uploadCsv($file, $directory, $filename)
+    {
+        $success = false;
+
+        if($file->getClientOriginalExtension() == 'csv')
+        {
+            $this->uploadFile($file, $filename, config('app.csv_storage') . '/' . $directory);
+            $success = true;
+        }
+
+        return $success;
+    }
+
     public function uploadAvatar($file, $avatarFilename = null)
     {
         if(!isset($avatarFilename))

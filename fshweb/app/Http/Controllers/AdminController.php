@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Jobs\RebuildSearchIndex;
+use App\UploadHandler;
 use App\UserProductImport;
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -25,26 +26,28 @@ class AdminController extends Controller
 
     public function doImport(Request $request)
     {
-
         if($request->hasFile('importfile'))
         {
-            $file = $request->file('importfile');
+            $filename = $request->file('importfile')->getClientOriginalName();
+            $directory = Uuid::uuid4()->toString();
 
-            if($file->isValid() && $file->getClientOriginalExtension() == 'csv')
+            $uploader = new UploadHandler();
+            $result = $uploader->uploadCsv($request->file('importfile'), $directory, $filename);
+
+            if($result)
             {
                 // Save file to storage for processing
-
                 $importInfo = array(
                     'user_id' => $request->user()->id,
-                    'uuid' => Uuid::uuid4(),
-                    'filename' => $file->getClientOriginalName(),
+                    'uuid' => $directory,
+                    'filename' => $filename,
                     'include_headers' => $request->input('includesheaders') ? true : false,
                     'add_as_active' => $request->input('addasactive') ? true : false
                     );
 
-                $file->move(storage_path('app/' . $importInfo['uuid']), $importInfo['filename']);
+                dd($importInfo);
 
-                $this->dispatch(new ParseProductImport($importInfo));
+                //$this->dispatch(new ParseProductImport($importInfo));
             }
         }
 
