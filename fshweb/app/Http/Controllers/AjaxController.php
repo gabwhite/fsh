@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\DbCategoryFinder;
 use App\ProductSearcher;
 use Illuminate\Http\Request;
-
+use Cache;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -57,6 +57,28 @@ class AjaxController extends Controller
         $products = $productSearcher->fullTextSearch('productindex', $words);
 
         return $products;
+    }
+
+    public function getCountries()
+    {
+        $countries = Cache::remember('countries', 5, function()
+        {
+            return \DB::table('countries')->where('active', '=', '1')->get();
+        });
+
+        return response()->json($countries);
+    }
+
+    public function getStateProvincesForCountry($countryId)
+    {
+        $key = 'stateprovince-' . $countryId;
+
+        $stateProvinces = Cache::remember($key, 5, function() use ($countryId)
+        {
+            return \DB::table('stateprovinces')->where('country_id', '=', $countryId)->get();
+        });
+
+        return response()->json($stateProvinces);
     }
 
 }

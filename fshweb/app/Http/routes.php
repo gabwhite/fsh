@@ -80,3 +80,5 @@ Route::post('auth/vendorregister', 'Auth\AuthController@postVendorRegister');
 // AJAX routes
 Route::get('ajax/getfoodcategories/{format}/{parentId?}', 'AjaxController@getFoodCategoriesForParent');
 Route::get('ajax/getuserproducts/{categoryId}', 'AjaxController@getUserProducts');
+Route::get('ajax/getcountries', 'AjaxController@getCountries');
+Route::get('ajax/getstateprovincesforcountry/{countryId}', 'AjaxController@getStateProvincesForCountry');

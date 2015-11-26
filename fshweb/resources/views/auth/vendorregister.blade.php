@@ -42,15 +42,13 @@
 
                 <div>
                     <label for="country">Country</label>
-                    <select name="country" class="form-control">
-                        <option value="1">Canada</option>
+                    <select id="country" name="country" class="form-control">
                     </select>
                 </div>
 
                 <div>
                     <label for="state_province">State / Province</label>
-                    <select name="state_province" class="form-control">
-                        <option value="1">NS</option>
+                    <select id="state_province" name="state_province" class="form-control">
                     </select>
                 </div>
 
@@ -98,9 +96,60 @@
 @section('scripts')
 
     <script type="text/javascript" src="{{url('js/vendor/validation/jquery.validate.min.js')}}"></script>
+    <script type="text/javascript" src="{{url('js/fsh.common.js')}}"></script>
     <script type="text/javascript">
         $(document).ready(function()
         {
+
+            fsh.common.doAjax("{{url('ajax/getcountries')}}", {}, "GET", true,
+                function(data)
+                {
+                    var html = "<option value=''></option>";
+                    $.each(data, function(idx, val)
+                    {
+                        //console.log(val);
+                        html += "<option value='" + val.id + "'>" + val.name + "</option>";
+                    });
+                    $("#country").html(html);
+                },
+                function(jqXhr, textStatus, errorThrown)
+                {
+
+                }
+            );
+
+            $("#country").on("change", function(e)
+            {
+                if($(this).val() === "")
+                {
+                    $("#state_province option[value != '']").remove();
+                }
+                else
+                {
+                    fsh.common.doAjax("{{url('ajax/getstateprovincesforcountry')}}/" + $(this).val(), {}, "GET", true,
+                        function(data)
+                        {
+                            //console.log(data);
+                            var html = "<option value=''></option>";
+                            $.each(data, function(idx, val)
+                            {
+                                //console.log(val);
+                                html += "<option value='" + val.id + "'>" + val.name + "</option>";
+                            });
+                            $("#state_province").html(html);
+                        },
+                        function(jqXhr, textStatus, errorThrown)
+                        {
+
+                        }
+                    );
+
+                }
+
+                e.preventDefault();
+            });
+
+
             $("#form1").validate({
                 errorClass: "validationError",
                 rules:
