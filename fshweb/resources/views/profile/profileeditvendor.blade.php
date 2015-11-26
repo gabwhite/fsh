@@ -152,6 +152,8 @@
         $(document).ready(function()
         {
 
+            var $country = $("#country");
+
             fsh.common.doAjax("{{url('ajax/getcountries')}}", {}, "GET", true,
                     function(data)
                     {
@@ -169,8 +171,8 @@
                             }
 
                         });
-                        $("#country").html(html);
-                        $("#country").trigger("change");
+                        $country.html(html);
+                        $country.trigger("change");
                     },
                     function(jqXhr, textStatus, errorThrown)
                     {
@@ -178,7 +180,7 @@
                     }
             );
 
-            $("#country").on("change", function(e)
+            $country.on("change", function(e)
             {
                 if($(this).val() === "")
                 {
