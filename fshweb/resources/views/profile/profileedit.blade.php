@@ -86,6 +86,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <input type="submit" value="Update" class="btn btn-primary btn-lg"/>
+                    <a href="{{url('/profile')}}" class="btn btn-lg">Cancel</a>
                 </div>
             </div>
 

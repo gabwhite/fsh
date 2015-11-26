@@ -8,9 +8,10 @@
 
 namespace App;
 
+use Illuminate\Support\Facades\Storage;
 use Ramsey\Uuid\Uuid;
 
-class UploadHandlerLocal
+class UploadHandler
 {
     public function generateUniqueFilename($extension)
     {
@@ -21,12 +22,24 @@ class UploadHandlerLocal
     {
         if(!isset($avatarFilename))
         {
-            $avatarFilename = generateUniqueFilename($file->getClientOriginalExtension());
+            $avatarFilename = $this->generateUniqueFilename($file->getClientOriginalExtension());
         }
 
         $this->uploadFile($file, $avatarFilename, public_path(config('app.avatar_storage')));
 
         return $avatarFilename;
+    }
+
+    public function removeAvatar($file)
+    {
+        try
+        {
+            Storage::disk('avatars')->delete($file);
+        }
+        catch(Exception $ex)
+        {
+            throw $ex;
+        }
     }
 
     public function uploadFile($file, $fileName, $path)
