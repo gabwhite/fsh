@@ -26,6 +26,8 @@
         <a href="{{url('profile/edit')}}">Edit my profile</a>
         <br/><br/>
 
+        <a href="{{url('profile/avatar')}}">Change Avatar</a>
+
         @if(Auth::user()->hasRole('admin'))
             You have <a href="{{url('/admin')}}">administrative</a> access
         @endif

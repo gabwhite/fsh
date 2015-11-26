@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\UploadHandler;
 use Illuminate\Http\Request;
 
 use Ramsey\Uuid\Uuid;
@@ -19,6 +20,49 @@ class ProfileController extends Controller
     {
         return view('profile.index');
     }
+
+    public function profileAvatar()
+    {
+        $user = \Auth::user();
+        $up = $user->userProfile();
+        if(isset($up))
+        {
+            $up = \Auth::user()->userProfile;
+        }
+
+        return view('profile.avataredit')->with('profile', $up);
+    }
+
+    public function profileAvatarUpdate(Request $request)
+    {
+        $user = \Auth::user();
+
+        if(!is_null($user))
+        {
+            if (!is_null($up = $user->userProfile))
+            {
+                if ($request->hasFile('logo_image_path'))
+                {
+                    $uploader = new UploadHandler();
+                    $avatarFilename = $uploader->uploadAvatar($request->file('logo_image_path'), $up->logo_image_path);
+                    $up->logo_image_path = $avatarFilename;
+                    $up->save();
+                }
+            }
+            else
+            {
+                // UserProfile doesn't exist, create a row
+                $input = $request->only(['firstname', 'lastname', 'bio']);
+                $user->userProfile()->create($input);
+            }
+
+
+            return redirect('profile/avatar');
+        }
+
+        return redirect('/');
+    }
+
 
     public function profileEdit()
     {
@@ -48,16 +92,7 @@ class ProfileController extends Controller
 
             if (!is_null($up = $user->userProfile))
             {
-
-                $avatarFilename = null;
-
-                if ($request->hasFile('logo_image_path')
-                    && $request->file('logo_image_path')->isValid())
-                {
-                    $avatarFilename = Uuid::uuid4()->toString() . "." . $request->file('logo_image_path')->getClientOriginalExtension();
-                    $request->file('logo_image_path')->move(storage_path(config('app.avatar_storage')), $avatarFilename);
-                }
-
+                // Update UserProfile
                 $up->firstname = $request->input('firstname') ? $request->input('firstname') : null ;
                 $up->lastname = $request->input('lastname') ? $request->input('lastname') : null;
                 $up->company = $request->input('company') ? $request->input('company') : null;
@@ -68,13 +103,26 @@ class ProfileController extends Controller
                 $up->contact_name = $request->input('contact_name') ? $request->input('contact_name') : null;
                 $up->contact_phone = $request->input('contact_phone') ? $request->input('contact_phone') : null;
                 $up->bio = $request->input('bio');
-                $up->logo_image_path = $avatarFilename;
                 $up->save();
             }
             else
             {
-                $input = $request->only(['firstname', 'lastname', 'bio']);
-                $user->userProfile()->create($input);
+                // UserProfile doesn't exist, create a row
+                $vals = [
+                        'firstname' => $request->input('firstname') ? $request->input('firstname') : null,
+                        'lastname' => $request->input('lastname') ? $request->input('lastname') : null,
+                        'company' => $request->input('company') ? $request->input('company') : null,
+                        'country' => $request->input('country') ? $request->input('country') : null,
+                        'state_province' => $request->input('state_province') ? $request->input('state_province') : null,
+                        'city' => $request->input('city') ? $request->input('city') : null,
+                        'zip_postal' => $request->input('zip_postal') ? $request->input('zip_postal') : null,
+                        'contact_name' => $request->input('contact_name') ? $request->input('contact_name') : null,
+                        'contact_phone' => $request->input('contact_phone') ? $request->input('contact_phone') : null,
+                        'bio' => $request->input('bio') ? $request->input('bio') : null,
+                        ];
+
+                //$input = $request->only(['firstname', 'lastname', 'bio']);
+                $user->userProfile()->create($vals);
             }
 
             return redirect('profile/edit');
@@ -92,13 +140,12 @@ class ProfileController extends Controller
             if($userProduct == null) { $userProduct = new \App\Models\UserProduct(); }
         }
 
-
         return view('profile.productedit')->with('userproduct', $userProduct);
     }
 
     public function editProduct(Request $request)
     {
-        echo "EDIT PROD";
+        echo "TODO EDIT PROD";
     }
 
 }

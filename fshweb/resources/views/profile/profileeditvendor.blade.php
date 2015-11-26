@@ -113,22 +113,6 @@
 
             <div class="row">
                 <div class="col-md-3">
-                    Logo Image
-                </div>
-                <div class="col-md-9">
-                    <input type="file" name="logo_image_path"/>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="">
-
-                </div>
-            </div>
-
-
-            <div class="row">
-                <div class="col-md-3">
                     About your company
                 </div>
                 <div class="col-md-9">
@@ -225,6 +209,7 @@
 
                 e.preventDefault();
             });
+
 
             $("#form1").validate({
                 errorClass: "validationError",

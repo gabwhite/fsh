@@ -37,7 +37,8 @@ Route::group(['middleware' => 'auth'], function()
     Route::get('/profile', 'ProfileController@index');
     Route::get('/profile/edit', 'ProfileController@profileEdit');
     Route::post('/profile/edit', 'ProfileController@profileUpdate');
-
+    Route:get('/profile/avatar', 'ProfileController@profileAvatar');
+    Route::post('/profile/avatar', 'ProfileController@profileAvatarUpdate');
     /*
     Route::group(['middleware' => ['role:vendor']], function()
     {
