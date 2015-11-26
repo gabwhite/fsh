@@ -45,10 +45,6 @@ atlassian-ide-plugin.xml
 com_crashlytics_export_strings.xml
 crashlytics.properties
 crashlytics-build.properties
-### Laravel template
-/bootstrap/compiled.php
-.env.*.php
-.env.php
-.env
+
 
 # Created by .ignore support plugin (hsz.mobi)
