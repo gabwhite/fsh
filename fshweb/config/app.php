@@ -209,6 +209,6 @@ return [
     'role_admin' => '1',
     'role_vendor' => '2',
     'role_user' => '3',
-    'avatar_storage' => storage_path('/avatars'),
+    'avatar_storage' => 'app/avatars',
 
 ];

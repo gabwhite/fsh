@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Ramsey\Uuid\Uuid;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -47,6 +48,16 @@ class ProfileController extends Controller
 
             if (!is_null($up = $user->userProfile))
             {
+
+                $avatarFilename = null;
+
+                if ($request->hasFile('logo_image_path')
+                    && $request->file('logo_image_path')->isValid())
+                {
+                    $avatarFilename = Uuid::uuid4()->toString() . "." . $request->file('logo_image_path')->getClientOriginalExtension();
+                    $request->file('logo_image_path')->move(storage_path(config('app.avatar_storage')), $avatarFilename);
+                }
+
                 $up->firstname = $request->input('firstname') ? $request->input('firstname') : null ;
                 $up->lastname = $request->input('lastname') ? $request->input('lastname') : null;
                 $up->company = $request->input('company') ? $request->input('company') : null;
@@ -57,6 +68,7 @@ class ProfileController extends Controller
                 $up->contact_name = $request->input('contact_name') ? $request->input('contact_name') : null;
                 $up->contact_phone = $request->input('contact_phone') ? $request->input('contact_phone') : null;
                 $up->bio = $request->input('bio');
+                $up->logo_image_path = $avatarFilename;
                 $up->save();
             }
             else

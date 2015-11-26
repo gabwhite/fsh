@@ -16,7 +16,7 @@
 
     <div class="col-md-12">
 
-        <form id="form1" name="form1" method="post" action="{{url('profile/edit')}}">
+        <form id="form1" name="form1" method="post" enctype="multipart/form-data" action="{{url('profile/edit')}}">
 
             <div class="row">
                 <div class="col-md-3">
@@ -119,6 +119,13 @@
                     <input type="file" name="logo_image_path"/>
                 </div>
             </div>
+
+            <div class="row">
+                <div class="">
+
+                </div>
+            </div>
+
 
             <div class="row">
                 <div class="col-md-3">
