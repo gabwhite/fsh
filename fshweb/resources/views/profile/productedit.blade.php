@@ -150,6 +150,7 @@
                 {{$userproduct->uom}}<br/>
 
                 <input type="submit" class="btn btn-primary btn-lg" value="Add / Update"/>
+                <a href="{{url('productdetail', $userproduct->id)}}" class="btn btn-lg">Cancel</a>
 
             </div>
 
