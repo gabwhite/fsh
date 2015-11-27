@@ -27,7 +27,7 @@ class AdminController extends Controller
 
         $users = Role::find(2)->users()->get();
 
-        return view('admin.import');
+        return view('admin.import')->with('vendors', $users);
     }
 
     public function doImport(Request $request)
