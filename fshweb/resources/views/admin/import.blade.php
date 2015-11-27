@@ -33,6 +33,23 @@
 
         <br/>
 
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" name="ignoreexisting" id="ignoreexisting"/>Ignore existing entries
+            </label>
+        </div>
+
+        <br/>
+
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" name="simulate" id="simulate"/>Simulate import
+            </label>
+        </div>
+
+        <br/>
+
+
         Associate products to
         <select name="vendor">
             <option value=""></option>

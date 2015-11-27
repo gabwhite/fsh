@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Jobs\RebuildSearchIndex;
+use App\ProductImportOptions;
 use App\UploadHandler;
 use App\UserProductImport;
 use Illuminate\Http\Request;
@@ -42,18 +43,29 @@ class AdminController extends Controller
 
             if($result)
             {
-                // Save file to storage for processing
+
+                $importInfo = new ProductImportOptions();
+                $importInfo->setUserId($request->input('vendor'));
+                $importInfo->setUuid($directory);
+                $importInfo->setFileName($filename);
+                $importInfo->setIncludeHeaders($request->input('includesheaders') ? true : false);
+                $importInfo->setAddAsActive($request->input('addasactive') ? true : false);
+                $importInfo->setIgnoreExisting($request->input('ignoreexisting') ? true : false);
+                $importInfo->setSimulate($request->input('simulate') ? true : false);
+
+                /*
                 $importInfo = array(
                     'user_id' => $request->user()->id,
                     'uuid' => $directory,
                     'filename' => $filename,
                     'include_headers' => $request->input('includesheaders') ? true : false,
-                    'add_as_active' => $request->input('addasactive') ? true : false
+                    'add_as_active' => $request->input('addasactive') ? true : false,
+                    'ignore_existing' => $request->input('ignoreexisting') ? true : false,
+                    'simulate' => $request->input('simulate') ? true : false
                     );
+                */
 
-                dd($importInfo);
-
-                //$this->dispatch(new ParseProductImport($importInfo));
+                $this->dispatch(new ParseProductImport($importInfo));
             }
         }
 

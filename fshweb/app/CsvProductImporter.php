@@ -10,12 +10,14 @@ namespace App;
 
 use Ramsey\Uuid\Uuid;
 use League\Csv\Reader;
+use App\Models;
 
 class CsvProductImporter implements iProductImporter
 {
 
-    public function doImport($data)
+    public function doImport(ProductImportOptions $pio)
     {
+        //dd($pio);
 
         //$userProductImport = new UserProductImport();
         //$userProductImport->user_id = $data['user_id'];
@@ -23,11 +25,11 @@ class CsvProductImporter implements iProductImporter
         //$userProductImport->filename = $data['filename'];
         //$userProductImport->save();
 
-        $fileContents = \Storage::get($data['uuid'] . '/' .  $data['filename']);
+        $fileContents = \Storage::get(config('app.csv_storage') . '/' . $pio->getUuid() . '/' .  $pio->getFileName());
         $csv = Reader::createFromString($fileContents);
         $csv->setDelimiter(',');
 
-        if($data['include_headers'])
+        if($pio->isIncludeHeaders())
         {
             $csv->setOffset(1); //because we don't want to insert the header
         }
@@ -35,8 +37,10 @@ class CsvProductImporter implements iProductImporter
         $recordsAdded = 0;
         $recordsUpdated = 0;
         $recordsFailed = 0;
+        $recordCount = 0;
 
-        $csv->each(function ($row) use(&$data, &$recordsAdded, &$recordsUpdated, &$recordsFailed) {
+        $csv->each(function ($row) use(&$pio, &$recordsAdded, &$recordsUpdated, &$recordsFailed, &$recordCount)
+        {
 
             /* Row Structure
              *
@@ -87,7 +91,10 @@ class CsvProductImporter implements iProductImporter
 
             if ($row[0] != null)
             {
-                \DB::beginTransaction();
+                if(!$pio->isSimulate())
+                {
+                    \DB::beginTransaction();
+                }
 
                 try
                 {
@@ -97,7 +104,7 @@ class CsvProductImporter implements iProductImporter
 
                     $isExisting = ($userProduct) ? true : false;
 
-                    if($isExisting)
+                    if($isExisting && !$pio->isSimulate())
                     {
                         // Clear any existing categories
                         \DB::table('user_products_categories')->where('product_id', '=', $userProduct->id)->delete();
@@ -107,8 +114,8 @@ class CsvProductImporter implements iProductImporter
                     }
                     else
                     {
-                        $userProduct = new \App\UserProduct();
-                        $userProduct->user_id = $data['user_id'];
+                        $userProduct = new UserProduct();
+                        $userProduct->user_id = $pio->getUserId();
                         $userProduct->uniquekey = (isset($row[8])) ? $row[8] : $row[11]; // MPC or GTIN
                     }
 
@@ -154,48 +161,58 @@ class CsvProductImporter implements iProductImporter
 
                     if(!$isExisting)
                     {
-                        $userProduct->published = $data['add_as_active'];
+                        $userProduct->published = $pio->isAddAsActive();
                     }
 
-                    $userProduct->save();
+                    // Only create record, relationships and commit if not simulated
+                    if(!$pio->isSimulate())
+                    {
+                        $userProduct->save();
 
-                    // Create any categories for the user product
-                    $catIdRoot = $this->createCategory($row[0], null);
-                    $catIdSub1 = $this->createCategory($row[1], $row[0]);
-                    $catIdSub2 = $this->createCategory($row[2], $row[1]);
+                        // Create any categories for the user product
+                        $catIdRoot = $this->createCategory($row[0], null);
+                        $catIdSub1 = $this->createCategory($row[1], $row[0]);
+                        $catIdSub2 = $this->createCategory($row[2], $row[1]);
 
-                    $this->createUserCategory($catIdRoot, $userProduct->id);
-                    $this->createUserCategory($catIdSub1, $userProduct->id);
-                    $this->createUserCategory($catIdSub2, $userProduct->id);
+                        $this->createUserCategory($catIdRoot, $userProduct->id);
+                        $this->createUserCategory($catIdSub1, $userProduct->id);
+                        $this->createUserCategory($catIdSub2, $userProduct->id);
 
-                    // Create any allergens for the user product
-                    if($row[25] == 'Y') { $this->createUserAllergen(6, $userProduct->id); }
-                    if($row[26] == 'Y') { $this->createUserAllergen(9, $userProduct->id); }
-                    if($row[27] == 'Y') { $this->createUserAllergen(5, $userProduct->id); }
-                    if($row[28] == 'Y') { $this->createUserAllergen(4, $userProduct->id); }
-                    if($row[29] == 'Y') { $this->createUserAllergen(1, $userProduct->id); }
-                    if($row[30] == 'Y') { $this->createUserAllergen(2, $userProduct->id); }
-                    if($row[31] == 'Y') { $this->createUserAllergen(7, $userProduct->id); }
-                    if($row[32] == 'Y') { $this->createUserAllergen(8, $userProduct->id); }
-                    if($row[33] == 'Y') { $this->createUserAllergen(3, $userProduct->id); }
+                        // Create any allergens for the user product
+                        if($row[25] == 'Y') { $this->createUserAllergen(6, $userProduct->id); }
+                        if($row[26] == 'Y') { $this->createUserAllergen(9, $userProduct->id); }
+                        if($row[27] == 'Y') { $this->createUserAllergen(5, $userProduct->id); }
+                        if($row[28] == 'Y') { $this->createUserAllergen(4, $userProduct->id); }
+                        if($row[29] == 'Y') { $this->createUserAllergen(1, $userProduct->id); }
+                        if($row[30] == 'Y') { $this->createUserAllergen(2, $userProduct->id); }
+                        if($row[31] == 'Y') { $this->createUserAllergen(7, $userProduct->id); }
+                        if($row[32] == 'Y') { $this->createUserAllergen(8, $userProduct->id); }
+                        if($row[33] == 'Y') { $this->createUserAllergen(3, $userProduct->id); }
 
-                    \DB::commit();
+                        \DB::commit();
+
+                    }
 
                     ($isExisting) ? $recordsUpdated += 1 : $recordsAdded += 1;
-
                 }
                 catch(\Exception $ex)
                 {
-                    \DB::rollBack();
+                    if(!$pio->isSimulate())
+                    {
+                        \DB::rollBack();
+                    }
+
                     $recordsFailed +=1 ;
                 }
+
+                $recordCount += 1;
 
                 return true; // Continue processing file
             }
         });
 
 
-        echo sprintf('Import complete, %s records added, %s records updated, %s records failed', $recordsAdded, $recordsUpdated, $recordsFailed);
+        echo sprintf('Import complete, %s records added, %s records updated, %s records failed %s', $recordsAdded, $recordsUpdated, $recordsFailed, ($pio->isSimulate() ? '(Simulated)' : '' ));
 
     }
 

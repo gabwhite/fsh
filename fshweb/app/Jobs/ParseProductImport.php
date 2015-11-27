@@ -4,6 +4,7 @@ namespace App\Jobs;
 
 use App\iProductImporter;
 use App\Jobs\Job;
+use App\ProductImportOptions;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Bus\SelfHandling;
@@ -20,7 +21,7 @@ class ParseProductImport extends Job implements SelfHandling, ShouldQueue
      *
      * @return void
      */
-    public function __construct($data)
+    public function __construct(ProductImportOptions $data)
     {
         $this->data = $data;
     }
