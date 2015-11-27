@@ -24,7 +24,7 @@
             <tr>
                 <td><a href="{{url('admin/userview', $u->id)}}">{{$u->name}}</a></td>
                 <td>{{$u->email}}</td>
-                <td>{{$u->roles}}</td>
+                <td>{{$u->roles->first()->name}}</td>
             </tr>
         @endforeach
         </tbody>

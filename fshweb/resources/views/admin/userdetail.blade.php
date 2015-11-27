@@ -29,10 +29,11 @@
                         <option value="">No Role</option>
                     @foreach ($roles as $r)
 
-                        @if ($user->hasRole($r->name))
-                        <option value="{{$r->id}}" selected="selected">{{$r->name}}</option>
+
+                        @if ($user->roles->first()->id == $r->id)
+                            <option value="{{$r->id}}" selected="selected">{{$r->name}}</option>
                         @else
-                        <option value="{{$r->id}}">{{$r->name}}</option>
+                            <option value="{{$r->id}}">{{$r->name}}</option>
                         @endif
 
                     @endforeach

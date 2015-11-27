@@ -12,6 +12,8 @@ use App\Jobs\ParseProductImport;
 use Storage;
 use Ramsey\Uuid\Uuid;
 
+use App\Models\Role;
+
 class AdminController extends Controller
 {
     public function index()
@@ -21,6 +23,10 @@ class AdminController extends Controller
 
     public function showImport()
     {
+        // Get all vendors in the system
+
+        $users = Role::find(2)->users()->get();
+
         return view('admin.import');
     }
 
@@ -56,15 +62,15 @@ class AdminController extends Controller
 
     public function showUsers()
     {
-        $allUsers = \App\Models\User::all();
-        $allRoles = \App\Models\Role::all();
+        //$allUsers = \App\Models\User::all();
+        $allUsers = \App\Models\User::with('roles')->get();
 
-        return view('admin.users', ['users' => $allUsers, 'roles' => $allRoles]);
+        return view('admin.users', ['users' => $allUsers]);
     }
 
     public function viewUser($id)
     {
-        $user = \App\Models\User::find($id);
+        $user = \App\Models\User::where('id', '=', $id)->with('roles')->first();
         $allRoles = \App\Models\Role::all();
 
         return view('admin.userdetail')->with('user', $user)->with('roles', $allRoles);
@@ -81,7 +87,8 @@ class AdminController extends Controller
 
     public function showRoles()
     {
-        $allRoles = \App\Models\Role::all();
+        //$allRoles = \App\Models\Role::all();
+        $allRoles = \App\Models\Role::with('perms')->get();
         $allPermissions = \App\Models\Permission::all();
 
         return view('admin.roles', ['roles' => $allRoles, 'permissions' => $allPermissions]);

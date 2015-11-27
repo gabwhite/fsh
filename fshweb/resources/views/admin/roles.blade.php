@@ -27,13 +27,15 @@
                 <td>
                     <select name="rolepermissions-{{$r->id}}[]" multiple="multiple" data-id="{{$r->id}}" class="form-control">
                     @foreach ($permissions as $p)
+                        <?php $btest = ''?>
 
-                        @if ($r->perms()->where('id', '=', $p->id)->count() == 1)
-                            <option value="{{$p->id}}" selected="selected">{{$p->name}}</option>
-                        @else
-                            <option value="{{$p->id}}">{{$p->name}}</option>
-                        @endif
+                        @foreach($r->perms as $rp)
+                            @if($rp->id == $p->id)
+                                <?php $btest = ' selected="selected"'?>
+                            @endif
+                        @endforeach
 
+                    <option value="{{$p->id}}"{!!$btest!!}>{{$p->name}}</option>
                     @endforeach
                     </select>
                     <a href="#" data-id="{{$r->id}}">Save</a>
