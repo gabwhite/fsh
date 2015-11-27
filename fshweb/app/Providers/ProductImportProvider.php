@@ -10,26 +10,20 @@ class ProductImportProvider extends ServiceProvider
     protected $defer = true;
 
     /**
-     * Bootstrap the application services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        //
-    }
-
-    /**
      * Register the application services.
      *
      * @return void
      */
     public function register()
     {
+        $this->app->bind('App\iProductImporter', 'App\CsvProductImporter');
+
+        /*
         $this->app->singleton('\App\iProductImporter', function ($app)
         {
             return new \App\CsvProductImporter();
         });
+        */
     }
 
     /**
@@ -39,6 +33,6 @@ class ProductImportProvider extends ServiceProvider
      */
     public function provides()
     {
-        return ['\App\iProductImporter'];
+        return ['App\iProductImporter'];
     }
 }
