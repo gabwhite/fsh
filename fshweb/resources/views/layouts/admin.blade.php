@@ -42,6 +42,7 @@
                 <li><a href="{{url('admin/import')}}">Product Import</a></li>
                 <li><a href="{{url('admin/searchindexes')}}">Search Indexes</a></li>
                 <li><a href="{{url('/')}}" target="_blank">Public Site</a></li>
+                <li><a href="{{url('/auth/logout')}}">Logout</a></li>
             </ul>
 
         @show
