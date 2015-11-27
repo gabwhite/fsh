@@ -144,13 +144,13 @@ return [
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
-        Zizaco\Entrust\EntrustServiceProvider::class,
-        Barryvdh\Debugbar\ServiceProvider::class,
-
         App\Providers\ProductImportProvider::class,
         App\Providers\SearchIndexerProvider::class,
-        App\Providers\CategoryProvider::class
+        App\Providers\CategoryProvider::class,
+
+        Zizaco\Entrust\EntrustServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class
+
 
     ],
 
