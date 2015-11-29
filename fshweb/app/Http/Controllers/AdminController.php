@@ -26,7 +26,7 @@ class AdminController extends Controller
     {
         // Get all vendors in the system
 
-        $users = Role::find(2)->users()->get();
+        $users = Role::find(config('app.role_vendor'))->users()->get();
 
         return view('admin.import')->with('vendors', $users);
     }
@@ -52,18 +52,6 @@ class AdminController extends Controller
                 $importInfo->setAddAsActive($request->input('addasactive') ? true : false);
                 $importInfo->setIgnoreExisting($request->input('ignoreexisting') ? true : false);
                 $importInfo->setSimulate($request->input('simulate') ? true : false);
-
-                /*
-                $importInfo = array(
-                    'user_id' => $request->user()->id,
-                    'uuid' => $directory,
-                    'filename' => $filename,
-                    'include_headers' => $request->input('includesheaders') ? true : false,
-                    'add_as_active' => $request->input('addasactive') ? true : false,
-                    'ignore_existing' => $request->input('ignoreexisting') ? true : false,
-                    'simulate' => $request->input('simulate') ? true : false
-                    );
-                */
 
                 $this->dispatch(new ParseProductImport($importInfo));
             }
