@@ -59,8 +59,12 @@
         </select>
 
         <br/>
+        <hr/>
 
         <input type="submit" name="submit" value="Upload" class="btn btn-primary"/>
+
+        <input type="button" name="btnPreview" value="Preview Rows" class="btn"/>
+
     </form>
 
 
@@ -72,13 +76,25 @@
     <script type="text/javascript" src="{{url('js/vendor/validation/jquery.validate.min.js')}}"></script>
     <script type="text/javascript">
 
-        $("#form1").validate({
-            errorClass: "validationError",
-            rules:
+        $(document).ready(function()
+        {
+
+            $("#btnPreview").on("click", function(e)
             {
-                vendor: { required: true }
-            }
+                e.preventDefault();
+            });
+
+            $("#form1").validate({
+                errorClass: "validationError",
+                rules:
+                {
+                    vendor: { required: true }
+                }
+            });
+
         });
+
+
 
     </script>
 

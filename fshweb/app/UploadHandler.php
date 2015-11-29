@@ -24,7 +24,7 @@ class UploadHandler
 
         if($file->getClientOriginalExtension() == 'csv')
         {
-            $this->uploadFile($file, $filename, config('app.csv_storage') . '/' . $directory);
+            $this->uploadFile($file, $filename, storage_path(config('app.csv_storage') . '/' . $directory));
             $success = true;
         }
 

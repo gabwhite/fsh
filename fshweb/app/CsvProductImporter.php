@@ -25,7 +25,11 @@ class CsvProductImporter implements iProductImporter
         //$userProductImport->filename = $data['filename'];
         //$userProductImport->save();
 
-        $fileContents = \Storage::get(config('app.csv_storage') . '/' . $pio->getUuid() . '/' .  $pio->getFileName());
+        //\Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix()
+        $path = $pio->getUuid() . '/' .  $pio->getFileName();
+dd($path);
+
+        $fileContents = \Storage::get($path);
         $csv = Reader::createFromString($fileContents);
         $csv->setDelimiter(',');
 

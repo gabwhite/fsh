@@ -212,7 +212,7 @@ return [
     'role_admin' => '1',
     'role_vendor' => '2',
     'role_user' => '3',
-    'csv_storage' => storage_path('app/imports'),
+    'csv_storage' => 'app/imports',
     'avatar_storage' => 'img/avatars',
     'avatar_none' => 'img/no-avatar.png',
 
