@@ -30,9 +30,8 @@ class PublicController extends Controller
 
     public function fullTextSearch(Request $request)
     {
-        $words = explode(' ', $request->input('searchquery'));
         $productSearcher = new ProductSearcher();
-        $hits = $productSearcher->fullTextSearch('productindex', $words);
+        $hits = $productSearcher->fullTextSearch('productindex', $request->input('searchquery'));
 
         $results = array();
         foreach($hits as $h)

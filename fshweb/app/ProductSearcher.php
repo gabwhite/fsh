@@ -14,14 +14,20 @@ use ZendSearch\Lucene\Search\Query;
 use ZendSearch\Lucene\Index\Term;
 use ZendSearch\Lucene\Analysis\Analyzer\Analyzer;
 use ZendSearch\Lucene\Analysis\Analyzer\Common\Utf8;
+use ZendSearch\Lucene\Search\QueryParser;
 
 class ProductSearcher
 {
-    public function fullTextSearch($index, $words)
+    public function fullTextSearch($index, $query)
     {
         Analyzer::setDefault(new Utf8());
         Lucene::setResultSetLimit(10);
 
+        $luceneQuery = QueryParser::parse($query);
+
+
+        /*
+        $words = explode(' ', $query);
         $query = new Query\MultiTerm();
         foreach($words as $w)
         {
@@ -30,6 +36,13 @@ class ProductSearcher
 
         $index = Lucene::open(storage_path('app/lucene/' . $index));
         $results = $index->find($query);
+
+        */
+
+        $index = Lucene::open(storage_path('app/lucene/' . $index));
+        $results = $index->find($luceneQuery);
+
+        //dd($results);
 
         return $results;
     }
