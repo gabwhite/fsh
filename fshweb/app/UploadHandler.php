@@ -31,7 +31,8 @@ class UploadHandler
                 if ($file->isValid())
                 {
                     //$file->move($path, $fileName);
-                    \Storage::disk('imports')->put($directory . '/' . $filename, \File::get($file));
+                    //\Storage::disk('imports')->put($directory . '/' . $filename, \File::get($file));
+                    \Storage::disk('imports')->put($directory . '/' . $filename, fopen($filename, 'r'));
                 }
             }
             catch(Exception $ex)
