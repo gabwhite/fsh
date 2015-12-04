@@ -9,6 +9,7 @@
 namespace App;
 
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File;
 use Ramsey\Uuid\Uuid;
 
 class UploadHandler
@@ -24,7 +25,21 @@ class UploadHandler
 
         if($file->getClientOriginalExtension() == 'csv')
         {
-            $this->uploadFile($file, $filename, storage_path(config('app.csv_storage') . '/' . $directory));
+            try
+            {
+
+                if ($file->isValid())
+                {
+                    //$file->move($path, $fileName);
+                    \Storage::disk('imports')->put($directory . '/' . $filename, \File::get($file));
+                }
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+
+            //$this->uploadFile($file, $filename, storage_path(config('app.csv_storage') . '/' . $directory));
             $success = true;
         }
 

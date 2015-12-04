@@ -53,6 +53,11 @@ return [
             'root'   => public_path('img/avatars'),
         ],
 
+        'imports' => [
+            'driver' => 'local',
+            'root' => storage_path('app/imports'),
+        ],
+
         'ftp' => [
             'driver'   => 'ftp',
             'host'     => 'ftp.example.com',
