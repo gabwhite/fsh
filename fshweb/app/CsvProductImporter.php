@@ -27,9 +27,10 @@ class CsvProductImporter implements iProductImporter
 
         //\Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix()
         $path = $pio->getUuid() . '/' .  $pio->getFileName();
-dd($path);
 
-        $fileContents = \Storage::get($path);
+        $fileContents = \Storage::disk('imports')->get($path);
+
+
         $csv = Reader::createFromString($fileContents);
         $csv->setDelimiter(',');
 
@@ -102,13 +103,13 @@ dd($path);
 
                 try
                 {
-                    // Check to see if the record already exists (update)
-                    $userProduct = \App\UserProduct::where('uniquekey', '=', $row[8])
+                    // Check to see if the record already exists (update) if not ignore existing items
+                    $userProduct = \App\Models\UserProduct::where('uniquekey', '=', $row[8])
                                     ->orWhere('uniquekey', '=', $row[11])->first();
 
                     $isExisting = ($userProduct) ? true : false;
 
-                    if($isExisting && !$pio->isSimulate())
+                    if($isExisting && !$pio->isSimulate() && !$pio->isIgnoreExisting())
                     {
                         // Clear any existing categories
                         \DB::table('user_products_categories')->where('product_id', '=', $userProduct->id)->delete();
@@ -118,7 +119,7 @@ dd($path);
                     }
                     else
                     {
-                        $userProduct = new UserProduct();
+                        $userProduct = new \App\Models\UserProduct();
                         $userProduct->user_id = $pio->getUserId();
                         $userProduct->uniquekey = (isset($row[8])) ? $row[8] : $row[11]; // MPC or GTIN
                     }
@@ -169,7 +170,7 @@ dd($path);
                     }
 
                     // Only create record, relationships and commit if not simulated
-                    if(!$pio->isSimulate())
+                    if(!$pio->isSimulate() || ($isExisting && !$pio->isIgnoreExisting()))
                     {
                         $userProduct->save();
 
@@ -197,7 +198,15 @@ dd($path);
 
                     }
 
-                    ($isExisting) ? $recordsUpdated += 1 : $recordsAdded += 1;
+                    if($isExisting && !$pio->isIgnoreExisting())
+                    {
+                        $recordsUpdated += 1;
+                    }
+                    else
+                    {
+                        $recordsAdded += 1;
+                    }
+
                 }
                 catch(\Exception $ex)
                 {
@@ -222,7 +231,7 @@ dd($path);
 
     private function createUserAllergen($allergenId, $productId)
     {
-        $upa = new \App\UserProductAllergen();
+        $upa = new \App\Models\UserProductAllergen();
         $upa->product_id = $productId;
         $upa->allergen_id = $allergenId;
         $upa->save();
@@ -233,7 +242,7 @@ dd($path);
         // Assign categories to user product
         if($categoryId != null)
         {
-            $upc = new \App\UserProductCategory();
+            $upc = new \App\Models\UserProductCategory();
             $upc->product_id = $productId;
             $upc->category_id = $categoryId;
             $upc->save();
@@ -247,10 +256,10 @@ dd($path);
         if($parentCategoryName == null)
         {
             // Top level category
-            $existing = \App\Category::where('name', '=', strtoupper($categoryName))->first();
+            $existing = \App\Models\Category::where('name', '=', strtoupper($categoryName))->first();
             if($existing == null)
             {
-                $newCat = new \App\Category();
+                $newCat = new \App\Models\Category();
                 $newCat->name = strtoupper($categoryName);
                 $newCat->save();
 
@@ -264,13 +273,13 @@ dd($path);
         else
         {
             // Sub level category
-            $existingParent = \App\Category::where('name', '=', strtoupper($parentCategoryName))->first();
+            $existingParent = \App\Models\Category::where('name', '=', strtoupper($parentCategoryName))->first();
             if($existingParent != null)
             {
-                $existing = \App\Category::where('name', '=', $categoryName)->where('parent_id', '=', $existingParent->id)->first();
+                $existing = \App\Models\Category::where('name', '=', $categoryName)->where('parent_id', '=', $existingParent->id)->first();
                 if($existing == null)
                 {
-                    $newCat = new \App\Category();
+                    $newCat = new \App\Models\Category();
                     $newCat->name = strtoupper($categoryName);
                     $newCat->parent_id = $existingParent->id;
                     $newCat->save();
