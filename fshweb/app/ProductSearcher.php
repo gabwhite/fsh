@@ -21,23 +21,31 @@ class ProductSearcher
     public function fullTextSearch($index, $query)
     {
         Analyzer::setDefault(new Utf8());
-        Lucene::setResultSetLimit(10);
+        Lucene::setResultSetLimit(25);
 
-        $luceneQuery = QueryParser::parse($query);
-
-
-        /*
         $words = explode(' ', $query);
-        $query = new Query\MultiTerm();
+        $finalWords = array();
+        //$query = new Query\MultiTerm();
         foreach($words as $w)
         {
-            $query->addTerm(new Term($w), true);
+            if(is_numeric($w))
+            {
+                $w = '"'.$w.'"';
+            }
+            else if(!starts_with($w, '"') && strlen($w) > 2)
+            {
+                $w = $w . '*';
+            }
+
+            array_push($finalWords, $w);
+
+            //$query->addTerm(new Term($w), true);
         }
 
-        $index = Lucene::open(storage_path('app/lucene/' . $index));
-        $results = $index->find($query);
+        //dd($finalWords);
 
-        */
+        //$luceneQuery = QueryParser::parse($query);
+        $luceneQuery = QueryParser::parse(implode(' ', $finalWords));
 
         $index = Lucene::open(storage_path('app/lucene/' . $index));
         $results = $index->find($luceneQuery);
