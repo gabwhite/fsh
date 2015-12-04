@@ -33,6 +33,14 @@ class AdminController extends Controller
 
     public function doImport(Request $request)
     {
+        /*===============================================================================*/
+        // Adjust these upload  / script execution time settings just for CSV uploads
+        /*===============================================================================*/
+        ini_set('upload_max_filesize', '10M'); // 10 megs
+        ini_set('post_max_size', '10M'); // 10 megs
+        ini_set('max_input_time', 300); // 5 minutes
+        ini_set('max_execution_time', 300); // 5 minutes;
+
         if($request->hasFile('importfile'))
         {
             $filename = $request->file('importfile')->getClientOriginalName();
