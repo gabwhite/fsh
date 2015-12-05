@@ -32,7 +32,7 @@ class UploadHandler
                 {
                     //$file->move($path, $fileName);
                     //\Storage::disk('imports')->put($directory . '/' . $filename, \File::get($file));
-                    \Storage::disk('imports')->put($directory . '/' . $filename, fopen($filename, 'r'));
+                    \Storage::disk('imports')->put($directory . '/' . $filename, fopen($file->getRealPath(), 'r'));
                 }
             }
             catch(Exception $ex)

@@ -17,13 +17,6 @@ class CsvProductImporter implements iProductImporter
 
     public function doImport(ProductImportOptions $pio)
     {
-        //dd($pio);
-
-        //$userProductImport = new UserProductImport();
-        //$userProductImport->user_id = $data['user_id'];
-        //$userProductImport->uuid = $data['uuid'];
-        //$userProductImport->filename = $data['filename'];
-        //$userProductImport->save();
 
         //\Storage::disk('local')->getDriver()->getAdapter()->getPathPrefix()
         $path = $pio->getUuid() . '/' .  $pio->getFileName();
@@ -224,6 +217,12 @@ class CsvProductImporter implements iProductImporter
             }
         });
 
+        // Create a record of the import in the database
+        $userProductImport = new \App\Models\UserProductImport();
+        $userProductImport->user_id = $pio->getUserId();
+        $userProductImport->uuid = $pio->getUuid();
+        $userProductImport->filename = $pio->getFileName();
+        $userProductImport->save();
 
         echo sprintf('Import complete, %s records added, %s records updated, %s records failed %s', $recordsAdded, $recordsUpdated, $recordsFailed, ($pio->isSimulate() ? '(Simulated)' : '' ));
 
