@@ -18,7 +18,7 @@ class CreateUserProductsImportsTable extends Migration
 
             $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->char('uuid', 16);
+            $table->char('uuid', 36);
             $table->string('filename', 250);
             $table->timestamps();
 
