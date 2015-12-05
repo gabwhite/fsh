@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Edit User')
+@section('title', 'Add User')
 
 @section('sidebar')
     @parent
@@ -10,17 +10,25 @@
 
 @section('content')
 
-    <form id="form1" name="form1" method="post" action="{{url('admin/edituser')}}">
+    <form id="form1" name="form1" method="post" action="{{url('admin/adduser')}}">
         {!! csrf_field() !!}
         <table class="table">
             <tbody>
                 <tr>
                     <td>Name</td>
-                    <td>{{$user->name}}</td>
+                    <td><input type="text" name="name" maxlength="25" class="form-control"/></td>
                 </tr>
                 <tr>
                     <td>Email</td>
-                    <td><a href="mailto:{{$user->email}}">{{$user->email}}</a></td>
+                    <td><input type="text" name="email" maxlength="100" class="form-control"/></td>
+                </tr>
+                <tr>
+                    <td>Password</td>
+                    <td><input type="password" id="password" name="password" maxlength="25" class="form-control" /></td>
+                </tr>
+                <tr>
+                    <td>Confirm Password</td>
+                    <td><input type="password" name="password_confirmation" maxlength="25" class="form-control" /></td>
                 </tr>
                 <tr>
                     <td>Role</td>
@@ -28,14 +36,7 @@
                     <select name="role" id="role" class="form-control">
                         <option value="">No Role</option>
                     @foreach ($roles as $r)
-
-
-                        @if ($user->roles->first()->id == $r->id)
-                            <option value="{{$r->id}}" selected="selected">{{$r->name}}</option>
-                        @else
-                            <option value="{{$r->id}}">{{$r->name}}</option>
-                        @endif
-
+                        <option value="{{$r->id}}">{{$r->name}}</option>
                     @endforeach
                     </select>
                     </td>
@@ -43,12 +44,9 @@
 
             </tbody>
         </table>
-        <input type="hidden" name="userid" value="{{$user->id}}"/>
-        <input type="submit" name="save" class="btn btn-primary" value="Update"/>
+        <input type="submit" name="save" class="btn btn-primary" value="Add"/>
 
     </form>
-
-
 
 @endsection
 
@@ -61,6 +59,10 @@
                 errorClass: "validationError",
                 rules:
                 {
+                    name: { required: true, maxlength: 25 },
+                    email: { required: true, email: true, maxlength: 100 },
+                    password: { required: true, maxlength: 25 },
+                    password_confirmation: { equalTo: "#password", maxlength: 25 },
                     role: { required: true }
                 }
             });

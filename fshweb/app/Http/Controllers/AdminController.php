@@ -2,21 +2,25 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Http\Request;
+use Storage;
+use Validator;
+use Ramsey\Uuid\Uuid;
+
 use App\Http\Controllers\Controller;
 use App\Jobs\RebuildSearchIndex;
 use App\ProductImportOptions;
 use App\UploadHandler;
-use App\UserProductImport;
-use Illuminate\Http\Request;
+use App\Models\User;
+use App\Models\UserProductImport;
 use App\Http\Requests;
 use App\Jobs\ParseProductImport;
-use Storage;
-use Ramsey\Uuid\Uuid;
-
 use App\Models\Role;
 
 class AdminController extends Controller
 {
+
     public function index()
     {
         return view('admin.home');
@@ -76,6 +80,39 @@ class AdminController extends Controller
         return view('admin.users', ['users' => $allUsers]);
     }
 
+    public function showUserAdd()
+    {
+        $allRoles = \App\Models\Role::all();
+
+        return view('admin.useradd')->with('roles', $allRoles);
+    }
+
+    public function addUser(Request $request)
+    {
+        $isValid =  Validator::make($request->all(), [
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255|unique:users',
+            'password' => 'required|confirmed|min:6',
+        ]);
+
+        if($isValid)
+        {
+            $user = User::create([
+                'name' => $request['name'],
+                'email' => $request['email'],
+                'password' => bcrypt($request['password']),
+            ]);
+
+            if(!is_null($request['role']))
+            {
+                // Add to 'user' role
+                $user->attachRole($request['role']);
+            }
+        }
+
+        return redirect('admin/users');
+    }
+
     public function viewUser($id)
     {
         $user = \App\Models\User::where('id', '=', $id)->with('roles')->first();
@@ -83,6 +120,7 @@ class AdminController extends Controller
 
         return view('admin.userdetail')->with('user', $user)->with('roles', $allRoles);
     }
+
 
     public function editUser(Request $request)
     {
