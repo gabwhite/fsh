@@ -178,4 +178,13 @@ class ProfileController extends Controller
         echo "TODO EDIT PROD";
     }
 
+    public function profileProducts()
+    {
+        $user = \Auth::user();
+
+        $products = \App\Models\UserProduct::where('user_id', '=', $user->id)->orderby('name')->paginate(20);
+
+        return view('profile.products')->with('products', $products);
+    }
+
 }

@@ -40,6 +40,12 @@
             <a href="{{url('profile/avatar')}}">Change Avatar</a>
         </p>
 
+        @if($user->hasRole('vendor'))
+            <p class="bg-info">
+                <a href="{{url('profile/products')}}">My Products</a>
+            </p>
+        @endif
+
         @if($user->hasRole('admin'))
             <p class="bg-danger">
             You have <a href="{{url('/admin')}}">administrative</a> access

@@ -39,12 +39,13 @@ Route::group(['middleware' => 'auth'], function()
     Route::post('/profile/edit', 'ProfileController@profileUpdate');
     Route:get('/profile/avatar', 'ProfileController@profileAvatar');
     Route::post('/profile/avatar', 'ProfileController@profileAvatarUpdate');
-    /*
+
+
     Route::group(['middleware' => ['role:vendor']], function()
     {
-
+        Route::get('profile/products', 'ProfileController@profileProducts');
     });
-    */
+
 
     Route::get('/profile/product/{id?}', 'ProfileController@showProduct');
     Route::post('/profile/product', 'ProfileController@editProduct');
