@@ -30,7 +30,7 @@
                     @foreach ($roles as $r)
 
 
-                        @if ($user->roles->first()->id == $r->id)
+                        @if (count($user->roles) > 0 && $user->roles->first()->id == $r->id)
                             <option value="{{$r->id}}" selected="selected">{{$r->name}}</option>
                         @else
                             <option value="{{$r->id}}">{{$r->name}}</option>

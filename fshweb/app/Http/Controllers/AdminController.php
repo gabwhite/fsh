@@ -77,6 +77,7 @@ class AdminController extends Controller
         //$allUsers = \App\Models\User::all();
         $allUsers = \App\Models\User::with('roles')->get();
 
+
         return view('admin.users', ['users' => $allUsers]);
     }
 
