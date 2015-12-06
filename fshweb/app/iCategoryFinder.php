@@ -12,4 +12,7 @@ namespace App;
 interface iCategoryFinder
 {
     public function getFoodCategoriesForParent($parentId = null);
+
+    public function getAllFoodCategories();
+
 }

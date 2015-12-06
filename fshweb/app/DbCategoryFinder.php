@@ -18,13 +18,11 @@ class DbCategoryFinder implements iCategoryFinder
         return $categories;
     }
 
-    public function getFoodCategoryDeepTree($parentId = null)
+    public function getAllFoodCategories()
     {
-        // If parent id is null, get the ENTIRE tree
-        $treeData = array();
+        $categories = \App\Models\Category::where('active', '=', 1)->get();
 
-        $rootCategories = \App\Models\Category::where('parent_id', '=', $parentId)->get();
-
+        return $categories;
     }
 
 }
