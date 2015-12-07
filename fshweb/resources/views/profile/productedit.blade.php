@@ -193,6 +193,8 @@
                     pack: { digits: true },
                     size: { number: true },
                     calc_size: { digits: true },
+                    mpc: { required: true },
+                    gtin: { required: true },
                     net_weight: { number: true },
                     gross_weight: { number: true },
                     tare_weight: { number: true }
