@@ -175,6 +175,69 @@ class ProfileController extends Controller
 
     public function editProduct(Request $request)
     {
+        $user = \Auth::user();
+        $productId = $request->input('id');
+        $isAdd = false;
+
+        // Now validate / create user product
+        $userProductValidator = $this->productValidator($request->all());
+        if ($userProductValidator->fails())
+        {
+            $this->throwValidationException($request, $userProductValidator);
+        }
+
+        $userProduct = \App\Models\UserProduct::where(['id' => $productId, 'user_id' => $user->id])->first();
+        if(!$userProduct)
+        {
+            // New user product
+            $userProduct = new \App\Models\UserProduct();
+            $userProduct->user_id = $user->id;
+            //$userProduct->uniquekey = (isset($row[8])) ? $row[8] : $row[11]; // MPC or GTIN
+
+            $isAdd = true;
+        }
+
+        $userProduct->name = $request->input('name');
+        $userProduct->brand = $request->input('brand');
+        $userProduct->pack = $request->input('pack');
+        $userProduct->size = $request->input('size');
+        $userProduct->uom = $request->input('uom');
+        $userProduct->serving_size_uom = $request->input('serving_size_uom');
+        $userProduct->mpc = $request->input('mpc');
+        $userProduct->broker_contact = $request->input('broker_contact');
+        $userProduct->gtin = $request->input('gtin');
+        $userProduct->is_halal = ($request->input('is_halal') ? 1 : 0);
+        $userProduct->is_organic = ($request->input('is_organic') ? 1 : 0);
+        $userProduct->is_kosher = ($request->input('is_kosher') ? 1 : 0);
+        $userProduct->calc_size = $request->input('calc_size');
+        $userProduct->calculation_size_uom = $request->input('calculation_size_uom');
+        $userProduct->calories = $request->input('calories');
+        $userProduct->calories_from_fat = $request->input('calories_from_fat');
+        $userProduct->protein = $request->input('protein');
+        $userProduct->carbs = $request->input('carbs');
+        $userProduct->fibre = $request->input('fibre');
+        $userProduct->sugar = $request->input('sugar');
+        $userProduct->total_fat = $request->input('total_fat');
+        $userProduct->saturated_fats = $request->input('saturated_fats');
+        $userProduct->sodium = $request->input('sodium');
+        $userProduct->product_image = $request->input('product_image');
+        $userProduct->description = $request->input('description');
+        $userProduct->preparation = $request->input('preparation');
+        $userProduct->ingredient_deck = $request->input('ingredient_deck');
+        $userProduct->features_benefits = $request->input('features_benefits');
+        $userProduct->allergen_disclaimer = $request->input('allergen_disclaimer');
+        $userProduct->net_weight = $request->input('net_weight');
+        $userProduct->gross_weight = $request->input('gross_weight');
+        $userProduct->tare_weight = $request->input('tare_weight');
+        $userProduct->serving_size = $request->input('serving_size');
+        $userProduct->vendor_logo = $request->input('vendor_logo');
+        $userProduct->pos_pdf = $request->input('pos_pdf');
+        $userProduct->published = ($request->input('published') ? 1 : 0);
+
+        //$userProduct->save();
+
+        dd($isAdd);
+
         echo "TODO EDIT PROD";
     }
 
@@ -187,4 +250,11 @@ class ProfileController extends Controller
         return view('profile.products')->with('products', $products);
     }
 
+    protected function productValidator(array $data)
+    {
+        return Validator::make($data, [
+            'name' => 'required|max:500',
+            'description' => 'required',
+        ]);
+    }
 }
