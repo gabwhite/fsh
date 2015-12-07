@@ -73,7 +73,7 @@ class AjaxController extends Controller
     {
         $countries = Cache::remember('countries', 5, function()
         {
-            return \DB::table('countries')->where('active', '=', '1')->get();
+            return $this->dataAccess->getAllCountries();
         });
 
         return response()->json($countries);
@@ -85,7 +85,7 @@ class AjaxController extends Controller
 
         $stateProvinces = Cache::remember($key, 5, function() use ($countryId)
         {
-            return \DB::table('stateprovinces')->where('country_id', '=', $countryId)->get();
+            return $this->dataAccess->getStateProvincesForCountry($countryId);
         });
 
         return response()->json($stateProvinces);

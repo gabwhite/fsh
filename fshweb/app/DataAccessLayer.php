@@ -74,4 +74,19 @@ class DataAccessLayer
         return Category::all();
     }
 
+    public function getAllCountries($activeOnly = true)
+    {
+        if($activeOnly)
+        {
+            return DB::table('countries')->where('active', '=', '1')->get();
+        }
+
+        return DB::table('countries')->get();
+
+    }
+
+    public function getStateProvincesForCountry($countryId)
+    {
+        return DB::table('stateprovinces')->where('country_id', '=', $countryId)->get();
+    }
 }
