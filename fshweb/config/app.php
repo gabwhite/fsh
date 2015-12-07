@@ -146,7 +146,6 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\ProductImportProvider::class,
         App\Providers\SearchIndexerProvider::class,
-        App\Providers\CategoryProvider::class,
 
         Zizaco\Entrust\EntrustServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class

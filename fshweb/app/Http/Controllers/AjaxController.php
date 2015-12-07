@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataAccessLayer;
 use App\DbCategoryFinder;
 use App\ProductSearcher;
 use Illuminate\Http\Request;
@@ -12,12 +13,21 @@ use App\Http\Controllers\Controller;
 class AjaxController extends Controller
 {
 
+    protected $dataAccess;
+
+    /**
+     * AjaxController constructor.
+     * @param $dataAccess
+     */
+    public function __construct(DataAccessLayer $dataAccess)
+    {
+        $this->dataAccess = $dataAccess;
+    }
+
+
     public function getFoodCategoriesForParent($format, $parentId = null)
     {
-        $categoryFinder = new DbCategoryFinder();
-
-        //$categories = \App\Models\Category::where('parent_id', '=', $parentId)->get();
-        $categories = $categoryFinder->getFoodCategoriesForParent($parentId);
+        $categories = $this->dataAccess->getFoodCategoriesForParent($parentId);
 
         if($format == 'JSON')
         {

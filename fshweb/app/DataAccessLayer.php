@@ -12,6 +12,7 @@ use App\Models\Role;
 use App\Models\Permission;
 use App\Models\User;
 use App\Models\UserProduct;
+use App\Models\Category;
 
 use \Illuminate\Support\Facades\DB;
 
@@ -56,6 +57,21 @@ class DataAccessLayer
     public function getUserProduct($productId)
     {
         return UserProduct::where('id', '=', $productId)->first();
+    }
+
+    public function getFoodCategoriesForParent($parentId = null)
+    {
+       return Category::where('parent_id', '=', $parentId)->get();
+    }
+
+    public function getAllFoodCategories($activeOnly = true)
+    {
+        if($activeOnly)
+        {
+            return $categories = Category::where('active', '=', 1)->get();
+        }
+
+        return Category::all();
     }
 
 }
