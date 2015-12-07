@@ -42,7 +42,7 @@
 
         @if($user->hasRole('vendor'))
             <p class="bg-info">
-                <a href="{{url('profile/products')}}">My Products</a>
+                <a href="{{url('profile/products')}}">My Products</a>&nbsp;(<a href="{{url('profile/product')}}">Add New</a>)
             </p>
         @endif
 

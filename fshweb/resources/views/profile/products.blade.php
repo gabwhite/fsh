@@ -13,6 +13,12 @@
 @section('content')
 
     <div class="row">
+        <div class="col-md-12">
+            <a href="{{url('profile/product')}}">Add New Product</a>
+        </div>
+    </div>
+
+    <div class="row">
 
         <div class="col-md-12">
 
