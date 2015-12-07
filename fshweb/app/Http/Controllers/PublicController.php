@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\DataAccessLayer;
 use App\ProductSearcher;
 use Illuminate\Http\Request;
 
@@ -11,6 +12,17 @@ use App\Http\Controllers\Controller;
 
 class PublicController extends Controller
 {
+    protected $dataAccess;
+
+    /**
+     * PublicController constructor.
+     * @param $dataAccess
+     */
+    public function __construct(DataAccessLayer $dataAccess)
+    {
+        $this->dataAccess = $dataAccess;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -23,7 +35,7 @@ class PublicController extends Controller
 
     public function productDetail($id)
     {
-        $userProduct = \App\Models\UserProduct::where('id', '=', $id)->first();
+        $userProduct = $this->dataAccess->getUserProduct($id);
 
         return view('productdetail')->with('userproduct', $userProduct);
     }
