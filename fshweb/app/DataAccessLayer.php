@@ -46,7 +46,6 @@ class DataAccessLayer
             return Role::with($relationships)->get();
         }
         return Role::all();
-
     }
 
     public function getAllPermissions()
@@ -57,6 +56,11 @@ class DataAccessLayer
     public function getUserProduct($productId)
     {
         return UserProduct::where('id', '=', $productId)->first();
+    }
+
+    public function getUserProductByIdUser($productId, $userId)
+    {
+        return UserProduct::where(['id' => $productId, 'user_id' => $userId])->first();
     }
 
     public function getFoodCategoriesForParent($parentId = null)

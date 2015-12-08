@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\DataAccessLayer;
 use App\UploadHandler;
 use Illuminate\Http\Request;
+use Validator;
 
 use Ramsey\Uuid\Uuid;
 use App\Http\Requests;
@@ -11,6 +13,19 @@ use App\Http\Controllers\Controller;
 
 class ProfileController extends Controller
 {
+
+    protected $dataAccess;
+
+    /**
+     * ProfileController constructor.
+     * @param $dataAccess
+     */
+    public function __construct(DataAccessLayer $dataAccess)
+    {
+        $this->dataAccess = $dataAccess;
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -166,7 +181,7 @@ class ProfileController extends Controller
         $userProduct = new \App\Models\UserProduct();
         if($id != null)
         {
-            $userProduct = \App\Models\UserProduct::where('id', '=', $id)->first();
+            $userProduct = $this->dataAccess->getUserProduct($id);
             if($userProduct == null) { $userProduct = new \App\Models\UserProduct(); }
         }
 
@@ -186,7 +201,7 @@ class ProfileController extends Controller
             $this->throwValidationException($request, $userProductValidator);
         }
 
-        $userProduct = \App\Models\UserProduct::where(['id' => $productId, 'user_id' => $user->id])->first();
+        $userProduct = $this->dataAccess->getUserProductByIdUser($productId, $user->id);
         if(!$userProduct)
         {
             // New user product
@@ -236,9 +251,7 @@ class ProfileController extends Controller
 
         //$userProduct->save();
 
-        dd($isAdd);
-
-        echo "TODO EDIT PROD";
+        return redirect('productdetail/' . $userProduct->id);
     }
 
     public function profileProducts()
