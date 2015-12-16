@@ -29,7 +29,6 @@ class AjaxController extends Controller
         $productSearcher = new ProductSearcher();
         $hits = $productSearcher->fullTextSearch('productindex', $query);
 
-
         $results = array();
         foreach($hits as $h)
         {
