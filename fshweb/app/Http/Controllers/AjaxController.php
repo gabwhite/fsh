@@ -24,6 +24,21 @@ class AjaxController extends Controller
         $this->dataAccess = $dataAccess;
     }
 
+    public function getProductFullTextSearch($query)
+    {
+        $productSearcher = new ProductSearcher();
+        $hits = $productSearcher->fullTextSearch('productindex', $query);
+
+        $results = array();
+        foreach($hits as $h)
+        {
+            $data = array('score' => $h->score, 'document' => $h->getDocument());
+            array_push($results, $data);
+        }
+
+        return $results->toJson();
+
+    }
 
     public function getFoodCategoriesForParent($format, $parentId = null)
     {
