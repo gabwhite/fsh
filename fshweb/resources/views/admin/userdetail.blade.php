@@ -23,6 +23,14 @@
                     <td><a href="mailto:{{$user->email}}">{{$user->email}}</a></td>
                 </tr>
                 <tr>
+                    <td>Change Password</td>
+                    <td><input type="password" id="password" name="password" maxlength="25" class="form-control"/></td>
+                </tr>
+                <tr>
+                    <td>Confirm Password</td>
+                    <td><input type="password" id="password_confirmation" name="password_confirmation" maxlength="25" class="form-control"/></td>
+                </tr>
+                <tr>
                     <td>Role</td>
                     <td>
                     <select name="role" id="role" class="form-control">
@@ -61,6 +69,8 @@
                 errorClass: "validationError",
                 rules:
                 {
+                    password: { required: false, maxlength: 25 },
+                    password_confirmation: { equalTo: "#password", maxlength: 25 },
                     role: { required: true }
                 }
             });

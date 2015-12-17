@@ -134,6 +134,12 @@ class AdminController extends Controller
     {
         $user = $this->dataAccess->getUser($request->input('userid'));
 
+        if($request->input('password') != '')
+        {
+            $user->password = bcrypt($request->input('password'));
+            $user->save();
+        }
+
         $user->attachRole($request->input('role'));
 
         return redirect('admin/userview/' . $request->input('userid'));
