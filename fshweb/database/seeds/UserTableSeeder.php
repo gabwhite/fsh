@@ -17,7 +17,7 @@ class UserTableSeeder extends Seeder
             'password' => bcrypt('password11')
         ]);
 
-        // Role for admin
+        // Role for admin (admin)
         DB::table('role_user')->insert([
             'user_id' => 1,
             'role_id' => 1
@@ -30,7 +30,7 @@ class UserTableSeeder extends Seeder
             'password' => bcrypt('password11')
         ]);
 
-        // Role for breen
+        // Role for breen (admin)
         DB::table('role_user')->insert([
             'user_id' => 2,
             'role_id' => 1
@@ -42,19 +42,19 @@ class UserTableSeeder extends Seeder
             'password' => bcrypt('password11')
         ]);
 
-        // Role for usertest
+        // Role for usertest (user)
         DB::table('role_user')->insert([
             'user_id' => 3,
             'role_id' => 3
         ]);
 
         DB::table('users')->insert([
-            'name' => 'vendortest',
-            'email' => 'vendor@vendor.com',
+            'name' => 'foodservicehound',
+            'email' => 'info@foodservicehound.com',
             'password' => bcrypt('password11')
         ]);
 
-        // Role for vendortest
+        // Role for foodservicehound (vendor)
         DB::table('role_user')->insert([
             'user_id' => 4,
             'role_id' => 2
