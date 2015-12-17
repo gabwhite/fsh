@@ -35,7 +35,7 @@
 
         <div class="checkbox">
             <label>
-                <input type="checkbox" name="ignoreexisting" id="ignoreexisting"/>Ignore existing entries
+                <input type="checkbox" name="ignoreexisting" id="ignoreexisting"/>Ignore existing entries (updates will not execute)
             </label>
         </div>
 
