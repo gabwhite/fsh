@@ -132,13 +132,15 @@ class AdminController extends Controller
 
     public function editUser(Request $request)
     {
-        $user = $this->dataAccess->getUser($request->input('userid'));
+        $user = $this->dataAccess->getUser($request->input('userid'), 'roles');
 
         if($request->input('password') != '')
         {
             $user->password = bcrypt($request->input('password'));
             $user->save();
         }
+
+        $user->detachRoles($user->roles);
 
         $user->attachRole($request->input('role'));
 
