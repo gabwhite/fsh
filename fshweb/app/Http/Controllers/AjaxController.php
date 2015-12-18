@@ -32,12 +32,21 @@ class AjaxController extends Controller
         $results = array();
         foreach($hits as $h)
         {
-            $data = array('score' => $h->score, 'document' => $h->getDocument());
+            $d = $h->getDocument();
+            $fieldNames = $d->getFieldNames();
+
+            $fields = array();
+            foreach($fieldNames as $fn)
+            {
+                $fv = $d->getFieldValue($fn);
+                $fields[$fn] = $fv;
+            }
+
+            $data = array('score' => $h->score, 'fields' => $fields);
             array_push($results, $data);
         }
 
-        return $results->toJson();
-
+        return response()->json($results);
     }
 
     public function getFoodCategoriesForParent($format, $parentId = null)

@@ -25,7 +25,16 @@
             <div class="col-md-9">
 
                 <form method="post" action="{{url('fulltextsearch')}}">
-                    <input type="text" name="searchquery" id="searchquery" placeholder="Search" value="{{$query or ''}}" class="form-control"/>
+
+                    <div class="row">
+                        <div class="col-md-9">
+                            <input type="text" name="searchquery" id="searchquery" placeholder="Search" value="{{$query or ''}}" class="form-control"/>
+                        </div>
+                        <div class="col-md-3">
+                            <a href="#" id="hlSearch" class="btn btn-primary">Search</a>
+                        </div>
+                    </div>
+
                     {!! csrf_field() !!}
                 </form>
                 <table id="product_list" width="100%" class="table">
@@ -62,12 +71,14 @@
 @endsection
 
 @section('scripts')
-    <script src="{{url('js/vendor/jstree/jstree.min.js')}}"></script>
+    <script type="text/javascript" src="{{url('js/vendor/jstree/jstree.min.js')}}"></script>
+    <script type="text/javascript" src="{{url('js/fsh.common.js')}}"></script>
     <script type="text/javascript">
+
+        var $resultTable = $("#product_list");
 
         $(document).ready(function()
         {
-            var $resultTable = $("#product_list");
 
             $("#jstree_demo_div").jstree({
                 "core" :
@@ -116,7 +127,33 @@
 
             });
 
+
+            $("#searchquery").on("keydown", performSearch);
+            $("#hlSearch").on("click", performSearch);
+
         });
+
+        function performSearch(e)
+        {
+            if(e.which === 13 || e.target.id === "hlSearch")
+            {
+                var qry = "{{url('ajax/productsearch')}}" + "/" + $("#searchquery").val();
+                $.getJSON(qry, function(jsonresult)
+                {
+                    var tableRows = "";
+                    $.each(jsonresult, function(idx, val)
+                    {
+                        console.log(val);
+                        tableRows += "<tr><td><a href='{{url('productdetail')}}/" + val.fields.id + "'>" + val.fields.name + "</a></td><td>" + val.fields.brand + "</td><td></td></tr>";
+                    });
+
+                    $resultTable.html(tableRows);
+
+                });
+
+                e.preventDefault();
+            }
+        }
 
     </script>
 
