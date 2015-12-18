@@ -249,7 +249,7 @@ class ProfileController extends Controller
         $userProduct->pos_pdf = $request->input('pos_pdf');
         $userProduct->published = ($request->input('published') ? 1 : 0);
 
-        //$userProduct->save();
+        $userProduct->save();
 
         return redirect('productdetail/' . $userProduct->id);
     }
