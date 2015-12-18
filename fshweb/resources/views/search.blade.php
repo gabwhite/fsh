@@ -28,7 +28,7 @@
 
                     <div class="row">
                         <div class="col-md-9">
-                            <input type="text" name="searchquery" id="searchquery" placeholder="Search" value="{{$query or ''}}" class="form-control"/>
+                            <input type="text" name="searchquery" id="searchquery" autocomplete="off" placeholder="Search" value="{{$query or ''}}" class="form-control"/>
                         </div>
                         <div class="col-md-3">
                             <a href="#" id="hlSearch" class="btn btn-primary">Search</a>
@@ -140,12 +140,18 @@
                 var qry = "{{url('ajax/productsearch')}}" + "/" + $("#searchquery").val();
                 $.getJSON(qry, function(jsonresult)
                 {
+
                     var tableRows = "";
                     $.each(jsonresult, function(idx, val)
                     {
                         console.log(val);
                         tableRows += "<tr><td><a href='{{url('productdetail')}}/" + val.fields.id + "'>" + val.fields.name + "</a></td><td>" + val.fields.brand + "</td><td></td></tr>";
                     });
+
+                    if(jsonresult.length === 0)
+                    {
+                        tableRows += "<tr><td colspan='3'>No Results Found</td></tr>";
+                    }
 
                     $resultTable.html(tableRows);
 
