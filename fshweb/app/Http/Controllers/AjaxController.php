@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CacheManager;
 use App\DataAccessLayer;
 use App\DbCategoryFinder;
 use App\ProductSearcher;
@@ -14,14 +15,16 @@ class AjaxController extends Controller
 {
 
     protected $dataAccess;
+    protected $cacheManager;
 
     /**
      * AjaxController constructor.
      * @param $dataAccess
      */
-    public function __construct(DataAccessLayer $dataAccess)
+    public function __construct(DataAccessLayer $dataAccess, CacheManager $cacheManager)
     {
         $this->dataAccess = $dataAccess;
+        $this->cacheManager = $cacheManager;
     }
 
     public function getProductFullTextSearch($query)
@@ -95,16 +98,21 @@ class AjaxController extends Controller
 
     public function getCountries()
     {
-        $countries = Cache::remember('countries', 5, function()
+        $countries = $this->cacheManager->getItem(env('CACHE_DRIVER'), 'countries');
+
+        if($countries == null)
         {
-            return $this->dataAccess->getAllCountries();
-        });
+            $countries = $this->dataAccess->getAllCountries();
+            $this->cacheManager->setItem(env('CACHE_DRIVER'), 'countries', $countries, 10);
+        }
 
         return response()->json($countries);
     }
 
     public function getStateProvincesForCountry($countryId)
     {
+
+
         $key = 'stateprovince-' . $countryId;
 
         $stateProvinces = Cache::remember($key, 5, function() use ($countryId)
