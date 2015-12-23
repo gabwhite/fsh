@@ -140,12 +140,11 @@
                 var qry = "{{url('ajax/productsearch')}}" + "/" + $("#searchquery").val();
                 $.getJSON(qry, function(jsonresult)
                 {
-
                     var tableRows = "";
                     $.each(jsonresult, function(idx, val)
                     {
-                        console.log(val);
-                        tableRows += "<tr><td><a href='{{url('productdetail')}}/" + val.fields.id + "'>" + val.fields.name + "</a></td><td>" + val.fields.brand + "</td><td></td></tr>";
+                        //console.log(val);
+                        tableRows += "<tr><td><a href='{{url('productdetail')}}/" + val.fields.product_id + "'>" + val.fields.name + "</a></td><td>" + val.fields.brand + "</td><td></td></tr>";
                     });
 
                     if(jsonresult.length === 0)
