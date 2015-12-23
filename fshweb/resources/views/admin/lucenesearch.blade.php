@@ -22,7 +22,8 @@ Manage Search Indexes
         @foreach ($indexes as $i)
         <tr>
             <td>{{substr($i, strpos($i, '/') + 1)}}</td>
-            <td><a href="#" data-indexname="{{substr($i, strpos($i, '/') + 1)}}">Rebuild</a></td>
+            <td><a href="#" class="idxrebuild" data-indexname="{{substr($i, strpos($i, '/') + 1)}}">Rebuild</a></td>
+            <td><a href="#" class="idxoptimize" data-indexname="{{substr($i, strpos($i, '/') + 1)}}">Optimize</a></td>
         </tr>
         @endforeach
     </tbody>
@@ -48,13 +49,22 @@ Manage Search Indexes
     <script type="text/javascript">
         $(document).ready(function()
         {
-            $("#currentindexes").find("a").off("click").on("click", function(e)
+            $("#currentindexes").find("a.idxrebuild").off("click").on("click", function(e)
             {
                 e.preventDefault();
                 $("#indexaction").val("REBUILD");
                 $("#indexname").val($(this).data("indexname"));
                 $("#frmManageIndex").submit();
             });
+
+            $("#currentindexes").find("a.idxoptimize").off("click").on("click", function(e)
+            {
+                e.preventDefault();
+                $("#indexaction").val("OPTIMIZE");
+                $("#indexname").val($(this).data("indexname"));
+                $("#frmManageIndex").submit();
+            });
+
         });
     </script>
 
