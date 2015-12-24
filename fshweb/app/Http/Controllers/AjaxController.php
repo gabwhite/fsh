@@ -29,6 +29,26 @@ class AjaxController extends Controller
 
     public function getProductFullTextSearch($query)
     {
+
+        $words = explode(' ', $query);
+        $finalWords = array();
+        foreach($words as $w)
+        {
+            if(is_numeric($w))
+            {
+                $w = '"'.$w.'"';
+            }
+            else if(!starts_with($w, '"') && strlen($w) > 2)
+            {
+                $w = $w . '*';
+            }
+
+            array_push($finalWords, $w);
+        }
+
+        $results = $this->dataAccess->getUserProductsByFullText($finalWords);
+
+        /*
         $productSearcher = new ProductSearcher();
         $hits = $productSearcher->fullTextSearch('productindex', $query);
 
@@ -48,6 +68,7 @@ class AjaxController extends Controller
             $data = array('score' => $h->score, 'fields' => $fields);
             array_push($results, $data);
         }
+        */
 
         return response()->json($results);
     }

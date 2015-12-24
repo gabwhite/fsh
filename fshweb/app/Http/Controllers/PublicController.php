@@ -42,6 +42,7 @@ class PublicController extends Controller
 
     public function fullTextSearch(Request $request)
     {
+
         $productSearcher = new ProductSearcher();
         $hits = $productSearcher->fullTextSearch('productindex', $request->input('searchquery'));
 

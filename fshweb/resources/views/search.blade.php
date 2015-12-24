@@ -144,7 +144,7 @@
                     $.each(jsonresult, function(idx, val)
                     {
                         //console.log(val);
-                        tableRows += "<tr><td><a href='{{url('productdetail')}}/" + val.fields.product_id + "'>" + val.fields.name + "</a></td><td>" + val.fields.brand + "</td><td></td></tr>";
+                        tableRows += "<tr><td><a href='{{url('productdetail')}}/" + val.id + "'>" + val.name + "</a></td><td>" + val.brand + "</td><td></td></tr>";
                     });
 
                     if(jsonresult.length === 0)

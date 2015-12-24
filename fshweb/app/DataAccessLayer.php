@@ -93,4 +93,15 @@ class DataAccessLayer
     {
         return DB::table('stateprovinces')->where('country_id', '=', $countryId)->get();
     }
+
+    public function getUserProductsByFullText($arrTerms)
+    {
+
+        $terms = implode(' ', $arrTerms);
+
+        $query = "MATCH (name, description, gtin, mpc, brand, ingredient_deck) AGAINST ('$terms' IN BOOLEAN MODE)";
+        $userProducts = UserProduct::select('id', 'name', 'brand')->whereRaw($query)->get();
+
+        return $userProducts;
+    }
 }
