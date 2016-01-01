@@ -16,6 +16,7 @@ class AlterUserProfilesTable extends Migration
         {
             $table->string('logo_image_path', 200)->nullable()->after('vendor_id');
             $table->string('contact_phone', 200)->nullable()->after('vendor_id');
+            $table->string('contact_title', 200)->nullable()->after('vendor_id');
             $table->string('contact_name', 200)->nullable()->after('vendor_id');
             $table->string('zip_postal', 50)->nullable()->after('vendor_id');
             $table->string('city', 200)->nullable()->after('vendor_id');
