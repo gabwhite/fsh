@@ -21,6 +21,8 @@ class AlterUserProfilesTable extends Migration
             $table->string('city', 200)->nullable()->after('vendor_id');
             $table->integer('state_province')->unsigned()->nullable()->after('vendor_id');
             $table->integer('country')->unsigned()->nullable()->after('vendor_id');
+            $table->string('address2', 200)->nullable()->after('vendor_id');
+            $table->string('address1', 200)->nullable()->after('vendor_id');
             $table->string('company', 200)->nullable()->after('vendor_id');
         });
     }
@@ -34,7 +36,7 @@ class AlterUserProfilesTable extends Migration
     {
         Schema::table('user_profiles', function (Blueprint $table)
         {
-            $table->dropColumn(['company', 'country', 'state_province', 'city', 'zip_postal', 'contact_name', 'contact_phone', 'logo_image_path']);
+            $table->dropColumn(['company', 'address1', 'address2', 'country', 'state_province', 'city', 'zip_postal', 'contact_name', 'contact_phone', 'logo_image_path']);
         });
     }
 }
