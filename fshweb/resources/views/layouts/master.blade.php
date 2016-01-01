@@ -324,7 +324,7 @@
                         </div><!--end widget-->
 
                         <div class="col-sm-12">
-                            <p id="footer" style="text-align: center;">©2015 foodservicehound.com </p>
+                            <p id="footer" style="text-align: center;">©2015 foodservicehound.com | <a href="{{url('contact')}}">Contact Us</a></p>
                         </div>
 
                         <div class="col-sm-12">

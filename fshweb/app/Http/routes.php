@@ -12,8 +12,6 @@
 */
 
 
-
-
 Route::get('/', function ()
 {
     return view('welcome');
@@ -28,8 +26,18 @@ Route::get('productdetail/{id}', 'PublicController@productDetail');
 
 Route::post('fulltextsearch', 'PublicController@fullTextSearch');
 
+//=================================
+// Contact Us routes
+//=================================
+Route::get('contact', 'PublicController@contactUs');
+Route::post('contact', 'PublicController@contactUsSubmit');
+//=================================
+
+
 Route::get('toolsresources', function() { return view('toolsresources'); } );
+
 Route::get('industryforums', function() { return view('industryforums'); } );
+
 
 // Routes the require authentication
 Route::group(['middleware' => 'auth'], function()

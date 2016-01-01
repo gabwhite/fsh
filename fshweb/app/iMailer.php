@@ -11,5 +11,7 @@ namespace App;
 
 interface iMailer
 {
-    public function sendMail($to , $from, $subject, $body);
+    public function sendMail($to, $from, $subject, $view, $viewData);
+
+    public function sendMailRaw($to, $from, $subject, $body);
 }
