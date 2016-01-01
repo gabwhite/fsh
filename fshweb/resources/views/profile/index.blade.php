@@ -28,10 +28,6 @@
         Currently logged in as: {{$user->name}} ({{$user->email}})
         <br/><br/>
 
-        @if(isEmailInUse('breen.young@gmail.com', 1))
-            cxcxcxc
-        @endif
-
         <p class="bg-info">
             <a href="{{url('profile/edit')}}">Edit my profile</a>
         </p>
