@@ -37,7 +37,7 @@ class AlterUserProfilesTable extends Migration
     {
         Schema::table('user_profiles', function (Blueprint $table)
         {
-            $table->dropColumn(['company', 'address1', 'address2', 'country', 'state_province', 'city', 'zip_postal', 'contact_name', 'contact_phone', 'logo_image_path']);
+            $table->dropColumn(['company', 'address1', 'address2', 'country', 'state_province', 'city', 'zip_postal', 'contact_name', 'contact_title', 'contact_phone', 'logo_image_path']);
         });
     }
 }
