@@ -85,18 +85,18 @@ class PublicController extends Controller
         // Send email to us
         $this->mailer->sendMail(config('app.contact_email_to'),
                                 $request->input('contact_email'),
-                                config('app.contact_subject_to'),
+                                trans('messages.contact_subject_to'),
                                 config('app.contact_email_view_admin'),
                                 $formData);
 
         // Send receipt of mail to user
         $this->mailer->sendMail($request->input('contact_email'),
                                 config('app.contact_email_to'),
-                                config('app.contact_subject_from'),
+                                trans('messages.contact_subject_from'),
                                 config('app.contact_email_view'),
                                 $formData);
 
-        $successMessage = config('app.contact_subject_from');
+        $successMessage = trans('messages.contact_subject_from');
 
         return view('contact')->with('successMessage', $successMessage);
 
