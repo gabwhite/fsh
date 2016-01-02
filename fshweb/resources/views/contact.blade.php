@@ -18,6 +18,10 @@
 
         <div class="col-md-12">
 
+            <p>
+                {{$successMessage or ''}}
+            </p>
+
             <form id="form1" name="contactus" method="post" action="{{url('contact')}}">
 
                 <div>

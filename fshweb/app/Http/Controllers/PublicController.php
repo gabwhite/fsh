@@ -96,6 +96,10 @@ class PublicController extends Controller
                                 config('app.contact_email_view'),
                                 $formData);
 
-        echo "Contact US Post";
+        $successMessage = config('app.contact_subject_from');
+
+        return view('contact')->with('successMessage', $successMessage);
+
+
     }
 }

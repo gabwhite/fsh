@@ -219,5 +219,5 @@ return [
     'contact_email_view_admin' => 'emails.contactadmin',
     'contact_email_to' => 'breen@foodservicehound.com',
     'contact_subject_to' => 'Contact Us message received',
-    'contact_subject_from' => 'Thank you for your message',
+    'contact_subject_from' => 'Thank you for your inquiry',
 ];
