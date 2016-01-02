@@ -37,7 +37,7 @@
         </form>
         <a href="{{url('/auth/register')}}">Register</a>
         |
-        <a href="#">Lost Password</a>
+        <a href="{{url('/password/email')}}">Lost Password</a>
 
     </div>
 
