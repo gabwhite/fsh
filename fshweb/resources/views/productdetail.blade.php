@@ -1,13 +1,13 @@
 @extends('layouts.master')
 
-@section('title', 'Page Title')
+@section('title', trans('ui.navigation_product_detail'))
 
 @section('css')
 
 @endsection
 
 @section('sectionheader')
-    PRODUCT DETAIL
+    {{trans('ui.navigation_product_detail')}}
 @endsection
 
 @section('content')
@@ -21,66 +21,66 @@
 
             <div class="nutrition-block">
 
-                <h4>Nutrition Facts</h4>
+                <h4>{{trans('ui.product_label_nutrition_facts')}}</h4>
 
                 <div class="nutrition-meta serving-size">
-                    <span class="nutrition-value">Serving Size&nbsp;{{$userproduct->serving_size}}</span>
+                    <span class="nutrition-value">{{trans('ui.product_label_serving_size')}}&nbsp;{{$userproduct->serving_size}}</span>
                 </div>
                 <div class="nutrition-meta amount-per-serving">
-                    <label>Amount Per Serving</label>
+                    <label>{{trans('ui.product_label_amount_per_serving')}}</label>
                 </div>
                 <div class="nutrition-meta calories">
                     <div class="col-lg-6 calories-left">
-                        <label>Calories&nbsp;</label><span class="nutrition-value">{{$userproduct->calories}}</span>
+                        <label>{{trans('ui.product_label_calories')}}&nbsp;</label><span class="nutrition-value">{{$userproduct->calories}}</span>
                     </div>
                     <div class="col-lg-6 calories-right">
-                        <span class="nutrition-value">Calories from Fat&nbsp;{{$userproduct->calories_from_fat}}</span>
+                        <span class="nutrition-value">{{trans('ui.product_label_calories_from_fat')}}&nbsp;{{$userproduct->calories_from_fat}}</span>
                     </div>
                     <div class="clearfix"></div>
                 </div>
                 <div class="nutrition-meta total-fat">
-                    <label>Total Fat&nbsp;</label><span class="nutrition-value">{{$userproduct->total_fat}}</span>
+                    <label>{{trans('ui.product_label_total_fat')}}&nbsp;</label><span class="nutrition-value">{{$userproduct->total_fat}}</span>
                 </div>
                 <div class="nutrition-meta saturated-fat">
-                    <span class="nutrition-value">Saturated Fat&nbsp;{{$userproduct->saturated_fats}}</span>
+                    <span class="nutrition-value">{{trans('ui.product_label_saturated_fat')}}&nbsp;{{$userproduct->saturated_fats}}</span>
                 </div>
                 <div class="nutrition-meta cholesteral">
-                    <label>Cholesteral&nbsp;</label><span class="nutrition-value"></span>
+                    <label>{{trans('ui.product_label_cholesterol')}}&nbsp;</label><span class="nutrition-value"></span>
                 </div>
                 <div class="nutrition-meta sodium">
-                    <label>Sodium&nbsp;</label><span class="nutrition-value">{{$userproduct->sodium}}</span>
+                    <label>{{trans('ui.product_label_sodium')}}&nbsp;</label><span class="nutrition-value">{{$userproduct->sodium}}</span>
                 </div>
                 <div class="nutrition-meta carbohydrates">
-                    <label>Total Carbohydrates&nbsp;</label><span class="nutrition-value">{{$userproduct->carbs}}</span>
+                    <label>{{trans('ui.product_label_total_carbs')}}&nbsp;</label><span class="nutrition-value">{{$userproduct->carbs}}</span>
                 </div>
                 <div class="nutrition-meta dietary-fibre">
-                    <span class="nutrition-value">Dietary Fibre&nbsp;{{$userproduct->fibre}}</span>
+                    <span class="nutrition-value">{{trans('ui.product_label_dietary_fibre')}}&nbsp;{{$userproduct->fibre}}</span>
                 </div>
                 <div class="nutrition-meta sugars">
-                    <span class="nutrition-value">Sugars&nbsp;{{$userproduct->sugar}}</span>
+                    <span class="nutrition-value">{{trans('ui.product_label_sugars')}}&nbsp;{{$userproduct->sugar}}</span>
                 </div>
                 <div class="nutrition-meta protein">
-                    <label>Protein&nbsp;</label><span class="nutrition-value">{{$userproduct->protein}}</span>
+                    <label>{{trans('ui.product_label_protein')}}&nbsp;</label><span class="nutrition-value">{{$userproduct->protein}}</span>
                 </div>
             </div>
 
-            <h4>Dietary Information</h4>
+            <h4>{{trans('ui.product_label_dietary_info')}}</h4>
             <div class="nutrition-meta">
-                <label>Halal:</label>
-                <span class="nutrition-value">{{($userproduct->is_halal) ? 'Yes' : 'No'}}</span>
+                <label>{{trans('ui.product_label_halal')}}:</label>
+                <span class="nutrition-value">{{($userproduct->is_halal) ? trans('ui.general_label_yes') : trans('ui.general_label_no')}}</span>
             </div>
             <div class="nutrition-meta">
-                <label>Organic:</label>
-                <span class="nutrition-value">{{($userproduct->is_organic) ? 'Yes' : 'No'}}</span>
+                <label>{{trans('ui.product_label_organic')}}:</label>
+                <span class="nutrition-value">{{($userproduct->is_organic) ? trans('ui.general_label_yes') : trans('ui.general_label_no')}}</span>
             </div>
             <div class="nutrition-meta">
-                <label>Kosher:</label>
-                <span class="nutrition-value">{{($userproduct->is_kosher) ? 'Yes' : 'No'}}</span>
+                <label>{{trans('ui.product_label_kosher')}}:</label>
+                <span class="nutrition-value">{{($userproduct->is_kosher) ? trans('ui.general_label_yes') : trans('ui.general_label_no')}}</span>
             </div>
 
             <br/>
 
-            <h4>Allergy Information</h4>
+            <h4>{{trans('ui.product_label_allergy_info')}}</h4>
             @foreach($userproduct->allergens as $a)
 
             @endforeach
@@ -103,50 +103,50 @@
 
         <h1>{{$userproduct->name}}</h1>
 
-        <h4>Description</h4>
+        <h4>{{trans('ui.product_label_description')}}</h4>
         {{$userproduct->description}}<br/>
 
         <br/>
 
-        <h4>Ingredients</h4>
+        <h4>{{trans('ui.product_label_ingredients')}}</h4>
         {{$userproduct->ingredient_deck}}<br/>
 
         <br/>
 
-        <h4>Features, Advantages and Benefits</h4>
+        <h4>{{trans('ui.product_label_features')}}</h4>
         @if($userproduct->features_benefits != '')
             {{$userproduct->features_benefits}}
         @else
-            No information provided
+            {{trans('ui.product_label_no_information')}}
         @endif
         <br/>
 
         <br/>
 
-        <h4>Allergen Disclaimer</h4>
+        <h4>{{trans('ui.product_label_allergen_disclaimer')}}</h4>
         @if($userproduct->allergen_disclaimer != '')
             {{$userproduct->allergen_disclaimer}}
         @else
-            No information provided
+                {{trans('ui.product_label_no_information')}}
         @endif
         <br/>
 
         <br/>
 
-        <h4>Preparation &amp; Cooking Suggestions</h4>
+        <h4>{{trans('ui.product_label_preparation')}}</h4>
         {{$userproduct->preparation}}<br/>
 
         <br/>
 
-        <h4>Packaging &amp; Weights</h4>
-        Pack:{{$userproduct->pack}}<br/>
-        Size:{{$userproduct->size}}<br/>
-        Calculation Size:{{$userproduct->calc_size}}<br/>
-        Product Code:{{$userproduct->mpc}}<br/>
-        GTIN:{{$userproduct->gtin}}<br/>
-        Net Weight:{{$userproduct->net_weight}}<br/>
-        Gross Weight:{{$userproduct->gross_weight}}<br/>
-        Tare Weight:{{$userproduct->tare_weight}}<br/>
+        <h4>{{trans('ui.product_label_packaging_weights')}}</h4>
+        {{trans('ui.product_label_pack')}}:{{$userproduct->pack}}<br/>
+        {{trans('ui.product_label_size')}}:{{$userproduct->size}}<br/>
+        {{trans('ui.product_label_calculation_size')}}:{{$userproduct->calc_size}}<br/>
+        {{trans('ui.product_label_product_code')}}:{{$userproduct->mpc}}<br/>
+        {{trans('ui.product_label_gtin')}}:{{$userproduct->gtin}}<br/>
+        {{trans('ui.product_label_net_weight')}}:{{$userproduct->net_weight}}<br/>
+        {{trans('ui.product_label_gross_weight')}}:{{$userproduct->gross_weight}}<br/>
+        {{trans('ui.product_label_tare_weight')}}:{{$userproduct->tare_weight}}<br/>
 
         {{$userproduct->brand}}<br/>
         {{$userproduct->calories}}<br/>
