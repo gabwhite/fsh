@@ -1,9 +1,9 @@
 @extends('layouts.master')
 
-@section('title', 'Login')
+@section('title', trans('ui.navigation_login'))
 
 @section('sectionheader')
-    LOGIN
+    {{trans('ui.navigation_login')}}
 @endsection
 
 @section('content')
@@ -16,28 +16,28 @@
             {!! csrf_field() !!}
 
             <div>
-                Email
+                {{trans('ui.login_label_email')}}
                 <input type="email" name="email" maxlength="100" value="{{ old('email') }}" class="form-control">
             </div>
 
             <div>
-                Password
+                {{trans('ui.login_label_password')}}
                 <input type="password" name="password" id="password" maxlength="25" class="form-control">
             </div>
 
             <div class="checkbox">
                 <label>
-                    <input type="checkbox" name="remember"> Remember Me
+                    <input type="checkbox" name="remember"> {{trans('ui.login_label_remember')}}
                 </label>
             </div>
 
             <div>
-                <button type="submit" class="btn btn-primary">Login</button>
+                <button type="submit" class="btn btn-primary">{{trans('ui.button_login')}}</button>
             </div>
         </form>
-        <a href="{{url('/auth/register')}}">Register</a>
+        <a href="{{url('/auth/register')}}">{{trans('ui.navigation_register')}}</a>
         |
-        <a href="{{url('/password/email')}}">Lost Password</a>
+        <a href="{{url('/password/email')}}">{{trans('ui.navigation_forgotpassword')}}</a>
 
     </div>
 

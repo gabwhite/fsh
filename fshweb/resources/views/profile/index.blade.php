@@ -1,13 +1,13 @@
 @extends('layouts.master')
 
-@section('title', 'Page Title')
+@section('title', trans('ui.navigation_profile'))
 
 @section('css')
 
 @endsection
 
 @section('sectionheader')
-    PROFILE
+    {{trans('ui.navigation_profile')}}
 @endsection
 
 @section('content')
@@ -16,29 +16,29 @@
 
     <div class="col-md-3">
         @if(isset($avatarFilename))
-            <img id="imgCurrentAvatar" src="{{url(config('app.avatar_storage') . '/' . $avatarFilename)}}" title="Current avatar" width="200" height="200"/>
+            <img id="imgCurrentAvatar" src="{{url(config('app.avatar_storage') . '/' . $avatarFilename)}}" title="{{trans('ui.user_label_currentavatar')}}" width="200" height="200"/>
         @else
-            <img id="imgCurrentAvatar" src="{{url(config('app.avatar_none'))}}" title="No avatar" width="200" height="200"/>
+            <img id="imgCurrentAvatar" src="{{url(config('app.avatar_none'))}}" title="{{trans('ui.user_label_noavatar')}}" width="200" height="200"/>
         @endif
 
     </div>
 
     <div class="col-md-9">
 
-        Currently logged in as: {{$user->name}} ({{$user->email}})
+        {{$user->name}} ({{$user->email}})
         <br/><br/>
 
         <p class="bg-info">
-            <a href="{{url('profile/edit')}}">Edit my profile</a>
+            <a href="{{url('profile/edit')}}">{{trans('ui.navigation_link_editprofile')}}</a>
         </p>
 
         <p class="bg-info">
-            <a href="{{url('profile/avatar')}}">Change Avatar</a>
+            <a href="{{url('profile/avatar')}}">{{trans('ui.navigation_link_changeavatar')}}</a>
         </p>
 
         @if($user->hasRole('vendor'))
             <p class="bg-info">
-                <a href="{{url('profile/products')}}">My Products</a>&nbsp;(<a href="{{url('profile/product')}}">Add New</a>)
+                <a href="{{url('profile/products')}}">{{trans('ui.navigation_link_myproducts')}}</a>&nbsp;(<a href="{{url('profile/product')}}">{{trans('ui.navigation_link_addnewproduct')}}</a>)
             </p>
         @endif
 

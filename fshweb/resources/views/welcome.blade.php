@@ -26,10 +26,10 @@
 
                     <div class="row">
                         <div class="col-md-9">
-                            <input type="text" name="searchquery" id="searchquery" placeholder="Enter a keyword, MPC code" class="form-control"/>
+                            <input type="text" name="searchquery" id="searchquery" placeholder="{{trans('ui.search_placeholder')}}" class="form-control"/>
                         </div>
                         <div class="col-md-3">
-                            <input type="submit" class="btn btn-primary" value="Search Products"/>
+                            <input type="submit" class="btn btn-primary" value="{{trans('ui.button_search')}}"/>
                         </div>
                     </div>
 

@@ -1,15 +1,14 @@
 @extends('layouts.master')
 
 
-@section('title', 'Contact Us')
+@section('title', trans('ui.navigation_contactus'))
 
 @section('css')
 
 @endsection
 
-@section('sidebar')
-    @parent
-
+@section('sectionheader')
+    {{trans('ui.navigation_contactus')}}
 @endsection
 
 @section('content')
@@ -25,24 +24,23 @@
             <form id="form1" name="contactus" method="post" action="{{url('contact')}}">
 
                 <div>
-                    Name
+                    {{trans('ui.contact_label_name')}}
                     <input type="text" name="contact_name" maxlength="100" value="{{ old('contact_name') }}" class="form-control">
                 </div>
 
 
                 <div>
-                    Email
+                    {{trans('ui.contact_label_email')}}
                     <input type="email" name="contact_email" maxlength="100" value="{{ old('contact_email') }}" class="form-control">
                 </div>
 
                 <div>
-                    Message
+                    {{trans('ui.contact_label_message')}}
                     <textarea name="contact_message"></textarea>
                 </div>
 
-
                 <div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <button type="submit" class="btn btn-primary">{{trans('ui.button_submit')}}</button>
                 </div>
 
 

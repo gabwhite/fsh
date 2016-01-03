@@ -1,9 +1,9 @@
 @extends('layouts.master')
 
-@section('title', 'Vendor Registration')
+@section('title', trans('ui.navigation_vendorreg'))
 
 @section('sectionheader')
-    VENDOR REGISTRATION
+    {{trans('ui.navigation_vendorreg')}}
 @endsection
 
 @section('content')
@@ -16,74 +16,79 @@
                 {!! csrf_field() !!}
 
                 <div>
-                    <label for="name">Name</label>
-                    <input type="text" name="name" maxlength="25" placeholder="Name" class="form-control">
+                    <label for="name">{{trans('ui.vendor_label_name')}}</label>
+                    <input type="text" name="name" maxlength="25" placeholder="" class="form-control">
                 </div>
 
                 <div>
-                    <label for="email">Email</label>
-                    <input type="email" name="email" maxlength="100" placeholder="Email" class="form-control">
+                    <label for="email">{{trans('ui.vendor_label_email')}}</label>
+                    <input type="email" name="email" maxlength="100" placeholder="" class="form-control">
                 </div>
 
                 <div>
-                    <label for="password">Password</label>
-                    <input type="password" id="password" name="password" placeholder="Password" maxlength="25" class="form-control">
+                    <label for="password">{{trans('ui.vendor_label_password')}}</label>
+                    <input type="password" id="password" name="password" placeholder="" maxlength="25" class="form-control">
                 </div>
 
                 <div>
-                    <label for="password_confirmation">Confirm Password</label>
-                    <input type="password" name="password_confirmation" placeholder="Confirm Password" maxlength="25" class="form-control">
+                    <label for="password_confirmation">{{trans('ui.vendor_label_confirmpassword')}}</label>
+                    <input type="password" name="password_confirmation" placeholder="" maxlength="25" class="form-control">
                 </div>
 
                 <div>
-                    <label for="company">Company</label>
-                    <input type="text" name="company" placeholder="Company" maxlength="200" class="form-control"/>
+                    <label for="company">{{trans('ui.vendor_label_company')}}</label>
+                    <input type="text" name="company" placeholder="" maxlength="200" class="form-control"/>
                 </div>
 
                 <div>
-                    <label for="country">Country</label>
+                    <label for="country">{{trans('ui.vendor_label_country')}}</label>
                     <select id="country" name="country" class="form-control">
                     </select>
                 </div>
 
                 <div>
-                    <label for="state_province">State / Province</label>
+                    <label for="state_province">{{trans('ui.vendor_label_stateprovince')}}</label>
                     <select id="state_province" name="state_province" class="form-control">
                     </select>
                 </div>
 
                 <div>
-                    <label for="city">City</label>
-                    <input type="text" name="city" placeholder="City" maxlength="200" class="form-control"/>
+                    <label for="city">{{trans('ui.vendor_label_city')}}</label>
+                    <input type="text" name="city" placeholder="" maxlength="200" class="form-control"/>
                 </div>
 
                 <div>
-                    <label for="zip_postal">Zip / Postal</label>
-                    <input type="text" name="zip_postal" placeholder="Zip / Postal" maxlength="50" class="form-control"/>
+                    <label for="zip_postal">{{trans('ui.vendor_label_zippostal')}}</label>
+                    <input type="text" name="zip_postal" placeholder="" maxlength="50" class="form-control"/>
                 </div>
 
                 <div>
-                    <label for="contact_name">Contact Name</label>
-                    <input type="text" name="contact_name" placeholder="Contact Name" maxlength="200" class="form-control"/>
+                    <label for="contact_name">{{trans('ui.vendor_label_contactname')}}</label>
+                    <input type="text" name="contact_name" placeholder="" maxlength="200" class="form-control"/>
                 </div>
 
                 <div>
-                    <label for="contact_phone">Contact Phone</label>
-                    <input type="text" name="contact_phone" placeholder="Contact Phone" maxlength="200" class="form-control"/>
+                    <label for="contact_name">{{trans('ui.vendor_label_contacttitle')}}</label>
+                    <input type="text" name="contact_title" placeholder="" maxlength="200" class="form-control"/>
                 </div>
 
                 <div>
-                    <label for="logo_image_path">Logo Image</label>
+                    <label for="contact_phone">{{trans('ui.vendor_label_contactphone')}}</label>
+                    <input type="text" name="contact_phone" placeholder="" maxlength="200" class="form-control"/>
+                </div>
+
+                <div>
+                    <label for="logo_image_path">{{trans('ui.vendor_label_logoimage')}}</label>
                     <input type="file" name="logo_image_path"/>
                 </div>
 
                 <div>
-                    <label for="bio">About your company</label>
-                    <textarea name="bio" class="form-control" placeholder="Bio" cols="80" rows="3"></textarea>
+                    <label for="bio">{{trans('ui.vendor_label_bio')}}</label>
+                    <textarea name="bio" class="form-control" placeholder="" cols="80" rows="3"></textarea>
                 </div>
 
                 <div>
-                    <button type="submit" class="btn btn-primary">Register</button>
+                    <button type="submit" class="btn btn-primary">{{trans('ui.button_register')}}</button>
                 </div>
             </form>
 
@@ -164,6 +169,7 @@
                     city: { required: true, maxlength: 200 },
                     zip_postal: { required: true, maxlength: 50 },
                     contact_name: { required: true, maxlength: 200 },
+                    contact_title: { maxlength: 200 },
                     contact_phone: { maxlength: 200 },
                     bio: { maxlength: 2000 }
                 }

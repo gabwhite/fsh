@@ -234,27 +234,18 @@
                     <div class="collapse navbar-collapse nav-collapse">
 
                         <ul id="menu-primary-menu" class="nav navbar-nav">
-                            <li id="menu-item-662" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-662"><a title="Products Search" href="{{url('/search')}}">Products Search</a></li>
-                            <li id="menu-item-4594" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4594"><a title="Industry Forums" href="{{url('industryforums')}}">Industry Forums</a></li>
-                            <li id="menu-item-224" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-224"><a title="Tools &amp; Resources" href="{{url('toolsresources')}}">Tools &#038; Resources</a></li>
+                            <li id="menu-item-662" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-662"><a title="{{trans('ui.navigation_productsearch')}}" href="{{url('/search')}}">{{trans('ui.navigation_productsearch')}}</a></li>
+                            <li id="menu-item-4594" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4594"><a title="{{trans('ui.navigation_industryforums')}}" href="{{url('industryforums')}}">{{trans('ui.navigation_industryforums')}}</a></li>
+                            <li id="menu-item-224" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-224"><a title="{{trans('ui.navigation_tools')}}" href="{{url('toolsresources')}}">{{trans('ui.navigation_tools')}}</a></li>
 
                             @if (Auth::check())
-                                <li id="menu-item-722" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-722"><a title="Logout" href="{{url('profile/')}}">Profile</a></li>
-                                <li id="menu-item-723" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-723"><a title="Logout" href="{{url('auth/logout')}}">Logout</a></li>
+                                <li id="menu-item-722" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-722"><a title="{{trans('ui.navigation_profile')}}" href="{{url('profile/')}}">{{trans('ui.navigation_profile')}}</a></li>
+                                <li id="menu-item-723" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-723"><a title="{{trans('ui.navigation_logout')}}" href="{{url('auth/logout')}}">{{trans('ui.navigation_logout')}}</a></li>
                             @else
-                                <li id="menu-item-721" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-721"><a title="Vendor Registration" href="{{url('auth/vendorregister')}}">Vendor Registration</a></li>
-                                <li id="menu-item-720" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-720"><a title="Login/Register" href="{{url('auth/login')}}">Login/Register</a></li>
+                                <li id="menu-item-721" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-721"><a title="{{trans('ui.navigation_vendorreg')}}" href="{{url('auth/vendorregister')}}">{{trans('ui.navigation_vendorreg')}}</a></li>
+                                <li id="menu-item-720" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-720"><a title="{{trans('ui.navigation_login')}}" href="{{url('auth/login')}}">{{trans('ui.navigation_login')}}</a></li>
                             @endif
 
-                            <li id="nav-menu-item-search" class="menu-item kleo-search-nav"><a class="search-trigger" href="#"><i class="icon icon-search"></i></a>
-                                <div class="kleo-search-wrap searchHidden" id="ajax_search_container">
-                                    <form class="form-inline" id="ajax_searchform" action="http://www.foodservicehound.com/" data-context="product">
-                                        <input type="hidden" name="post_type" value="product">        <input name="s" class="ajax_s form-control" autocomplete="off" type="text" value="" placeholder="Start typing to search...">
-                                        <span class="kleo-ajax-search-loading"><i class="icon-spin6 animate-spin"></i></span>
-                                    </form>
-                                    <div class="kleo_ajax_results"></div>
-                                </div>
-                            </li>
                         </ul>
                     </div>
 
@@ -324,7 +315,7 @@
                         </div><!--end widget-->
 
                         <div class="col-sm-12">
-                            <p id="footer" style="text-align: center;">©2015 foodservicehound.com | <a href="{{url('contact')}}">Contact Us</a></p>
+                            <p id="footer" style="text-align: center;">©2015 foodservicehound.com | <a href="{{url('contact')}}">{{trans('ui.navigation_contactus')}}</a></p>
                         </div>
 
                         <div class="col-sm-12">

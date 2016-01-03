@@ -1,13 +1,13 @@
 @extends('layouts.master')
 
-@section('title', 'Page Title')
+@section('title', trans('ui.navigation_profile'))
 
 @section('css')
 
 @endsection
 
 @section('sectionheader')
-    EDIT PROFILE
+    {{trans('ui.navigation_profile')}}
 @endsection
 
 @section('content')
@@ -20,28 +20,28 @@
 
             <div class="row">
                 <div class="col-md-3">
-                    Email
+                    {{trans('ui.user_label_email')}}
                 </div>
                 <div class="col-md-9">
-                    <input type="text" name="email" placeholder="Email" class="form-control" value="{{Auth::user()->email}}" maxlength="100"/>
+                    <input type="text" name="email" placeholder="" class="form-control" value="{{Auth::user()->email}}" maxlength="100"/>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-3">
-                    Password
+                    {{trans('ui.user_label_password')}}
                 </div>
                 <div class="col-md-9">
-                    <input type="password" name="password" placeholder="Password" class="form-control" maxlength="25"/>
+                    <input type="password" name="password" placeholder="" class="form-control" maxlength="25"/>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-3">
-                    Confirm Password
+                    {{trans('ui.user_label_confirmpassword')}}
                 </div>
                 <div class="col-md-9">
-                    <input type="password" name="confirmpassword" placeholder="Confirm Password" class="form-control" maxlength="25"/>
+                    <input type="password" name="confirmpassword" placeholder="" class="form-control" maxlength="25"/>
                 </div>
             </div>
 
@@ -58,35 +58,35 @@
 
             <div class="row">
                 <div class="col-md-3">
-                    First Name
+                    {{trans('ui.user_label_firstname')}}
                 </div>
                 <div class="col-md-9">
-                    <input type="text" name="firstname" placeholder="First Name" class="form-control" maxlength="100" value="{{isset($profile) ? $profile->firstname : ''}}"/>
+                    <input type="text" name="firstname" placeholder="" class="form-control" maxlength="100" value="{{isset($profile) ? $profile->firstname : ''}}"/>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-3">
-                    Last Name
+                    {{trans('ui.user_label_lastname')}}
                 </div>
                 <div class="col-md-9">
-                    <input type="text" name="lastname" placeholder="Last Name" class="form-control" maxlength="100" value="{{isset($profile) ? $profile->lastname : ''}}"/>
+                    <input type="text" name="lastname" placeholder="" class="form-control" maxlength="100" value="{{isset($profile) ? $profile->lastname : ''}}"/>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-3">
-                    Bio
+                    {{trans('ui.user_label_bio')}}
                 </div>
                 <div class="col-md-9">
-                    <textarea name="bio" class="form-control" placeholder="Bio" cols="80" rows="3">{{isset($profile) ? $profile->bio : ''}}</textarea>
+                    <textarea name="bio" class="form-control" placeholder="" cols="80" rows="3">{{isset($profile) ? $profile->bio : ''}}</textarea>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-12">
-                    <input type="submit" value="Update" class="btn btn-primary btn-lg"/>
-                    <a href="{{url('/profile')}}" class="btn btn-lg">Cancel</a>
+                    <input type="submit" value="{{trans('ui.button_update')}}" class="btn btn-primary btn-lg"/>
+                    <a href="{{url('/profile')}}" class="btn btn-lg">{{trans('ui.button_cancel')}}</a>
                 </div>
             </div>
 

@@ -28,10 +28,10 @@
 
                     <div class="row">
                         <div class="col-md-9">
-                            <input type="text" name="searchquery" id="searchquery" autocomplete="off" placeholder="Search" value="{{$query or ''}}" class="form-control"/>
+                            <input type="text" name="searchquery" id="searchquery" autocomplete="off" placeholder="{{trans('ui.search_placeholder')}}" value="{{$query or ''}}" class="form-control"/>
                         </div>
                         <div class="col-md-3">
-                            <a href="#" id="hlSearch" class="btn btn-primary">Search</a>
+                            <a href="#" id="hlSearch" class="btn btn-primary">{{trans('ui.button_search')}}</a>
                         </div>
                     </div>
 
