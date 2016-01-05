@@ -40,7 +40,7 @@ class ProfileController extends Controller
         $up = $user->userProfile;
         if (!is_null($up))
         {
-            $avatarFilename = $up->logo_image_path;
+            $avatarFilename = $up->avatar_image_path;
         }
 
         return view('profile.index')->with('user', $user)->with('avatarFilename', $avatarFilename);
@@ -67,37 +67,37 @@ class ProfileController extends Controller
             $uploader = new UploadHandler();
             $up = $user->userProfile;
 
-            if ($request->hasFile('logo_image_path'))
+            if ($request->hasFile('avatar_image_path'))
             {
                 $avatarFilename = null;
 
-                if (!is_null($up) && isset($up->logo_image_path))
+                if (!is_null($up) && isset($up->avatar_image_path))
                 {
-                    $avatarFilename = $up->logo_image_path;
+                    $avatarFilename = $up->avatar_image_path;
                 }
 
-                $newFilename = $uploader->uploadAvatar($request->file('logo_image_path'), $avatarFilename);
+                $newFilename = $uploader->uploadAvatar($request->file('avatar_image_path'), $avatarFilename);
 
                 if(!is_null($up))
                 {
-                    $up->logo_image_path = $newFilename;
+                    $up->avatar_image_path = $newFilename;
                     $up->save();
                 }
                 else
                 {
                     // UserProfile doesn't exist, create a row
-                    $input = ['user_id' => $user->id, 'logo_image_path' => $newFilename];
+                    $input = ['user_id' => $user->id, 'avatar_image_path' => $newFilename];
                     $user->userProfile()->create($input);
                 }
             }
-            else if($request->input('current_logo_image_path') == "0")
+            else if($request->input('current_avatar_image_path') == "0")
             {
                 // Remove existing avatar
                 if (!is_null($up))
                 {
-                    $uploader->removeAvatar($up->logo_image_path);
+                    $uploader->removeAvatar($up->avatar_image_path);
 
-                    $up->logo_image_path = null;
+                    $up->avatar_image_path = null;
                     $up->save();
                 }
             }

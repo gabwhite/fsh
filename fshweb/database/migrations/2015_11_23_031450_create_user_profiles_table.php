@@ -20,6 +20,7 @@ class CreateUserProfilesTable extends Migration
             $table->string('firstname', 100)->nullable();
             $table->string('lastname', 100)->nullable();
             $table->text('bio')->nullable();
+            $table->string('avatar_image_path', 200)->nullable();
             $table->integer('vendor_id')->nullable();
             $table->timestamps();
 
