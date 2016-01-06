@@ -26,15 +26,15 @@
     <![endif]-->
 
     <link rel="stylesheet" href="{{url('/css/bootstrap.min.css')}}">
-    <link rel="stylesheet" id="kleo-app-css"  href="{{url('/css/kleo/app.css?ver=3.0.4')}}" type="text/css" media="all" />
+   <!--  <link rel="stylesheet" id="kleo-app-css"  href="{{url('/css/kleo/app.css?ver=3.0.4')}}" type="text/css" media="all" /> -->
     <link rel="stylesheet" id="magnific-popup-css"  href="{{url('/js/vendor/magnific-popup/magnific.css?ver=3.0.4')}}" type="text/css" media="all" />
     <link rel="stylesheet" id="tp-josefin-css"  href="http://fonts.googleapis.com/css?family=Josefin+Slab%3A400%2C100%2C600%2C700%2C300%7CJosefin+Sans%3A400%2C300%2C100%2C600%2C700&#038;ver=4.3.1" type="text/css" media="all" />
     <link rel="stylesheet" id="tp-josefinsans-css"  href="http://fonts.googleapis.com/css?family=Josefin+Sans%3A400%2C300%2C100%2C600%2C700&#038;ver=4.3.1" type="text/css" media="all" />
     <link rel="stylesheet" id="kleo-fonts-css"  href="{{url('/css/kleo/fontello.css?ver=3.0.4')}}" type="text/css" media="all" />
     <link rel="stylesheet" id="kleo-google-fonts-css"  href="//fonts.googleapis.com/css?family=Josefin+Sans%3A700%2C300%2C400%7CRoboto+Condensed%3A300%7COpen+Sans%3A400&#038;subset=latin&#038;ver=4.3.1" type="text/css" media="all" />
-    <link rel="stylesheet" id="kleo-colors-css"  href="{{url('/css/kleo/dynamic.css?ver=3.0.4')}}" type="text/css" media="all" />
-    <link rel="stylesheet" id="kleo-style-css"  href="{{url('/css/kleo/style-child.css?ver=3.0.4')}}" type="text/css" media="all" />
-
+    <!-- <link rel="stylesheet" id="kleo-colors-css"  href="{{url('/css/kleo/dynamic.css?ver=3.0.4')}}" type="text/css" media="all" /> -->
+   <!--  <link rel="stylesheet" id="kleo-style-css"  href="{{url('/css/kleo/style-child.css?ver=3.0.4')}}" type="text/css" media="all" /> -->
+    <link rel="stylesheet" href="{{url('/css/fsh.css')}}">
 
     <script src="{{url('js/kleo/init.js')}}"></script>
     <script src="{{url('js/kleo/modernizr.custom.46504.js')}}"></script>
@@ -171,10 +171,10 @@
             text-decoration: none;
         }
 
-        #main .alternate-color h1, #main .alternate-color h2, #main .alternate-color h3, #main .alternate-color h4, #main .alternate-color h5, #main .alternate-color h6 {
+        /*#main .alternate-color h1, #main .alternate-color h2, #main .alternate-color h3, #main .alternate-color h4, #main .alternate-color h5, #main .alternate-color h6 {
             text-transform: uppercase;
             margin-top: 10px;
-        }
+        }*/
 
         .main-center-title .breadcrumb-extra {
             display: none;

@@ -56,3 +56,9 @@
 .nutrition-meta .daily-value {
     text-align: right;
 }
+
+/*Gab's Addition - Test*/
+
+#main .alternate-color h1 {
+    text-transform: none;
+}
