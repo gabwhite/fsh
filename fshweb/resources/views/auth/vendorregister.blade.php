@@ -31,13 +31,13 @@
                 </div>
 
                 <div>
-                    <label for="password_confirmation">{{trans('ui.vendor_label_confirmpassword')}}</label>
+                    <label for="password_confirmation">{{trans('ui.vendor_label_confirm_password')}}</label>
                     <input type="password" name="password_confirmation" placeholder="" maxlength="25" class="form-control">
                 </div>
 
                 <div>
                     <label for="company">{{trans('ui.vendor_label_company')}}</label>
-                    <input type="text" name="company" placeholder="" maxlength="200" class="form-control"/>
+                    <input type="text" name="company_name" placeholder="" maxlength="200" class="form-control"/>
                 </div>
 
                 <div>
@@ -47,7 +47,7 @@
                 </div>
 
                 <div>
-                    <label for="state_province">{{trans('ui.vendor_label_stateprovince')}}</label>
+                    <label for="state_province">{{trans('ui.vendor_label_state_province')}}</label>
                     <select id="state_province" name="state_province" class="form-control">
                     </select>
                 </div>
@@ -58,33 +58,48 @@
                 </div>
 
                 <div>
-                    <label for="zip_postal">{{trans('ui.vendor_label_zippostal')}}</label>
+                    <label for="zip_postal">{{trans('ui.vendor_label_zip_postal')}}</label>
                     <input type="text" name="zip_postal" placeholder="" maxlength="50" class="form-control"/>
                 </div>
 
                 <div>
-                    <label for="contact_name">{{trans('ui.vendor_label_contactname')}}</label>
+                    <label for="contact_name">{{trans('ui.vendor_label_contact_name')}}</label>
                     <input type="text" name="contact_name" placeholder="" maxlength="200" class="form-control"/>
                 </div>
 
                 <div>
-                    <label for="contact_name">{{trans('ui.vendor_label_contacttitle')}}</label>
+                    <label for="contact_name">{{trans('ui.vendor_label_contact_title')}}</label>
                     <input type="text" name="contact_title" placeholder="" maxlength="200" class="form-control"/>
                 </div>
 
                 <div>
-                    <label for="contact_phone">{{trans('ui.vendor_label_contactphone')}}</label>
+                    <label for="contact_phone">{{trans('ui.vendor_label_contact_phone')}}</label>
                     <input type="text" name="contact_phone" placeholder="" maxlength="200" class="form-control"/>
                 </div>
 
                 <div>
-                    <label for="logo_image_path">{{trans('ui.vendor_label_logoimage')}}</label>
+                    <label for="contact_url">{{trans('ui.vendor_label_contact_url')}}</label>
+                    <input type="text" name="contact_url" placeholder="" maxlength="200" class="form-control"/>
+                </div>
+
+                <div>
+                    <label for="intro_text">{{trans('ui.vendor_label_intro_text')}}</label>
+                    <textarea name="intro_text" class="form-control" placeholder="" cols="80" rows="3"></textarea>
+                </div>
+
+                <div>
+                    <label for="about_text">{{trans('ui.vendor_label_about_text')}}</label>
+                    <textarea name="about_text" class="form-control" placeholder="" cols="80" rows="3"></textarea>
+                </div>
+
+                <div>
+                    <label for="logo_image_path">{{trans('ui.vendor_label_logo_image')}}</label>
                     <input type="file" name="logo_image_path"/>
                 </div>
 
                 <div>
-                    <label for="bio">{{trans('ui.vendor_label_bio')}}</label>
-                    <textarea name="bio" class="form-control" placeholder="" cols="80" rows="3"></textarea>
+                    <label for="logo_image_path">{{trans('ui.vendor_label_background_image')}}</label>
+                    <input type="file" name="background_image_path"/>
                 </div>
 
                 <div>
@@ -163,7 +178,7 @@
                     email: { required: true, email: true, maxlength: 100 },
                     password: { required: true, maxlength: 25, minlength: 6 },
                     password_confirmation: { equalTo: "#password", maxlength: 25, minlength: 6 },
-                    company: { required: true, maxlength: 200 },
+                    company_name: { required: true, maxlength: 200 },
                     country: { required: true },
                     state_province: { required: true },
                     city: { required: true, maxlength: 200 },
@@ -171,7 +186,9 @@
                     contact_name: { required: true, maxlength: 200 },
                     contact_title: { maxlength: 200 },
                     contact_phone: { maxlength: 200 },
-                    bio: { maxlength: 2000 }
+                    contact_url: { maxlength: 200 },
+                    intro_text: { maxlength: 2000 },
+                    about_text: { maxlength: 2000 }
                 }
             });
 

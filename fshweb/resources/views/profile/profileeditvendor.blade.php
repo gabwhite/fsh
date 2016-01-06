@@ -16,48 +16,22 @@
 
     <div class="col-md-12">
 
-        <form id="form1" name="form1" method="post" enctype="multipart/form-data" action="{{url('profile/edit')}}">
+        <form id="form1" name="form1" method="post" enctype="multipart/form-data" action="{{url('profile/editvendor')}}">
+
+
 
             <div class="row">
                 <div class="col-md-3">
-                    Email
+                    {{trans('ui.vendor_label_company')}}
                 </div>
                 <div class="col-md-9">
-                    <input type="text" name="email" placeholder="Email" class="form-control" value="{{Auth::user()->email}}" maxlength="100"/>
+                    <input type="text" name="company_name" placeholder="" maxlength="200" class="form-control" value="{{isset($profile) ? $profile->company_name : ''}}"/>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-3">
-                    Password
-                </div>
-                <div class="col-md-9">
-                    <input type="password" name="password" placeholder="Password" class="form-control" maxlength="25"/>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-3">
-                    Confirm Password
-                </div>
-                <div class="col-md-9">
-                    <input type="password" name="confirmpassword" placeholder="Confirm Password" class="form-control" maxlength="25"/>
-                </div>
-            </div>
-
-
-            <div class="row">
-                <div class="col-md-3">
-                    Company
-                </div>
-                <div class="col-md-9">
-                    <input type="text" name="company" placeholder="Company" maxlength="200" class="form-control" value="{{isset($profile) ? $profile->company : ''}}"/>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-3">
-                    Country
+                    {{trans('ui.vendor_label_country')}}
                 </div>
                 <div class="col-md-9">
                     <select id="country" name="country" class="form-control">
@@ -67,7 +41,7 @@
 
             <div class="row">
                 <div class="col-md-3">
-                    State / Province
+                    {{trans('ui.vendor_label_state_province')}}
                 </div>
                 <div class="col-md-9">
                     <select id="state_province" name="state_province" class="form-control">
@@ -77,52 +51,116 @@
 
             <div class="row">
                 <div class="col-md-3">
-                    City
+                    {{trans('ui.vendor_label_address1')}}
                 </div>
                 <div class="col-md-9">
-                    <input type="text" name="city" placeholder="City" maxlength="200" class="form-control" value="{{isset($profile) ? $profile->city : ''}}"/>
+                    <input type="text" name="address1" placeholder="" maxlength="200" class="form-control" value="{{isset($profile) ? $profile->address1 : ''}}"/>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-3">
-                    Zip / Postal
+                    {{trans('ui.vendor_label_address2')}}
                 </div>
                 <div class="col-md-9">
-                    <input type="text" name="zip_postal" placeholder="Zip / Postal" maxlength="50" class="form-control" value="{{isset($profile) ? $profile->zip_postal : ''}}"/>
+                    <input type="text" name="address2" placeholder="" maxlength="200" class="form-control" value="{{isset($profile) ? $profile->address2 : ''}}"/>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-3">
-                    Contact Name
+                    {{trans('ui.vendor_label_city')}}
                 </div>
                 <div class="col-md-9">
-                    <input type="text" name="contact_name" placeholder="Contact Name" maxlength="200" class="form-control" value="{{isset($profile) ? $profile->contact_name : ''}}"/>
+                    <input type="text" name="city" placeholder="" maxlength="200" class="form-control" value="{{isset($profile) ? $profile->city : ''}}"/>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-3">
-                    Contact Phone
+                    {{trans('ui.vendor_label_zip_postal')}}
                 </div>
                 <div class="col-md-9">
-                    <input type="text" name="contact_phone" placeholder="Contact Phone" maxlength="200" class="form-control" value="{{isset($profile) ? $profile->contact_phone : ''}}"/>
+                    <input type="text" name="zip_postal" placeholder="" maxlength="50" class="form-control" value="{{isset($profile) ? $profile->zip_postal : ''}}"/>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-3">
-                    About your company
+                    {{trans('ui.vendor_label_contact_name')}}
                 </div>
                 <div class="col-md-9">
-                    <textarea name="bio" class="form-control" placeholder="Bio" cols="80" rows="3">{{isset($profile) ? $profile->bio : ''}}</textarea>
+                    <input type="text" name="contact_name" placeholder="" maxlength="200" class="form-control" value="{{isset($profile) ? $profile->contact_name : ''}}"/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    {{trans('ui.vendor_label_contact_title')}}
+                </div>
+                <div class="col-md-9">
+                    <input type="text" name="contact_title" placeholder="" maxlength="200" class="form-control" value="{{isset($profile) ? $profile->contact_title : ''}}"/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    {{trans('ui.vendor_label_contact_phone')}}
+                </div>
+                <div class="col-md-9">
+                    <input type="text" name="contact_phone" placeholder="" maxlength="200" class="form-control" value="{{isset($profile) ? $profile->contact_phone : ''}}"/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    {{trans('ui.vendor_label_contact_url')}}
+                </div>
+                <div class="col-md-9">
+                    <input type="text" name="contact_url" placeholder="" maxlength="200" class="form-control" value="{{isset($profile) ? $profile->contact_url : ''}}"/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    {{trans('ui.vendor_label_intro_text')}}
+                </div>
+                <div class="col-md-9">
+                    <textarea name="intro_text" class="form-control" placeholder="" cols="80" rows="3">{{isset($profile) ? $profile->intro_text : ''}}</textarea>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    {{trans('ui.vendor_label_about_text')}}
+                </div>
+                <div class="col-md-9">
+                    <textarea name="about_text" class="form-control" placeholder="" cols="80" rows="3">{{isset($profile) ? $profile->about_text : ''}}</textarea>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    {{trans('ui.vendor_label_logo_image')}}
+                </div>
+                <div class="col-md-9">
+                    <input type="file" name="logo_image_path"/>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-3">
+                    {{trans('ui.vendor_label_background_image')}}
+                </div>
+                <div class="col-md-9">
+                    <input type="file" name="background_image_path"/>
                 </div>
             </div>
 
             <div class="row">
                 <div class="col-md-12">
                     <input type="submit" value="Update" class="btn btn-primary btn-lg"/>
+                    <a href="{{url('/profile/')}}">{{trans('ui.button_cancel')}}</a>
                 </div>
             </div>
 
@@ -140,6 +178,7 @@
     <script type="text/javascript" src="{{url('js/vendor/validation/jquery.validate.min.js')}}"></script>
     <script type="text/javascript" src="{{url('js/fsh.common.js')}}"></script>
     <script type="text/javascript">
+
         $(document).ready(function()
         {
 
@@ -215,17 +254,19 @@
                 errorClass: "validationError",
                 rules:
                 {
-                    email: { required: true, email: true, maxlength: 100 },
-                    password: { maxlength: 25, minlength: 6 },
-                    password_confirmation: { equalTo: "#password", maxlength: 25, minlength: 6 },
-                    company: { required: true, maxlength: 200 },
+                    company_name: { required: true, maxlength: 200 },
                     country: { required: true },
                     state_province: { required: true },
+                    address1: { required: true, maxlength: 200 },
+                    address2: { required: true, maxlength: 200 },
                     city: { required: true, maxlength: 200 },
                     zip_postal: { required: true, maxlength: 50 },
                     contact_name: { required: true, maxlength: 200 },
+                    contact_title: { maxlength: 200 },
                     contact_phone: { maxlength: 200 },
-                    bio: { maxlength: 2000 }
+                    contact_url: { maxlength: 200 },
+                    intro_text: { maxlength: 2000 },
+                    about_text: { maxlength: 2000 }
                 }
             });
 

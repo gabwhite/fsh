@@ -19,7 +19,7 @@ class VendorProfile extends Model
     protected $fillable =
         [
             'user_id',
-            'company', 'address1', 'address2', 'city', 'state_province','country', 'zip_postal',
+            'company_name', 'address1', 'address2', 'city', 'state_province', 'country', 'zip_postal',
             'contact_name', 'contact_title', 'contact_phone', 'contact_url',
             'intro_text', 'about_text', 'logo_image_path', 'background_image_path'
         ];

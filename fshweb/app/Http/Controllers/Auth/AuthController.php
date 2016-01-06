@@ -60,16 +60,20 @@ class AuthController extends Controller
     protected function vendorValidator(array $data)
     {
         return Validator::make($data, [
-            'bio' => 'max:2000',
+            'intro_text' => 'max:2000',
+            'about_text' => 'max:2000',
             //'vendor_id' => 'max:6',
-            'company' => 'required|max:200',
+            'company_name' => 'required|max:200',
             'country' => 'required|max:6',
             'state_province' => 'required|max:6',
             'city' => 'required|max:200',
             'zip_postal' => 'required|max:50',
-            'contact_name' => 'required|max:200',
+            'contact_name' => 'max:200',
+            'contact_title' => 'max:200',
+            'contact_url' => 'max:200',
             'contact_phone' => 'max:200',
             'logo_image_path' => 'max:200',
+            'background_image_path' => 'max:200',
         ]);
     }
 
@@ -102,19 +106,25 @@ class AuthController extends Controller
         return $user;
     }
 
-    protected function createVendorUserProfile($id, array $data)
+    protected function createVendorProfile($id, array $data)
     {
-        return UserProfile::create([
+        return VendorProfile::create([
             'user_id' => $id,
-            'bio' => $data['bio'],
-            'company' => $data['company'],
-            'country' => $data['country'],
-            'state_province' => $data['state_province'],
+            'company_name' => $data['company_name'],
+            'address1' => $data['address1'],
+            'address2' => $data['address2'],
             'city' => $data['city'],
+            'state_province' => $data['state_province'],
+            'country' => $data['country'],
             'zip_postal' => $data['zip_postal'],
             'contact_name' => $data['contact_name'],
+            'contact_title' => $data['contact_title'],
             'contact_phone' => $data['contact_phone'],
+            'contact_url' => $data['contact_url'],
+            'intro_text' => $data['intro_text'],
+            'about_text' => $data['about_text'],
             'logo_image_path' => $data['logo_image_path'],
+            'background_image_path' => $data['background_image_path'],
         ]);
     }
 
@@ -142,7 +152,7 @@ class AuthController extends Controller
             $user = $this->create($request->all(), config('app.role_vendor'));
 
 
-            // Now validate / create user profile
+            // Now validate / create vendor profile
             $vendorUserProfileValidator = $this->vendorValidator($request->all());
 
             if ($vendorUserProfileValidator->fails()) {
@@ -151,7 +161,7 @@ class AuthController extends Controller
                 );
             }
 
-            $this->createVendorUserProfile($user->id, $request->all());
+            $this->createVendorProfile($user->id, $request->all());
 
             DB::commit();
 

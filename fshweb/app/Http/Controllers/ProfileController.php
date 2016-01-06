@@ -118,14 +118,8 @@ class ProfileController extends Controller
             $up = \Auth::user()->userProfile;
         }
 
-        if($user->hasRole(['admin', 'user']))
-        {
-            return view('profile.profileedit')->with('profile', $up);
-        }
-        else
-        {
-            return view('profile.profileeditvendor')->with('profile', $up);
-        }
+        return view('profile.profileedit')->with('profile', $up);
+
     }
 
     public function profileUpdate(Request $request)
@@ -140,13 +134,6 @@ class ProfileController extends Controller
                 // Update UserProfile
                 $up->firstname = $request->input('firstname') ? $request->input('firstname') : null ;
                 $up->lastname = $request->input('lastname') ? $request->input('lastname') : null;
-                $up->company = $request->input('company') ? $request->input('company') : null;
-                $up->country = $request->input('country') ? $request->input('country') : null;
-                $up->state_province = $request->input('state_province') ? $request->input('state_province') : null;
-                $up->city = $request->input('city') ? $request->input('city') : null;
-                $up->zip_postal = $request->input('zip_postal') ? $request->input('zip_postal') : null;
-                $up->contact_name = $request->input('contact_name') ? $request->input('contact_name') : null;
-                $up->contact_phone = $request->input('contact_phone') ? $request->input('contact_phone') : null;
                 $up->bio = $request->input('bio');
                 $up->save();
             }
@@ -156,17 +143,9 @@ class ProfileController extends Controller
                 $vals = [
                         'firstname' => $request->input('firstname') ? $request->input('firstname') : null,
                         'lastname' => $request->input('lastname') ? $request->input('lastname') : null,
-                        'company' => $request->input('company') ? $request->input('company') : null,
-                        'country' => $request->input('country') ? $request->input('country') : null,
-                        'state_province' => $request->input('state_province') ? $request->input('state_province') : null,
-                        'city' => $request->input('city') ? $request->input('city') : null,
-                        'zip_postal' => $request->input('zip_postal') ? $request->input('zip_postal') : null,
-                        'contact_name' => $request->input('contact_name') ? $request->input('contact_name') : null,
-                        'contact_phone' => $request->input('contact_phone') ? $request->input('contact_phone') : null,
                         'bio' => $request->input('bio') ? $request->input('bio') : null,
                         ];
 
-                //$input = $request->only(['firstname', 'lastname', 'bio']);
                 $user->userProfile()->create($vals);
             }
 
@@ -174,6 +153,79 @@ class ProfileController extends Controller
         }
 
         return redirect('/');
+    }
+
+    public function vendorEdit()
+    {
+        $user = \Auth::user();
+        $vp = $user->vendorProfile();
+        if(isset($vp))
+        {
+            $vp = \Auth::user()->vendorProfile;
+        }
+
+        if($user->hasRole(['vendor']))
+        {
+            return view('profile.profileeditvendor')->with('profile', $vp);
+        }
+
+        return redirect('/');
+
+    }
+
+    public function vendorUpdate(Request $request)
+    {
+        $user = \Auth::user();
+
+        if(!is_null($user))
+        {
+
+            if (!is_null($vp = $user->vendorProfile))
+            {
+                // Update VendorProfile
+                $vp->company_name = $request->input('company_name') ? $request->input('company_name') : null;
+                $vp->country = $request->input('country') ? $request->input('country') : null;
+                $vp->state_province = $request->input('state_province') ? $request->input('state_province') : null;
+                $vp->address1 = $request->input('address1') ? $request->input('address1') : null;
+                $vp->address2 = $request->input('address2') ? $request->input('address2') : null;
+                $vp->city = $request->input('city') ? $request->input('city') : null;
+                $vp->zip_postal = $request->input('zip_postal') ? $request->input('zip_postal') : null;
+                $vp->contact_name = $request->input('contact_name') ? $request->input('contact_name') : null;
+                $vp->contact_title = $request->input('contact_title') ? $request->input('contact_title') : null;
+                $vp->contact_phone = $request->input('contact_phone') ? $request->input('contact_phone') : null;
+                $vp->contact_url = $request->input('contact_url') ? $request->input('contact_url') : null;
+                $vp->intro_text = $request->input('intro_text') ? $request->input('intro_text') : null;
+                $vp->about_text = $request->input('about_text') ? $request->input('about_text') : null;
+
+                $vp->save();
+            }
+            else
+            {
+                // VendorProfile doesn't exist, create a row
+                $vals = [
+                    'company_name' => $request->input('company_name') ? $request->input('company_name') : null,
+                    'country' => $request->input('country') ? $request->input('country') : null,
+                    'state_province' => $request->input('state_province') ? $request->input('state_province') : null,
+                    'address1' => $request->input('address1') ? $request->input('address1') : null,
+                    'address2' => $request->input('address2') ? $request->input('address2') : null,
+                    'city' => $request->input('city') ? $request->input('city') : null,
+                    'zip_postal' => $request->input('zip_postal') ? $request->input('zip_postal') : null,
+                    'contact_name' => $request->input('contact_name') ? $request->input('contact_name') : null,
+                    'contact_title' => $request->input('contact_title') ? $request->input('contact_title') : null,
+                    'contact_phone' => $request->input('contact_phone') ? $request->input('contact_phone') : null,
+                    'contact_url' => $request->input('contact_url') ? $request->input('contact_url') : null,
+                    'intro_text' => $request->input('intro_text') ? $request->input('intro_text') : null,
+                    'about_text' => $request->input('about_text') ? $request->input('about_text') : null,
+                ];
+
+                $user->vendorProfile()->create($vals);
+            }
+
+            return redirect('profile/editvendor');
+        }
+
+        return redirect('/');
+
     }
 
     public function showProduct($id = null)

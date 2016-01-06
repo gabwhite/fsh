@@ -29,6 +29,7 @@ return [
     'navigation_link_deleteavatar' => 'Delete current avatar',
     'navigation_link_myproducts' => 'My Products',
     'navigation_link_addnewproduct' => 'Add New',
+    'navigation_link_editvendor' => 'Edit Vendor Profile',
 
     'search_placeholder' => 'Enter a keyword, MPC code',
 
@@ -39,6 +40,7 @@ return [
     'button_cancel' => 'Cancel',
     'button_submit' => 'Submit',
     'button_addupdate' => 'Add / Update',
+    'button_back' => 'Back',
 
     'general_label_yes' => 'Yes',
     'general_label_no' => 'No',
@@ -62,17 +64,24 @@ return [
     'vendor_label_name' => 'Name',
     'vendor_label_email' => 'Email',
     'vendor_label_password' => 'Password',
-    'vendor_label_confirmpassword' => 'Confirm Password',
-    'vendor_label_company' => 'Company',
+    'vendor_label_confirm_password' => 'Confirm Password',
+    'vendor_label_company' => 'Company Name',
     'vendor_label_country' => 'Country',
-    'vendor_label_stateprovince' => 'State / Province',
+    'vendor_label_state_province' => 'State / Province',
+    'vendor_label_address1' => 'Address 1',
+    'vendor_label_address2' => 'Address 2',
+
     'vendor_label_city' => 'City',
-    'vendor_label_zippostal' => 'Zip / Postal',
-    'vendor_label_contactname' => 'Contact Name',
-    'vendor_label_contacttitle' => 'Contact Title',
-    'vendor_label_contactphone' => 'Contact Phone',
-    'vendor_label_logoimage' => 'Logo Image',
-    'vendor_label_bio' => 'About your company',
+    'vendor_label_zip_postal' => 'Zip / Postal',
+    'vendor_label_contact_name' => 'Contact Name',
+    'vendor_label_contact_title' => 'Contact Title',
+    'vendor_label_contact_phone' => 'Contact Phone',
+    'vendor_label_contact_url' => 'Website URL',
+    'vendor_label_logo_image' => 'Logo Image',
+    'vendor_label_background_image' => 'Cover Image',
+    'vendor_label_intro_text' => 'Company Intro Text',
+    'vendor_label_about_text' => 'About your company',
+
 
 
     'contact_label_name' => 'Name',

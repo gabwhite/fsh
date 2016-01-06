@@ -45,15 +45,18 @@ Route::group(['middleware' => 'auth'], function()
     Route::get('/profile', 'ProfileController@index');
     Route::get('/profile/edit', 'ProfileController@profileEdit');
     Route::post('/profile/edit', 'ProfileController@profileUpdate');
-    Route:get('/profile/avatar', 'ProfileController@profileAvatar');
+    Route::get('/profile/avatar', 'ProfileController@profileAvatar');
     Route::post('/profile/avatar', 'ProfileController@profileAvatarUpdate');
 
 
+    // Routes that require either admin or vendor roles
     Route::group(['middleware' => ['role:vendor|admin']], function()
     {
         Route::get('profile/products', 'ProfileController@profileProducts');
         Route::get('/profile/product/{id?}', 'ProfileController@showProduct');
         Route::post('/profile/product', 'ProfileController@editProduct');
+        Route::get('profile/editvendor', 'ProfileController@vendorEdit');
+        Route::post('profile/editvendor', 'ProfileController@vendorUpdate');
     });
 
 
