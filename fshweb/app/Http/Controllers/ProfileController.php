@@ -64,45 +64,61 @@ class ProfileController extends Controller
 
         if(!is_null($user))
         {
-            $uploader = new UploadHandler();
-            $up = $user->userProfile;
-
-            if ($request->hasFile('avatar_image_path'))
+            $action = $request->input('action');
+            if(isset($action) && !is_null($action))
             {
-                $avatarFilename = null;
+                $up = $user->userProfile;
+                $uploader = new UploadHandler();
 
-                if (!is_null($up) && isset($up->avatar_image_path))
+                if($action == 'UPDATE')
                 {
-                    $avatarFilename = $up->avatar_image_path;
+                    if ($request->hasFile('avatar_image_path'))
+                    {
+                        $avatarFilename = null;
+
+                        if (!is_null($up) && isset($up->avatar_image_path))
+                        {
+                            $avatarFilename = $up->avatar_image_path;
+                        }
+
+                        $newFilename = $uploader->uploadAvatar($request->file('avatar_image_path'), $avatarFilename);
+
+                        if(!is_null($up))
+                        {
+                            $up->avatar_image_path = $newFilename;
+                            $up->save();
+                        }
+                        else
+                        {
+                            // UserProfile doesn't exist, create a row
+                            $input = ['user_id' => $user->id, 'avatar_image_path' => $newFilename];
+                            $user->userProfile()->create($input);
+                        }
+
+                        return view('profile.avataredit')->with('profile', $up)->with('isCropMode', true);
+                    }
                 }
-
-                $newFilename = $uploader->uploadAvatar($request->file('avatar_image_path'), $avatarFilename);
-
-                if(!is_null($up))
+                else if($action == 'DELETE')
                 {
-                    $up->avatar_image_path = $newFilename;
-                    $up->save();
+                    // Remove existing avatar
+                    if (!is_null($up))
+                    {
+                        $uploader->removeAvatar($up->avatar_image_path);
+
+                        $up->avatar_image_path = null;
+                        $up->save();
+                    }
+
+                    return redirect('profile/avatar');
                 }
-                else
+                else if($action == 'CROP')
                 {
-                    // UserProfile doesn't exist, create a row
-                    $input = ['user_id' => $user->id, 'avatar_image_path' => $newFilename];
-                    $user->userProfile()->create($input);
+                    $cropData = explode(';', $request->input('cropdata'));
+                    $uploader->cropAvatar($up->avatar_image_path, $cropData);
+
+                    return redirect('profile/avatar');
                 }
             }
-            else if($request->input('current_avatar_image_path') == "0")
-            {
-                // Remove existing avatar
-                if (!is_null($up))
-                {
-                    $uploader->removeAvatar($up->avatar_image_path);
-
-                    $up->avatar_image_path = null;
-                    $up->save();
-                }
-            }
-
-            return redirect('profile/');
         }
 
         return redirect('/');
@@ -128,7 +144,6 @@ class ProfileController extends Controller
 
         if(!is_null($user))
         {
-
             if (!is_null($up = $user->userProfile))
             {
                 // Update UserProfile
