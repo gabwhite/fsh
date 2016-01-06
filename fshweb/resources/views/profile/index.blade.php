@@ -38,6 +38,12 @@
 
         @if($user->hasRole('vendor'))
 
+            @if(isset($vendorId))
+            <p class="bg-info">
+                <a href="{{url('vendor', $vendorId)}}">{{trans('ui.navigation_link_viewvendor')}}</a>
+            </p>
+            @endif
+
             <p class="bg-info">
                 <a href="{{url('profile/editvendor')}}">{{trans('ui.navigation_link_editvendor')}}</a>
             </p>

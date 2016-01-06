@@ -36,14 +36,21 @@ class ProfileController extends Controller
         $user = \Auth::user();
 
         $avatarFilename = null;
+        $vendorId = null;
+        $vendorOwner = false;
 
         $up = $user->userProfile;
         if (!is_null($up))
         {
             $avatarFilename = $up->avatar_image_path;
+            $vendorId = $up->vendor_id;
+            if(isset($vendorId))
+            {
+                $vendorOwner = $this->dataAccess->isVendorOwner($user->id, $vendorId);
+            }
         }
 
-        return view('profile.index')->with('user', $user)->with('avatarFilename', $avatarFilename);
+        return view('profile.index')->with('user', $user)->with(['avatarFilename' => $avatarFilename, 'vendorId' => $vendorId, 'vendorOwner' => $vendorOwner]);
     }
 
     public function profileAvatar()
