@@ -111,6 +111,13 @@ class DataAccessLayer
         return ($this->getVendorOwner($vendorId) == $userId);
     }
 
+    public function getVendorsForUser($userId)
+    {
+        $vendors = VendorProfile::where('user_id', '=', $userId)->select('vendor_id')->get();
+
+
+    }
+
     public function getVendorOwner($vendorId)
     {
         $owner = VendorProfile::where('id', '=', $vendorId)->select('user_id')->first();
