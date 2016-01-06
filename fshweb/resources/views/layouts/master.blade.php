@@ -274,6 +274,25 @@
 
         <section class="container-wrap main-color">
             <div id="main-container" class="container">
+
+                <!-- START BOOTSTRAP ALERT AREA -->
+                @if(session('successMessage'))
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p class="bg-success">{{session('successMessage')}}</p>
+                        </div>
+                    </div>
+                @endif
+
+                @if(session('errorMessage'))
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p class="bg-error">{{session('errorMessage')}}</p>
+                        </div>
+                    </div>
+                @endif
+                <!-- END BOOTSTRAP ALERT AREA -->
+
                 <!-- START MAIN PAGE CONTENT -->
                 @yield('content')
                 <!-- END MAIN PAGE CONTENT -->

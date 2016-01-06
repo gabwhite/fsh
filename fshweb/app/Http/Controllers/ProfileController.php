@@ -164,7 +164,7 @@ class ProfileController extends Controller
                 $user->userProfile()->create($vals);
             }
 
-            return redirect('profile/edit');
+            return redirect('profile/edit')->with('successMessage', trans('messages.profile_update_success'));
         }
 
         return redirect('/');
@@ -236,7 +236,7 @@ class ProfileController extends Controller
                 $user->vendorProfile()->create($vals);
             }
 
-            return redirect('profile/editvendor');
+            return redirect('profile/editvendor')->with('successMessage', trans('messages.vendor_update_success'));;
         }
 
         return redirect('/');
@@ -318,7 +318,7 @@ class ProfileController extends Controller
 
         $userProduct->save();
 
-        return redirect('productdetail/' . $userProduct->id);
+        return redirect('productdetail/' . $userProduct->id)->with('successMessage', trans('messages.product_update_success'));;
     }
 
     public function profileProducts()
