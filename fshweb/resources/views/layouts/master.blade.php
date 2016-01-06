@@ -284,10 +284,14 @@
                     </div>
                 @endif
 
-                @if(session('errorMessage'))
+                @if(count($errors) > 0)
                     <div class="row">
                         <div class="col-md-12">
-                            <p class="bg-error">{{session('errorMessage')}}</p>
+                            <p class="bg-danger">
+                            @foreach ($errors->all() as $error)
+                                {{ $error }}<br/>
+                            @endforeach
+                            </p>
                         </div>
                     </div>
                 @endif
