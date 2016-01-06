@@ -93,6 +93,8 @@
                 rotatable: false,
                 scalable: false,
                 zoomable: false,
+                movable: false,
+                aspectRatio: 1 / 1,
                 crop: function(e)
                 {
                     //console.log(e.x);
