@@ -53,6 +53,16 @@
                 </div>
 
                 <div>
+                    <label for="address1">{{trans('ui.vendor_label_address1')}}</label>
+                    <input type="text" name="address1" placeholder="" maxlength="200" class="form-control"/>
+                </div>
+
+                <div>
+                    <label for="address2">{{trans('ui.vendor_label_address2')}}</label>
+                    <input type="text" name="address2" placeholder="" maxlength="200" class="form-control"/>
+                </div>
+
+                <div>
                     <label for="city">{{trans('ui.vendor_label_city')}}</label>
                     <input type="text" name="city" placeholder="" maxlength="200" class="form-control"/>
                 </div>
@@ -181,6 +191,8 @@
                     company_name: { required: true, maxlength: 200 },
                     country: { required: true },
                     state_province: { required: true },
+                    address1: { required: true, maxlength: 200 },
+                    address2: { required: true, maxlength: 200 },
                     city: { required: true, maxlength: 200 },
                     zip_postal: { required: true, maxlength: 50 },
                     contact_name: { required: true, maxlength: 200 },
