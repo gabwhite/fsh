@@ -13,6 +13,7 @@ use App\Models\Permission;
 use App\Models\User;
 use App\Models\UserProduct;
 use App\Models\Category;
+use App\Models\VendorProfile;
 
 use \Illuminate\Support\Facades\DB;
 
@@ -103,5 +104,12 @@ class DataAccessLayer
         $userProducts = UserProduct::select('id', 'name', 'brand')->whereRaw($query)->get();
 
         return $userProducts;
+    }
+
+    public function getVendorProfile($vendorId)
+    {
+        $vendorProfile = VendorProfile::find($vendorId);
+
+        return $vendorProfile;
     }
 }

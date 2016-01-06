@@ -33,6 +33,8 @@ Route::get('contact', 'PublicController@contactUs');
 Route::post('contact', 'PublicController@contactUsSubmit');
 //=================================
 
+Route::get('vendor/{id}', 'PublicController@vendorDetail');
+
 
 Route::get('toolsresources', function() { return view('toolsresources'); } );
 

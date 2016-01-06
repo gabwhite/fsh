@@ -102,4 +102,11 @@ class PublicController extends Controller
 
 
     }
+
+    public function vendorDetail($id)
+    {
+        $vendorProfile = $this->dataAccess->getVendorProfile($id);
+
+        return view('vendor.view')->with('profile', $vendorProfile);
+    }
 }
