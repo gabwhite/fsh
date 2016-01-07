@@ -46,7 +46,7 @@ class AjaxController extends Controller
             array_push($finalWords, $w);
         }
 
-        $results = $this->dataAccess->getUserProductsByFullText($finalWords);
+        $results = $this->dataAccess->getProductsByFullText($finalWords);
 
         /*
         $productSearcher = new ProductSearcher();
@@ -99,17 +99,17 @@ class AjaxController extends Controller
         }
     }
 
-    public function getUserProducts($categoryId)
+    public function getProducts($categoryId)
     {
 
         $productSearcher = new ProductSearcher();
-        //$products = $productSearcher->getUserProductsByCategoryPaginated($categoryId, 3, true);
-        $products = $productSearcher->getUserProductsByCategory($categoryId);
+        //$products = $productSearcher->getProductsByCategoryPaginated($categoryId, 3, true);
+        $products = $productSearcher->getProductsByCategory($categoryId);
 
         return response()->json($products);
     }
 
-    public function getUserProductsFullText($words)
+    public function getProductsFullText($words)
     {
         $productSearcher = new ProductSearcher();
         $products = $productSearcher->fullTextSearch('productindex', $words);

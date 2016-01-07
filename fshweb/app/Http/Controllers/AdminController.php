@@ -12,7 +12,7 @@ use App\Jobs\RebuildSearchIndex;
 use App\ProductImportOptions;
 use App\UploadHandler;
 use App\Models\User;
-use App\Models\UserProductImport;
+use App\Models\ProductImport;
 use App\Http\Requests;
 use App\Jobs\ParseProductImport;
 use App\Models\Role;

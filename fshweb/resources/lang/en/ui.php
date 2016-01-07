@@ -29,6 +29,7 @@ return [
     'navigation_link_deleteavatar' => 'Delete current avatar',
     'navigation_link_myproducts' => 'My Products',
     'navigation_link_addnewproduct' => 'Add New',
+    'navigation_link_viewvendor' => 'View Vendor Profile',
     'navigation_link_editvendor' => 'Edit Vendor Profile',
 
     'search_placeholder' => 'Enter a keyword, MPC code',

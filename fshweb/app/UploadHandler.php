@@ -11,6 +11,7 @@ namespace App;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Ramsey\Uuid\Uuid;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class UploadHandler
 {
@@ -84,5 +85,24 @@ class UploadHandler
         {
             throw $ex;
         }
+    }
+
+    public function cropAvatar($fileName, $cropData)
+    {
+        $this->cropImage(public_path(config('app.avatar_storage')), $fileName, $cropData);
+    }
+
+    public function cropVendorAsset($fileName, $cropData)
+    {
+        $this->cropImage(public_path(config('app.vendor_storage')), $fileName, $cropData);
+    }
+
+    public function cropImage($path, $fileName, $cropData)
+    {
+        // $cropData is an array with the following order:
+        // width, height, x, y, rotate, scaleX, scaleY
+
+        $img = Image::make($path . '/' .  $fileName)->crop(ceil($cropData[0]), ceil($cropData[1]), ceil($cropData[2]), ceil($cropData[3]));
+        $img->save();
     }
 }

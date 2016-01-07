@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserProductsImportsTable extends Migration
+class CreateUserVendorTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,17 +12,18 @@ class CreateUserProductsImportsTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_products_imports', function(Blueprint $table)
+        Schema::create('user_vendor', function (Blueprint $table)
         {
             $table->engine = 'InnoDB';
 
-            $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->char('uuid', 36);
-            $table->string('filename', 250);
+            $table->integer('vendor_id')->unsigned();
             $table->timestamps();
 
+            $table->primary(['user_id', 'vendor_id']);
+
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('vendor_id')->references('id')->on('vendors')->onDelete('cascade');
         });
     }
 
@@ -33,6 +34,6 @@ class CreateUserProductsImportsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('user_products_imports');
+        Schema::drop('user_vendor');
     }
 }

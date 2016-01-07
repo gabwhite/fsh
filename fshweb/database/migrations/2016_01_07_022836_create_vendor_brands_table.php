@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateFoodCatagoriesTable extends Migration
+class CreateVendorBrandsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,16 +12,18 @@ class CreateFoodCatagoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('food_categories', function(Blueprint $table)
-        {
+        Schema::create('vendor_brands', function (Blueprint $table) {
+
             $table->engine = 'InnoDB';
 
             $table->increments('id');
+            $table->integer('vendor_id')->unsigned();
             $table->string('name', 200);
-            $table->integer('parent_id')->unsigned()->nullable();
+            $table->string('logo_image_path', 200);
             $table->boolean('active')->default('1');
             $table->timestamps();
 
+            $table->foreign('vendor_id')->references('id')->on('vendors')->onDelete('cascade');
         });
     }
 
@@ -32,6 +34,6 @@ class CreateFoodCatagoriesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('food_categories');
+        Schema::drop('vendor_brands');
     }
 }

@@ -11,8 +11,10 @@ namespace App;
 use App\Models\Role;
 use App\Models\Permission;
 use App\Models\User;
-use App\Models\UserProduct;
+use App\Models\Product;
 use App\Models\Category;
+use App\Models\Vendor;
+use App\Models\VendorBrand;
 
 use \Illuminate\Support\Facades\DB;
 
@@ -53,14 +55,14 @@ class DataAccessLayer
         return Permission::all();
     }
 
-    public function getUserProduct($productId)
+    public function getProduct($productId)
     {
-        return UserProduct::where('id', '=', $productId)->first();
+        return Product::where('id', '=', $productId)->first();
     }
 
-    public function getUserProductByIdUser($productId, $userId)
+    public function getProductByIdUser($productId, $userId)
     {
-        return UserProduct::where(['id' => $productId, 'user_id' => $userId])->first();
+        return Product::where(['id' => $productId, 'vendor_id' => $userId])->first();
     }
 
     public function getFoodCategoriesForParent($parentId = null)
@@ -94,14 +96,66 @@ class DataAccessLayer
         return DB::table('stateprovinces')->where('country_id', '=', $countryId)->get();
     }
 
-    public function getUserProductsByFullText($arrTerms)
+    public function getProductsByFullText($arrTerms)
     {
 
         $terms = implode(' ', $arrTerms);
 
         $query = "MATCH (name, description, gtin, mpc, brand, ingredient_deck) AGAINST ('$terms' IN BOOLEAN MODE)";
-        $userProducts = UserProduct::select('id', 'name', 'brand')->whereRaw($query)->get();
+        $products = Product::select('id', 'name', 'brand')->whereRaw($query)->get();
 
-        return $userProducts;
+        return $products;
     }
+
+    public function isVendorOwner($userId, $vendorId)
+    {
+        return ($this->getVendorOwner($vendorId) == $userId);
+    }
+
+    public function getVendorsForUser($userId)
+    {
+        $vendors = Vendor::where('user_id', '=', $userId)->select('id')->get();
+
+        return $vendors;
+
+    }
+
+    public function isUserVendorOwner($userId, $vendorId)
+    {
+        $vendors = $this->getVendorsForUser($userId);
+
+        $v = array_first($vendors, function($key, $val) use ($vendorId)
+        {
+            return $val == $vendorId;
+        }, null);
+
+        if($v == null) { return false; } else { return true; }
+    }
+
+    public function getVendorOwner($vendorId)
+    {
+        $owner = Vendor::where('id', '=', $vendorId)->select('user_id')->first();
+
+        if(isset($owner))
+        {
+            return $owner->user_id;
+        }
+
+        return null;
+    }
+
+    public function getVendor($vendorId)
+    {
+        $vendor = Vendor::find($vendorId);
+
+        return $vendor;
+    }
+
+    public function getBrandsForVendor($vendorId)
+    {
+        $brands = VendorBrand::where('vendor_id', '=', $vendorId)->get();
+
+        return $brands;
+    }
+
 }

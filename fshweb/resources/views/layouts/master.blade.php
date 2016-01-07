@@ -87,7 +87,7 @@
                     <div class="collapse navbar-collapse nav-collapse">
 
                         <ul id="menu-primary-menu" class="nav navbar-nav">
-                            <li id="menu-item-662" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-662"><a title="{{trans('ui.navigation_productsearch')}}" href="{{url('/search')}}">{{trans('ui.navigation_productsearch')}}</a></li>
+                            <li id="menu-item-662" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-662"><a title="{{trans('ui.navigation_productsearch')}}" href="{{url('/product/search')}}">{{trans('ui.navigation_productsearch')}}</a></li>
                             <li id="menu-item-4594" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4594"><a title="{{trans('ui.navigation_industryforums')}}" href="{{url('industryforums')}}">{{trans('ui.navigation_industryforums')}}</a></li>
                             <li id="menu-item-224" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-224"><a title="{{trans('ui.navigation_tools')}}" href="{{url('toolsresources')}}">{{trans('ui.navigation_tools')}}</a></li>
 
@@ -114,6 +114,29 @@
 
         <section class="container-wrap main-color">
             <div id="main-container" class="container">
+
+                <!-- START BOOTSTRAP ALERT AREA -->
+                @if(session('successMessage'))
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p class="bg-success">{{session('successMessage')}}</p>
+                        </div>
+                    </div>
+                @endif
+
+                @if($errors && count($errors) > 0)
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p class="bg-danger">
+                            @foreach ($errors->all() as $error)
+                                {{ $error }}<br/>
+                            @endforeach
+                            </p>
+                        </div>
+                    </div>
+                @endif
+                <!-- END BOOTSTRAP ALERT AREA -->
+
                 <!-- START MAIN PAGE CONTENT -->
                 @yield('content')
                 <!-- END MAIN PAGE CONTENT -->

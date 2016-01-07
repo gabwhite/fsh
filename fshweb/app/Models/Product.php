@@ -4,9 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class UserProduct extends Model
+class Product extends Model
 {
-    protected $table = 'user_products';
+    protected $table = 'products';
 
     protected $fillable =
         [
@@ -22,11 +22,11 @@ class UserProduct extends Model
 
     public function allergens()
     {
-        return $this->belongsToMany('App\Models\Allergen', 'user_products_allergens', 'product_id', 'allergen_id');
+        return $this->belongsToMany('App\Models\Allergen', 'product_allergens', 'product_id', 'allergen_id');
     }
 
     public function categories()
     {
-        return $this->belongsToMany('App\Models\Category', 'user_products_categories', 'product_id', 'category_id');
+        return $this->belongsToMany('App\Models\Category', 'product_categories', 'product_id', 'category_id');
     }
 }

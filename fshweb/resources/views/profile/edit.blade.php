@@ -45,17 +45,6 @@
                 </div>
             </div>
 
-            @if(isset(Auth::user()->userProfile) && isset(Auth::user()->userProfile->vendor_id))
-            <div class="row">
-                <div class="col-md-3">
-                    Vendor
-                </div>
-                <div class="col-md-9">
-                    You're a member of {{Auth::user()->userProfile->vendor_id}}
-                </div>
-            </div>
-            @endif
-
             <div class="row">
                 <div class="col-md-3">
                     {{trans('ui.user_label_firstname')}}

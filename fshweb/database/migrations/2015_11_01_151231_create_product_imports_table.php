@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserProfilesTable extends Migration
+class CreateProductImportsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,18 +12,15 @@ class CreateUserProfilesTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_profiles', function (Blueprint $table)
+        Schema::create('product_imports', function(Blueprint $table)
         {
             $table->engine = 'InnoDB';
 
+            $table->increments('id');
             $table->integer('user_id')->unsigned();
-            $table->string('firstname', 100)->nullable();
-            $table->string('lastname', 100)->nullable();
-            $table->text('bio')->nullable();
-            $table->string('avatar_image_path', 200)->nullable();
+            $table->char('uuid', 36);
+            $table->string('filename', 250);
             $table->timestamps();
-
-            $table->primary('user_id');
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
@@ -36,6 +33,6 @@ class CreateUserProfilesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('user_profiles');
+        Schema::drop('product_imports');
     }
 }
