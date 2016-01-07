@@ -10,7 +10,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class VendorBrands extends Model
+class VendorBrand extends Model
 {
     protected $table = 'vendor_brands';
 
