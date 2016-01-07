@@ -6,6 +6,7 @@
 body {
 	background: $body-background;
 	color: $body;
+	font-family: $body-font;
 }
 
 .well {
@@ -35,9 +36,22 @@ h2.subhead {
 	font-weight: 600;
 	font-size: 16px;
 	text-align: center;
+	margin-bottom: 20px;
 	color: $primary;
 	@include breakpoint(tablet){
 		font-size: 24px;
+	}
+}
+
+/*----------  Link Related styling  ----------*/
+
+.login-links {
+	color: $body;
+	font-weight: 600;
+	font-size: 18px;
+
+	a {
+		color: $primary;
 	}
 }
 
