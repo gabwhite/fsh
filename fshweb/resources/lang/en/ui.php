@@ -19,7 +19,7 @@ return [
     'navigation_login' => 'Login/Register',
     'navigation_logout' => 'Logout',
     'navigation_contactus' => 'Contact Us',
-    'navigation_register' => 'Register',
+    'navigation_register' => 'Sign Up for A Free Account',
     'navigation_forgotpassword' => 'Lost Password',
     'navigation_editavatar' => 'Edit Avatar',
     'navigation_product_detail' => 'Product Detail',
@@ -36,7 +36,7 @@ return [
 
     'button_search' => 'Search Products',
     'button_register' => 'Register',
-    'button_login' => 'Login',
+    'button_login' => 'Sign In',
     'button_update' => 'Update',
     'button_cancel' => 'Cancel',
     'button_submit' => 'Submit',
