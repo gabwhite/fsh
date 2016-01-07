@@ -158,4 +158,24 @@ class DataAccessLayer
         return $brands;
     }
 
+    public function getVendors($fields = null)
+    {
+        if(isset($fields))
+        {
+            $vendors = Vendor::select($fields)->orderBy('company_name', 'desc')->get();
+        }
+        else
+        {
+            $vendors = Vendor::orderBy('company_name', 'desc')->get();
+        }
+
+
+        return $vendors;
+    }
+
+    public function upsertBrand($vendorId, $data)
+    {
+
+    }
+
 }
