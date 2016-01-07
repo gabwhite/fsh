@@ -14,6 +14,7 @@ use App\Models\User;
 use App\Models\UserProduct;
 use App\Models\Category;
 use App\Models\Vendor;
+use App\Models\VendorBrand;
 
 use \Illuminate\Support\Facades\DB;
 
@@ -149,4 +150,12 @@ class DataAccessLayer
 
         return $vendor;
     }
+
+    public function getBrandsForVendor($vendorId)
+    {
+        $brands = VendorBrand::where('vendor_id', '=', $vendorId)->get();
+
+        return $brands;
+    }
+
 }
