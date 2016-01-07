@@ -40,9 +40,11 @@ class AdminController extends Controller
     public function showImport()
     {
         // Get all vendors in the system
-        $users = $this->dataAccess->getUsersForRole(config('app.role_vendor'));
 
-        return view('admin.import')->with('vendors', $users);
+        //$users = $this->dataAccess->getUsersForRole(config('app.role_vendor'));
+        $vendors = $this->dataAccess->getVendors(['id', 'company_name']);
+
+        return view('admin.import')->with('vendors', $vendors);
     }
 
     public function doImport(Request $request)
@@ -66,7 +68,7 @@ class AdminController extends Controller
             if($result)
             {
                 $importInfo = new ProductImportOptions();
-                $importInfo->setUserId($request->input('vendor'));
+                $importInfo->setVendorId($request->input('vendor'));
                 $importInfo->setUuid($directory);
                 $importInfo->setFileName($filename);
                 $importInfo->setIncludeHeaders($request->input('includesheaders') ? true : false);

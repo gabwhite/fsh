@@ -54,7 +54,7 @@
         <select name="vendor">
             <option value=""></option>
         @foreach($vendors as $v)
-            <option value="{{$v->id}}">{{$v->name}}</option>
+            <option value="{{$v->id}}">{{$v->company_name}}</option>
         @endforeach
         </select>
 

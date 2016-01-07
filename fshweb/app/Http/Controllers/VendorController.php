@@ -94,5 +94,23 @@ class VendorController extends Controller
 
     }
 
+    public function upsertBrand(Request $request)
+    {
+        $user = \Auth::user();
+
+        //$this->dataAccess->upsertBrand(1, $request->all());
+
+        echo 'Updated / Added brand';
+    }
+
+    protected function brandValidator(array $data)
+    {
+        return Validator::make($data, [
+            'name' => 'required|max:200',
+            'logo_image_path' => 'required|max:200',
+            'active' => 'required'
+        ]);
+    }
+
 
 }
