@@ -114,7 +114,7 @@
                     {{trans('ui.vendor_label_contact_url')}}
                 </div>
                 <div class="col-md-9">
-                    {{isset($profile) ? $profile->contact_url : ''}}
+                    <a href="{{isset($profile) ? $profile->contact_url : ''}}" target="_blank">{{isset($profile) ? $profile->contact_url : ''}}</a>
                 </div>
             </div>
 
