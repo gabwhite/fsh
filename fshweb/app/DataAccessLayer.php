@@ -115,6 +115,7 @@ class DataAccessLayer
     {
         $vendors = VendorProfile::where('user_id', '=', $userId)->select('vendor_id')->get();
 
+        return $vendors;
 
     }
 
