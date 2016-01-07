@@ -25,7 +25,7 @@
     <link rel="stylesheet" href="{{url('/css/kleo/fontello-ie7.min.css')}}">
     <![endif]-->
 
-    <link rel="stylesheet" href="{{url('/css/bootstrap.min.css')}}">
+    <!-- <link rel="stylesheet" href="{{url('/css/bootstrap.min.css')}}"> -->
     <!-- <link rel="stylesheet" id="kleo-app-css"  href="{{url('/css/kleo/app.css?ver=3.0.4')}}" type="text/css" media="all" /> -->
     <link rel="stylesheet" id="magnific-popup-css"  href="{{url('/js/vendor/magnific-popup/magnific.css?ver=3.0.4')}}" type="text/css" media="all" />
     <link rel="stylesheet" id="tp-josefin-css"  href="http://fonts.googleapis.com/css?family=Josefin+Slab%3A400%2C100%2C600%2C700%2C300%7CJosefin+Sans%3A400%2C300%2C100%2C600%2C700&#038;ver=4.3.1" type="text/css" media="all" />
@@ -34,158 +34,11 @@
     <link rel="stylesheet" id="kleo-google-fonts-css"  href="//fonts.googleapis.com/css?family=Josefin+Sans%3A700%2C300%2C400%7CRoboto+Condensed%3A300%7COpen+Sans%3A400&#038;subset=latin&#038;ver=4.3.1" type="text/css" media="all" />
     <!-- <link rel="stylesheet" id="kleo-colors-css"  href="{{url('/css/kleo/dynamic.css?ver=3.0.4')}}" type="text/css" media="all" /> -->
    <!--  <link rel="stylesheet" id="kleo-style-css"  href="{{url('/css/kleo/style-child.css?ver=3.0.4')}}" type="text/css" media="all" /> -->
-    <link rel="stylesheet" href="{{url('/css/fsh.css')}}">
+    <link rel="stylesheet" href="{{url('/css/app.css')}}">
 
     <script src="{{url('js/kleo/init.js')}}"></script>
     <script src="{{url('js/kleo/modernizr.custom.46504.js')}}"></script>
-
-
-    <style>
-        span.kleo-animate-number.animate-when-almost-visible.number_prepared.start-animation {
-            color: #ffffff;
-            border: none;
-            font-size: 95px;
-        }
-
-        table#products-list tr td {
-            border-bottom: 1px solid #444;
-            padding: 0px 5px!important;
-        }
-
-        td.hidden-xs {
-            font-size: 13px!important;
-        }
-
-        table#products-list tr td a {
-            font-weight: bold;
-            font-size: 13px!important;
-            color: #000!important;
-            text-transform: uppercase!important;
-        }
-
-        .nutrition-block {
-            font-family: 'Helvetica', sans-serif;
-            background: #fff;
-            font-size: 10px;
-            border: 1px solid #000;
-            padding: 10px;
-        }
-
-        .nutrition {
-            margin: 30px!important;
-        }
-
-        .nutrition-block h4 {
-            color: #000;
-            font-family: 'Helvetica', sans-serif!important;
-            font-size: 2em!important;
-            margin-top: 2px!important;
-        }
-
-        .nutrition-block label {
-            font-weight: bold;
-        }
-
-        .product-details-meta p {
-            margin-top: 1px;
-        }
-
-        .user-products h4 {
-            font-weight: 600;
-            font-size: 1.5em;
-            font-family: 'Josefin Sans', sans-serif;
-            margin: 35px 0 1px 0;
-        }
-
-        .vendor-logo {
-            margin: 30px;
-        }
-
-        .vendor-logo img {
-            width: 100% !important;
-            height: auto !important;
-            border-radius: 50%;
-        }
-
-
-        .product-image img {
-            width: inherit!important;
-            max-height: 400px;
-            margin: 0 auto;
-        }
-
-        div#wpcf-field-product-image {
-            width: 100%;
-            text-align: center;
-        }
-
-        h1 {
-            border-bottom: none!important;
-        }
-
-        .home-page section.container-wrap.main-color {
-            background-color: #de5328;
-            color: #ffffff!important;
-        }
-
-        p#footer {
-            font-size: 12px;
-        }
-
-        .home-page section.container-wrap.main-color h2 {
-            color: #ffffff!important;
-        }
-
-        h2 {
-            text-transform: uppercase;
-        }
-
-        .navbar-nav>li>a {
-            text-transform: uppercase;
-        }
-
-        .tp-button.orange, .tp-button:hover.orange,
-        .purchase.orange, .purchase:hover.orange
-        { background-color: #de5328;
-            -webkit-box-shadow:  none;
-            -moz-box-shadow:   none;
-            box-shadow:   none
-        }
-
-        .tp-button {
-            padding: 6px 13px 5px;
-            border-radius: 3px;
-            -moz-border-radius: 3px;
-            -webkit-border-radius: 3px;
-            height: 30px;
-            cursor: pointer;
-            color: #fff !important;
-            text-transform: uppercase;
-            text-shadow: none!important;
-            font-size: 15px;
-            line-height: 45px !important;
-            background: none;
-            font-family: 'Helvetica Neue', sans-serif;
-            font-weight: bold;
-            letter-spacing: -1px;
-            text-decoration: none;
-        }
-
-        /*#main .alternate-color h1, #main .alternate-color h2, #main .alternate-color h3, #main .alternate-color h4, #main .alternate-color h5, #main .alternate-color h6 {
-            text-transform: uppercase;
-            margin-top: 10px;
-        }*/
-
-        .main-center-title .breadcrumb-extra {
-            display: none;
-        }
-
-        .validationError
-        {
-            color: red;
-        }
-
-    </style>
+    
     <noscript><style> .wpb_animate_when_almost_visible { opacity: 1; }</style></noscript>
 
 

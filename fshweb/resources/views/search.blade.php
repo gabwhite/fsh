@@ -7,7 +7,19 @@
 @endsection
 
 @section('sectionheader')
-    FIND YOUR PRODUCTS
+<section class='clearfix container-wrap main-title alternate-color  main-center-title border-bottom'>
+    <div class='container'><h1 class="page-title">Find What You're Looking For.</h1>
+        <div class='breadcrumb-extra'>
+            <div class="kleo_framework breadcrumb" xmlns:v="http://rdf.data-vocabulary.org/#">
+                <span typeof="v:Breadcrumb">
+                    <a rel="v:url" property="v:title" href="http://www.foodservicehound.com" title="FoodserviceHound.com" >Home</a>
+                </span>
+                <span class="sep"> </span>
+                <span class="active">Find What You're Looking For</span>
+            </div>
+        </div>
+    </div>
+</section>
 @endsection
 
 @section('content')

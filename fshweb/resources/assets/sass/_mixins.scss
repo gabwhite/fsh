@@ -1,0 +1,92 @@
+/*==========================================================================
+=            Mixins: Variables and reusable bits of common code            =
+==========================================================================*/
+
+/*----------  Media Queries  ----------*/
+@mixin breakpoint($point) {
+	@if $point == desktop {
+		@media (min-width: 1200px) { @content ; }
+	}
+	@else if $point == laptop {
+		@media (min-width: 991px) { @content ; }
+	}
+	@else if $point == tablet {
+		@media (min-width: 768px) { @content ; }
+	}
+	@else if $point == sm-mobile {
+		@media (min-width: 480px)  { @content ; }
+	}	
+	@else if $point == xs-mobile {
+		@media (min-width: 320px)  { @content ; }
+	}
+}
+
+/*----------  Vendor Prefixing  ----------*/
+
+@mixin vendor-prefixes($property, $value) {
+	-webkit-#{$property}: $value;
+	-moz-#{$property}: $value;
+	-ms-#{$property}: $value;
+	-o-#{$property}: $value;
+}
+
+/*----------  Transition  ----------*/
+
+@mixin transition {
+	transition: all ease 0.5s;
+	-webkit-transition: all ease 0.5s;
+	-moz-transition: all ease 0.5s;
+	-ms-transition: all ease 0.5s;
+	-o-transition: all ease 0.5s;
+}
+
+/*----------  Button Standards  ----------*/
+
+@mixin btn {
+	display: block;
+	text-transform: none;
+	font-size: 16px;
+	border: 0;
+	width: auto;
+	margin: 25px 0;
+	@include transition;
+	@include breakpoint(tablet){
+		width: 225px;
+	}
+}
+
+/*----------  Color Variables  ----------*/
+
+$primary : rgba(222, 83, 40, 100); // Primary Orange
+
+$primary-dark : darken($primary, 15%); // secondary orange for hovers
+
+$primary-button : rgba(77, 211, 113, 100);   // Green for app buttons
+
+$button-hover : darken($primary-button, 10%); // Green button hover
+
+$second-button : $primary;  // Secondary buttons are same as primary color
+
+$second-hover : $primary-dark; //Secondary button hover are same as primary dark
+
+$rating : rgba(255, 206, 14, 100); // Colour of star rating
+
+$body-background: #F8F8F8; // Background colour of entire site
+
+$light-grey : #EEEEEE;    // Very light grey for shadows, etc
+
+$border: #c2c2c2;         // color of input borders
+
+$placeholder : #7D7D7D;   // color of placeholder text
+
+$body : rgba(75, 74, 74, 100); // color of any body text on the site
+
+/*----------  Typography  ----------*/
+
+$display: "Josefin Sans"; // Text for the headings of the site
+
+$body-font: "Open Sans";       // text for the body of the site. 
+
+
+
+/*=====  End of Mixins: Variables and reusable bits of common code  ======*/
