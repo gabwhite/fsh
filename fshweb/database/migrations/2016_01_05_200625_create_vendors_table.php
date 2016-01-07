@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateVendorProfilesTable extends Migration
+class CreateVendorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,18 +12,18 @@ class CreateVendorProfilesTable extends Migration
      */
     public function up()
     {
-        Schema::create('vendor_profiles', function(Blueprint $table)
+        Schema::create('vendors', function(Blueprint $table)
         {
             $table->engine = 'InnoDB';
 
             $table->increments('id');
             $table->integer('user_id')->unsigned();
 
-            $table->string('company_name', 200)->nullable();
+            $table->string('company_name', 200);
             $table->string('address1', 200)->nullable();
             $table->string('address2', 200)->nullable();
             $table->string('city', 200)->nullable();
-            $table->integer('state_province')->unsigned();
+            $table->integer('state_province')->unsigned()->nullable();
             $table->integer('country')->unsigned()->nullable();
             $table->string('zip_postal', 50)->nullable();
             $table->string('contact_name', 200)->nullable();
@@ -50,14 +50,14 @@ class CreateVendorProfilesTable extends Migration
      */
     public function down()
     {
-        Schema::table('vendor_profiles', function (Blueprint $table)
+        Schema::table('vendors', function (Blueprint $table)
         {
-            $table->dropForeign('vendor_profiles_user_id_foreign');
-            $table->dropForeign('vendor_profiles_country_foreign');
-            $table->dropForeign('vendor_profiles_state_province_foreign');
+            $table->dropForeign('vendors_user_id_foreign');
+            $table->dropForeign('vendors_country_foreign');
+            $table->dropForeign('vendors_state_province_foreign');
         });
 
-        Schema::drop('vendor_profiles');
+        Schema::drop('vendors');
 
     }
 }

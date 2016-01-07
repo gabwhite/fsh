@@ -10,9 +10,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class VendorProfile extends Model
+class Vendor extends Model
 {
-    protected $table = 'vendor_profiles';
+    protected $table = 'vendors';
 
     protected $primaryKey = 'id';
 
@@ -27,5 +27,10 @@ class VendorProfile extends Model
     public function user()
     {
         return $this->belongsTo('\App\Model\User');
+    }
+
+    public function brands()
+    {
+
     }
 }

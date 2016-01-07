@@ -106,9 +106,9 @@ class AuthController extends Controller
         return $user;
     }
 
-    protected function createVendorProfile($id, array $data)
+    protected function createVendor($id, array $data)
     {
-        return \App\Models\VendorProfile::create([
+        return \App\Models\Vendor::create([
             'user_id' => $id,
             'company_name' => $data['company_name'],
             'address1' => $data['address1'],
@@ -159,7 +159,7 @@ class AuthController extends Controller
                 $this->throwValidationException($request, $vendorUserProfileValidator);
             }
 
-            $this->createVendorProfile($user->id, $request->all());
+            $this->createVendor($user->id, $request->all());
 
             DB::commit();
 

@@ -13,7 +13,7 @@ use App\Models\Permission;
 use App\Models\User;
 use App\Models\UserProduct;
 use App\Models\Category;
-use App\Models\VendorProfile;
+use App\Models\Vendor;
 
 use \Illuminate\Support\Facades\DB;
 
@@ -113,15 +113,27 @@ class DataAccessLayer
 
     public function getVendorsForUser($userId)
     {
-        $vendors = VendorProfile::where('user_id', '=', $userId)->select('vendor_id')->get();
+        $vendors = Vendor::where('user_id', '=', $userId)->select('id')->get();
 
         return $vendors;
 
     }
 
+    public function isUserVendorOwner($userId, $vendorId)
+    {
+        $vendors = $this->getVendorsForUser($userId);
+
+        $v = array_first($vendors, function($key, $val) use ($vendorId)
+        {
+            return $val == $vendorId;
+        }, null);
+
+        if($v == null) { return false; } else { return true; }
+    }
+
     public function getVendorOwner($vendorId)
     {
-        $owner = VendorProfile::where('id', '=', $vendorId)->select('user_id')->first();
+        $owner = Vendor::where('id', '=', $vendorId)->select('user_id')->first();
 
         if(isset($owner))
         {
@@ -131,10 +143,10 @@ class DataAccessLayer
         return null;
     }
 
-    public function getVendorProfile($vendorId)
+    public function getVendor($vendorId)
     {
-        $vendorProfile = VendorProfile::find($vendorId);
+        $vendor = Vendor::find($vendorId);
 
-        return $vendorProfile;
+        return $vendor;
     }
 }

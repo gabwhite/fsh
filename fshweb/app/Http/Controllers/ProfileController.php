@@ -44,11 +44,12 @@ class ProfileController extends Controller
         {
             $avatarFilename = $up->avatar_image_path;
             $vendorId = $up->vendor_id;
-            if(isset($vendorId))
-            {
-                $vendorOwner = $this->dataAccess->isVendorOwner($user->id, $vendorId);
-            }
         }
+
+        $vendors = $this->dataAccess->getVendorsForUser($user->id);
+
+        // TODO: We're only supporting one vendor owner per person for now.
+        if(count($vendors) > 0) { $vendorOwner = true; $vendorId = $vendors[0]->id; }
 
         return view('profile.index')->with('user', $user)->with(['avatarFilename' => $avatarFilename, 'vendorId' => $vendorId, 'vendorOwner' => $vendorOwner]);
     }
@@ -180,10 +181,10 @@ class ProfileController extends Controller
     public function vendorEdit()
     {
         $user = \Auth::user();
-        $vp = $user->vendorProfile();
+        $vp = $user->vendor();
         if(isset($vp))
         {
-            $vp = \Auth::user()->vendorProfile;
+            $vp = \Auth::user()->vendor;
         }
 
         if($user->hasRole(['vendor']))
@@ -202,9 +203,9 @@ class ProfileController extends Controller
         if(!is_null($user))
         {
 
-            if (!is_null($vp = $user->vendorProfile))
+            if (!is_null($vp = $user->vendor))
             {
-                // Update VendorProfile
+                // Update Vendor
                 $vp->company_name = $request->input('company_name') ? $request->input('company_name') : null;
                 $vp->country = $request->input('country') ? $request->input('country') : null;
                 $vp->state_province = $request->input('state_province') ? $request->input('state_province') : null;
@@ -223,7 +224,7 @@ class ProfileController extends Controller
             }
             else
             {
-                // VendorProfile doesn't exist, create a row
+                // Vendor doesn't exist, create a row
                 $vals = [
                     'company_name' => $request->input('company_name') ? $request->input('company_name') : null,
                     'country' => $request->input('country') ? $request->input('country') : null,
@@ -240,7 +241,7 @@ class ProfileController extends Controller
                     'about_text' => $request->input('about_text') ? $request->input('about_text') : null,
                 ];
 
-                $user->vendorProfile()->create($vals);
+                $user->vendor()->create($vals);
             }
 
             return redirect('profile/editvendor')->with('successMessage', trans('messages.vendor_update_success'));;
