@@ -10,7 +10,7 @@
 
 <div class="row">
 
-    <div class="col-md-12">
+    <div class="col-xs-12 col-md-8 col-md-offset-2">
 
         <form id="form1" name="form1" method="POST" action="{{url('/auth/register')}}">
             {!! csrf_field() !!}

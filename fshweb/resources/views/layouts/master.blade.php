@@ -26,7 +26,7 @@
     <![endif]-->
 
     <link rel="stylesheet" href="{{url('/css/bootstrap.min.css')}}">
-   <!--  <link rel="stylesheet" id="kleo-app-css"  href="{{url('/css/kleo/app.css?ver=3.0.4')}}" type="text/css" media="all" /> -->
+    <!-- <link rel="stylesheet" id="kleo-app-css"  href="{{url('/css/kleo/app.css?ver=3.0.4')}}" type="text/css" media="all" /> -->
     <link rel="stylesheet" id="magnific-popup-css"  href="{{url('/js/vendor/magnific-popup/magnific.css?ver=3.0.4')}}" type="text/css" media="all" />
     <link rel="stylesheet" id="tp-josefin-css"  href="http://fonts.googleapis.com/css?family=Josefin+Slab%3A400%2C100%2C600%2C700%2C300%7CJosefin+Sans%3A400%2C300%2C100%2C600%2C700&#038;ver=4.3.1" type="text/css" media="all" />
     <link rel="stylesheet" id="tp-josefinsans-css"  href="http://fonts.googleapis.com/css?family=Josefin+Sans%3A400%2C300%2C100%2C600%2C700&#038;ver=4.3.1" type="text/css" media="all" />
@@ -283,7 +283,7 @@
     </div><!-- #main -->
 
     <!--start kleo-quick-contact-wrapper-->
-    <a class="kleo-go-top" href="#"><i class="icon-up-open-big"></i></a>
+   <!--  <a class="kleo-go-top" href="#"><i class="icon-up-open-big"></i></a>
     <div class="kleo-quick-contact-wrapper">
         <a class="kleo-quick-contact-link" href="#"><i class="icon-mail-alt"></i></a>
         <div id="kleo-quick-contact">
@@ -301,7 +301,9 @@
             </form>
             <div class="bottom-arrow"></div>
         </div>
-    </div><!--end kleo-quick-contact-wrapper-->
+    </div>
+
+     --><!--end kleo-quick-contact-wrapper-->
 
     <!-- start footer -->
     <div id="socket" class="socket-color">
