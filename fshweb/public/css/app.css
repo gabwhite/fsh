@@ -8316,11 +8316,27 @@ button.close {
 
 /*----------  Typography  ----------*/
 
+/*----------  Other Elements  ----------*/
+
 /*=====  End of Mixins: Variables and reusable bits of common code  ======*/
 
 /*======================================================
 =            Typography for the entire site            =
 ======================================================*/
+
+/*----------  Globals  ----------*/
+
+body {
+  background: #F8F8F8;
+  color: #4b4a4a;
+}
+
+.well {
+  background: white;
+  color: #4b4a4a;
+  border: 1px solid #c2c2c2;
+  border-radius: 3px;
+}
 
 /*----------  Headers  ----------*/
 
@@ -8328,6 +8344,7 @@ h1,
 h2,
 h3 {
   font-family: "Josefin Sans";
+  text-transform: none !important;
 }
 
 h4,
@@ -8337,20 +8354,49 @@ h6 {
   color: #4b4a4a;
 }
 
+h1.page-title {
+  font-weight: 600;
+  color: white;
+  text-align: center;
+  text-transform: none;
+}
+
+h2.subhead {
+  font-weight: 600;
+  font-size: 16px;
+  text-align: center;
+  color: #de5328;
+}
+
+@media (min-width: 768px) {
+  h2.subhead {
+    font-size: 24px;
+  }
+}
+
 /*=====  End of Typography for the entire site  ======*/
 
 /*================================================
 =            Styling for page Headers            =
 ================================================*/
 
-.main-title h1 {
-  color: white;
-  text-align: center;
-  text-transform: none;
-}
-
 .main-title {
   background: #de5328;
+  margin-bottom: 4%;
+}
+
+.search-header {
+  background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74, 75, 75, 0.5)), url(../../public/img/headers/search-bg.png) no-repeat;
+  background-position: center center;
+  background-size: cover;
+  padding: 2.5%;
+}
+
+.login-header {
+  background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74, 75, 75, 0.5)), url(../../public/img/headers/login-bg.png) no-repeat;
+  background-position: center center;
+  background-size: cover;
+  padding: 2.5%;
 }
 
 /*=====  End of Styling for page Headers  ======*/

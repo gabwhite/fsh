@@ -38,7 +38,7 @@
 
     <script src="{{url('js/kleo/init.js')}}"></script>
     <script src="{{url('js/kleo/modernizr.custom.46504.js')}}"></script>
-    
+
     <noscript><style> .wpb_animate_when_almost_visible { opacity: 1; }</style></noscript>
 
 
@@ -110,20 +110,7 @@
     </div><!--end header-->
 
     <div id="main">
-
-        <section class='container-wrap main-title alternate-color  main-center-title border-bottom'>
-            <div class='container'><h1 class="page-title">@yield('sectionheader')</h1>
-                <div class='breadcrumb-extra'>
-                    <div class="kleo_framework breadcrumb" xmlns:v="http://rdf.data-vocabulary.org/#">
-                        <span typeof="v:Breadcrumb">
-                            <a rel="v:url" property="v:title" href="http://www.foodservicehound.com" title="FoodserviceHound.com" >Home</a>
-                        </span>
-                        <span class="sep"> </span>
-                        <span class="active">@yield('sectionheader')</span>
-                    </div>
-                </div>
-            </div>
-        </section>
+        @yield('sectionheader')
 
         <section class="container-wrap main-color">
             <div id="main-container" class="container">

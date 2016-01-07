@@ -1,11 +1,22 @@
 /*======================================================
 =            Typography for the entire site            =
 ======================================================*/
+/*----------  Globals  ----------*/
+
+body {
+	background: $body-background;
+	color: $body;
+}
+
+.well {
+	@include well;
+}
 
 /*----------  Headers  ----------*/
 
 h1, h2, h3 {
 	font-family: $display;
+	text-transform: none !important;
 }
 
 h4, h5, h6 {
@@ -13,6 +24,22 @@ h4, h5, h6 {
 	color: $body;
 }
 
+h1.page-title {
+	font-weight: 600;
+	color: white;
+	text-align: center;
+	text-transform: none;
+}
 
+h2.subhead {
+	font-weight: 600;
+	font-size: 16px;
+	text-align: center;
+	color: $primary;
+	@include breakpoint(tablet){
+		font-size: 24px;
+	}
+}
 
 /*=====  End of Typography for the entire site  ======*/
+	

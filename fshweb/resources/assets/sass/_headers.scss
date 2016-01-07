@@ -2,16 +2,32 @@
 =            Styling for page Headers            =
 ================================================*/
 
-.main-title h1 {
-	color: white;
-    text-align: center;
-    text-transform: none;
+//Globals 
+.main-title {
+    background: $primary;
+    margin-bottom: 4%;
 }
 
-.main-title
-{
-    background: $primary;
+// Search page
+
+.search-header {
+	background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74, 75, 75, 0.5)), url(../../public/img/headers/search-bg.png) no-repeat;
+	background-position: center center;
+	background-size: cover;
+	padding: 2.5%;
 }
+
+// Login Page
+
+.login-header {
+	background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74,75, 75, 0.5 )), url(../../public/img/headers/login-bg.png) no-repeat;
+	background-position: center center;
+	background-size: cover;
+	padding: 2.5%;
+}
+
+
+
 
 
 

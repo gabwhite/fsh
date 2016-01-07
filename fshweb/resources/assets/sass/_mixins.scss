@@ -88,5 +88,13 @@ $display: "Josefin Sans"; // Text for the headings of the site
 $body-font: "Open Sans";       // text for the body of the site. 
 
 
+/*----------  Other Elements  ----------*/
+
+@mixin well {
+	background: white;
+	color: $body;
+	border: 1px solid $border;
+	border-radius: 3px;
+}
 
 /*=====  End of Mixins: Variables and reusable bits of common code  ======*/
