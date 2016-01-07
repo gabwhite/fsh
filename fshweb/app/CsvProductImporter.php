@@ -113,7 +113,7 @@ class CsvProductImporter implements iProductImporter
                     else
                     {
                         $product = new \App\Models\Product();
-                        $product->vendor_id = $pio->getUserId();
+                        $product->vendor_id = $pio->getVendorId();
                         $product->uniquekey = (isset($row[8])) ? $row[8] : $row[11]; // MPC or GTIN
                     }
 
