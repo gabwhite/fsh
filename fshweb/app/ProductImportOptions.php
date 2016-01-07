@@ -11,7 +11,7 @@ namespace App;
 
 class ProductImportOptions
 {
-    private $userId;
+    private $vendorId;
     private $uuid = '';
     private $fileName = '';
     private $includeHeaders = true;
@@ -31,17 +31,17 @@ class ProductImportOptions
     /**
      * @return mixed
      */
-    public function getUserId()
+    public function getVendorId()
     {
-        return $this->userId;
+        return $this->vendorId;
     }
 
     /**
-     * @param mixed $userId
+     * @param mixed $vendorId
      */
-    public function setUserId($userId)
+    public function setVendorId($vendorId)
     {
-        $this->userId = $userId;
+        $this->vendorId = $vendorId;
     }
 
     /**

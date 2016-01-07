@@ -11,20 +11,19 @@
 |
 */
 
-
+// Home route
 Route::get('/', function ()
 {
     return view('welcome');
 });
 
-Route::get('/search', function()
-{
-    return view('search');
-});
+//=================================
+// Product routes
+//=================================
+Route::get('/product/search', 'ProductController@search');
+Route::post('/product/search', 'ProductController@fullTextSearch');
+Route::get('/product/detail/{id}', 'ProductController@detail');
 
-Route::get('productdetail/{id}', 'PublicController@productDetail');
-
-Route::post('fulltextsearch', 'PublicController@fullTextSearch');
 
 //=================================
 // Contact Us routes
@@ -32,6 +31,8 @@ Route::post('fulltextsearch', 'PublicController@fullTextSearch');
 Route::get('contact', 'PublicController@contactUs');
 Route::post('contact', 'PublicController@contactUsSubmit');
 //=================================
+
+Route::get('vendor/detail/{id}', 'VendorController@detail');
 
 
 Route::get('toolsresources', function() { return view('toolsresources'); } );
@@ -52,11 +53,11 @@ Route::group(['middleware' => 'auth'], function()
     // Routes that require either admin or vendor roles
     Route::group(['middleware' => ['role:vendor|admin']], function()
     {
-        Route::get('profile/products', 'ProfileController@profileProducts');
-        Route::get('/profile/product/{id?}', 'ProfileController@showProduct');
-        Route::post('/profile/product', 'ProfileController@editProduct');
-        Route::get('profile/editvendor', 'ProfileController@vendorEdit');
-        Route::post('profile/editvendor', 'ProfileController@vendorUpdate');
+        Route::get('/products/{id}', 'ProductController@vendorProducts');
+        Route::get('/product/edit/{id?}', 'ProductController@showProduct');
+        Route::post('/product/edit', 'ProductController@editProduct');
+        Route::get('/vendor/edit', 'VendorController@edit');
+        Route::post('/vendor/edit', 'VendorController@update');
     });
 
 
@@ -103,7 +104,7 @@ Route::post('auth/vendorregister', 'Auth\AuthController@postVendorRegister');
 
 // AJAX routes
 Route::get('ajax/getfoodcategories/{format}/{parentId?}', 'AjaxController@getFoodCategoriesForParent');
-Route::get('ajax/getuserproducts/{categoryId}', 'AjaxController@getUserProducts');
+Route::get('ajax/getproducts/{categoryId}', 'AjaxController@getProducts');
 Route::get('ajax/getcountries', 'AjaxController@getCountries');
 Route::get('ajax/getstateprovincesforcountry/{countryId}', 'AjaxController@getStateProvincesForCountry');
 Route::get('ajax/productsearch/{query}', 'AjaxController@getProductFullTextSearch');

@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserProductsCategoriesTable extends Migration
+class CreateProductCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,17 +12,18 @@ class CreateUserProductsCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_products_categories', function(Blueprint $table)
+        Schema::create('product_categories', function(Blueprint $table)
         {
             $table->engine = 'InnoDB';
 
 
             $table->integer('product_id')->unsigned();
             $table->integer('category_id')->unsigned();
+            $table->timestamps();
 
             $table->primary(['product_id', 'category_id']);
 
-            $table->foreign('product_id')->references('id')->on('user_products')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             $table->foreign('category_id')->references('id')->on('food_categories')->onDelete('cascade');
 
         });
@@ -35,6 +36,6 @@ class CreateUserProductsCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('user_products_categories');
+        Schema::drop('product_categories');
     }
 }

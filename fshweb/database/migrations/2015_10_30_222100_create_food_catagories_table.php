@@ -18,7 +18,7 @@ class CreateFoodCatagoriesTable extends Migration
 
             $table->increments('id');
             $table->string('name', 200);
-            $table->integer('parent_id')->unsigned();
+            $table->integer('parent_id')->unsigned()->nullable();
             $table->boolean('active')->default('1');
             $table->timestamps();
 

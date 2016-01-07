@@ -64,10 +64,10 @@ class AuthController extends Controller
             'about_text' => 'max:2000',
             //'vendor_id' => 'max:6',
             'company_name' => 'required|max:200',
-            'country' => 'required|max:6',
-            'state_province' => 'required|max:6',
-            'city' => 'required|max:200',
-            'zip_postal' => 'required|max:50',
+            'country' => 'max:6',
+            'state_province' => 'max:6',
+            'city' => 'max:200',
+            'zip_postal' => 'max:50',
             'contact_name' => 'max:200',
             'contact_title' => 'max:200',
             'contact_url' => 'max:200',
@@ -106,9 +106,9 @@ class AuthController extends Controller
         return $user;
     }
 
-    protected function createVendorProfile($id, array $data)
+    protected function createVendor($id, array $data)
     {
-        return VendorProfile::create([
+        return \App\Models\Vendor::create([
             'user_id' => $id,
             'company_name' => $data['company_name'],
             'address1' => $data['address1'],
@@ -153,15 +153,14 @@ class AuthController extends Controller
 
 
             // Now validate / create vendor profile
-            $vendorUserProfileValidator = $this->vendorValidator($request->all());
+            $vendorValidator = $this->vendorValidator($request->all());
 
-            if ($vendorUserProfileValidator->fails()) {
-                $this->throwValidationException(
-                    $request, $vendorUserProfileValidator
-                );
+            if ($vendorValidator->fails())
+            {
+                $this->throwValidationException($request, $vendorValidator);
             }
 
-            $this->createVendorProfile($user->id, $request->all());
+            $this->createVendor($user->id, $request->all());
 
             DB::commit();
 

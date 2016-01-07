@@ -55,36 +55,36 @@ class ProductSearcher
         return $results;
     }
 
-    public function getUserProductsByCategory($categoryId)
+    public function getProductsByCategory($categoryId)
     {
-        $products = \DB::table('user_products')
-            ->join('user_products_categories', 'user_products.id', '=', 'user_products_categories.product_id')
-            ->where('user_products_categories.category_id', '=', $categoryId)
-            //->where('user_products.published', '=', true)
-            ->select('user_products.id', 'user_products.name', 'user_products.brand')->orderBy('user_products.name')->get();
+        $products = \DB::table('products')
+            ->join('product_categories', 'products.id', '=', 'product_categories.product_id')
+            ->where('product_categories.category_id', '=', $categoryId)
+            //->where('products.published', '=', true)
+            ->select('products.id', 'products.name', 'products.brand')->orderBy('products.name')->get();
 
         return $products;
     }
 
-    public function getUserProductsByCategoryPaginated($categoryId, $pageSize, $isSimplePaginate)
+    public function getProductsByCategoryPaginated($categoryId, $pageSize, $isSimplePaginate)
     {
         if ($isSimplePaginate)
         {
-            $products = \DB::table('user_products')
-                ->join('user_products_categories', 'user_products.id', '=', 'user_products_categories.product_id')
-                ->where('user_products_categories.category_id', '=', $categoryId)
-                //->where('user_products.published', '=', true)
-                ->select('user_products.id', 'user_products.name', 'user_products.brand')->simplePaginate($pageSize);
+            $products = \DB::table('products')
+                ->join('product_categories', 'products.id', '=', 'product_categories.product_id')
+                ->where('product_categories.category_id', '=', $categoryId)
+                //->where('products.published', '=', true)
+                ->select('products.id', 'products.name', 'products.brand')->simplePaginate($pageSize);
 
             return $products;
         }
         else
         {
-            $products = \DB::table('user_products')
-                ->join('user_products_categories', 'user_products.id', '=', 'user_products_categories.product_id')
-                ->where('user_products_categories.category_id', '=', $categoryId)
-                //->where('user_products.published', '=', true)
-                ->select('user_products.id', 'user_products.name', 'user_products.brand')->paginate($pageSize);
+            $products = \DB::table('products')
+                ->join('product_categories', 'products.id', '=', 'product_categories.product_id')
+                ->where('product_categories.category_id', '=', $categoryId)
+                //->where('products.published', '=', true)
+                ->select('products.id', 'products.name', 'products.brand')->paginate($pageSize);
 
             return $products;
         }
