@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserProductsTable extends Migration
+class CreateProductsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,13 +12,14 @@ class CreateUserProductsTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_products', function(Blueprint $table)
+        Schema::create('products', function(Blueprint $table)
         {
             $table->engine = 'InnoDB';
 
 
             $table->increments('id');
-            $table->integer('user_id')->unsigned();
+            $table->integer('vendor_id')->unsigned();
+            $table->string('uniquekey', 200);
             $table->string('name', 500);
             $table->text('description');
 
@@ -58,10 +59,9 @@ class CreateUserProductsTable extends Migration
             $table->string('vendor_logo', 500)->nullable();
             $table->string('product_image', 500)->nullable();
             $table->string('pos_pdf', 500)->nullable();
+            $table->boolean('published')->default('0');
 
             $table->timestamps();
-
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
         });
     }
@@ -73,6 +73,6 @@ class CreateUserProductsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('user_products');
+        Schema::drop('products');
     }
 }

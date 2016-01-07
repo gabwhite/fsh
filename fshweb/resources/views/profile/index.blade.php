@@ -40,13 +40,13 @@
 
             @if(isset($vendorId))
             <p class="bg-info">
-                <a href="{{url('vendor', $vendorId)}}">{{trans('ui.navigation_link_viewvendor')}}</a>
+                <a href="{{url('vendor/detail', $vendorId)}}">{{trans('ui.navigation_link_viewvendor')}}</a>
             </p>
             @endif
 
             @if($vendorOwner)
             <p class="bg-info">
-                <a href="{{url('profile/editvendor')}}">{{trans('ui.navigation_link_editvendor')}}</a>
+                <a href="{{url('vendor/edit')}}">{{trans('ui.navigation_link_editvendor')}}</a>
             </p>
             @endif
 

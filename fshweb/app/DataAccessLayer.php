@@ -11,7 +11,7 @@ namespace App;
 use App\Models\Role;
 use App\Models\Permission;
 use App\Models\User;
-use App\Models\UserProduct;
+use App\Models\Product;
 use App\Models\Category;
 use App\Models\Vendor;
 use App\Models\VendorBrand;
@@ -55,14 +55,14 @@ class DataAccessLayer
         return Permission::all();
     }
 
-    public function getUserProduct($productId)
+    public function getProduct($productId)
     {
-        return UserProduct::where('id', '=', $productId)->first();
+        return Product::where('id', '=', $productId)->first();
     }
 
-    public function getUserProductByIdUser($productId, $userId)
+    public function getProductByIdUser($productId, $userId)
     {
-        return UserProduct::where(['id' => $productId, 'user_id' => $userId])->first();
+        return Product::where(['id' => $productId, 'vendor_id' => $userId])->first();
     }
 
     public function getFoodCategoriesForParent($parentId = null)
@@ -96,15 +96,15 @@ class DataAccessLayer
         return DB::table('stateprovinces')->where('country_id', '=', $countryId)->get();
     }
 
-    public function getUserProductsByFullText($arrTerms)
+    public function getProductsByFullText($arrTerms)
     {
 
         $terms = implode(' ', $arrTerms);
 
         $query = "MATCH (name, description, gtin, mpc, brand, ingredient_deck) AGAINST ('$terms' IN BOOLEAN MODE)";
-        $userProducts = UserProduct::select('id', 'name', 'brand')->whereRaw($query)->get();
+        $products = Product::select('id', 'name', 'brand')->whereRaw($query)->get();
 
-        return $userProducts;
+        return $products;
     }
 
     public function isVendorOwner($userId, $vendorId)
