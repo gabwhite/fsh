@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateUserProfilesTable extends Migration
+class CreateUserVendorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,20 +12,18 @@ class CreateUserProfilesTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_profiles', function (Blueprint $table)
+        Schema::create('user_vendors', function (Blueprint $table)
         {
             $table->engine = 'InnoDB';
 
             $table->integer('user_id')->unsigned();
-            $table->string('firstname', 100)->nullable();
-            $table->string('lastname', 100)->nullable();
-            $table->text('bio')->nullable();
-            $table->string('avatar_image_path', 200)->nullable();
+            $table->integer('vendor_id')->unsigned();
             $table->timestamps();
 
-            $table->primary('user_id');
+            $table->primary(['user_id', 'vendor_id']);
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('vendor_id')->references('id')->on('vendors')->onDelete('cascade');
         });
     }
 
@@ -36,6 +34,6 @@ class CreateUserProfilesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('user_profiles');
+        Schema::drop('user_vendors');
     }
 }

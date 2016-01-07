@@ -24,13 +24,15 @@ class Vendor extends Model
             'intro_text', 'about_text', 'logo_image_path', 'background_image_path'
         ];
 
-    public function user()
+
+    public function users()
     {
-        return $this->belongsTo('\App\Models\User');
+        return $this->belongsToMany('\App\Models\User');
     }
 
     public function brands()
     {
         return $this->hasMany('\App\Models\VendorBrand');
     }
+
 }

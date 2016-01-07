@@ -44,8 +44,8 @@ class User extends Model implements AuthenticatableContract,
         return $this->hasOne('\App\Models\UserProfile', 'user_id');
     }
 
-    public function vendor()
+    public function vendors()
     {
-        return $this->hasOne('\App\Models\Vendor', 'user_id');
+        return $this->belongsToMany('\App\Models\Vendor');
     }
 }
