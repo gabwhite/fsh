@@ -43,12 +43,13 @@
 /*----------  Button Standards  ----------*/
 
 @mixin btn {
-	display: block;
+	display: inline-block;
 	text-transform: none;
 	font-family: $body-font;
 	font-weight: 700;
 	font-size: 16px;
 	border: 0;
+	border-radius: 3px;
 	width: auto;
 	margin: 25px auto;
 	@include transition;
@@ -97,6 +98,14 @@ $body-font: "Open Sans";       // text for the body of the site.
 	color: $body;
 	border: 1px solid $border;
 	border-radius: 3px;
+}
+
+// Fixed backgrounds 
+
+@mixin background {
+	background-position: center center;
+	background-size: cover;
+	background-attachment: fixed;
 }
 
 /*=====  End of Mixins: Variables and reusable bits of common code  ======*/

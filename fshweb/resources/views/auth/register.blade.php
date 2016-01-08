@@ -42,8 +42,8 @@
                         <input type="password" name="password_confirmation" maxlength="25" class="form-control">
                     </div>
 
-                    <div>
-                        <button type="submit" class="btn btn-primary">{{trans('ui.button_register')}}</button>
+                    <div class="text-center">
+                        <button type="submit" class=" btn-primary">{{trans('ui.button_register')}}</button>
                     </div>
                 </form>
             </div>
