@@ -38,8 +38,8 @@
                         </label>
                     </div>
 
-                    <div class="center-block">
-                        <button type="submit" class="btn btn-primary">{{trans('ui.button_login')}}</button>
+                    <div class="text-center">
+                        <button type="submit" class="btn-primary">{{trans('ui.button_login')}}</button>
                     </div>
                 </form>
             </div>
