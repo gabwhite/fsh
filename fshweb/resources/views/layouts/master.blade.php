@@ -169,25 +169,17 @@
     <!-- start footer -->
     <div id="socket" class="socket-color">
         <div class="container">
-            <div class="template-page tpl-no col-xs-12 col-sm-12">
-                <div class="wrap-content">
-                    <div class="row">
-
-                        <div class="col-sm-12">
-                            <div class="gap-10"></div>
-                        </div><!--end widget-->
-
-                        <div class="col-sm-12">
-                            <p id="footer" style="text-align: center;">©2015 foodservicehound.com | <a href="{{url('contact')}}">{{trans('ui.navigation_contactus')}}</a></p>
+            <div class="row">
+                    <div class="col-xs-12">
+                        
+                        <div class="col-xs-6">
+                            <p class="footer">&#169; 2016 Food Service Hound</p>
                         </div>
 
-                        <div class="col-sm-12">
-                            <div class="gap-10"></div>
-                        </div><!--end widget-->
-
+                        <div class="col-xs-6 pull-right">
+                            <a class="contact" href="{{url('contact')}}">{{trans('ui.navigation_contactus')}}</a>
+                        </div>
                     </div><!--end row-->
-
-                </div><!--end wrap-content-->
             </div><!--end template-page-->
         </div><!--end container-->
     </div><!--end footer-->

@@ -7,33 +7,52 @@
 @endsection
 
 @section('sectionheader')
-    PRODUCT EDIT
+<section class='clearfix container-wrap item-header'>
+    <div class='container'>
+        <div class="col-xs-12">
+            <h1 class="item-title">{{$product->name}}</h1>
+        </div>
+
+        <div class="col-xs-12 {{($product->published) ? 'bg-success' : 'bg-danger'}}">
+            <input type="checkbox" id="published" name="published" {{($product->published) ? 'checked="checked"' : ''}}/> <label for="published">Published</label>
+        </div>
+    </div>
+</section>
 @endsection
 
 @section('content')
 
-    <div class="row">
-
+    <div class="container">
+        
         <form id="form1" name="form1" method="post" action="{{url('product/edit')}}">
 
-            <div class="col-md-12">
+            <div class="col-xs-12 well">
+                <h4>Product Title</h4>
+                <h1><input type="text" name="name" class="form-control input-lg" maxlength="500" placeholder="Enter Product Name" value="{{$product->name}}"/></h1>
 
-                <div class="row">
+                <h4>Description</h4>
+                <textarea title="description" name="description" class="form-control" cols="80" rows="3">{{$product->description}}</textarea>
+            
+            </div>
 
-                    <div class="col-md-3">
+            <div class="row">
 
-                        <div class="nutrition">
+                <div class="col-xs-12 col-md-4">
+                
+                    <div class="nutrition">
 
-                            <div class="nutrition-block">
+                        <div class="nutrition-block">
 
-                                <h4>Nutrition Facts</h4>
+                            <h4>Nutrition Facts</h4>
 
-                                <div class="nutrition-meta serving-size">
-                                    <span class="nutrition-value">Serving Size&nbsp;<input type="text" name="serving_size" class="form-control input-sm" maxlength="10" value="{{$product->serving_size}}"/></span>
+                            <div class="nutrition-meta serving-size">
+                                <span class="nutrition-value">Serving Size&nbsp;<input type="text" name="serving_size" class="form-control input-sm" maxlength="10" value="{{$product->serving_size}}"/></span>
                                 </div>
+
                                 <div class="nutrition-meta amount-per-serving">
                                     <label>Amount Per Serving</label>
                                 </div>
+
                                 <div class="nutrition-meta calories">
                                     <div class="col-lg-6 calories-left">
                                         <label>Calories&nbsp;</label><span class="nutrition-value"><input type="text" name="calories" class="form-control input-sm" maxlength="10" value="{{$product->calories}}"/></span>
@@ -52,6 +71,7 @@
                                 <div class="nutrition-meta cholesteral">
                                     <label>Cholesteral&nbsp;</label><span class="nutrition-value"></span>
                                 </div>
+                                
                                 <div class="nutrition-meta sodium">
                                     <label>Sodium&nbsp;</label><span class="nutrition-value"><input type="text" name="sodium" class="form-control input-sm" maxlength="10" value="{{$product->sodium}}"/></span>
                                 </div>
@@ -70,6 +90,7 @@
                             </div>
 
                             <h4>Dietary Information</h4>
+                            
                             <div class="nutrition-meta">
                                 <div class="checkbox">
                                     <label>
@@ -77,6 +98,7 @@
                                     </label>
                                 </div>
                             </div>
+                            
                             <div class="nutrition-meta">
                                 <div class="checkbox">
                                     <label>
@@ -84,6 +106,7 @@
                                     </label>
                                 </div>
                             </div>
+                            
                             <div class="nutrition-meta">
                                 <div class="checkbox">
                                     <label>
@@ -92,7 +115,6 @@
                                 </div>
                             </div>
 
-                            <br/>
 
                             <h4>Allergy Information</h4>
                             @foreach($product->allergens as $a)
@@ -100,63 +122,43 @@
                             @endforeach
 
                         </div>
-
-
-
                     </div>
 
-                    <div class="col-md-9">
+                <div class="col-xs-12 col-md-8">
 
-                        <br/>
+                    <h4>Ingredients</h4>
+                    <textarea title="ingredient_deck" name="ingredient_deck" class="form-control" cols="80" rows="3">{{$product->ingredient_deck}}</textarea>
 
-                        <div class="{{($product->published) ? 'bg-success' : 'bg-danger'}}">
-                            <input type="checkbox" id="published" name="published" {{($product->published) ? 'checked="checked"' : ''}}/> <label for="published">Published</label>
-                        </div>
+                    <h4>Features, Advantages and Benefits</h4>
+                    <textarea title="features_benefits" name="features_benefits" class="form-control" cols="80" rows="3">{{$product->features_benefits}}</textarea>
 
-                        <br/>
+                    <h4>Allergen Disclaimer</h4>
+                    <textarea title="allergen_disclaimer" name="allergen_disclaimer" class="form-control" cols="80" rows="3">{{$product->allergen_disclaimer}}</textarea>
 
-                        <h1><input type="text" name="name" class="form-control input-lg" maxlength="500" placeholder="Enter Product Name" value="{{$product->name}}"/></h1>
-
-
-
-                        <h4>Description</h4>
-                        <textarea title="description" name="description" class="form-control" cols="80" rows="3">{{$product->description}}</textarea>
-
-                        <h4>Ingredients</h4>
-                        <textarea title="ingredient_deck" name="ingredient_deck" class="form-control" cols="80" rows="3">{{$product->ingredient_deck}}</textarea>
-
-                        <h4>Features, Advantages and Benefits</h4>
-                        <textarea title="features_benefits" name="features_benefits" class="form-control" cols="80" rows="3">{{$product->features_benefits}}</textarea>
-
-                        <h4>Allergen Disclaimer</h4>
-                        <textarea title="allergen_disclaimer" name="allergen_disclaimer" class="form-control" cols="80" rows="3">{{$product->allergen_disclaimer}}</textarea>
-
-                        <h4>Preparation &amp; Cooking Suggestions</h4>
-                        <textarea title="preparation" name="preparation" class="form-control" cols="80" rows="3">{{$product->preparation}}</textarea><br/>
+                    <h4>Preparation &amp; Cooking Suggestions</h4>
+                    <textarea title="preparation" name="preparation" class="form-control" cols="80" rows="3">{{$product->preparation}}</textarea><br/>
 
 
-                        <h4>Packaging &amp; Weights</h4>
-                        Pack:<input type="text" name="pack" title="pack" class="form-control" maxlength="10" value="{{$product->pack}}"/>
-                        Size:<input type="text" name="size" title="size" class="form-control" maxlength="9" value="{{$product->size}}"/>
-                        Calculation Size:<input type="text" name="calc_size" title="calc_size" class="form-control" maxlength="10" value="{{$product->calc_size}}"/>
-                        Product Code:<input type="text" name="mpc" title="mpc" class="form-control" maxlength="250" value="{{$product->mpc}}"/>
-                        GTIN:<input type="text" name="gtin" title="gtin" class="form-control" maxlength="250" value="{{$product->gtin}}"/>
-                        Net Weight:<input type="text" name="net_weight" title="net_weight" class="form-control" maxlength="9" value="{{$product->net_weight}}"/>
-                        Gross Weight:<input type="text" name="gross_weight" title="gross_weight" class="form-control" maxlength="9" value="{{$product->gross_weight}}"/>
-                        Tare Weight:<input type="text" name="tare_weight" title="tare_weight" class="form-control" maxlength="9" value="{{$product->tare_weight}}"/>
+                    <h4>Packaging &amp; Weights</h4>
+                    Pack:<input type="text" name="pack" title="pack" class="form-control" maxlength="10" value="{{$product->pack}}"/>
+                    Size:<input type="text" name="size" title="size" class="form-control" maxlength="9" value="{{$product->size}}"/>
+                    Calculation Size:<input type="text" name="calc_size" title="calc_size" class="form-control" maxlength="10" value="{{$product->calc_size}}"/>
+                    Product Code:<input type="text" name="mpc" title="mpc" class="form-control" maxlength="250" value="{{$product->mpc}}"/>
+                    GTIN:<input type="text" name="gtin" title="gtin" class="form-control" maxlength="250" value="{{$product->gtin}}"/>
+                    Net Weight:<input type="text" name="net_weight" title="net_weight" class="form-control" maxlength="9" value="{{$product->net_weight}}"/>
+                    Gross Weight:<input type="text" name="gross_weight" title="gross_weight" class="form-control" maxlength="9" value="{{$product->gross_weight}}"/>
+                    Tare Weight:<input type="text" name="tare_weight" title="tare_weight" class="form-control" maxlength="9" value="{{$product->tare_weight}}"/>
 
-                        {{$product->brand}}<br/>
-                        {{$product->calories}}<br/>
-                        {{$product->uom}}<br/>
+                    {{$product->brand}}<br/>
+                    {{$product->calories}}<br/>
+                    {{$product->uom}}<br/>
 
-                        <input type="submit" class="btn btn-primary btn-lg" value="Add / Update"/>
-                        <a href="{{url('productdetail', $product->id)}}" class="btn btn-lg">Cancel</a>
-
-                    </div>
+                    <input type="submit" class="btn btn-primary btn-lg" value="Add / Update"/>
+                    <a href="{{url('productdetail', $product->id)}}" class="btn btn-lg">Cancel</a>
 
                 </div>
-            </div>
-
+            </div> <!-- end of container -->
+                </div><!-- End of main row -->
             <input type="hidden" name="id" value="{{$product->id}}"/>
 
             {!! csrf_field() !!}

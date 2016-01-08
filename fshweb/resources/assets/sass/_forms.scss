@@ -29,7 +29,33 @@ label {
 	&:hover, &:focus, &:active{
 		background: $button-hover;
 		border: 2px solid $button-hover;
-		@include transition;
+	}
+}
+
+.btn {
+	@include btn;
+	background: $primary;
+	border: 2px solid $primary-dark;
+	color: white;	
+
+	&:hover, &:focus, &:active {
+		background: $primary-dark;
+		border: 2px solid $primary-dark;
+		color: white;
+	}
+}
+
+.btn-row {
+	display: inline-block;
+	margin-bottom: 30px;
+	
+	:first-child {
+			margin-left: 0;
+		}
+	button {
+		margin: 0 10px;
+
+
 	}
 }
 
