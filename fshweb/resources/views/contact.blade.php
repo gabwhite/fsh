@@ -22,11 +22,8 @@
         <div class="col-xs-12 col-md-6 col-md-offset-3">
             <div class="row well">
 
-                <p>
-                    {{$successMessage or ''}}
-                </p>
 
-                <h2 class="subhead">Thanks for reaching out. We'll be in touch soon. </h2>
+                <h2 class="subhead">{{$successMessage or ''}}</h2>
 
                 <div class="col-xs-12 col-md-8 col-md-offset-2">   
                     <form id="form1" name="contactus" method="post" action="{{url('contact')}}">

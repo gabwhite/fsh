@@ -73,7 +73,7 @@ class PublicController extends Controller
                                 config('app.contact_email_view'),
                                 $formData);
 
-        $successMessage = trans('messages.contact_subject_from');
+        $successMessage = trans('messages.contact_received_success');
 
         return view('contact')->with('successMessage', $successMessage);
 
