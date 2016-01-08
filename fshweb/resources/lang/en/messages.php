@@ -19,4 +19,6 @@ return [
     'vendor_update_success' => 'Vendor successfully updated',
 
     'product_update_success' => 'Product successfully updated',
+
+    'product_administrator_notice' => 'You are an administrator for this product',
 ];
