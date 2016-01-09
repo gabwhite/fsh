@@ -10,7 +10,7 @@ class Product extends Model
 
     protected $fillable =
         [
-            'user_id',
+            'vendor_id',
             'uniquekey', 'name', 'description', 'brand',
             'pack', 'calc_size', 'mpc', 'broker_contact', 'allergen_disclaimer',
             'features_benefits', 'ingredient_deck', 'uom',

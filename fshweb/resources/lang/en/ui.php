@@ -126,6 +126,12 @@ return [
     'product_label_no_information' => 'No information provided',
     'product_label_packaging_weights' => 'Packaging &#038; Weights',
 
+    'product_label_add_to_my_products' => 'Add to My Products',
+    'product_label_goto_vendor_profile' => 'Go to Vendor Profile',
+    'product_label_request_sample' => 'Request a Sample',
+    'product_label_edit_product' => 'Edit Product',
+    'product_label_rate_product' => 'Rate Product',
+
 
 
 ];

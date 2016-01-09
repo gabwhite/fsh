@@ -115,10 +115,13 @@
                                 </div>
                             </div>
 
-
                             <h4>Allergy Information</h4>
-                            @foreach($product->allergens as $a)
-
+                            @foreach($allergens as $a)
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="allergens[]" value="{{$a->id}}">{{$a->name}}
+                                </label>
+                            </div>
                             @endforeach
 
                         </div>

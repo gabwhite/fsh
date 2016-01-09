@@ -219,7 +219,7 @@ class CsvProductImporter implements iProductImporter
 
         // Create a record of the import in the database
         $productImport = new \App\Models\ProductImport();
-        $productImport->user_id = $pio->getUserId();
+        $productImport->user_id = $pio->getVendorId();
         $productImport->uuid = $pio->getUuid();
         $productImport->filename = $pio->getFileName();
         $productImport->save();

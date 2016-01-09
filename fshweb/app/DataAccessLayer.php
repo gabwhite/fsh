@@ -55,8 +55,13 @@ class DataAccessLayer
         return Permission::all();
     }
 
-    public function getProduct($productId)
+    public function getProduct($productId, $relationships = null)
     {
+        if(isset($relationships))
+        {
+            return Product::where('id', '=', $productId)->with($relationships)->first();
+        }
+
         return Product::where('id', '=', $productId)->first();
     }
 
@@ -175,6 +180,17 @@ class DataAccessLayer
 
     public function upsertBrand($vendorId, $data)
     {
+
+    }
+
+    public function getAllAllergens($activeOnly = true)
+    {
+        if($activeOnly)
+        {
+            return DB::table('allergens')->where('active', '=', '1')->get();
+        }
+
+        return DB::table('allergens')->get();
 
     }
 

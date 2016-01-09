@@ -12,15 +12,15 @@
         <div class="col-xs-12">
             <h1 class="item-title">{{$product->name}}</h1>
             <div class="btn-row">
-                <button class="btn-primary">Add to My Products</button>
+                <button class="btn-primary">{{trans('ui.product_label_add_to_my_products')}}</button>
             </div>
 
             <div class="btn-row">
-                <button class="btn-primary">Go to Vendor Profile</button>
+                <button class="btn-primary">{{trans('ui.product_label_goto_vendor_profile')}}</button>
             </div>
 
             <div class="btn-row">
-                <button class="btn">Request a Sample</button>
+                <button class="btn">{{trans('ui.product_label_request_sample')}}</button>
             </div>
         </div>
 
@@ -28,9 +28,9 @@
             @if (Auth::check()
                 && (Auth::user()->hasRole('admin') || (Auth::user()->hasRole('vendor') && isProductOwner($product->id) )))
 
-                <p class="bg-info">You are an administrator for this product 
+                <p class="bg-info">{{trans('messages.product_administrator_notice')}}
                     <button class="btn-primary">
-                        <a href="{{url('product/edit', $product->id)}}">Edit Product</a>
+                        <a href="{{url('product/edit', $product->id)}}">{{trans('ui.product_label_edit_product')}}</a>
                     </button>
                 </p>
 
@@ -54,7 +54,7 @@
                 <h3>{{trans('ui.product_label_description')}}</h3>
                 <h3>{{$product->description}}</h3>
 
-                <button class="btn">Rate this Product</button>
+                <button class="btn">{{trans('ui.product_label_rate_product')}}</button>
             </div>
         
         </div>
@@ -154,12 +154,21 @@
              </div>
                 
             <div class="row">
-                <div class="col-xs-12 col-md-10 col-md-offset-1">                    
+                <div class="col-xs-12 col-md-10 col-md-offset-1">
+
                     <h2 class="item-subhead">{{trans('ui.product_label_allergy_info')}}</h2>
                     
                     <div class="col-xs-12 well">
-                       <p> @foreach($product->allergens as $a) </p> 
-                        @endforeach
+
+                        @forelse($product->allergens as $a)
+                            <div class="table-row">
+                                <p>{{$a->name}}</p>
+                                <p>&nbsp;</p>
+                            </div>
+                        @empty
+                            <p>{{trans('ui.product_label_no_information')}}</p>
+                        @endforelse
+
                     </div>
                  </div>   
             </div>

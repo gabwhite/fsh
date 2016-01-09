@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 use App\DataAccessLayer;
+use App\LookupManager;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -19,15 +20,17 @@ class ProductController extends Controller
 {
 
     protected $dataAccess;
+    protected $lookupManager;
 
-    public function __construct(DataAccessLayer $dataAccess)
+    public function __construct(DataAccessLayer $dataAccess, LookupManager $lookupManager)
     {
         $this->dataAccess = $dataAccess;
+        $this->lookupManager = $lookupManager;
     }
 
     public function detail($id)
     {
-        $product = $this->dataAccess->getProduct($id);
+        $product = $this->dataAccess->getProduct($id, 'allergens');
 
         return view('product.detail')->with('product', $product);
     }
@@ -55,14 +58,25 @@ class ProductController extends Controller
 
     public function showProduct($id = null)
     {
-        $product = new \App\Models\Product();
-        if($id != null)
+        $user = \Auth::user();
+
+        // Only admins or product owner can edit product
+        $canEdit = false;
+        if($user->hasRole(config('app.role_admin_name')) || $this->dataAccess->isVendorOwner($user->id, $id))
         {
-            $product = $this->dataAccess->getProduct($id);
+            $canEdit = true;
+        }
+
+        $product = new \App\Models\Product();
+        if($id != null && $canEdit)
+        {
+            $product = $this->dataAccess->getProduct($id, 'allergens');
             if($product == null) { $product = new \App\Models\Product(); }
         }
 
-        return view('product.edit')->with('product', $product);
+        $allergens = $this->lookupManager->getProductAllergens();
+
+        return view('product.edit')->with(['product' => $product, 'allergens' => $allergens]);
     }
 
     public function editProduct(Request $request)
