@@ -183,4 +183,15 @@ class DataAccessLayer
 
     }
 
+    public function getAllAllergens($activeOnly = true)
+    {
+        if($activeOnly)
+        {
+            return DB::table('allergens')->where('active', '=', '1')->get();
+        }
+
+        return DB::table('allergens')->get();
+
+    }
+
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\CacheManager;
 use App\DataAccessLayer;
 use App\DbCategoryFinder;
+use App\LookupManager;
 use App\ProductSearcher;
 use Illuminate\Http\Request;
 use Cache;
@@ -15,16 +16,16 @@ class AjaxController extends Controller
 {
 
     protected $dataAccess;
-    protected $cacheManager;
+    protected $lookupManager;
 
     /**
      * AjaxController constructor.
      * @param $dataAccess
      */
-    public function __construct(DataAccessLayer $dataAccess, CacheManager $cacheManager)
+    public function __construct(DataAccessLayer $dataAccess, LookupManager $lookupManager)
     {
         $this->dataAccess = $dataAccess;
-        $this->cacheManager = $cacheManager;
+        $this->lookupManager = $lookupManager;
     }
 
     public function getProductFullTextSearch($query)
@@ -47,28 +48,6 @@ class AjaxController extends Controller
         }
 
         $results = $this->dataAccess->getProductsByFullText($finalWords);
-
-        /*
-        $productSearcher = new ProductSearcher();
-        $hits = $productSearcher->fullTextSearch('productindex', $query);
-
-        $results = array();
-        foreach($hits as $h)
-        {
-            $d = $h->getDocument();
-            $fieldNames = $d->getFieldNames();
-
-            $fields = array();
-            foreach($fieldNames as $fn)
-            {
-                $fv = $d->getFieldValue($fn);
-                $fields[$fn] = $fv;
-            }
-
-            $data = array('score' => $h->score, 'fields' => $fields);
-            array_push($results, $data);
-        }
-        */
 
         return response()->json($results);
     }
@@ -119,27 +98,14 @@ class AjaxController extends Controller
 
     public function getCountries()
     {
-        $countries = $this->cacheManager->getItem(env('CACHE_DRIVER'), 'countries');
-
-        if($countries == null)
-        {
-            $countries = $this->dataAccess->getAllCountries();
-            $this->cacheManager->setItem(env('CACHE_DRIVER'), 'countries', $countries, 10);
-        }
+        $countries = $this->lookupManager->getCountries();
 
         return response()->json($countries);
     }
 
     public function getStateProvincesForCountry($countryId)
     {
-
-
-        $key = 'stateprovince-' . $countryId;
-
-        $stateProvinces = Cache::remember($key, 5, function() use ($countryId)
-        {
-            return $this->dataAccess->getStateProvincesForCountry($countryId);
-        });
+        $stateProvinces = $this->lookupManager->getStateProvincesForCountry($countryId);
 
         return response()->json($stateProvinces);
     }
