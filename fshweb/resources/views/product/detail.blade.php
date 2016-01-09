@@ -154,12 +154,21 @@
              </div>
                 
             <div class="row">
-                <div class="col-xs-12 col-md-10 col-md-offset-1">                    
+                <div class="col-xs-12 col-md-10 col-md-offset-1">
+
                     <h2 class="item-subhead">{{trans('ui.product_label_allergy_info')}}</h2>
                     
                     <div class="col-xs-12 well">
-                       <p> @foreach($product->allergens as $a) </p> 
-                        @endforeach
+
+                        @forelse($product->allergens as $a)
+                            <div class="table-row">
+                                <p>{{$a->name}}</p>
+                                <p>&nbsp;</p>
+                            </div>
+                        @empty
+                            <p>{{trans('ui.product_label_no_information')}}</p>
+                        @endforelse
+
                     </div>
                  </div>   
             </div>

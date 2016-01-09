@@ -27,7 +27,7 @@ class ProductController extends Controller
 
     public function detail($id)
     {
-        $product = $this->dataAccess->getProduct($id);
+        $product = $this->dataAccess->getProduct($id, 'allergens');
 
         return view('product.detail')->with('product', $product);
     }
