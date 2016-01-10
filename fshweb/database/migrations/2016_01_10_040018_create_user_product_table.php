@@ -12,7 +12,7 @@ class CreateUserProductTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_product', function (Blueprint $table)
+        Schema::create('user_product_favorites', function (Blueprint $table)
         {
             $table->engine = 'InnoDB';
 
@@ -34,6 +34,6 @@ class CreateUserProductTable extends Migration
      */
     public function down()
     {
-        Schema::drop('user_product');
+        Schema::drop('user_product_favorites');
     }
 }
