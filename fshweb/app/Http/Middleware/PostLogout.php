@@ -15,10 +15,12 @@ class PostLogout
      */
     public function handle($request, Closure $next)
     {
+        $vendorSessionKey = config('app.session_key_vendor');
+
         // Clear session vars
-        if(\Session::has('vendor_id'))
+        if(\Session::has($vendorSessionKey))
         {
-            \Session::forget('vendor_id');
+            \Session::forget($vendorSessionKey);
         }
 
         return $next($request);

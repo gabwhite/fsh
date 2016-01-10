@@ -222,4 +222,6 @@ return [
     'contact_email_view' => 'emails.contact',
     'contact_email_view_admin' => 'emails.contactadmin',
     'contact_email_to' => 'breen@foodservicehound.com',
+
+    'session_key_vendor' => 'vendor_id',
 ];

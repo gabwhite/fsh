@@ -82,9 +82,11 @@ class ProductController extends Controller
 
     public function vendorProducts()
     {
-        $user = \Auth::user();
-
-        $products = $this->dataAccess->getProductsByVendor($user->id, ['id', 'name'], true, 20);
+        $products = array();
+        if(\Session::has(config('app.session_key_vendor')))
+        {
+            $products = $this->dataAccess->getProductsByVendor(\Session::get(config('app.session_key_vendor')), ['id', 'name'], true, 20);
+        }
 
         return view('profile.products')->with('products', $products);
     }
