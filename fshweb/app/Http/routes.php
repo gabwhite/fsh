@@ -53,7 +53,7 @@ Route::group(['middleware' => 'auth'], function()
     // Routes that require either admin or vendor roles
     Route::group(['middleware' => ['role:vendor|admin']], function()
     {
-        Route::get('/products/{id}', 'ProductController@vendorProducts');
+        Route::get('/product/vendor', 'ProductController@vendorProducts');
         Route::get('/product/edit/{id?}', 'ProductController@showProduct');
         Route::post('/product/edit', 'ProductController@editProduct');
         Route::get('/vendor/edit', 'VendorController@edit');
