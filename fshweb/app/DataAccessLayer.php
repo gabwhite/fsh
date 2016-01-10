@@ -65,14 +65,35 @@ class DataAccessLayer
         return Product::where('id', '=', $productId)->first();
     }
 
-    public function getProductByIdUser($productId, $userId)
+    public function getProductByIdVendor($productId, $vendorId)
     {
-        return Product::where(['id' => $productId, 'vendor_id' => $userId])->first();
+        return Product::where(['id' => $productId, 'vendor_id' => $vendorId])->first();
+    }
+
+    public function getProductsByVendor($vendorId, $fields = null, $paginate = false, $itemsPerPage = 20)
+    {
+        $query = Product::where('vendor_id', '=', $vendorId);
+        if(isset($fields))
+        {
+            $query->select($fields);
+        }
+
+        if($paginate)
+        {
+            $products = $query->paginate($itemsPerPage);
+        }
+        else
+        {
+            $products = $query->get();
+        }
+
+        return $products;
+
     }
 
     public function upsertProduct($productId, $userId, $data)
     {
-        $product = $this->getProductByIdUser($productId, $userId);
+        $product = $this->getProductByIdVendor($productId, $userId);
 
         $isAdd = false;
         if(!$product)
@@ -174,12 +195,17 @@ class DataAccessLayer
         return ($this->getVendorOwner($vendorId) == $userId);
     }
 
-    public function getVendorsForUser($userId)
+    public function getVendorsForUser($userId, $fields = null)
     {
-        $vendors = Vendor::where('user_id', '=', $userId)->select('id')->get();
+        $query = Vendor::where('user_id', '=', $userId);
+        if(isset($fields))
+        {
+            $query->select($fields);
+        }
+
+        $vendors = $query->get();
 
         return $vendors;
-
     }
 
     public function isUserVendorOwner($userId, $vendorId)

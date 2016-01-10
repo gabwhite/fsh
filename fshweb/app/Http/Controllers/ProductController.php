@@ -84,7 +84,7 @@ class ProductController extends Controller
     {
         $user = \Auth::user();
 
-        $products = \App\Models\Product::where('user_id', '=', $user->id)->orderby('name')->paginate(20);
+        $products = $this->dataAccess->getProductsByVendor($user->id, ['id', 'name'], true, 20);
 
         return view('profile.products')->with('products', $products);
     }

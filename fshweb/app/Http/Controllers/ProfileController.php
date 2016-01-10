@@ -47,7 +47,7 @@ class ProfileController extends Controller
 
         // Get vendor associations
 
-        $vendors = $this->dataAccess->getVendorsForUser($user->id);
+        $vendors = $this->dataAccess->getVendorsForUser($user->id, ['id']);
 
         // TODO: We're only supporting one vendor owner per person for now.
         if(count($vendors) > 0) { $vendorOwner = true; $vendorId = $vendors[0]->id; }
