@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use App\DataAccessLayer;
 use Closure;
 
-class RedirectOnRole
+class PostLogin
 {
     protected $dataAccess;
 
@@ -28,6 +28,9 @@ class RedirectOnRole
     public function handle($request, Closure $next)
     {
         $response = $next($request);
+
+        // Clear any existing session vars
+        if(\Session::has('vendor_id')) { \Session::forget('vendor_id'); }
 
         $user = $request->user();
         if ($user)
