@@ -40,22 +40,6 @@ class ProductController extends Controller
         return view('product.search');
     }
 
-    public function fullTextSearch(Request $request)
-    {
-
-        $productSearcher = new ProductSearcher();
-        $hits = $productSearcher->fullTextSearch('productindex', $request->input('searchquery'));
-
-        $results = array();
-        foreach($hits as $h)
-        {
-            $data = array('score' => $h->score, 'document' => $h->getDocument());
-            array_push($results, $data);
-        }
-
-        return view('search')->with('searchresults', $results)->with('query', $request->input('searchquery'));
-    }
-
     public function showProduct($id = null)
     {
         $user = \Auth::user();
