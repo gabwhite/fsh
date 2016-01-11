@@ -20,6 +20,10 @@ label {
 	}
 }
 
+.input-sm {
+	height: 35px;
+}
+
 /*----------  Buttons  ----------*/
 .btn-primary {
 	@include btn;
@@ -54,9 +58,13 @@ label {
 		}
 	button {
 		margin: 0 10px;
-
-
 	}
+}
+
+.btn-sm {
+	@extend .btn-primary;
+	height: 35px;
+	line-height: 0;
 }
 
 /*=====  End of Forms and Buttons  ======*/

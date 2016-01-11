@@ -17,6 +17,22 @@ p {
 	@include well;
 }
 
+.reset-left {
+    @include breakpoint(tablet){
+        padding-left: 0;
+    }
+}
+
+.reset-right {
+    @include breakpoint(tablet){
+        padding-right: 0;
+    }
+}
+
+.reset-padding {
+    padding: 0;
+}
+
 /*----------  Headers  ----------*/
 
 h1, h2, h3 {
@@ -138,12 +154,20 @@ h4 {
     margin: 0;
 }
 
-.nutrition-meta .col-lg-6 {
-    padding: 0;
+
+.nutrition-meta .calories-left, 
+.nutrition-meta .amount-per-serving,
+.nutrition-meta .calories-right {
+    padding: 2% 0;
 }
 
 .nutrition-meta .calories-right {
-    text-align: right;
+    padding-left: 2%;
+}
+
+.nutrition-meta label.nutrition-value {
+    font-size: 16px;
+    font-weight: 300;
 }
 
 .nutrition-meta.saturated-fat, .nutrition-meta.dietary-fibre,
@@ -159,18 +183,22 @@ h4 {
 
 .bg-info {
 	background: white;
-	border: 2px solid $primary-button;
-}
-
-p.bg-info {
+    border: 1px solid $border;
+	border-left: 5px solid $rating;
 	padding: 10px 20px;
+    margin-bottom: 30px;
+
+    p {
+        margin-bottom: 0;
+        line-height: 2.2;
+    }
 }
 
-p.bg-info button {
+.bg-info button {
 	margin: 0 10px;
 }
 
-p.bg-info a {
+.bg-info a {
 	color: white;
 
 	&:hover, &:focus, &:active {
@@ -179,7 +207,10 @@ p.bg-info a {
 	}
 }
 
-
+.bg-danger {
+    @extend .bg-info;
+    border-left: 5px solid $danger;
+}
 
 
 /*----------  Stuff that was in Header  ----------*/

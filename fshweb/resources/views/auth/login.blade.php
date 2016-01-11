@@ -16,9 +16,9 @@
 <div class="row">
 
     <div class="col-xs-12 col-md-6 col-md-offset-3">
-        <div class="row well">
+        <div class="well col-xs-12">
             <h2 class="subhead">Sign In to Your Account</h2>
-            <div class="col-xs-12 col-md-8 col-md-offset-2">
+            <div class="col-xs-12 col-md-10 col-md-offset-1">
                 <form id="form1" name="form1" method="POST" action="{{url('/auth/login')}}">
                 {!! csrf_field() !!}
 

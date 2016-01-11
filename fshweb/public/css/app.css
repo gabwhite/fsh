@@ -1754,12 +1754,15 @@ a.bg-success:focus {
   background-color: #c1e2b3;
 }
 
-.bg-info {
+.bg-info,
+.bg-danger {
   background-color: #d9edf7;
 }
 
 a.bg-info:hover,
-a.bg-info:focus {
+a.bg-danger:hover,
+a.bg-info:focus,
+a.bg-danger:focus {
   background-color: #afd9ee;
 }
 
@@ -4065,67 +4068,125 @@ fieldset[disabled] .btn-default.focus {
   background-color: #333;
 }
 
-.btn-primary {
+.btn-primary,
+.btn-sm,
+.btn-group-sm > .btn {
   color: #fff;
   background-color: #337ab7;
   border-color: #2e6da4;
 }
 
 .btn-primary:focus,
-.btn-primary.focus {
+.btn-sm:focus,
+.btn-group-sm > .btn:focus,
+.btn-primary.focus,
+.focus.btn-sm,
+.btn-group-sm > .focus.btn {
   color: #fff;
   background-color: #286090;
   border-color: #122b40;
 }
 
-.btn-primary:hover {
+.btn-primary:hover,
+.btn-sm:hover,
+.btn-group-sm > .btn:hover {
   color: #fff;
   background-color: #286090;
   border-color: #204d74;
 }
 
 .btn-primary:active,
+.btn-sm:active,
+.btn-group-sm > .btn:active,
 .btn-primary.active,
-.open > .btn-primary.dropdown-toggle {
+.active.btn-sm,
+.btn-group-sm > .active.btn,
+.open > .btn-primary.dropdown-toggle,
+.open > .dropdown-toggle.btn-sm,
+.btn-group-sm.open > .dropdown-toggle.btn {
   color: #fff;
   background-color: #286090;
   border-color: #204d74;
 }
 
 .btn-primary:active:hover,
+.btn-sm:active:hover,
+.btn-group-sm > .btn:active:hover,
 .btn-primary:active:focus,
+.btn-sm:active:focus,
+.btn-group-sm > .btn:active:focus,
 .btn-primary:active.focus,
+.btn-sm:active.focus,
+.btn-group-sm > .btn:active.focus,
 .btn-primary.active:hover,
+.active.btn-sm:hover,
+.btn-group-sm > .active.btn:hover,
 .btn-primary.active:focus,
+.active.btn-sm:focus,
+.btn-group-sm > .active.btn:focus,
 .btn-primary.active.focus,
+.active.focus.btn-sm,
+.btn-group-sm > .active.focus.btn,
 .open > .btn-primary.dropdown-toggle:hover,
+.open > .dropdown-toggle.btn-sm:hover,
+.btn-group-sm.open > .dropdown-toggle.btn:hover,
 .open > .btn-primary.dropdown-toggle:focus,
-.open > .btn-primary.dropdown-toggle.focus {
+.open > .dropdown-toggle.btn-sm:focus,
+.btn-group-sm.open > .dropdown-toggle.btn:focus,
+.open > .btn-primary.dropdown-toggle.focus,
+.open > .dropdown-toggle.focus.btn-sm,
+.btn-group-sm.open > .dropdown-toggle.focus.btn {
   color: #fff;
   background-color: #204d74;
   border-color: #122b40;
 }
 
 .btn-primary:active,
+.btn-sm:active,
+.btn-group-sm > .btn:active,
 .btn-primary.active,
-.open > .btn-primary.dropdown-toggle {
+.active.btn-sm,
+.btn-group-sm > .active.btn,
+.open > .btn-primary.dropdown-toggle,
+.open > .dropdown-toggle.btn-sm,
+.btn-group-sm.open > .dropdown-toggle.btn {
   background-image: none;
 }
 
 .btn-primary.disabled:hover,
+.disabled.btn-sm:hover,
+.btn-group-sm > .disabled.btn:hover,
 .btn-primary.disabled:focus,
+.disabled.btn-sm:focus,
+.btn-group-sm > .disabled.btn:focus,
 .btn-primary.disabled.focus,
+.disabled.focus.btn-sm,
+.btn-group-sm > .disabled.focus.btn,
 .btn-primary[disabled]:hover,
+[disabled].btn-sm:hover,
+.btn-group-sm > [disabled].btn:hover,
 .btn-primary[disabled]:focus,
+[disabled].btn-sm:focus,
+.btn-group-sm > [disabled].btn:focus,
 .btn-primary[disabled].focus,
+[disabled].focus.btn-sm,
+.btn-group-sm > [disabled].focus.btn,
 fieldset[disabled] .btn-primary:hover,
+fieldset[disabled] .btn-sm:hover,
+fieldset[disabled] .btn-group-sm > .btn:hover,
 fieldset[disabled] .btn-primary:focus,
-fieldset[disabled] .btn-primary.focus {
+fieldset[disabled] .btn-sm:focus,
+fieldset[disabled] .btn-group-sm > .btn:focus,
+fieldset[disabled] .btn-primary.focus,
+fieldset[disabled] .focus.btn-sm,
+fieldset[disabled] .btn-group-sm > .focus.btn {
   background-color: #337ab7;
   border-color: #2e6da4;
 }
 
-.btn-primary .badge {
+.btn-primary .badge,
+.btn-sm .badge,
+.btn-group-sm > .btn .badge {
   color: #337ab7;
   background-color: #fff;
 }
@@ -8343,6 +8404,22 @@ p {
   border-radius: 3px;
 }
 
+@media (min-width: 768px) {
+  .reset-left {
+    padding-left: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .reset-right {
+    padding-right: 0;
+  }
+}
+
+.reset-padding {
+  padding: 0;
+}
+
 /*----------  Headers  ----------*/
 
 h1,
@@ -8470,12 +8547,19 @@ h4 {
   margin: 0;
 }
 
-.nutrition-meta .col-lg-6 {
-  padding: 0;
+.nutrition-meta .calories-left,
+.nutrition-meta .amount-per-serving,
+.nutrition-meta .calories-right {
+  padding: 2% 0;
 }
 
 .nutrition-meta .calories-right {
-  text-align: right;
+  padding-left: 2%;
+}
+
+.nutrition-meta label.nutrition-value {
+  font-size: 16px;
+  font-weight: 300;
 }
 
 .nutrition-meta.saturated-fat,
@@ -8490,28 +8574,43 @@ h4 {
 
 /*----------  Admin editing notices  ----------*/
 
-.bg-info {
+.bg-info,
+.bg-danger {
   background: white;
-  border: 2px solid #4dd371;
-}
-
-p.bg-info {
+  border: 1px solid #c2c2c2;
+  border-left: 5px solid #ffce0e;
   padding: 10px 20px;
+  margin-bottom: 30px;
 }
 
-p.bg-info button {
+.bg-info p,
+.bg-danger p {
+  margin-bottom: 0;
+  line-height: 2.2;
+}
+
+.bg-info button,
+.bg-danger button {
   margin: 0 10px;
 }
 
-p.bg-info a {
+.bg-info a,
+.bg-danger a {
   color: white;
 }
 
-p.bg-info a:hover,
-p.bg-info a:focus,
-p.bg-info a:active {
+.bg-info a:hover,
+.bg-danger a:hover,
+.bg-info a:focus,
+.bg-danger a:focus,
+.bg-info a:active,
+.bg-danger a:active {
   color: white;
   text-decoration: none;
+}
+
+.bg-danger {
+  border-left: 5px solid #e7212d;
 }
 
 /*----------  Stuff that was in Header  ----------*/
@@ -8674,9 +8773,18 @@ label {
   }
 }
 
+.input-sm,
+.input-group-sm > .form-control,
+.input-group-sm > .input-group-addon,
+.input-group-sm > .input-group-btn > .btn {
+  height: 35px;
+}
+
 /*----------  Buttons  ----------*/
 
-.btn-primary {
+.btn-primary,
+.btn-sm,
+.btn-group-sm > .btn {
   display: inline-block;
   text-transform: none;
   font-family: "Open Sans";
@@ -8696,14 +8804,22 @@ label {
 }
 
 @media (min-width: 768px) {
-  .btn-primary {
+  .btn-primary,
+  .btn-sm,
+  .btn-group-sm > .btn {
     padding: 10px 30px;
   }
 }
 
 .btn-primary:hover,
+.btn-sm:hover,
+.btn-group-sm > .btn:hover,
 .btn-primary:focus,
-.btn-primary:active {
+.btn-sm:focus,
+.btn-group-sm > .btn:focus,
+.btn-primary:active,
+.btn-sm:active,
+.btn-group-sm > .btn:active {
   background: #2fbe55;
   border: 2px solid #2fbe55;
 }
@@ -8755,6 +8871,12 @@ label {
   margin: 0 10px;
 }
 
+.btn-sm,
+.btn-group-sm > .btn {
+  height: 35px;
+  line-height: 0;
+}
+
 /*=====  End of Forms and Buttons  ======*/
 
 /*================================================
@@ -8776,21 +8898,21 @@ label {
 }
 
 .login-header {
-  background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74, 75, 75, 0.5)), url(/img/headers/login-bg.jpg) no-repeat;
+  background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74, 75, 75, 0.5)), url(../../public/img/headers/login-bg.jpg) no-repeat;
   background-position: center center;
   background-size: cover;
   background-attachment: fixed;
 }
 
 .register-header {
-  background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74, 75, 75, 0.5)), url(/img/headers/signup-bg.jpg) no-repeat;
+  background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74, 75, 75, 0.5)), url(../../public/img/headers/signup-bg.jpg) no-repeat;
   background-position: center center;
   background-size: cover;
   background-attachment: fixed;
 }
 
 .contact-header {
-  background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74, 75, 75, 0.5)), url(/img/headers/contact-bg.jpg) no-repeat;
+  background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74, 75, 75, 0.5)), url(../../public/img/headers/contact-bg.jpg) no-repeat;
   background-position: center center;
   background-size: cover;
   background-attachment: fixed;
@@ -8821,7 +8943,7 @@ label {
 }
 
 a.contact {
-  background: url(/img/icons/envelope.svg) no-repeat;
+  background: url(../../public/img/icons/envelope.svg) no-repeat;
   background-size: contain;
   color: white;
   padding-left: 35px;
