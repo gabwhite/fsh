@@ -18,6 +18,10 @@ class ProductImportOptions
     private $addAsActive = false;
     private $ignoreExisting = false;
     private $simulate = false;
+    private $downloadImages = false;
+    private $resizeImages = false;
+    private $resizeImageWidth = null;
+    private $resizeImageHeight = null;
 
     /**
      * ProductImportOptions constructor.
@@ -138,6 +142,70 @@ class ProductImportOptions
     public function setSimulate($simulate)
     {
         $this->simulate = $simulate;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isDownloadImages()
+    {
+        return $this->downloadImages;
+    }
+
+    /**
+     * @param boolean $downloadImages
+     */
+    public function setDownloadImages($downloadImages)
+    {
+        $this->downloadImages = $downloadImages;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isResizeImages()
+    {
+        return $this->resizeImages;
+    }
+
+    /**
+     * @param boolean $resizeImages
+     */
+    public function setResizeImages($resizeImages)
+    {
+        $this->resizeImages = $resizeImages;
+    }
+
+    /**
+     * @return null
+     */
+    public function getResizeImageWidth()
+    {
+        return $this->resizeImageWidth;
+    }
+
+    /**
+     * @param null $resizeImageWidth
+     */
+    public function setResizeImageWidth($resizeImageWidth)
+    {
+        $this->resizeImageWidth = $resizeImageWidth;
+    }
+
+    /**
+     * @return null
+     */
+    public function getResizeImageHeight()
+    {
+        return $this->resizeImageHeight;
+    }
+
+    /**
+     * @param null $resizeImageHeight
+     */
+    public function setResizeImageHeight($resizeImageHeight)
+    {
+        $this->resizeImageHeight = $resizeImageHeight;
     }
 
 
