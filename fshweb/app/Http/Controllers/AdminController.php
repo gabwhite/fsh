@@ -75,6 +75,10 @@ class AdminController extends Controller
                 $importInfo->setAddAsActive($request->input('addasactive') ? true : false);
                 $importInfo->setIgnoreExisting($request->input('ignoreexisting') ? true : false);
                 $importInfo->setSimulate($request->input('simulate') ? true : false);
+                $importInfo->setDownloadImages($request->input('downloadimages') ? true : false);
+                $importInfo->setResizeImages($request->input('resizeimages') ? true : false);
+                $importInfo->setResizeImageWidth($request->input('imagewidth'));
+                $importInfo->setResizeImageHeight($request->input('imageheight'));
 
                 $this->dispatch(new ParseProductImport($importInfo));
             }
