@@ -154,6 +154,16 @@ class CsvProductImporter implements iProductImporter
                     $product->gross_weight =        0;
                     $product->tare_weight =         0;
                     $product->serving_size =        0;
+
+                    if($pio->isDownloadImages())
+                    {
+                        $product->vendor_logo = '';
+                    }
+                    else
+                    {
+                        $product->vendor_logo = '';
+                    }
+
                     $product->vendor_logo =         '';
                     $product->pos_pdf =             '';
 
@@ -222,7 +232,7 @@ class CsvProductImporter implements iProductImporter
         $productImport->user_id = $pio->getVendorId();
         $productImport->uuid = $pio->getUuid();
         $productImport->filename = $pio->getFileName();
-        $productImport->save();
+        //$productImport->save();
 
         echo sprintf('Import complete, %s records added, %s records updated, %s records failed %s', $recordsAdded, $recordsUpdated, $recordsFailed, ($pio->isSimulate() ? '(Simulated)' : '' ));
 
