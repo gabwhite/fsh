@@ -219,6 +219,7 @@ return [
     'csv_storage' => 'app/imports',
     'avatar_storage' => 'img/avatars',
     'avatar_none' => 'img/no-avatar.png',
+    'vendor_storage' => 'img/vendors',
     'contact_email_view' => 'emails.contact',
     'contact_email_view_admin' => 'emails.contactadmin',
     'contact_email_to' => 'breen@foodservicehound.com',
