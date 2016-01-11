@@ -232,9 +232,15 @@ class DataAccessLayer
         return null;
     }
 
-    public function getVendor($vendorId)
+    public function getVendor($vendorId, $fields = null)
     {
-        $vendor = Vendor::find($vendorId);
+        $query = Vendor::where('id', '=', $vendorId);
+        if(isset($fields))
+        {
+            $query->select($fields);
+        }
+
+        $vendor = $query->first();
 
         return $vendor;
     }
@@ -259,6 +265,38 @@ class DataAccessLayer
 
 
         return $vendors;
+    }
+
+    public function upsertVendor($vendorId, $data)
+    {
+
+        $vendor = $this->getVendor($vendorId);
+
+        $isAdd = false;
+        if(!isset($vendor))
+        {
+            $vendor = new Vendor();
+            $isAdd = true;
+        }
+
+        $vendor->user_id = $data['user_id'];
+        $vendor->company_name = $data['company_name'] ? $data['company_name'] : null;
+        $vendor->country = $data['country'] ? $data['country'] : null;
+        $vendor->state_province = $data['state_province'] ? $data['state_province'] : null;
+        $vendor->address1 = $data['address1'] ? $data['address1'] : null;
+        $vendor->address2 = $data['address2'] ? $data['address2'] : null;
+        $vendor->city = $data['city'] ? $data['city'] : null;
+        $vendor->zip_postal = $data['zip_postal'] ? $data['zip_postal'] : null;
+        $vendor->contact_name = $data['contact_name'] ? $data['contact_name'] : null;
+        $vendor->contact_title = $data['contact_title'] ? $data['contact_title'] : null;
+        $vendor->contact_phone = $data['contact_phone'] ? $data['contact_phone'] : null;
+        $vendor->contact_url = $data['contact_url'] ? $data['contact_url'] : null;
+        $vendor->intro_text = $data['intro_text'] ? $data['intro_text'] : null;
+        $vendor->about_text = $data['about_text'] ? $data['about_text'] : null;
+
+        $vendor->save();
+
+        return $vendor->id;
     }
 
     public function upsertBrand($vendorId, $data)
