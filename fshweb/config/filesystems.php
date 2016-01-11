@@ -53,6 +53,11 @@ return [
             'root'   => public_path('img/avatars'),
         ],
 
+        'vendors' => [
+            'driver' => 'local',
+            'root'   => public_path('img/vendors'),
+        ],
+
         'imports' => [
             'driver' => 'local',
             'root' => storage_path('app/imports'),
