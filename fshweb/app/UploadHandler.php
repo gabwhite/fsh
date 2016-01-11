@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
 use Ramsey\Uuid\Uuid;
 use Intervention\Image\ImageManagerStatic as Image;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class UploadHandler
 {
@@ -20,7 +21,7 @@ class UploadHandler
         return Uuid::uuid4()->toString() . "." . $extension;
     }
 
-    public function uploadCsv($file, $directory, $filename)
+    public function uploadCsv(UploadedFile $file, $directory, $filename)
     {
         $success = false;
 
@@ -28,7 +29,6 @@ class UploadHandler
         {
             try
             {
-
                 if ($file->isValid())
                 {
                     //$file->move($path, $fileName);
@@ -48,7 +48,7 @@ class UploadHandler
         return $success;
     }
 
-    public function uploadAvatar($file, $avatarFilename = null)
+    public function uploadAvatar(UploadedFile $file, $avatarFilename = null)
     {
         if(!isset($avatarFilename))
         {
@@ -72,7 +72,7 @@ class UploadHandler
         }
     }
 
-    public function uploadFile($file, $fileName, $path)
+    public function uploadFile(UploadedFile $file, $fileName, $path)
     {
         try
         {
@@ -92,9 +92,9 @@ class UploadHandler
         $this->cropImage(public_path(config('app.avatar_storage')), $fileName, $cropData);
     }
 
-    public function cropVendorAsset($fileName, $cropData)
+    public function resizeVendorAsset($fileName, $width, $height)
     {
-        $this->cropImage(public_path(config('app.vendor_storage')), $fileName, $cropData);
+        $this->resizeImage(public_path(config('app.vendor_storage')), $fileName, $width, $height);
     }
 
     public function cropImage($path, $fileName, $cropData)
@@ -104,5 +104,36 @@ class UploadHandler
 
         $img = Image::make($path . '/' .  $fileName)->crop(ceil($cropData[0]), ceil($cropData[1]), ceil($cropData[2]), ceil($cropData[3]));
         $img->save();
+    }
+
+    public function resizeImage($path, $fileName, $width, $height)
+    {
+        $img = Image::make($path . '/' . $fileName)->resize($width, $height);
+        $img->save();
+    }
+
+    public function getRemoteFile($url, $fileName, $path, $resizeWidth = null, $resizeHeight = null)
+    {
+        $extension = pathinfo($url, PATHINFO_EXTENSION);
+        $fileName = $fileName . '.' . $extension;
+        $savePath = $path . '/' . $fileName;
+
+        $file = file_get_contents($url);
+
+        $saved = file_put_contents($savePath, $file);
+
+        $success = false;
+
+        if($saved)
+        {
+            $success = true;
+
+            if(isset($resizeWidth) && isset($resizeHeight))
+            {
+                $this->resizeVendorAsset($fileName, $resizeWidth, $resizeHeight);
+            }
+        }
+
+        return $success;
     }
 }
