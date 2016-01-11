@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-    <p>This is my admin body content.</p>
+
 
     <form id="form1" name="form1" method="post" action="{{url('admin/import')}}" enctype="multipart/form-data">
         {!! csrf_field() !!}
@@ -23,15 +23,11 @@
             </label>
         </div>
 
-        <br/>
-
         <div class="checkbox">
             <label>
                 <input type="checkbox" name="addasactive" id="addasactive"/>Add new entries as active
             </label>
         </div>
-
-        <br/>
 
         <div class="checkbox">
             <label>
@@ -39,7 +35,21 @@
             </label>
         </div>
 
-        <br/>
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" name="downloadimages" id="downloadimages"/>Download Images
+            </label>
+        </div>
+
+        <div class="checkbox">
+            <label>
+                <input type="checkbox" name="resizeimages" id="resizeimages"/>Resize Images
+            </label>
+
+            <input type="text" name="imagewidth" id="imagewidth" size="5" placeholder="Width"/>
+            X
+            <input type="text" name="imageheight" id="imageheight" size="5" placeholder="Height"/>
+        </div>
 
         <div class="checkbox">
             <label>
