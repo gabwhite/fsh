@@ -141,6 +141,25 @@
 
                 <div class="row">
                     <div class="col-md-3">
+                        {{trans('ui.vendor_label_brands')}}
+                    </div>
+
+                    <div class="col-md-9">
+                    @forelse($vendor->brands as $b)
+                    {{$b->name}} <a href="#" class="deletebrand">Delete</a><br/>
+                    @empty
+                        No Brands Defined
+                    @endforelse
+
+                    <br/>
+                    <a href="#">Add Brand</a>
+
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-3">
                         {{trans('ui.vendor_label_logo_image')}}
                     </div>
                     <div class="col-md-9">

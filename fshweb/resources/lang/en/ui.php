@@ -82,6 +82,7 @@ return [
     'vendor_label_background_image' => 'Cover Image',
     'vendor_label_intro_text' => 'Company Intro Text',
     'vendor_label_about_text' => 'About your company',
+    'vendor_label_brands' => 'Brands',
 
 
 

@@ -34,9 +34,13 @@ class VendorController extends Controller
 
     public function edit()
     {
-        $user = \Auth::user();
+        $vendor = null;
+        if(\Session::has(config('app.session_key_vendor')))
+        {
+            $vendor = $this->dataAccess->getVendor(\Session::get(config('app.session_key_vendor')), null, 'brands');
+        }
 
-        return view('vendor.edit')->with('vendor', $user->vendorOwned);
+        return view('vendor.edit')->with('vendor', $vendor);
     }
 
     public function update(Request $request)

@@ -232,7 +232,7 @@ class DataAccessLayer
         return null;
     }
 
-    public function getVendor($vendorId, $fields = null)
+    public function getVendor($vendorId, $fields = null, $relationships = null)
     {
         $query = Vendor::where('id', '=', $vendorId);
         if(isset($fields))
@@ -240,9 +240,27 @@ class DataAccessLayer
             $query->select($fields);
         }
 
+        if(isset($relationships))
+        {
+            $query->with($relationships);
+        }
+
         $vendor = $query->first();
 
         return $vendor;
+    }
+
+    public function getBrand($brandId, $fields = null)
+    {
+        $query = VendorBrand::where('id', '=', $brandId);
+        if(isset($fields))
+        {
+            $query->select($fields);
+        }
+
+        $brand = $query->first();
+
+        return $brand;
     }
 
     public function getBrandsForVendor($vendorId)
@@ -280,28 +298,52 @@ class DataAccessLayer
         }
 
         $vendor->user_id = $data['user_id'];
-        $vendor->company_name = $data['company_name'] ? $data['company_name'] : null;
-        $vendor->country = $data['country'] ? $data['country'] : null;
-        $vendor->state_province = $data['state_province'] ? $data['state_province'] : null;
-        $vendor->address1 = $data['address1'] ? $data['address1'] : null;
-        $vendor->address2 = $data['address2'] ? $data['address2'] : null;
-        $vendor->city = $data['city'] ? $data['city'] : null;
-        $vendor->zip_postal = $data['zip_postal'] ? $data['zip_postal'] : null;
-        $vendor->contact_name = $data['contact_name'] ? $data['contact_name'] : null;
-        $vendor->contact_title = $data['contact_title'] ? $data['contact_title'] : null;
-        $vendor->contact_phone = $data['contact_phone'] ? $data['contact_phone'] : null;
-        $vendor->contact_url = $data['contact_url'] ? $data['contact_url'] : null;
-        $vendor->intro_text = $data['intro_text'] ? $data['intro_text'] : null;
-        $vendor->about_text = $data['about_text'] ? $data['about_text'] : null;
+        $vendor->company_name = $data['company_name'] ? $data['company_name'] : $vendor->company_name;
+        $vendor->country = $data['country'] ? $data['country'] : $vendor->country;
+        $vendor->state_province = $data['state_province'] ? $data['state_province'] : $vendor->state_province;
+        $vendor->address1 = $data['address1'] ? $data['address1'] : $vendor->address1;
+        $vendor->address2 = $data['address2'] ? $data['address2'] : $vendor->address2;
+        $vendor->city = $data['city'] ? $data['city'] : $vendor->city;
+        $vendor->zip_postal = $data['zip_postal'] ? $data['zip_postal'] : $vendor->zip_postal;
+        $vendor->contact_name = $data['contact_name'] ? $data['contact_name'] : $vendor->contact_name;
+        $vendor->contact_title = $data['contact_title'] ? $data['contact_title'] : $vendor->contact_title;
+        $vendor->contact_phone = $data['contact_phone'] ? $data['contact_phone'] : $vendor->contact_phone;
+        $vendor->contact_url = $data['contact_url'] ? $data['contact_url'] : $vendor->contact_url;
+        $vendor->intro_text = $data['intro_text'] ? $data['intro_text'] : $vendor->intro_text;
+        $vendor->about_text = $data['about_text'] ? $data['about_text'] : $vendor->about_text;
 
         $vendor->save();
 
         return $vendor->id;
     }
 
-    public function upsertBrand($vendorId, $data)
+    public function upsertBrand($brandId, $data)
     {
+        $brand = $this->getBrand($brandId);
+        $isAdd = false;
+        if(!isset($brand))
+        {
+            $brand = new VendorBrand();
+            $isAdd = true;
+        }
 
+        $brand->vendor_id = $data['vendor_id'];
+        $brand->name = $data['name'];
+        $brand->logo_image_path = $data['logo_image_path'];
+        $brand->active = $data['active'] ? 1 : 0;
+
+        $brand->save();
+
+        return $brand->id;
+    }
+
+    public function deleteBrand($brandId)
+    {
+        $brand = $this->getBrand($brandId);
+        if(!isset($brand))
+        {
+            $brand->delete();
+        }
     }
 
     public function getAllAllergens($activeOnly = true)
