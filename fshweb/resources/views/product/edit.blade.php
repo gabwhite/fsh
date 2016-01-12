@@ -64,8 +64,6 @@
                                 </label>
                                 <input type="text" name="calories_from_fat" class="form-control input-sm" maxlength="10" value="{{$product->calories_from_fat}}"/>
                             </div>
-                            
-                            <div class="clearfix"></div>
 
                         </div>
                                 
@@ -103,7 +101,7 @@
                     
                     </div><!--  end of nutrition block -->
                                
-
+                    <!-- beginning of nutrition info -->
                     <div class="row">
                         <div class="col-xs-12 col-md-10">
                             <h2 class="item-subhead">Dietary Information</h2>
@@ -132,11 +130,11 @@
                                         </label>
                                     </div>
                                 </div>
-                            </div>
-                                    
+                            </div>        
                         </div>
                     </div>
-                            
+                    
+                    <!-- Allergy Info     -->
                     <div class="row">
                         <div class="col-xs-12 col-md-10">
                             <h2 class="item-subhead">Allergy Information</h2>
@@ -153,6 +151,8 @@
                         </div>
                     </div>   
                 </div>
+                
+                <!-- Main column Product details -->
 
                 <div class="col-xs-12 col-md-8">
                     <h2 class="item-subhead">Product Details</h2>
@@ -186,6 +186,7 @@
                         <h2 class="item-subhead">Packaging &amp; Weights</h2>
                         
                         <div class="well col-xs-12">
+                            
                             <div class="col-xs-12 col-md-6">
                                 
                                 Pack:<input type="text" name="pack" title="pack" class="form-control" maxlength="10" value="{{$product->pack}}"/>
@@ -195,24 +196,27 @@
                                 Calculation Size:<input type="text" name="calc_size" title="calc_size" class="form-control" maxlength="10" value="{{$product->calc_size}}"/>
 
                                 Product Code:<input type="text" name="mpc" title="mpc" class="form-control" maxlength="250" value="{{$product->mpc}}"/>
-
+                                
+                                GTIN:<input type="text" name="gtin" title="gtin" class="form-control" maxlength="250" value="{{$product->gtin}}"/>
+                                
+                                Net Weight:<input type="text" name="net_weight" title="net_weight" class="form-control" maxlength="9" value="{{$product->net_weight}}"/>
+                            
                             </div>
 
                             <div class="col-xs-12 col-md-6">
-                                
-                                GTIN:<input type="text" name="gtin" title="gtin" class="form-control" maxlength="250" value="{{$product->gtin}}"/>
 
-                                Net Weight:<input type="text" name="net_weight" title="net_weight" class="form-control" maxlength="9" value="{{$product->net_weight}}"/>
 
                                 Gross Weight:<input type="text" name="gross_weight" title="gross_weight" class="form-control" maxlength="9" value="{{$product->gross_weight}}"/>
 
                                 Tare Weight:<input type="text" name="tare_weight" title="tare_weight" class="form-control" maxlength="9" value="{{$product->tare_weight}}"/>
+                                
+                                Brand: <input type="text" name="brand" title"brand" class="form-control" max-length="20" value="{{$product->brand}}">
+
+                                Calories: <input type="text" name="calories" class="form-control" max-length="9" value="{{$product->calories}}">
+                                
+                                Unit of Measure: <input type="text" name="calories" class="form-control" max-length="9" value="{{$product->uom}}">
+
                             </div>
-
-                            {{$product->brand}}<br/>
-                            {{$product->calories}}<br/>
-                            {{$product->uom}}<br/>
-
 
                         </div>  
 
@@ -221,8 +225,8 @@
                     </div>  
                    
 
-                    <input type="submit" class="btn btn-primary btn-lg" value="Add / Update"/>
-                    <a href="{{url('productdetail', $product->id)}}" class="btn btn-lg">Cancel</a>
+                    <input type="submit" class="btn-primary" value="Add / Update"/>
+                    <a href="{{url('productdetail', $product->id)}}" class="btn">Cancel</a>
 
                 </div>
             </div> <!-- end of container -->

@@ -25,6 +25,8 @@
     <link rel="stylesheet" id="magnific-popup-css"  href="{{url('/js/vendor/magnific-popup/magnific.css?ver=3.0.4')}}" type="text/css" media="all" />
    
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:600,300,700,300italic,700italic|Josefin+Sans:400,700,700italic,400italic' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="{{url('/js/vendor/jstree/themes/default/style.min.css')}}">
    
     <link rel="stylesheet" href="{{url('/css/app.css')}}">
 
@@ -65,7 +67,7 @@
                         <form class="navbar-form" method="post" action="{{url('product/search')}}">
                             <div class="form-group">
                                 <input type="text" name="searchquery" id="searchquery" autocomplete="off" placeholder="{{trans('ui.search_placeholder')}}" value="{{$query or ''}}" class="form-control"/>
-                                <a href="#" id="hlSearch" class="search"><img src="../../public/img/icons/search.svg" alt=""></a>
+                                <a href="#" id="hlSearch" class="search"><img src="/public/img/icons/search.svg" alt=""></a>
                             </div>
                                     
                                     
@@ -96,7 +98,7 @@
                                 @if (Auth::check())
                                     <li class="menu-item">
                                         <a title="{{trans('ui.navigation_profile')}}" href="{{url('profile/')}}">{{trans('ui.navigation_profile')}}</a>
-                                    /li>
+                                    </li>
 
                                     <li id="menu-item-723" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-723">
                                         <a title="{{trans('ui.navigation_logout')}}" href="{{url('auth/logout')}}">{{trans('ui.navigation_logout')}}</a>

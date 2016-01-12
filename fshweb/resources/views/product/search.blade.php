@@ -2,11 +2,9 @@
 
 @section('title', 'Page Title')
 
-@section('css')
-    <link rel="stylesheet" href="{{url('/js/vendor/jstree/themes/default/style.min.css')}}">
-@endsection
 
 @section('sectionheader')
+
 <section class='clearfix container-wrap main-title search-header'>
     <div class='container'><h1 class="page-title">Find What You're Looking For.</h1>
         
@@ -34,6 +32,7 @@
             <div class="row">
 
                 <div class="col-md-3">
+                    <h2 class="item-subhead">Categories</h2>
                     <div id="jstree_demo_div"></div>
                 </div>
 

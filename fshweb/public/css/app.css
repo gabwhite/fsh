@@ -8617,13 +8617,42 @@ h4 {
   border-left: 5px solid #e7212d;
 }
 
-/*----------  Stuff that was in Header  ----------*/
+/*----------  Search sidebar tree  ----------*/
 
-span.kleo-animate-number.animate-when-almost-visible.number_prepared.start-animation {
-  color: #ffffff;
-  border: none;
-  font-size: 95px;
+.jstree-default .jstree-anchor {
+  font-family: "Open Sans";
+  color: #4b4a4a;
+  font-weight: 600;
+  text-transform: none;
+  font-size: 18px;
 }
+
+.jstree-default .jstree-anchor:hover,
+.jstree-default .jstree-anchor:active,
+.jstree-default .jstree-anchor:focus {
+  background: none;
+  box-shadow: none;
+}
+
+.jstree-anchor.jstree-clicked {
+  background: none;
+  box-shadow: none;
+}
+
+.jstree-default .jstree-node {
+  background: url(/public/img/icons/plus.svg) no-repeat;
+}
+
+.jstree-default .jstree-icon,
+.jstree-default .jstree-icon.jstree-themeicon {
+  background: none;
+}
+
+li.jstree-node {
+  margin: 10px 0;
+}
+
+/*----------  Stuff that was in Header  ----------*/
 
 table#products-list tr td {
   border-bottom: 1px solid #444;
@@ -8895,7 +8924,7 @@ label {
 
 /*----------  Navigation  ----------*/
 
-.navbar {
+nav.navbar {
   margin-bottom: 0;
 }
 
@@ -8938,7 +8967,7 @@ ul.nav {
 }
 
 .navbar-form input {
-  margin-bottom: 10px;
+  margin-bottom: 0;
 }
 
 a.search {
@@ -8959,7 +8988,7 @@ a.search {
 /*----------  Individual page headers  ----------*/
 
 .search-header {
-  background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74, 75, 75, 0.5)), url(../../public/img/headers/search-bg.jpg) no-repeat;
+  background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74, 75, 75, 0.5)), url(/public/img/headers/search-bg.jpg) no-repeat;
   background-position: center center;
   background-size: cover;
   background-attachment: fixed;
@@ -8967,21 +8996,21 @@ a.search {
 }
 
 .login-header {
-  background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74, 75, 75, 0.5)), url(../../public/img/headers/login-bg.jpg) no-repeat;
+  background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74, 75, 75, 0.5)), url(/public/img/headers/login-bg.jpg) no-repeat;
   background-position: center center;
   background-size: cover;
   background-attachment: fixed;
 }
 
 .register-header {
-  background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74, 75, 75, 0.5)), url(../../public/img/headers/signup-bg.jpg) no-repeat;
+  background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74, 75, 75, 0.5)), url(/public/img/headers/signup-bg.jpg) no-repeat;
   background-position: center center;
   background-size: cover;
   background-attachment: fixed;
 }
 
 .contact-header {
-  background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74, 75, 75, 0.5)), url(../../public/img/headers/contact-bg.jpg) no-repeat;
+  background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74, 75, 75, 0.5)), url(/public/img/headers/contact-bg.jpg) no-repeat;
   background-position: center center;
   background-size: cover;
   background-attachment: fixed;
