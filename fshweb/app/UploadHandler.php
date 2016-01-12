@@ -16,10 +16,10 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class UploadHandler
 {
-    public function generateUniqueFilename($extension)
-    {
-        return Uuid::uuid4()->toString() . "." . $extension;
-    }
+
+    //===================================================================
+    // CSV Functions
+    //===================================================================
 
     public function uploadCsv(UploadedFile $file, $directory, $filename)
     {
@@ -48,6 +48,11 @@ class UploadHandler
         return $success;
     }
 
+
+    //===================================================================
+    // Avatar Functions
+    //===================================================================
+
     public function uploadAvatar(UploadedFile $file, $avatarFilename = null)
     {
         if(!isset($avatarFilename))
@@ -72,6 +77,53 @@ class UploadHandler
         }
     }
 
+    public function cropAvatar($fileName, $cropData)
+    {
+        $this->cropImage(public_path(config('app.avatar_storage')), $fileName, $cropData);
+    }
+
+    //===================================================================
+    // Vendor Functions
+    //===================================================================
+
+    public function uploadVendorAsset(UploadedFile $file, $fileName = null)
+    {
+        if(!isset($fileName))
+        {
+            $fileName = $this->generateUniqueFilename($file->getClientOriginalExtension());
+        }
+
+        $this->uploadFile($file, $fileName, public_path(config('app.vendor_storage')));
+
+        return $fileName;
+    }
+
+    public function removeVendorAsset($file)
+    {
+        try
+        {
+            Storage::disk('vendors')->delete($file);
+        }
+        catch(Exception $ex)
+        {
+            throw $ex;
+        }
+    }
+
+    public function resizeVendorAsset($fileName, $width, $height)
+    {
+        $this->resizeImage(public_path(config('app.vendor_storage')), $fileName, $width, $height);
+    }
+
+    //===================================================================
+    // General Functions
+    //===================================================================
+
+    public function generateUniqueFilename($extension)
+    {
+        return Uuid::uuid4()->toString() . "." . $extension;
+    }
+
     public function uploadFile(UploadedFile $file, $fileName, $path)
     {
         try
@@ -85,16 +137,6 @@ class UploadHandler
         {
             throw $ex;
         }
-    }
-
-    public function cropAvatar($fileName, $cropData)
-    {
-        $this->cropImage(public_path(config('app.avatar_storage')), $fileName, $cropData);
-    }
-
-    public function resizeVendorAsset($fileName, $width, $height)
-    {
-        $this->resizeImage(public_path(config('app.vendor_storage')), $fileName, $width, $height);
     }
 
     public function cropImage($path, $fileName, $cropData)

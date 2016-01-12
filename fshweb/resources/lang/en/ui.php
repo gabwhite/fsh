@@ -41,7 +41,10 @@ return [
     'button_cancel' => 'Cancel',
     'button_submit' => 'Submit',
     'button_addupdate' => 'Add / Update',
+    'button_edit' => 'Edit',
+    'button_edit_header' =>  'Edit Header',
     'button_back' => 'Back',
+    'button_save' => 'Save Changes',
 
     'general_label_yes' => 'Yes',
     'general_label_no' => 'No',
@@ -82,6 +85,11 @@ return [
     'vendor_label_background_image' => 'Cover Image',
     'vendor_label_intro_text' => 'Company Intro Text',
     'vendor_label_about_text' => 'About your company',
+    'vendor_label_brands' => 'Our Brands',
+    'vendor_label_contact' => 'Contact Vendor',
+    'vendor_label_add_brands' => 'Add New Brands',
+    'vendor_label_edit_logo' => 'Edit Logo',
+    'vendor_label_edit_background' => 'Edit Background',
 
 
 
