@@ -110,4 +110,9 @@ class AjaxController extends Controller
         return response()->json($stateProvinces);
     }
 
+    public function deleteBrand($brandId)
+    {
+
+    }
+
 }
