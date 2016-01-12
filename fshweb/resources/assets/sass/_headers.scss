@@ -9,6 +9,72 @@
 	padding: 2.5%;
 }
 
+/*----------  Navigation  ----------*/
+
+.navbar {
+	margin-bottom: 0;
+}
+
+.navbar-nav {
+	float: right;
+}
+
+.navbar-default{
+	background: white;
+	border: 1px solid $border;
+}
+
+#logo_img {
+	max-height: 50px;
+	margin: 0 auto;
+}
+
+.navbar-brand {
+	float: left;
+	height: auto;
+	padding: 10px 0;
+}
+
+button.navbar-collapse, 
+.nav-links {
+	float: right;
+}
+
+ul.nav {
+	padding-top: 1%;
+}
+
+.navbar-form {
+	padding: 0;
+
+	.form-control, 
+	.form-group {
+		width: 100%;
+	}
+	input {
+		margin-bottom: 10px;
+	}
+}
+
+a.search {
+	float: right;
+    position: absolute;
+    top: 20px;
+    right: 10%;
+}
+
+.navbar-default .navbar-nav > li > a {
+	text-transform: none;
+	font-family: $body-font;
+	font-weight: 600;
+	color: $body;
+	font-size: 16px;
+}
+
+
+/*----------  Individual page headers  ----------*/
+
+
 // Search page
 
 .search-header {

@@ -21,17 +21,11 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 
-    <!--[if IE 7]>
-    <link rel="stylesheet" href="{{url('/css/kleo/fontello-ie7.min.css')}}">
-    <![endif]-->
-
-    <!-- <link rel="stylesheet" href="{{url('/css/bootstrap.min.css')}}"> -->
-    <!-- <link rel="stylesheet" id="kleo-app-css"  href="{{url('/css/kleo/app.css?ver=3.0.4')}}" type="text/css" media="all" /> -->
+ 
     <link rel="stylesheet" id="magnific-popup-css"  href="{{url('/js/vendor/magnific-popup/magnific.css?ver=3.0.4')}}" type="text/css" media="all" />
    
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:600,300,700,300italic,700italic|Josefin+Sans:400,700,700italic,400italic' rel='stylesheet' type='text/css'>
-    <!-- <link rel="stylesheet" id="kleo-colors-css"  href="{{url('/css/kleo/dynamic.css?ver=3.0.4')}}" type="text/css" media="all" /> -->
-   <!--  <link rel="stylesheet" id="kleo-style-css"  href="{{url('/css/kleo/style-child.css?ver=3.0.4')}}" type="text/css" media="all" /> -->
+   
     <link rel="stylesheet" href="{{url('/css/app.css')}}">
 
     <script src="{{url('js/kleo/init.js')}}"></script>
@@ -39,78 +33,100 @@
 
     <noscript><style> .wpb_animate_when_almost_visible { opacity: 1; }</style></noscript>
 
-
     @yield('css')
 
 </head>
 
-<body class="kleo-navbar-fixed navbar-resize">
+<body>
 
-<div class="kleo-page">
+    <div id="header" class="row">
 
-    <div id="header" class="header-color">
+        <nav class="navbar navbar-default col-xs-12" role="navigation">
 
-        <div class="navbar" role="navigation">
-
-            <div class="kleo-main-header header-normal">
-
-                <div class="container">
-                    <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="container clearfix">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class=">col-xs-6 col-md-3">
                     <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
 
-                        <div class="kleo-mobile-switch">
-
-                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".nav-collapse">
-                                <span class="sr-only">Toggle navigation</span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                                <span class="icon-bar"></span>
-                            </button>
-
-                        </div>
-
-                        <div class="kleo-mobile-icons">
-
-
-                        </div>
-
-                        <strong class="logo">
-                            <a href="{{url('/')}}">
-                                <img id="logo_img" title="FoodserviceHound.com" src="{{url('/img/horizontallogoFoodServiceHound.png')}}" alt="FoodserviceHound.com">
-                            </a>
-                        </strong>
+                        <a href="{{url('/')}}" class="navbar-brand"> 
+                            <img id="logo_img" title="FoodserviceHound.com" src="{{url('/img/horizontallogoFoodServiceHound.png')}}" alt="FoodserviceHound.com">
+                        </a>
                     </div>
+                </div>
+                
+                <div class="col-xs-6 col-md-9">
+                    <div class="col-xs-12 col-md-4">
+                        <form class="navbar-form" method="post" action="{{url('product/search')}}">
+                            <div class="form-group">
+                                <input type="text" name="searchquery" id="searchquery" autocomplete="off" placeholder="{{trans('ui.search_placeholder')}}" value="{{$query or ''}}" class="form-control"/>
+                                <a href="#" id="hlSearch" class="search"><img src="../../public/img/icons/search.svg" alt=""></a>
+                            </div>
+                                    
+                                    
+                            {!! csrf_field() !!}
+                        </form>
+                    </div>    
 
                     <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse nav-collapse">
+                    <div class="col-xs-12 col-md-8">
+                     
+                        <div class="collapse navbar-collapse nav-collapse" id="bs-example-navbar-collapse-1">
 
-                        <ul id="menu-primary-menu" class="nav navbar-nav">
-                            <li id="menu-item-662" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-662"><a title="{{trans('ui.navigation_productsearch')}}" href="{{url('/product/search')}}">{{trans('ui.navigation_productsearch')}}</a></li>
-                            <li id="menu-item-4594" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-4594"><a title="{{trans('ui.navigation_industryforums')}}" href="{{url('industryforums')}}">{{trans('ui.navigation_industryforums')}}</a></li>
-                            <li id="menu-item-224" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-224"><a title="{{trans('ui.navigation_tools')}}" href="{{url('toolsresources')}}">{{trans('ui.navigation_tools')}}</a></li>
+                            <ul class="nav navbar-nav">
+                                <li class="menu-item">
+                                    <a title="{{trans('ui.navigation_productsearch')}}" href="{{url('/product/search')}}">{{trans('ui.navigation_productsearch')}}</a>
+                                </li>
+                                
+                                <!-- Hidden menu item -->
+                                <li class="hide menu-item">
+                                    <a title="{{trans('ui.navigation_industryforums')}}" href="{{url('industryforums')}}">{{trans('ui.navigation_industryforums')}}</a>
+                                </li>
+                                
+                                <!-- hidden menu item -->
+                                <li class="hide menu-item">
+                                    <a title="{{trans('ui.navigation_tools')}}" href="{{url('toolsresources')}}">{{trans('ui.navigation_tools')}}</a>
+                                </li>
 
-                            @if (Auth::check())
-                                <li id="menu-item-722" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-722"><a title="{{trans('ui.navigation_profile')}}" href="{{url('profile/')}}">{{trans('ui.navigation_profile')}}</a></li>
-                                <li id="menu-item-723" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-723"><a title="{{trans('ui.navigation_logout')}}" href="{{url('auth/logout')}}">{{trans('ui.navigation_logout')}}</a></li>
-                            @else
-                                <li id="menu-item-721" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-721"><a title="{{trans('ui.navigation_vendorreg')}}" href="{{url('auth/vendorregister')}}">{{trans('ui.navigation_vendorreg')}}</a></li>
-                                <li id="menu-item-720" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-720"><a title="{{trans('ui.navigation_login')}}" href="{{url('auth/login')}}">{{trans('ui.navigation_login')}}</a></li>
-                            @endif
+                                @if (Auth::check())
+                                    <li class="menu-item">
+                                        <a title="{{trans('ui.navigation_profile')}}" href="{{url('profile/')}}">{{trans('ui.navigation_profile')}}</a>
+                                    /li>
 
-                        </ul>
+                                    <li id="menu-item-723" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-723">
+                                        <a title="{{trans('ui.navigation_logout')}}" href="{{url('auth/logout')}}">{{trans('ui.navigation_logout')}}</a>
+                                    </li>
+                                @else
+                                    <li class="menu-item">
+                                        <a title="{{trans('ui.navigation_vendorreg')}}" href="{{url('auth/vendorregister')}}">{{trans('ui.navigation_vendorreg')}}</a>
+                                    </li>
+
+                                    <li class="menu-item">
+                                        <a title="{{trans('ui.navigation_login')}}" href="{{url('auth/login')}}">{{trans('ui.navigation_login')}}</a>
+                                    </li>
+                                @endif
+
+                            </ul>
+                        </div>
+
                     </div>
+                </div>
 
-                </div><!--end container-->
-            </div>
+            </div><!--end container-->
 
-        </div>
+        </nav>
 
     </div><!--end header-->
 
     <div id="main">
         @yield('sectionheader')
 
-        <section class="container-wrap main-color">
+        <section class="container-wrap">
             <div id="main-container" class="container">
 
                 <!-- START BOOTSTRAP ALERT AREA -->
@@ -183,8 +199,6 @@
             </div><!--end template-page-->
         </div><!--end container-->
     </div><!--end footer-->
-
-</div><!-- end kleo page -->
 
 
 <script src="{{url('js/vendor/jquery-1.11.3.min.js')}}"></script>
