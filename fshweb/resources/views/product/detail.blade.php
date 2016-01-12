@@ -28,11 +28,12 @@
             @if (Auth::check()
                 && (Auth::user()->hasRole('admin') || (Auth::user()->hasRole('vendor') && isProductOwner($product->id) )))
 
-                <p class="bg-info">{{trans('messages.product_administrator_notice')}}
-                    <button class="btn-primary">
+                <div class="bg-info clearfix">
+                    <p class="pull-left">{{trans('messages.product_administrator_notice')}}</p>
+                    <button class="btn-sm pull-right">
                         <a href="{{url('product/edit', $product->id)}}">{{trans('ui.product_label_edit_product')}}</a>
                     </button>
-                </p>
+                </div>
 
             @endif
         </div>
@@ -43,9 +44,7 @@
 
 @section('content')
     <div class="container">
-        
-        <div class="col-xs-12 well">
-        
+        <div class="col-xs-12 well">  
             <div class="col-xs-12 col-md-4">
                 <img src="http://placehold.it/200x300" alt="">
             </div>
@@ -56,16 +55,14 @@
 
                 <button class="btn">{{trans('ui.product_label_rate_product')}}</button>
             </div>
-        
         </div>
-    
     </div>
 
-    <div class="row">
-
-        <div class="col-md-4">
+    <div class="container">
+        
+        <div class="col-xs-12 col-md-4 reset-padding">
             <div class="row">
-                <div class="col-xs-12 col-md-10 col-md-offset-1">
+                <div class="col-xs-12 col-md-10">
                     <div class="nutrition">
 
                         <div class="nutrition-block">
@@ -130,7 +127,7 @@
             </div>
 
             <div class="row">
-                <div class="col-xs-12 col-md-10 col-md-offset-1">
+                <div class="col-xs-12 col-md-10">
                 
                     <h2 class="item-subhead">{{trans('ui.product_label_dietary_info')}}</h2>
                     
@@ -154,7 +151,7 @@
              </div>
                 
             <div class="row">
-                <div class="col-xs-12 col-md-10 col-md-offset-1">
+                <div class="col-xs-12 col-md-10">
 
                     <h2 class="item-subhead">{{trans('ui.product_label_allergy_info')}}</h2>
                     
@@ -175,7 +172,7 @@
 
         </div>
 
-        <div class="col-md-8">
+        <div class="col-xs-12 col-md-8 reset-padding">
             <h2 class="item-subhead">{{trans('ui.navigation_product_detail')}}</h2>
             
             <div class="well col-xs-12">
@@ -279,10 +276,9 @@
                     </div>
                 </div>   
             </div>
-
         </div>
-
-    </div>
+        
+    </div><!-- end of container -->
 
 
 @endsection

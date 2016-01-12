@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.4.4 (17249) - http://www.bohemiancoding.com/sketch -->
+    <title>search</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="06a.-Vendor-Profile---User-View" sketch:type="MSArtboardGroup" transform="translate(-934.000000, -33.000000)" fill="#DE5328">
+            <g id="00.-Nav" sketch:type="MSLayerGroup" transform="translate(-1.000000, -2.000000)">
+                <g id="Product-Search-+-search" transform="translate(731.000000, 23.000000)" sketch:type="MSShapeGroup">
+                    <g id="search" transform="translate(216.000000, 24.000000) rotate(-270.000000) translate(-216.000000, -24.000000) translate(204.000000, 12.000000)">
+                        <path d="M9.75,19.4475 C4.40325,19.4475 0.0525,15.09675 0.0525,9.75 C0.0525,4.40325 4.40325,0.0525 9.75,0.0525 C15.09675,0.0525 19.4475,4.40325 19.4475,9.75 C19.4475,15.09675 15.09675,19.4475 9.75,19.4475 L9.75,19.4475 Z M1.4475,9.75 C1.4475,14.328 5.172,18.0525 9.75,18.0525 C14.328,18.0525 18.0525,14.328 18.0525,9.75 C18.0525,5.172 14.328,1.4475 9.75,1.4475 C5.172,1.4475 1.4475,5.172 1.4475,9.75 Z" id="Fill-1"></path>
+                        <path d="M22.71975,23.78025 L15.96975,17.03025 L17.03025,15.96975 L23.78025,22.71975 L22.71975,23.78025" id="Fill-2"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
