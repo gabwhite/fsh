@@ -26,7 +26,7 @@
                 @foreach($products as $p)
                     <tr>
                         <td>
-                            <a href="{{url('productdetail', $p->id)}}">{{$p->name}}</a>
+                            <a href="{{url('/product/detail', $p->id)}}">{{$p->name}}</a>
                         </td>
                     </tr>
                 @endforeach

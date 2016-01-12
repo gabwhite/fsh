@@ -51,7 +51,7 @@
             @endif
 
             <p class="bg-info">
-                <a href="{{url('profile/products')}}">{{trans('ui.navigation_link_myproducts')}}</a>&nbsp;(<a href="{{url('profile/product')}}">{{trans('ui.navigation_link_addnewproduct')}}</a>)
+                <a href="{{url('product/vendor')}}">{{trans('ui.navigation_link_myproducts')}}</a>&nbsp;(<a href="{{url('product/edit')}}">{{trans('ui.navigation_link_addnewproduct')}}</a>)
             </p>
         @endif
 

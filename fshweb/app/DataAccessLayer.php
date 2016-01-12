@@ -65,9 +65,87 @@ class DataAccessLayer
         return Product::where('id', '=', $productId)->first();
     }
 
-    public function getProductByIdUser($productId, $userId)
+    public function getProductByIdVendor($productId, $vendorId)
     {
-        return Product::where(['id' => $productId, 'vendor_id' => $userId])->first();
+        return Product::where(['id' => $productId, 'vendor_id' => $vendorId])->first();
+    }
+
+    public function getProductsByVendor($vendorId, $fields = null, $paginate = false, $itemsPerPage = 20)
+    {
+        $query = Product::where('vendor_id', '=', $vendorId);
+        if(isset($fields))
+        {
+            $query->select($fields);
+        }
+
+        if($paginate)
+        {
+            $products = $query->paginate($itemsPerPage);
+        }
+        else
+        {
+            $products = $query->get();
+        }
+
+        return $products;
+
+    }
+
+    public function upsertProduct($productId, $userId, $data)
+    {
+        $product = $this->getProductByIdVendor($productId, $userId);
+
+        $isAdd = false;
+        if(!$product)
+        {
+            // New user product
+            $product = new Product();
+            $product->vendor_id = $userId;
+            //$product->uniquekey = (isset($row[8])) ? $row[8] : $row[11]; // MPC or GTIN
+            $isAdd = true;
+        }
+
+        $product->name = $data['name'];
+        $product->brand = (isset($data['brand']) ? $data['brand'] : null);
+        $product->pack = (isset($data['pack']) ? $data['pack'] : null);
+        $product->size = (isset($data['size']) ? $data['size'] : null);
+        $product->uom = (isset($data['uom']) ? $data['uom'] : null);
+        $product->serving_size_uom = (isset($data['serving_size_uom']) ? $data['serving_size_uom'] : null);
+        $product->mpc = (isset($data['mpc']) ? $data['mpc'] : null);
+        $product->broker_contact = (isset($data['broker_contact']) ? $data['broker_contact'] : null);
+        $product->gtin = (isset($data['gtin']) ? $data['gtin'] : null);
+        $product->is_halal = (isset($data['is_halal']) ? 1 : 0);
+        $product->is_organic = (isset($data['is_organic']) ? 1 : 0);
+        $product->is_kosher = (isset($data['is_kosher']) ? 1 : 0);
+        $product->calc_size = (isset($data['calc_size']) ? $data['calc_size'] : null);
+        $product->calculation_size_uom = (isset($data['calculation_size_uom']) ? $data['calculation_size_uom'] : null);
+        $product->calories = (isset($data['calories']) ? $data['calories'] : null);
+        $product->calories_from_fat = (isset($data['calories_from_fat']) ? $data['calories_from_fat'] : null);
+        $product->protein = (isset($data['protein']) ? $data['protein'] : null);
+        $product->carbs = (isset($data['carbs']) ? $data['carbs'] : null);
+        $product->fibre = (isset($data['fibre']) ? $data['fibre'] : null);
+        $product->sugar = (isset($data['sugar']) ? $data['sugar'] : null);
+        $product->total_fat = (isset($data['total_fat']) ? $data['total_fat'] : null);
+        $product->saturated_fats = (isset($data['saturated_fats']) ? $data['saturated_fats'] : null);
+        $product->sodium = (isset($data['sodium']) ? $data['sodium'] : null);
+        $product->product_image = (isset($data['product_image']) ? $data['product_image'] : null);
+        $product->description = (isset($data['description']) ? $data['description'] : '');
+        $product->preparation = (isset($data['preparation']) ? $data['preparation'] : null);
+        $product->ingredient_deck = (isset($data['ingredient_deck']) ? $data['ingredient_deck'] : null);
+        $product->features_benefits = (isset($data['features_benefits']) ? $data['features_benefits'] : null);
+        $product->allergen_disclaimer = (isset($data['allergen_disclaimer']) ? $data['allergen_disclaimer'] : null);
+        $product->net_weight = (isset($data['net_weight']) ? $data['net_weight'] : null);
+        $product->gross_weight = (isset($data['gross_weight']) ? $data['gross_weight'] : null);
+        $product->tare_weight = (isset($data['tare_weight']) ? $data['tare_weight'] : null);
+        $product->serving_size = (isset($data['serving_size']) ? $data['serving_size'] : null);
+        $product->vendor_logo = (isset($data['vendor_logo']) ? $data['vendor_logo'] : null);
+        $product->pos_pdf = (isset($data['pos_pdf']) ? $data['pos_pdf'] : null);
+        $product->published = (isset($data['published']) ? 1 : 0);
+
+        $product->save();
+
+        return $product->id;
+
     }
 
     public function getFoodCategoriesForParent($parentId = null)
@@ -117,12 +195,17 @@ class DataAccessLayer
         return ($this->getVendorOwner($vendorId) == $userId);
     }
 
-    public function getVendorsForUser($userId)
+    public function getVendorsForUser($userId, $fields = null)
     {
-        $vendors = Vendor::where('user_id', '=', $userId)->select('id')->get();
+        $query = Vendor::where('user_id', '=', $userId);
+        if(isset($fields))
+        {
+            $query->select($fields);
+        }
+
+        $vendors = $query->get();
 
         return $vendors;
-
     }
 
     public function isUserVendorOwner($userId, $vendorId)
@@ -149,11 +232,35 @@ class DataAccessLayer
         return null;
     }
 
-    public function getVendor($vendorId)
+    public function getVendor($vendorId, $fields = null, $relationships = null)
     {
-        $vendor = Vendor::find($vendorId);
+        $query = Vendor::where('id', '=', $vendorId);
+        if(isset($fields))
+        {
+            $query->select($fields);
+        }
+
+        if(isset($relationships))
+        {
+            $query->with($relationships);
+        }
+
+        $vendor = $query->first();
 
         return $vendor;
+    }
+
+    public function getBrand($brandId, $fields = null)
+    {
+        $query = VendorBrand::where('id', '=', $brandId);
+        if(isset($fields))
+        {
+            $query->select($fields);
+        }
+
+        $brand = $query->first();
+
+        return $brand;
     }
 
     public function getBrandsForVendor($vendorId)
@@ -178,9 +285,65 @@ class DataAccessLayer
         return $vendors;
     }
 
-    public function upsertBrand($vendorId, $data)
+    public function upsertVendor($vendorId, $data)
     {
 
+        $vendor = $this->getVendor($vendorId);
+
+        $isAdd = false;
+        if(!isset($vendor))
+        {
+            $vendor = new Vendor();
+            $isAdd = true;
+        }
+
+        $vendor->user_id = $data['user_id'];
+        $vendor->company_name = $data['company_name'] ? $data['company_name'] : $vendor->company_name;
+        $vendor->country = $data['country'] ? $data['country'] : $vendor->country;
+        $vendor->state_province = $data['state_province'] ? $data['state_province'] : $vendor->state_province;
+        $vendor->address1 = $data['address1'] ? $data['address1'] : $vendor->address1;
+        $vendor->address2 = $data['address2'] ? $data['address2'] : $vendor->address2;
+        $vendor->city = $data['city'] ? $data['city'] : $vendor->city;
+        $vendor->zip_postal = $data['zip_postal'] ? $data['zip_postal'] : $vendor->zip_postal;
+        $vendor->contact_name = $data['contact_name'] ? $data['contact_name'] : $vendor->contact_name;
+        $vendor->contact_title = $data['contact_title'] ? $data['contact_title'] : $vendor->contact_title;
+        $vendor->contact_phone = $data['contact_phone'] ? $data['contact_phone'] : $vendor->contact_phone;
+        $vendor->contact_url = $data['contact_url'] ? $data['contact_url'] : $vendor->contact_url;
+        $vendor->intro_text = $data['intro_text'] ? $data['intro_text'] : $vendor->intro_text;
+        $vendor->about_text = $data['about_text'] ? $data['about_text'] : $vendor->about_text;
+
+        $vendor->save();
+
+        return $vendor->id;
+    }
+
+    public function upsertBrand($brandId, $data)
+    {
+        $brand = $this->getBrand($brandId);
+        $isAdd = false;
+        if(!isset($brand))
+        {
+            $brand = new VendorBrand();
+            $isAdd = true;
+        }
+
+        $brand->vendor_id = $data['vendor_id'];
+        $brand->name = $data['name'];
+        $brand->logo_image_path = $data['logo_image_path'];
+        $brand->active = $data['active'] ? 1 : 0;
+
+        $brand->save();
+
+        return $brand->id;
+    }
+
+    public function deleteBrand($brandId)
+    {
+        $brand = $this->getBrand($brandId);
+        if(!isset($brand))
+        {
+            $brand->delete();
+        }
     }
 
     public function getAllAllergens($activeOnly = true)

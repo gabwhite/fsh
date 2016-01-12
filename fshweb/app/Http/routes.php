@@ -53,7 +53,7 @@ Route::group(['middleware' => 'auth'], function()
     // Routes that require either admin or vendor roles
     Route::group(['middleware' => ['role:vendor|admin']], function()
     {
-        Route::get('/products/{id}', 'ProductController@vendorProducts');
+        Route::get('/product/vendor', 'ProductController@vendorProducts');
         Route::get('/product/edit/{id?}', 'ProductController@showProduct');
         Route::post('/product/edit', 'ProductController@editProduct');
         Route::get('/vendor/edit', 'VendorController@edit');
@@ -85,8 +85,8 @@ Route::group(['middleware' => 'auth'], function()
 
 // Authentication routes...
 Route::get('auth/login', 'Auth\AuthController@getLogin');
-Route::post('auth/login', ['middleware' => 'redirectonrole', 'uses' => 'Auth\AuthController@postLogin']);
-Route::get('auth/logout', 'Auth\AuthController@getLogout');
+Route::post('auth/login', ['middleware' => 'postlogin', 'uses' => 'Auth\AuthController@postLogin']);
+Route::get('auth/logout', ['middleware' => 'postlogout', 'uses' => 'Auth\AuthController@getLogout']);
 
 // Password reset link request routes...
 Route::get('password/email', 'Auth\PasswordController@getEmail');

@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use App\DataAccessLayer;
 use Closure;
 
-class RedirectOnRole
+class PostLogin
 {
     protected $dataAccess;
 
@@ -29,6 +29,11 @@ class RedirectOnRole
     {
         $response = $next($request);
 
+        $vendorSessionKey = config('app.session_key_vendor');
+
+        // Clear any existing session vars
+        if(\Session::has($vendorSessionKey)) { \Session::forget($vendorSessionKey); }
+
         $user = $request->user();
         if ($user)
         {
@@ -43,7 +48,7 @@ class RedirectOnRole
                 $vendors = $this->dataAccess->getVendorsForUser($currentUser->id, ['id']);
 
                 // TODO: We're only supporting one vendor owner per person for now.
-                if(count($vendors) > 0) { \Session::put('vendor_id', $vendors[0]->id); }
+                if(count($vendors) > 0) { \Session::put($vendorSessionKey, $vendors[0]->id); }
 
             }
 
