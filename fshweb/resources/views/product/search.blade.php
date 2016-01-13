@@ -6,7 +6,7 @@
 @section('sectionheader')
 
 <section class='clearfix container-wrap main-title search-header'>
-    <div class='container'><h1 class="page-title">Find What You're Looking For.</h1>
+    <div class='container'><h1 class="page-title">{{trans('ui.search_label_header')}}</h1>
         
         <!-- BREADCRUMBS, NOT SURE IF THEY'RE NEEDED?  -->
 
@@ -32,7 +32,8 @@
             <div class="row">
 
                 <div class="col-xs-12 col-md-3">
-                    <h2 class="item-subhead">Categories</h2>
+                    <h2 class="item-subhead">{{trans('ui.search_label_categories')}}</h2>
+
                     <div id="jstree_demo_div"></div>
                 </div>
 
@@ -160,7 +161,7 @@
 
                     if(jsonresult.length === 0)
                     {
-                        tableRows += "<tr><td colspan='3'>No Results Found</td></tr>";
+                        tableRows += "<tr><td colspan='3'>{{trans('ui.search_label_no_results')}}</td></tr>";
                     }
 
                     $resultTable.html(tableRows);
