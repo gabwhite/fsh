@@ -27,6 +27,8 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:600,300,700,300italic,700italic|Josefin+Sans:400,700,700italic,400italic' rel='stylesheet' type='text/css'>
 
     <link rel="stylesheet" href="{{url('/js/vendor/jstree/themes/default/style.min.css')}}">
+
+    <link rel="stylesheet" href="{{url('/js/vendor/flexslider/jquery.flexslider-min.js')}}">
    
     <link rel="stylesheet" href="{{url('/css/app.css')}}">
 
@@ -204,7 +206,7 @@
 <script src="{{url('js/vendor/jquery-1.11.3.min.js')}}"></script>
 <script src="{{url('js/vendor/bootstrap/bootstrap.min.js')}}"></script>
 <script src="{{url('js/fsh.common.js')}}"></script>
-
+<script src="{{url('js/vendor/flexslider/jquery.flexslider-min.js')}}"></script>
 
 
 @yield('scripts')

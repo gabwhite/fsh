@@ -8474,7 +8474,11 @@ h2.item-subhead {
   font-weight: 600;
   color: #de5328;
   line-height: 110%;
-  margin-top: 5%;
+  margin-top: 10px;
+}
+
+h3 {
+  line-height: 1.5;
 }
 
 h4 {
@@ -8593,14 +8597,14 @@ h4 {
   line-height: 2.2;
 }
 
+.bg-info a,
+.bg-danger a {
+  color: #de5328;
+}
+
 .bg-info button,
 .bg-danger button {
   margin: 0 10px;
-}
-
-.bg-info a,
-.bg-danger a {
-  color: white;
 }
 
 .bg-info a:hover,
@@ -8609,7 +8613,7 @@ h4 {
 .bg-danger a:focus,
 .bg-info a:active,
 .bg-danger a:active {
-  color: white;
+  color: #a13919;
   text-decoration: none;
 }
 
@@ -8640,7 +8644,7 @@ h4 {
 }
 
 .jstree-default .jstree-node {
-  background: url(/public/img/icons/plus.svg) no-repeat;
+  background: url(../../public/img/icons/plus.svg) no-repeat;
 }
 
 .jstree-default .jstree-icon,
@@ -8917,7 +8921,7 @@ label {
 ================================================*/
 
 .main-title {
-  background: #de5328;
+  background: none;
   margin-bottom: 4%;
   padding: 2.5%;
 }
@@ -8988,7 +8992,7 @@ a.search {
 /*----------  Individual page headers  ----------*/
 
 .search-header {
-  background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74, 75, 75, 0.5)), url(/public/img/headers/search-bg.jpg) no-repeat;
+  background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74, 75, 75, 0.5)), url(../../public/img/headers/search-bg.jpg) no-repeat;
   background-position: center center;
   background-size: cover;
   background-attachment: fixed;
@@ -8996,21 +9000,21 @@ a.search {
 }
 
 .login-header {
-  background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74, 75, 75, 0.5)), url(/public/img/headers/login-bg.jpg) no-repeat;
+  background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74, 75, 75, 0.5)), url(../../public/img/headers/login-bg.jpg) no-repeat;
   background-position: center center;
   background-size: cover;
   background-attachment: fixed;
 }
 
 .register-header {
-  background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74, 75, 75, 0.5)), url(/public/img/headers/signup-bg.jpg) no-repeat;
+  background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74, 75, 75, 0.5)), url(../../public/img/headers/signup-bg.jpg) no-repeat;
   background-position: center center;
   background-size: cover;
   background-attachment: fixed;
 }
 
 .contact-header {
-  background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74, 75, 75, 0.5)), url(/public/img/headers/contact-bg.jpg) no-repeat;
+  background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74, 75, 75, 0.5)), url(../../public/img/headers/contact-bg.jpg) no-repeat;
   background-position: center center;
   background-size: cover;
   background-attachment: fixed;
@@ -9023,6 +9027,23 @@ a.search {
 .item-header .container,
 .item-header .auth-check {
   padding-right: 0;
+}
+
+.vendor-profile {
+  background: #4b4a4a;
+  padding: 2%;
+  border: 5px solid white;
+  -ms-box-shadow: 0 0 1px #7D7D7D;
+  -o-box-shadow: 0 0 1px #7D7D7D;
+  box-shadow: 0 0 1px #7D7D7D;
+}
+
+#imgCurrentAvatar {
+  border-radius: 50%;
+  max-width: 140px;
+  height: auto;
+  display: block;
+  margin: 0 auto;
 }
 
 /*=====  End of Styling for page Headers  ======*/
@@ -9049,3 +9070,24 @@ a.contact {
 }
 
 /*=====  End of Footer Styling  ======*/
+
+/*==================================================
+=            Bootstrap Carousel Styling            =
+==================================================*/
+
+ul.slides {
+  margin-left: -5%;
+}
+
+.slides li {
+  border: 1px solid #c2c2c2;
+  height: 120px;
+}
+
+.slides li img {
+  display: block;
+  margin: 0 auto;
+  padding: 10px 0;
+}
+
+/*=====  End of Bootstrap Carousel Styling  ======*/
