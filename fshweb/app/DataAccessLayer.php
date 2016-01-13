@@ -148,9 +148,20 @@ class DataAccessLayer
 
     }
 
-    public function getFoodCategoriesForParent($parentId = null)
+    public function getFoodCategoriesForParent($activeOnly = true, $parentId = null, $fields = null)
     {
-       return Category::where('parent_id', '=', $parentId)->get();
+        $query = Category::where('parent_id', '=', $parentId);
+        if($activeOnly)
+        {
+            $query->where('active', '=', $activeOnly);
+        }
+
+        if(isset($fields))
+        {
+            $query->select($fields);
+        }
+
+       return $query->get();
     }
 
     public function getAllFoodCategories($activeOnly = true)
@@ -179,14 +190,23 @@ class DataAccessLayer
         return DB::table('stateprovinces')->where('country_id', '=', $countryId)->get();
     }
 
-    public function getProductsByFullText($rawQuery)
+    public function getProductsByFullText($rawQuery, $paginate = false, $pageSize = 25)
     {
         $arrTerms = $this->prepareFullTextSearchQuery($rawQuery);
 
         $terms = implode(' ', $arrTerms);
 
         $query = "MATCH (name, description, gtin, mpc, brand, ingredient_deck) AGAINST ('$terms' IN BOOLEAN MODE)";
-        $products = Product::select('id', 'name', 'brand')->whereRaw($query)->get();
+
+        if($paginate)
+        {
+            $products = Product::select('id', 'name', 'brand')->whereRaw($query)->paginate($pageSize);
+        }
+        else
+        {
+            $products = Product::select('id', 'name', 'brand')->whereRaw($query)->get();
+        }
+
 
         return $products;
     }
