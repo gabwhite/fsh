@@ -25,8 +25,7 @@
         </div>
 
         <div class="col-xs-12 auth-check">
-            @if (Auth::check()
-                && (Auth::user()->hasRole('admin') || (Auth::user()->hasRole('vendor') && isProductOwner($product->id) )))
+            @if ($canEdit)
 
                 <div class="bg-info clearfix">
                     <p class="pull-left">{{trans('messages.product_administrator_notice')}}</p>

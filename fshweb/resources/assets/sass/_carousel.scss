@@ -1,0 +1,19 @@
+/*==================================================
+=            Bootstrap Carousel Styling            =
+==================================================*/
+
+ul.slides {
+	margin-left: -5%;
+}
+
+.slides li {
+	border: 1px solid $border;
+	height: 120px;
+
+	img {
+		display: block;
+		margin: 0 auto;
+		padding: 10px 0;
+	}
+}
+/*=====  End of Bootstrap Carousel Styling  ======*/

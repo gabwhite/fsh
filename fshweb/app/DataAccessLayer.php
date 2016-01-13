@@ -179,8 +179,9 @@ class DataAccessLayer
         return DB::table('stateprovinces')->where('country_id', '=', $countryId)->get();
     }
 
-    public function getProductsByFullText($arrTerms)
+    public function getProductsByFullText($rawQuery)
     {
+        $arrTerms = $this->prepareFullTextSearchQuery($rawQuery);
 
         $terms = implode(' ', $arrTerms);
 
@@ -355,6 +356,47 @@ class DataAccessLayer
 
         return DB::table('allergens')->get();
 
+    }
+
+    public function getProductsByCategory($categoryId, $paginate = false, $pageSize = 25)
+    {
+        $query = \DB::table('products')
+            ->join('product_categories', 'products.id', '=', 'product_categories.product_id')
+            ->where('product_categories.category_id', '=', $categoryId)
+            //->where('products.published', '=', true)
+            ->select('products.id', 'products.name', 'products.brand')->orderBy('products.name');
+
+        if($paginate)
+        {
+            $products = $query->paginate($pageSize);
+        }
+        else
+        {
+            $products = $query->get();
+        }
+
+        return $products;
+    }
+
+    private function prepareFullTextSearchQuery($rawQuery)
+    {
+        $words = explode(' ', $rawQuery);
+        $finalWords = array();
+        foreach($words as $w)
+        {
+            if(is_numeric($w))
+            {
+                $w = '"'.$w.'"';
+            }
+            else if(!starts_with($w, '"') && strlen($w) > 2)
+            {
+                $w = $w . '*';
+            }
+
+            array_push($finalWords, $w);
+        }
+
+        return $finalWords;
     }
 
 }

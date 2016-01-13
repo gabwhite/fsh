@@ -6,7 +6,7 @@
 @section('sectionheader')
 
 <section class='clearfix container-wrap main-title search-header'>
-    <div class='container'><h1 class="page-title">Find What You're Looking For.</h1>
+    <div class='container'><h1 class="page-title">{{trans('ui.search_label_header')}}</h1>
         
         <!-- BREADCRUMBS, NOT SURE IF THEY'RE NEEDED?  -->
 
@@ -27,16 +27,17 @@
 
     <div class="row">
 
-        <div class="col-md-12">
+        <div class="col-xs-12 col-md-12">
 
             <div class="row">
 
-                <div class="col-md-3">
-                    <h2 class="item-subhead">Categories</h2>
+                <div class="col-xs-12 col-md-3">
+                    <h2 class="item-subhead">{{trans('ui.search_label_categories')}}</h2>
+
                     <div id="jstree_demo_div"></div>
                 </div>
 
-                <div class="col-md-9">
+                <div class="col-xs-12 col-md-9">
 
                     <form>
 
@@ -49,8 +50,8 @@
                             </div>
                         </div>
 
-                        {!! csrf_field() !!}
                     </form>
+
                     <table id="product_list" width="100%" class="table">
                         <thead>
                         <tr>
@@ -64,10 +65,10 @@
                             @foreach($searchresults as $r)
                                 <tr>
                                     <td>
-                                        <a href="{{url('/productdetail', $r['document']->getFieldValue('id'))}}">{{$r['document']->getFieldValue('name')}}</a>
-                                        ({{round($r['score'] * 100)}}%)
+                                        <a href="{{url('/product/detail', $r->id)}}">{{$r->name}}</a>
                                     </td>
-                                    <td>{{$r['document']->getFieldValue('brand')}}</td></tr>
+                                    <td>{{$r->brand}}</td>
+                                </tr>
                             @endforeach
                         @endif
                         </tbody>
@@ -86,7 +87,6 @@
 
 @section('scripts')
     <script type="text/javascript" src="{{url('js/vendor/jstree/jstree.min.js')}}"></script>
-    <script type="text/javascript" src="{{url('js/fsh.common.js')}}"></script>
     <script type="text/javascript">
 
         var $resultTable = $("#product_list");
@@ -141,11 +141,8 @@
 
             });
 
-
             $("#tbSearchQuery").on("keydown", performSearch);
             $("#hlSearchButton").on("click", performSearch);
-
-
         });
 
         function performSearch(e)
@@ -164,7 +161,7 @@
 
                     if(jsonresult.length === 0)
                     {
-                        tableRows += "<tr><td colspan='3'>No Results Found</td></tr>";
+                        tableRows += "<tr><td colspan='3'>{{trans('ui.search_label_no_results')}}</td></tr>";
                     }
 
                     $resultTable.html(tableRows);

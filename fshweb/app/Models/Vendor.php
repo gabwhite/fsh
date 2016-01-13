@@ -30,6 +30,11 @@ class Vendor extends Model
         return $this->belongsToMany('\App\Models\User');
     }
 
+    public function products()
+    {
+        return $this->hasMany('\App\Models\Product');
+    }
+
     public function brands()
     {
         return $this->hasMany('\App\Models\VendorBrand');

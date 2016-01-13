@@ -80,7 +80,11 @@ h2.item-subhead {
 	font-weight: 600;
 	color: $primary;
 	line-height: 110%;
-	margin-top: 5%;
+	margin-top: 10px;
+}
+
+h3 {
+    line-height: 1.5;
 }
 
 h4 {
@@ -196,6 +200,10 @@ h4 {
         margin-bottom: 0;
         line-height: 2.2;
     }
+
+    a {
+        color: $primary;
+    }
 }
 
 .bg-info button {
@@ -203,10 +211,9 @@ h4 {
 }
 
 .bg-info a {
-	color: white;
-
+	
 	&:hover, &:focus, &:active {
-		color: white;
+		color: $primary-dark;
 		text-decoration: none;
 	}
 }
@@ -237,7 +244,7 @@ h4 {
 }
 
 .jstree-default .jstree-node {
-    background: url(/public/img/icons/plus.svg) no-repeat;
+    background: url(../../public/img/icons/plus.svg) no-repeat;
 }
 
 .jstree-default .jstree-icon,

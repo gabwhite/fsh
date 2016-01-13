@@ -67,4 +67,18 @@ class LookupManager
         return $allergens;
     }
 
+    public function getFoodCategoriesForParent($parentId = null)
+    {
+        $key = 'foodcats-' . (isset($parentId) ? $parentId : 'root');
+
+        $categories = $this->cacheManager->getItem(env('CACHE_DRIVER'), $key);
+        if($categories == null)
+        {
+            $categories = $this->dataAccess->getFoodCategoriesForParent($parentId);
+            $this->cacheManager->setItem(env('CACHE_DRIVER'), $key, $categories, 10);
+        }
+
+        return $categories;
+    }
+
 }

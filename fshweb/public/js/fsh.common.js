@@ -54,14 +54,28 @@ fsh.common = (function ($, document)
         }
     };
 
+    var globalInitialization = function()
+    {
+        // Set event handler for global search button
+        var searchButton = $("#frmNavigationSearch").find("a");
+        searchButton.on("click", function(e)
+        {
+            e.preventDefault();
+            $("#frmNavigationSearch").submit();
+        });
+    };
+
     var pub =
     {
         p: p,
         setDebug: setDebug,
-        doAjax: doAjax
+        doAjax: doAjax,
+        globalInitialization: globalInitialization
     };
 
     return pub;
 
 
 }(jQuery, document));
+
+$(document).ready(function() { fsh.common.globalInitialization();});

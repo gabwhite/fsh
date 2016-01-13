@@ -33,6 +33,9 @@ return [
     'navigation_link_editvendor' => 'Edit Vendor Profile',
 
     'search_placeholder' => 'Enter a keyword, MPC code',
+    'search_label_header' => 'Find What You\'re Looking For.',
+    'search_label_categories' => 'Categories',
+    'search_label_no_results' => 'No Results Found',
 
     'button_search' => 'Search Products',
     'button_register' => 'Register',
@@ -84,7 +87,7 @@ return [
     'vendor_label_logo_image' => 'Logo Image',
     'vendor_label_background_image' => 'Cover Image',
     'vendor_label_intro_text' => 'Company Intro Text',
-    'vendor_label_about_text' => 'About your company',
+    'vendor_label_about_text' => 'About Us',
     'vendor_label_brands' => 'Our Brands',
     'vendor_label_contact' => 'Contact Vendor',
     'vendor_label_add_brands' => 'Add New Brands',

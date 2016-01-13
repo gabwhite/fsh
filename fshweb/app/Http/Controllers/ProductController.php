@@ -30,9 +30,22 @@ class ProductController extends Controller
 
     public function detail($id)
     {
-        $product = $this->dataAccess->getProduct($id, 'allergens');
+        $product = $this->dataAccess->getProduct($id, ['allergens', 'vendor']);
 
-        return view('product.detail')->with('product', $product);
+        $canEdit = false;
+
+        if(\Auth::check())
+        {
+            $user = \Auth::user();
+
+            if($user->hasRole(config('app.role_admin_name'))
+                || \Session::get(config('app.session_key_vendor')) == $product->vendor->id)
+            {
+                $canEdit = true;
+            }
+        }
+
+        return view('product.detail')->with(['product' => $product, 'canEdit' => $canEdit]);
     }
 
     public function search()
@@ -40,22 +53,27 @@ class ProductController extends Controller
         return view('product.search');
     }
 
-    public function showProduct($id = null)
+    public function doSearch(Request $request)
     {
-        $user = \Auth::user();
+        $results = $this->dataAccess->getProductsByFullText($request->input('searchquery'));
 
-        // Only admins or product owner can edit product
-        $canEdit = false;
-        if($user->hasRole(config('app.role_admin_name')) || $this->dataAccess->isVendorOwner($user->id, $id))
-        {
-            $canEdit = true;
-        }
+        return view('product.search')->with('searchresults', $results);
+    }
 
+    public function showEditProduct($id = null)
+    {
+        //$user = \Auth::user();
         $product = new \App\Models\Product();
-        if($id != null && $canEdit)
+
+        // This is an edit, see if the user can edit product
+        if($id != null)
         {
             $product = $this->dataAccess->getProduct($id, 'allergens');
-            if($product == null) { $product = new \App\Models\Product(); }
+            if(!isset($product) || \Session::get(config('app.session_key_vendor')) != $product->vendor_id)
+            {
+                // Product came back null or doesn't belong to this vendor, see product to new
+                $product = new \App\Models\Product();
+            }
         }
 
         $allergens = $this->lookupManager->getProductAllergens();

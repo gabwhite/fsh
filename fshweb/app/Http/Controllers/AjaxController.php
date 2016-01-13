@@ -6,7 +6,6 @@ use App\CacheManager;
 use App\DataAccessLayer;
 use App\DbCategoryFinder;
 use App\LookupManager;
-use App\ProductSearcher;
 use Illuminate\Http\Request;
 use Cache;
 use App\Http\Requests;
@@ -30,31 +29,14 @@ class AjaxController extends Controller
 
     public function getProductFullTextSearch($query)
     {
-
-        $words = explode(' ', $query);
-        $finalWords = array();
-        foreach($words as $w)
-        {
-            if(is_numeric($w))
-            {
-                $w = '"'.$w.'"';
-            }
-            else if(!starts_with($w, '"') && strlen($w) > 2)
-            {
-                $w = $w . '*';
-            }
-
-            array_push($finalWords, $w);
-        }
-
-        $results = $this->dataAccess->getProductsByFullText($finalWords);
+        $results = $this->dataAccess->getProductsByFullText($query);
 
         return response()->json($results);
     }
 
     public function getFoodCategoriesForParent($format, $parentId = null)
     {
-        $categories = $this->dataAccess->getFoodCategoriesForParent($parentId);
+        $categories = $this->lookupManager->getFoodCategoriesForParent($parentId);
 
         if($format == 'JSON')
         {
@@ -80,20 +62,9 @@ class AjaxController extends Controller
 
     public function getProducts($categoryId)
     {
-
-        $productSearcher = new ProductSearcher();
-        //$products = $productSearcher->getProductsByCategoryPaginated($categoryId, 3, true);
-        $products = $productSearcher->getProductsByCategory($categoryId);
+        $products = $this->dataAccess->getProductsByCategory($categoryId);
 
         return response()->json($products);
-    }
-
-    public function getProductsFullText($words)
-    {
-        $productSearcher = new ProductSearcher();
-        $products = $productSearcher->fullTextSearch('productindex', $words);
-
-        return $products;
     }
 
     public function getCountries()
@@ -112,7 +83,7 @@ class AjaxController extends Controller
 
     public function deleteBrand($brandId)
     {
-
+        // TODO
     }
 
 }

@@ -20,7 +20,7 @@
                 <div class="col-xs-12 col-md-10 col-md-offset-1">
                     <h2 class="subhead">Reset Your Password</h2>
 
-                    <form method="POST" action="{{url('/password/email')}}">
+                    <form id="form1" method="POST" action="{{url('/password/email')}}">
 
                         {!! csrf_field() !!}
 
@@ -48,4 +48,21 @@
         </div>
     </div> <!-- end of row -->
 
+@endsection
+
+@section('scripts')
+    <script src="{{url('js/vendor/validation/jquery.validate.min.js')}}"></script>
+    <script type="text/javascript">
+        $(document).ready(function()
+        {
+            $("#form1").validate({
+                errorClass: "validationError",
+                rules:
+                {
+                    email: { required: true, email: true, maxlength: 100 }
+                }
+            });
+
+        });
+    </script>
 @endsection

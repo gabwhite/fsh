@@ -29,4 +29,9 @@ class Product extends Model
     {
         return $this->belongsToMany('App\Models\Category', 'product_categories', 'product_id', 'category_id');
     }
+
+    public function vendor()
+    {
+        return $this->belongsTo('App\Models\Vendor');
+    }
 }

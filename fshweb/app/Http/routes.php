@@ -21,7 +21,7 @@ Route::get('/', function ()
 // Product routes
 //=================================
 Route::get('/product/search', 'ProductController@search');
-Route::post('/product/search', 'ProductController@fullTextSearch');
+Route::post('/product/navsearch', 'ProductController@doSearch');
 Route::get('/product/detail/{id}', 'ProductController@detail');
 
 
@@ -33,11 +33,6 @@ Route::post('contact', 'PublicController@contactUsSubmit');
 //=================================
 
 Route::get('vendor/detail/{id}', 'VendorController@detail');
-
-
-Route::get('toolsresources', function() { return view('toolsresources'); } );
-
-Route::get('industryforums', function() { return view('industryforums'); } );
 
 
 // Routes the require authentication
@@ -54,7 +49,7 @@ Route::group(['middleware' => 'auth'], function()
     Route::group(['middleware' => ['role:vendor|admin']], function()
     {
         Route::get('/product/vendor', 'ProductController@vendorProducts');
-        Route::get('/product/edit/{id?}', 'ProductController@showProduct');
+        Route::get('/product/edit/{id?}', 'ProductController@showEditProduct');
         Route::post('/product/edit', 'ProductController@editProduct');
         Route::get('/vendor/edit', 'VendorController@edit');
         Route::post('/vendor/edit', 'VendorController@update');
