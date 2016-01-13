@@ -4,7 +4,7 @@
 
 //Globals 
 .main-title {
-    background: $primary;
+    background: none;
     margin-bottom: 4%;
 	padding: 2.5%;
 }
@@ -78,7 +78,7 @@ a.search {
 // Search page
 
 .search-header {
-	background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74, 75, 75, 0.5)), url(/public/img/headers/search-bg.jpg) no-repeat;
+	background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74, 75, 75, 0.5)), url(../../public/img/headers/search-bg.jpg) no-repeat;
 	@include background;
 	background-position: center 60%;
 }
@@ -86,21 +86,21 @@ a.search {
 // Login Page
 
 .login-header {
-	background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74,75, 75, 0.5 )), url(/public/img/headers/login-bg.jpg) no-repeat;
+	background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74,75, 75, 0.5 )), url(../../public/img/headers/login-bg.jpg) no-repeat;
 	@include background;
 }
 
 // Register Header
 
 .register-header {
-	background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74,75, 75, 0.5 )), url(/public/img/headers/signup-bg.jpg) no-repeat;
+	background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74,75, 75, 0.5 )), url(../../public/img/headers/signup-bg.jpg) no-repeat;
 	@include background;
 }
 
 // contact header 
 
 .contact-header {
-	background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74, 75, 75, 0.5)), url(/img/headers/contact-bg.jpg) no-repeat;
+	background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74, 75, 75, 0.5)), url(../../public/img/headers/contact-bg.jpg) no-repeat;
 	@include background;
 }
 
@@ -115,5 +115,22 @@ a.search {
 
 }
 
+// Vendor profile 
+
+.vendor-profile {
+	background: $body;
+	padding: 2%;
+	border: 5px solid white;
+	@include vendor-prefixes(box-shadow, 0 0 1px $placeholder);
+	box-shadow: 0 0 1px $placeholder;
+}
+
+#imgCurrentAvatar {
+	border-radius: 50%;
+	max-width: 140px;
+	height: auto;
+	display: block;
+	margin: 0 auto;
+}
 
 /*=====  End of Styling for page Headers  ======*/

@@ -27,16 +27,16 @@
 
     <div class="row">
 
-        <div class="col-md-12">
+        <div class="col-xs-12 col-md-12">
 
             <div class="row">
 
-                <div class="col-md-3">
+                <div class="col-xs-12 col-md-3">
                     <h2 class="item-subhead">Categories</h2>
                     <div id="jstree_demo_div"></div>
                 </div>
 
-                <div class="col-md-9">
+                <div class="col-xs-12 col-md-9">
 
                     <form>
 

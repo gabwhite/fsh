@@ -9,7 +9,18 @@
 
 
 @section('sectionheader')
-    {{isset($profile) ? $profile->company_name : ''}}
+<section class='clearfix container-wrap main-title'>
+    <div class="container ">
+        <div class="col-xs-12 vendor-profile">
+            @if(isset($avatarFilename))
+                <img id="imgCurrentAvatar" src="{{url(config('app.avatar_storage') . '/' . $avatarFilename)}}" title="{{trans('ui.user_label_currentavatar')}}" width="200" height="200"/>
+            @else
+                <img id="imgCurrentAvatar" src="{{url(config('app.avatar_none'))}}" title="{{trans('ui.user_label_noavatar')}}" width="200" height="200"/>
+            @endif
+            <h1 class="page-title">{{isset($profile) ? $profile->company_name : ''}}</h1>
+        </div>
+    </div>
+</section>
 @endsection
 
 
@@ -17,128 +28,73 @@
 
     <div class="row">
 
-        <div class="col-md-12">
+        <div class="col-xs-12 col-md-4">
 
-            <div class="row">
-                <div class="col-md-3">
-                    {{trans('ui.vendor_label_company')}}
-                </div>
-                <div class="col-md-9">
-                    {{isset($profile) ? $profile->company_name : ''}}
-                </div>
-            </div>
+            <div class="col-xs-12 col-md-11">
+                <h2 class="item-subhead">Contact</h2>
 
-            <div class="row">
-                <div class="col-md-3">
-                    {{trans('ui.vendor_label_country')}}
-                </div>
-                <div class="col-md-9">
-                *TODO*
-                </div>
-            </div>
+                <div class="col-xs-12 well">
+                    
+                    <label for="company name">{{trans('ui.vendor_label_company')}}</label>
 
-            <div class="row">
-                <div class="col-md-3">
-                    {{trans('ui.vendor_label_state_province')}}
-                </div>
-                <div class="col-md-9">
-                    *TODO*
-                </div>
-            </div>
+                    <p>{{isset($profile) ? $profile->company_name : ''}}</p>
+                    
+                    <label for="vendor address">{{trans('ui.vendor_label_address1')}}</label>
+                    
+                    <p>{{isset($profile) ? $profile->address1 : ''}}</p>
+                    
+                    
+                    <label for="state/province">{{trans('ui.vendor_label_state_province')}}</label>
+                    
+                    <p>{{trans('ui.vendor_label_country')}}</p>
+        
+                    <label for="address two">{{trans('ui.vendor_label_address2')}}</label>
+                    
+                    <p>{{isset($profile) ? $profile->address2 : ''}}</p>
 
-            <div class="row">
-                <div class="col-md-3">
-                    {{trans('ui.vendor_label_address1')}}
-                </div>
-                <div class="col-md-9">
-                    {{isset($profile) ? $profile->address1 : ''}}
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="col-md-3">
-                    {{trans('ui.vendor_label_address2')}}
-                </div>
-                <div class="col-md-9">
-                    {{isset($profile) ? $profile->address2 : ''}}
-                </div>
-            </div>
+                    <label for="city">
+                        {{trans('ui.vendor_label_city')}}
+                    </label>
+                    <p>{{isset($profile) ? $profile->city : ''}}</p>
 
-            <div class="row">
-                <div class="col-md-3">
-                    {{trans('ui.vendor_label_city')}}
-                </div>
-                <div class="col-md-9">
-                    {{isset($profile) ? $profile->city : ''}}
-                </div>
-            </div>
+                    <label for="postal-code">{{trans('ui.vendor_label_zip_postal')}}</label>
+                    <p>{{isset($profile) ? $profile->zip_postal : ''}}</p>
 
-            <div class="row">
-                <div class="col-md-3">
-                    {{trans('ui.vendor_label_zip_postal')}}
-                </div>
-                <div class="col-md-9">
-                    {{isset($profile) ? $profile->zip_postal : ''}}
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="col-md-3">
-                    {{trans('ui.vendor_label_contact_name')}}
-                </div>
-                <div class="col-md-9">
-                    {{isset($profile) ? $profile->contact_name : ''}}
-                </div>
-            </div>
+                    <label for="contact">{{trans('ui.vendor_label_contact_name')}}</label>
+                    <p>{{isset($profile) ? $profile->contact_name : ''}}</p>
+                    
+                    <label for="contact-title">{{trans('ui.vendor_label_contact_title')}}</label>
 
-            <div class="row">
-                <div class="col-md-3">
-                    {{trans('ui.vendor_label_contact_title')}}
-                </div>
-                <div class="col-md-9">
-                    {{isset($profile) ? $profile->contact_title : ''}}
-                </div>
-            </div>
+                    <p>{{isset($profile) ? $profile->contact_title : ''}}</p>
+                    
+                    <label for="Phone">{{trans('ui.vendor_label_contact_phone')}}</label>
+                    <p> {{isset($profile) ? $profile->contact_phone : ''}}</p>
 
-            <div class="row">
-                <div class="col-md-3">
-                    {{trans('ui.vendor_label_contact_phone')}}
-                </div>
-                <div class="col-md-9">
-                    {{isset($profile) ? $profile->contact_phone : ''}}
-                </div>
-            </div>
+                    <label for="website">{{trans('ui.vendor_label_contact_url')}}</label>
 
-            <div class="row">
-                <div class="col-md-3">
-                    {{trans('ui.vendor_label_contact_url')}}
+                    <p><a href="{{isset($profile) ? $profile->contact_url : ''}}" target="_blank">{{isset($profile) ? $profile->contact_url : ''}}</a></p>
                 </div>
-                <div class="col-md-9">
-                    <a href="{{isset($profile) ? $profile->contact_url : ''}}" target="_blank">{{isset($profile) ? $profile->contact_url : ''}}</a>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-3">
-                    {{trans('ui.vendor_label_intro_text')}}
-                </div>
-                <div class="col-md-9">
-                    {{isset($profile) ? $profile->intro_text : ''}}
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-3">
-                    {{trans('ui.vendor_label_about_text')}}
-                </div>
-                <div class="col-md-9">
-                    {{isset($profile) ? $profile->about_text : ''}}
-                </div>
+                
             </div>
 
 
+
+
+        </div> <!-- end of sidebar -->
+
+        <div class="col-xs-12 col-md-8">
+            <h2 class="item-subhead">{{trans('ui.vendor_label_about_text')}}</h2>
+
+            <div class="col-xs-12 well">
+                <h3>{{isset($profile) ? $profile->intro_text : ''}}</h3>
+
+                <p>{{isset($profile) ? $profile->about_text : ''}}</p>
+                
+            </div>
+            
         </div>
-
 
     </div>
 
