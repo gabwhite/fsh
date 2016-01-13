@@ -3,7 +3,7 @@
 @section('title', 'Page Title')
 
 @section('css')
-    <link rel="stylesheet" type="text/css" href="{{url('js/vendor/vegas/vegas.min.css')}}"/>
+
 @endsection
 
 @section('sidebar')
