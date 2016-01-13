@@ -358,6 +358,26 @@ class DataAccessLayer
 
     }
 
+    public function getProductsByCategory($categoryId, $paginate = false, $pageSize = 25)
+    {
+        $query = \DB::table('products')
+            ->join('product_categories', 'products.id', '=', 'product_categories.product_id')
+            ->where('product_categories.category_id', '=', $categoryId)
+            //->where('products.published', '=', true)
+            ->select('products.id', 'products.name', 'products.brand')->orderBy('products.name');
+
+        if($paginate)
+        {
+            $products = $query->paginate($pageSize);
+        }
+        else
+        {
+            $products = $query->get();
+        }
+
+        return $products;
+    }
+
     private function prepareFullTextSearchQuery($rawQuery)
     {
         $words = explode(' ', $rawQuery);

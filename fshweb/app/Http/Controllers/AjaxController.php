@@ -6,7 +6,6 @@ use App\CacheManager;
 use App\DataAccessLayer;
 use App\DbCategoryFinder;
 use App\LookupManager;
-use App\ProductSearcher;
 use Illuminate\Http\Request;
 use Cache;
 use App\Http\Requests;
@@ -63,10 +62,7 @@ class AjaxController extends Controller
 
     public function getProducts($categoryId)
     {
-
-        $productSearcher = new ProductSearcher();
-        //$products = $productSearcher->getProductsByCategoryPaginated($categoryId, 3, true);
-        $products = $productSearcher->getProductsByCategory($categoryId);
+        $products = $this->dataAccess->getProductsByCategory($categoryId);
 
         return response()->json($products);
     }
@@ -87,7 +83,7 @@ class AjaxController extends Controller
 
     public function deleteBrand($brandId)
     {
-
+        // TODO
     }
 
 }
