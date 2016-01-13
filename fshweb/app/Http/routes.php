@@ -49,7 +49,7 @@ Route::group(['middleware' => 'auth'], function()
     Route::group(['middleware' => ['role:vendor|admin']], function()
     {
         Route::get('/product/vendor', 'ProductController@vendorProducts');
-        Route::get('/product/edit/{id?}', 'ProductController@showProduct');
+        Route::get('/product/edit/{id?}', 'ProductController@showEditProduct');
         Route::post('/product/edit', 'ProductController@editProduct');
         Route::get('/vendor/edit', 'VendorController@edit');
         Route::post('/vendor/edit', 'VendorController@update');
