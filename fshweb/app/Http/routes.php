@@ -35,11 +35,6 @@ Route::post('contact', 'PublicController@contactUsSubmit');
 Route::get('vendor/detail/{id}', 'VendorController@detail');
 
 
-Route::get('toolsresources', function() { return view('toolsresources'); } );
-
-Route::get('industryforums', function() { return view('industryforums'); } );
-
-
 // Routes the require authentication
 Route::group(['middleware' => 'auth'], function()
 {
