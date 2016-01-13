@@ -30,24 +30,7 @@ class AjaxController extends Controller
 
     public function getProductFullTextSearch($query)
     {
-
-        $words = explode(' ', $query);
-        $finalWords = array();
-        foreach($words as $w)
-        {
-            if(is_numeric($w))
-            {
-                $w = '"'.$w.'"';
-            }
-            else if(!starts_with($w, '"') && strlen($w) > 2)
-            {
-                $w = $w . '*';
-            }
-
-            array_push($finalWords, $w);
-        }
-
-        $results = $this->dataAccess->getProductsByFullText($finalWords);
+        $results = $this->dataAccess->getProductsByFullText($query);
 
         return response()->json($results);
     }
