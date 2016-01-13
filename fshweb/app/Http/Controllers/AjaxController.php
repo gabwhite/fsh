@@ -37,7 +37,7 @@ class AjaxController extends Controller
 
     public function getFoodCategoriesForParent($format, $parentId = null)
     {
-        $categories = $this->dataAccess->getFoodCategoriesForParent($parentId);
+        $categories = $this->lookupManager->getFoodCategoriesForParent($parentId);
 
         if($format == 'JSON')
         {
@@ -69,14 +69,6 @@ class AjaxController extends Controller
         $products = $productSearcher->getProductsByCategory($categoryId);
 
         return response()->json($products);
-    }
-
-    public function getProductsFullText($words)
-    {
-        $productSearcher = new ProductSearcher();
-        $products = $productSearcher->fullTextSearch('productindex', $words);
-
-        return $products;
     }
 
     public function getCountries()
