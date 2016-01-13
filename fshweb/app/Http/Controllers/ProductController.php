@@ -40,6 +40,13 @@ class ProductController extends Controller
         return view('product.search');
     }
 
+    public function doSearch(Request $request)
+    {
+        $results = $this->dataAccess->getProductsByFullText($request->input('searchquery'));
+
+        return view('product.search')->with('searchresults', $results);
+    }
+
     public function showProduct($id = null)
     {
         $user = \Auth::user();

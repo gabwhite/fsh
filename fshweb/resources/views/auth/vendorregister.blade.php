@@ -133,7 +133,6 @@
 @section('scripts')
 
     <script type="text/javascript" src="{{url('js/vendor/validation/jquery.validate.min.js')}}"></script>
-    <script type="text/javascript" src="{{url('js/fsh.common.js')}}"></script>
     <script type="text/javascript">
         $(document).ready(function()
         {

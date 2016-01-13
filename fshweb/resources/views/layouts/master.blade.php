@@ -64,13 +64,11 @@
                 
                 <div class="col-xs-6 col-md-9">
                     <div class="col-xs-12 col-md-4">
-                        <form class="navbar-form" method="post" action="{{url('product/search')}}">
+                        <form class="navbar-form" id="frmNavigationSearch" method="post" action="{{url('product/navsearch')}}">
                             <div class="form-group">
-                                <input type="text" name="searchquery" id="searchquery" autocomplete="off" placeholder="{{trans('ui.search_placeholder')}}" value="{{$query or ''}}" class="form-control"/>
-                                <a href="#" id="hlSearch" class="search"><img src="/public/img/icons/search.svg" alt=""></a>
+                                <input type="text" name="searchquery" autocomplete="off" placeholder="{{trans('ui.search_placeholder')}}" value="{{$query or ''}}" class="form-control"/>
+                                <a href="#" class="search"><img src="{{url('img/icons/search.svg')}}" alt=""></a>
                             </div>
-                                    
-                                    
                             {!! csrf_field() !!}
                         </form>
                     </div>    
@@ -205,6 +203,7 @@
 
 <script src="{{url('js/vendor/jquery-1.11.3.min.js')}}"></script>
 <script src="{{url('js/vendor/bootstrap/bootstrap.min.js')}}"></script>
+<script src="{{url('js/fsh.common.js')}}"></script>
 
 
 

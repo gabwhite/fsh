@@ -49,8 +49,8 @@
                             </div>
                         </div>
 
-                        {!! csrf_field() !!}
                     </form>
+
                     <table id="product_list" width="100%" class="table">
                         <thead>
                         <tr>
@@ -64,10 +64,10 @@
                             @foreach($searchresults as $r)
                                 <tr>
                                     <td>
-                                        <a href="{{url('/productdetail', $r['document']->getFieldValue('id'))}}">{{$r['document']->getFieldValue('name')}}</a>
-                                        ({{round($r['score'] * 100)}}%)
+                                        <a href="{{url('/product/detail', $r->id)}}">{{$r->name}}</a>
                                     </td>
-                                    <td>{{$r['document']->getFieldValue('brand')}}</td></tr>
+                                    <td>{{$r->brand}}</td>
+                                </tr>
                             @endforeach
                         @endif
                         </tbody>
@@ -86,7 +86,6 @@
 
 @section('scripts')
     <script type="text/javascript" src="{{url('js/vendor/jstree/jstree.min.js')}}"></script>
-    <script type="text/javascript" src="{{url('js/fsh.common.js')}}"></script>
     <script type="text/javascript">
 
         var $resultTable = $("#product_list");
@@ -141,11 +140,8 @@
 
             });
 
-
             $("#tbSearchQuery").on("keydown", performSearch);
             $("#hlSearchButton").on("click", performSearch);
-
-
         });
 
         function performSearch(e)

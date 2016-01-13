@@ -21,7 +21,7 @@ Route::get('/', function ()
 // Product routes
 //=================================
 Route::get('/product/search', 'ProductController@search');
-Route::post('/product/search', 'ProductController@fullTextSearch');
+Route::post('/product/navsearch', 'ProductController@doSearch');
 Route::get('/product/detail/{id}', 'ProductController@detail');
 
 
