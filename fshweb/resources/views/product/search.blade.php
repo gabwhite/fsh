@@ -38,14 +38,14 @@
 
                 <div class="col-md-9">
 
-                    <form method="post" action="{{url('product/search')}}">
+                    <form>
 
                         <div class="row">
                             <div class="col-md-9">
-                                <input type="text" name="searchquery" id="searchquery" autocomplete="off" placeholder="{{trans('ui.search_placeholder')}}" value="{{$query or ''}}" class="form-control"/>
+                                <input type="text" name="tbSearchQuery" id="tbSearchQuery" autocomplete="off" placeholder="{{trans('ui.search_placeholder')}}" value="{{$query or ''}}" class="form-control"/>
                             </div>
                             <div class="col-md-3">
-                                <a href="#" id="hlSearch" class="btn btn-primary">{{trans('ui.button_search')}}</a>
+                                <a href="#" id="hlSearchButton" class="btn btn-primary">{{trans('ui.button_search')}}</a>
                             </div>
                         </div>
 
@@ -142,16 +142,17 @@
             });
 
 
-            $("#searchquery").on("keydown", performSearch);
-            $("#hlSearch").on("click", performSearch);
+            $("#tbSearchQuery").on("keydown", performSearch);
+            $("#hlSearchButton").on("click", performSearch);
+
 
         });
 
         function performSearch(e)
         {
-            if(e.which === 13 || e.target.id === "hlSearch")
+            if(e.which === 13 || e.target.id === "hlSearchButton")
             {
-                var qry = "{{url('ajax/productsearch')}}" + "/" + $("#searchquery").val();
+                var qry = "{{url('ajax/productsearch')}}" + "/" + $("#tbSearchQuery").val();
                 $.getJSON(qry, function(jsonresult)
                 {
                     var tableRows = "";
