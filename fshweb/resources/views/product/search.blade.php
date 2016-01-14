@@ -7,7 +7,13 @@
 
 <section class='clearfix container-wrap main-title search-header'>
     <div class='container'><h1 class="page-title">{{trans('ui.search_label_header')}}</h1>
-        
+
+        <div id="divCategoryDropdowns">
+            <select id="ddlbCategory"><option value="">Select Category</option></select>
+            <select id="ddlbSubCategory"><option value="">Select Sub Category</option></select>
+            <select id="ddlbProductType"><option value="">Select Product Type</option></select>
+        </div>
+
         <!-- BREADCRUMBS, NOT SURE IF THEY'RE NEEDED?  -->
 
         <!-- <div class='breadcrumb-extra'>
@@ -90,6 +96,11 @@
     <script type="text/javascript">
 
         var $resultTable = $("#product_list");
+        var $categoryDdlb = $("#ddlbCategory");
+        var $subCategoryDdlb = $("#ddlbSubCategory");
+        var $productTypeDdlb = $("#ddlbProductType");
+
+        var foodCategoryUrl = "{{url('ajax/getfoodcategories/')}}";
 
         $(document).ready(function()
         {
@@ -107,11 +118,11 @@
                             //console.log(node);
                             if(node.id === "#")
                             {
-                                return "{{url('ajax/getfoodcategories/TREEJSON/')}}";
+                                return foodCategoryUrl + "/TREEJSON";
                             }
                             else
                             {
-                                return "{{url('ajax/getfoodcategories/TREEJSON/')}}" + "/" + node.id;
+                                return foodCategoryUrl + "/TREEJSON/" + node.id;
                             }
                         },
                         "data": function(node)
@@ -143,6 +154,13 @@
 
             $("#tbSearchQuery").on("keydown", performSearch);
             $("#hlSearchButton").on("click", performSearch);
+
+            populateSearchDropdown(1);
+
+            $categoryDdlb.on("change", populateSearchDropdown);
+            $subCategoryDdlb.on("change", populateSearchDropdown);
+            $productTypeDdlb.on("change", populateSearchDropdown);
+
         });
 
         function performSearch(e)
@@ -165,11 +183,51 @@
                     }
 
                     $resultTable.html(tableRows);
-
+``
                 });
 
                 e.preventDefault();
             }
+        }
+
+        function populateSearchDropdown(dropdownType)
+        {
+            var parentId;
+            var dropdownToPopulate;
+            if(dropdownType === 1)
+            {
+                dropdownToPopulate = $categoryDdlb;
+            }
+            else if(dropdownType === 2)
+            {
+                dropdownToPopulate = $subCategoryDdlb;
+            }
+            else if(dropdownType === 3)
+            {
+                dropdownToPopulate = $productTypeDdlb;
+            }
+
+            var qry = foodCategoryUrl + "/JSON";
+            if(parentId !== undefined && parentId !== null) { qry += "/" + parentId; }
+
+            $.getJSON(qry, function(jsonresult)
+            {
+                console.log(jsonresult);
+                var options = "<option value=''>Select Category</option>";
+                $.each(jsonresult, function(idx, val)
+                {
+                    options += "<option value='" + val.id + "'>" + val.name + "</option>";
+                });
+
+                dropdownToPopulate.html(options);
+
+            });
+
+        }
+
+        function getFoodCategories(parentId)
+        {
+
         }
 
     </script>
