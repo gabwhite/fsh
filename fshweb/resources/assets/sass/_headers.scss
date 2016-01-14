@@ -6,7 +6,7 @@
 .main-title {
     background: none;
     margin-bottom: 4%;
-	padding: 2.5%;
+	padding: 20px;
 }
 
 /*----------  Navigation  ----------*/
@@ -131,6 +131,12 @@ a.search {
 	height: auto;
 	display: block;
 	margin: 0 auto;
+}
+
+// Profile Page
+.profile-head {
+	@extend .main-title;
+	margin-bottom: 0;
 }
 
 /*=====  End of Styling for page Headers  ======*/

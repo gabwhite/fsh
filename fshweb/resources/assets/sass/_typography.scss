@@ -223,6 +223,11 @@ h4 {
     border-left: 5px solid $danger;
 }
 
+.bg-success {
+    @extend .bg-info;
+    border-left: 5px solid $primary-button;
+}
+
 /*----------  Search sidebar tree  ----------*/
 
 .jstree-default .jstree-anchor {

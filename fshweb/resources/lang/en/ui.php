@@ -24,9 +24,9 @@ return [
     'navigation_editavatar' => 'Edit Avatar',
     'navigation_product_detail' => 'Product Detail',
 
-    'navigation_link_editprofile' => 'Edit my profile',
+    'navigation_link_editprofile' => 'Edit Profile',
     'navigation_link_changeavatar' => 'Change Avatar',
-    'navigation_link_deleteavatar' => 'Delete current avatar',
+    'navigation_link_deleteavatar' => 'Yes, delete my current avatar',
     'navigation_link_myproducts' => 'My Products',
     'navigation_link_addnewproduct' => 'Add New',
     'navigation_link_viewvendor' => 'View Vendor Profile',

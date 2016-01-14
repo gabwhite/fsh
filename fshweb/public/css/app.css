@@ -1755,14 +1755,17 @@ a.bg-success:focus {
 }
 
 .bg-info,
-.bg-danger {
+.bg-danger,
+.bg-success {
   background-color: #d9edf7;
 }
 
 a.bg-info:hover,
 a.bg-danger:hover,
+a.bg-success:hover,
 a.bg-info:focus,
-a.bg-danger:focus {
+a.bg-danger:focus,
+a.bg-success:focus {
   background-color: #afd9ee;
 }
 
@@ -8583,7 +8586,8 @@ h4 {
 /*----------  Admin editing notices  ----------*/
 
 .bg-info,
-.bg-danger {
+.bg-danger,
+.bg-success {
   background: white;
   border: 1px solid #c2c2c2;
   border-left: 5px solid #ffce0e;
@@ -8592,33 +8596,43 @@ h4 {
 }
 
 .bg-info p,
-.bg-danger p {
+.bg-danger p,
+.bg-success p {
   margin-bottom: 0;
   line-height: 2.2;
 }
 
 .bg-info a,
-.bg-danger a {
+.bg-danger a,
+.bg-success a {
   color: #de5328;
 }
 
 .bg-info button,
-.bg-danger button {
+.bg-danger button,
+.bg-success button {
   margin: 0 10px;
 }
 
 .bg-info a:hover,
 .bg-danger a:hover,
+.bg-success a:hover,
 .bg-info a:focus,
 .bg-danger a:focus,
+.bg-success a:focus,
 .bg-info a:active,
-.bg-danger a:active {
+.bg-danger a:active,
+.bg-success a:active {
   color: #a13919;
   text-decoration: none;
 }
 
 .bg-danger {
   border-left: 5px solid #e7212d;
+}
+
+.bg-success {
+  border-left: 5px solid #4dd371;
 }
 
 /*----------  Search sidebar tree  ----------*/
@@ -8861,6 +8875,12 @@ label {
   border: 2px solid #2fbe55;
 }
 
+.btn-primary a,
+.btn-sm a,
+.btn-group-sm > .btn a {
+  color: white;
+}
+
 .btn {
   display: inline-block;
   text-transform: none;
@@ -8895,6 +8915,10 @@ label {
   color: white;
 }
 
+.btn a {
+  color: white;
+}
+
 .btn-row {
   display: inline-block;
   margin-bottom: 30px;
@@ -8904,7 +8928,8 @@ label {
   margin-left: 0;
 }
 
-.btn-row button {
+.btn-row button,
+.btn-row input[type="submit"] {
   margin: 0 10px;
 }
 
@@ -8914,16 +8939,35 @@ label {
   line-height: 0;
 }
 
+/*----------  Icons + Link style buttons  ----------*/
+
+.delete-avatar {
+  font-weight: 700;
+}
+
+.delete-avatar img {
+  width: 15px;
+}
+
+.change-avatar {
+  font-weight: 700;
+}
+
+.change-avatar img {
+  width: 20px;
+}
+
 /*=====  End of Forms and Buttons  ======*/
 
 /*================================================
 =            Styling for page Headers            =
 ================================================*/
 
-.main-title {
+.main-title,
+.profile-head {
   background: none;
   margin-bottom: 4%;
-  padding: 2.5%;
+  padding: 20px;
 }
 
 /*----------  Navigation  ----------*/
@@ -9044,6 +9088,10 @@ a.search {
   height: auto;
   display: block;
   margin: 0 auto;
+}
+
+.profile-head {
+  margin-bottom: 0;
 }
 
 /*=====  End of Styling for page Headers  ======*/

@@ -7,81 +7,87 @@
 @endsection
 
 @section('sectionheader')
-    {{trans('ui.navigation_profile')}}
+<section class='clearfix container-wrap profile-head'>
+    <div class="container">
+        <div class="col-xs-12 col-md-4">
+          @if(isset($avatarFilename))
+              <img id="imgCurrentAvatar" src="{{url(config('app.avatar_storage') . '/' . $avatarFilename)}}" title="{{trans('ui.user_label_currentavatar')}}" width="200" height="200"/>
+          @else
+              <img id="imgCurrentAvatar" src="{{url(config('app.avatar_none'))}}" title="{{trans('ui.user_label_noavatar')}}" width="200" height="200"/>
+          @endif          
+        </div>
+
+        <div class="col-xs-12 col-md-8">  
+
+            <h1 class="item-title">{{trans('ui.navigation_link_editprofile')}}</h1>
+            
+            <button class="btn-primary">
+                <a href="{{url('profile/avatar')}}">{{trans('ui.navigation_link_changeavatar')}}</a>
+            </button>
+        </div>
+    </div>
+</section>
+            
+
 @endsection
 
 @section('content')
 
 <div class="row">
 
-    <div class="col-md-12">
+    <div class="col-xs-12 col-md-8 col-md-offset-4">
+        <div class="col-xs-12 well">
+            
+        
+            <form id="form1" name="form1" method="post" action="{{url('profile/edit')}}">
 
-        <form id="form1" name="form1" method="post" action="{{url('profile/edit')}}">
+                <div class="detail-row">
+                    <label for="email">{{trans('ui.user_label_email')}}</label>
+                    <input type="text" name="email" placeholder="" class="form-control" value="{{Auth::user()->email}}" maxlength="100"/>  
+                </div>
 
-            <div class="row">
-                <div class="col-md-3">
-                    {{trans('ui.user_label_email')}}
-                </div>
-                <div class="col-md-9">
-                    <input type="text" name="email" placeholder="" class="form-control" value="{{Auth::user()->email}}" maxlength="100"/>
-                </div>
-            </div>
+                <div class="detail-row">
+                    <label for="password">{{trans('ui.user_label_password')}}</label>
 
-            <div class="row">
-                <div class="col-md-3">
-                    {{trans('ui.user_label_password')}}
-                </div>
-                <div class="col-md-9">
                     <input type="password" name="password" placeholder="" class="form-control" maxlength="25"/>
                 </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-3">
-                    {{trans('ui.user_label_confirmpassword')}}
-                </div>
-                <div class="col-md-9">
+                    
+                
+                <div class="detail-row">
+                    <label for="confirm password">{{trans('ui.user_label_confirmpassword')}}</label>    
+                    
                     <input type="password" name="confirmpassword" placeholder="" class="form-control" maxlength="25"/>
                 </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-3">
-                    {{trans('ui.user_label_firstname')}}
-                </div>
-                <div class="col-md-9">
+            
+                <div class="detail-row">
+                    <label for="firstname">{{trans('ui.user_label_firstname')}}</label>
+                        
                     <input type="text" name="firstname" placeholder="" class="form-control" maxlength="100" value="{{isset($profile) ? $profile->firstname : ''}}"/>
                 </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-3">
-                    {{trans('ui.user_label_lastname')}}
-                </div>
-                <div class="col-md-9">
+                
+                <div class="detail-row">
+                    <label for="lastname">{{trans('ui.user_label_lastname')}}</label>
+                    
                     <input type="text" name="lastname" placeholder="" class="form-control" maxlength="100" value="{{isset($profile) ? $profile->lastname : ''}}"/>
                 </div>
-            </div>
 
-            <div class="row">
-                <div class="col-md-3">
-                    {{trans('ui.user_label_bio')}}
+                <div class="detail-row">
+                    <label for="bio">{{trans('ui.user_label_bio')}}</label>
+                    
+                    <textarea name="bio" class="form-control" placeholder="" cols="80" rows="5">{{isset($profile) ? $profile->bio : ''}}</textarea>
                 </div>
-                <div class="col-md-9">
-                    <textarea name="bio" class="form-control" placeholder="" cols="80" rows="3">{{isset($profile) ? $profile->bio : ''}}</textarea>
+
+
+                <div class="row btn-row">
+                    <div class="col-md-12">
+                        <input type="submit" value="{{trans('ui.button_update')}}" class=" btn-primary"/>
+                        <a href="{{url('/profile')}}" class="btn ">{{trans('ui.button_cancel')}}</a>
+                    </div>
                 </div>
-            </div>
 
-            <div class="row">
-                <div class="col-md-12">
-                    <input type="submit" value="{{trans('ui.button_update')}}" class="btn btn-primary btn-lg"/>
-                    <a href="{{url('/profile')}}" class="btn btn-lg">{{trans('ui.button_cancel')}}</a>
-                </div>
-            </div>
-
-            {!! csrf_field() !!}
-        </form>
-
+                {!! csrf_field() !!}
+            </form>
+        </div>
     </div>
 
 </div>
