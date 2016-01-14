@@ -93,6 +93,7 @@ return [
     'vendor_label_add_brands' => 'Add New Brands',
     'vendor_label_edit_logo' => 'Edit Logo',
     'vendor_label_edit_background' => 'Edit Background',
+    'vendor_label_choose_country' => 'Please choose a country first',
 
 
 
