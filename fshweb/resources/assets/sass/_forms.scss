@@ -25,6 +25,23 @@ label {
 	height: 35px;
 }
 
+/*----------  Dropdown <select> elements  ----------*/
+
+select.search-dropdown {
+	border: 1px solid $border;
+	border-radius: 3px;
+	font-size: 16px;
+	height: 35px;
+	width: 100%;
+	font-weight: 600;
+	color: $placeholder;
+	@include breakpoint(tablet){
+		height: 50px;
+		width: 20%;
+		margin: 0 10px;
+	}
+}
+
 /*----------  Buttons  ----------*/
 .btn-primary {
 	@include btn;

@@ -8,10 +8,12 @@
 <section class='clearfix container-wrap main-title search-header'>
     <div class='container'><h1 class="page-title">{{trans('ui.search_label_header')}}</h1>
 
-        <div id="divCategoryDropdowns">
-            <select id="ddlbCategory"><option value="">Select Category</option></select>
-            <select id="ddlbSubCategory"><option value="">Select Sub Category</option></select>
-            <select id="ddlbProductType"><option value="">Select Product Type</option></select>
+        <div id="divCategoryDropdowns" class="row">
+            <div class="col-xs-12 text-center">
+                <select id="ddlbCategory" class="search-dropdown"><option value="">Select Category</option></select>
+                <select id="ddlbSubCategory" class="search-dropdown"><option value="">Select Sub Category</option></select>
+                <select id="ddlbProductType" class="search-dropdown"><option value="">Select Product Type</option></select>
+            </div>
         </div>
 
         <!-- BREADCRUMBS, NOT SURE IF THEY'RE NEEDED?  -->
@@ -37,28 +39,31 @@
 
             <div class="row">
 
-                <div class="col-xs-12 col-md-3">
-                    <h2 class="item-subhead">{{trans('ui.search_label_categories')}}</h2>
+                <div class="col-xs-12 col-md-4">
+                    <div class="col-xs-12 col-md-11">
+                        
+                        <h2 class="item-subhead">{{trans('ui.search_label_categories')}}</h2>
 
-                    <div id="jstree_demo_div"></div>
+                        <div id="jstree_demo_div"></div>
+                    </div>
                 </div>
 
-                <div class="col-xs-12 col-md-9">
+                <div class="col-xs-12 col-md-8">
+                    <div class="col-xs-12 well">
+                        <form>
 
-                    <form>
-
-                        <div class="row">
-                            <div class="col-md-9">
-                                <input type="text" name="tbSearchQuery" id="tbSearchQuery" autocomplete="off" placeholder="{{trans('ui.search_placeholder')}}" value="{{$query or ''}}" class="form-control"/>
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <input type="text" name="tbSearchQuery" id="tbSearchQuery" autocomplete="off" placeholder="{{trans('ui.search_placeholder')}}" value="{{$query or ''}}" class="form-control"/>
+                                </div>
+                                <div class="col-md-3">
+                                    <a href="#" id="hlSearchButton" class="btn btn-primary">{{trans('ui.button_search')}}</a>
+                                </div>
                             </div>
-                            <div class="col-md-3">
-                                <a href="#" id="hlSearchButton" class="btn btn-primary">{{trans('ui.button_search')}}</a>
-                            </div>
-                        </div>
 
-                    </form>
+                        </form>
 
-                    <table id="product_list" width="100%" class="table">
+                        <table id="product_list" width="100%" class="table">
                         <thead>
                         <tr>
                             <th></th>
@@ -79,6 +84,9 @@
                         @endif
                         </tbody>
                     </table>
+                    </div>
+
+                    
 
                 </div>
 

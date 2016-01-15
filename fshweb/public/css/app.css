@@ -8839,6 +8839,26 @@ label {
   height: 35px;
 }
 
+/*----------  Dropdown <select> elements  ----------*/
+
+select.search-dropdown {
+  border: 1px solid #c2c2c2;
+  border-radius: 3px;
+  font-size: 16px;
+  height: 35px;
+  width: 100%;
+  font-weight: 600;
+  color: #7D7D7D;
+}
+
+@media (min-width: 768px) {
+  select.search-dropdown {
+    height: 50px;
+    width: 20%;
+    margin: 0 10px;
+  }
+}
+
 /*----------  Buttons  ----------*/
 
 .btn-primary,
