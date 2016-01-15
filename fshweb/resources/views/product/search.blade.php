@@ -95,7 +95,7 @@
     <script type="text/javascript" src="{{url('js/vendor/jstree/jstree.min.js')}}"></script>
     <script type="text/javascript">
 
-        var $categoryTree = $("#jstree_demo_div")
+        var $categoryTree = $("#jstree_demo_div");
         var $resultTable = $("#product_list");
 
         var $categoryDdlb = $("#ddlbCategory");
