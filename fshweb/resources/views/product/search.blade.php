@@ -96,6 +96,7 @@
     <script type="text/javascript">
 
         var $resultTable = $("#product_list");
+
         var $categoryDdlb = $("#ddlbCategory");
         var $subCategoryDdlb = $("#ddlbSubCategory");
         var $productTypeDdlb = $("#ddlbProductType");
@@ -155,12 +156,54 @@
             $("#tbSearchQuery").on("keydown", performSearch);
             $("#hlSearchButton").on("click", performSearch);
 
-            populateSearchDropdown(1);
+            $categoryDdlb.on("change", function(e)
+            {
+                var placeHolder = "Select Category";
+                var fillSelf = true;
+                var qry = foodCategoryUrl + "/JSON";
+                if($categoryDdlb.val() !== "")
+                {
+                    fillSelf = false;
+                    qry += "/" + $categoryDdlb.val();
+                    placeHolder = "Select Sub Category";
+                }
 
-            $categoryDdlb.on("change", populateSearchDropdown);
-            $subCategoryDdlb.on("change", populateSearchDropdown);
-            $productTypeDdlb.on("change", populateSearchDropdown);
+                $.getJSON(qry, function(jsonresult)
+                {
+                    //console.log(jsonresult);
+                    var options = "<option value=''>" + placeHolder + "</option>";
+                    $.each(jsonresult, function(idx, val)
+                    {
+                        options += "<option value='" + val.id + "'>" + val.name + "</option>";
+                    });
 
+                    if(fillSelf) { $categoryDdlb.html(options); }
+                    else { $subCategoryDdlb.html(options); }
+                });
+            });
+
+            $subCategoryDdlb.on("change", function(e)
+            {
+                var placeHolder = "Select Product Type";
+                var qry = foodCategoryUrl + "/JSON/" + $subCategoryDdlb.val();
+                if($subCategoryDdlb.val() !== "")
+                {
+                }
+
+                $.getJSON(qry, function(jsonresult)
+                {
+                    //console.log(jsonresult);
+                    var options = "<option value=''>" + placeHolder + "</option>";
+                    $.each(jsonresult, function(idx, val)
+                    {
+                        options += "<option value='" + val.id + "'>" + val.name + "</option>";
+                    });
+
+                    $productTypeDdlb.html(options);
+                });
+            });
+
+            $categoryDdlb.trigger("change");
         });
 
         function performSearch(e)
@@ -188,46 +231,6 @@
 
                 e.preventDefault();
             }
-        }
-
-        function populateSearchDropdown(dropdownType)
-        {
-            var parentId;
-            var dropdownToPopulate;
-            if(dropdownType === 1)
-            {
-                dropdownToPopulate = $categoryDdlb;
-            }
-            else if(dropdownType === 2)
-            {
-                dropdownToPopulate = $subCategoryDdlb;
-            }
-            else if(dropdownType === 3)
-            {
-                dropdownToPopulate = $productTypeDdlb;
-            }
-
-            var qry = foodCategoryUrl + "/JSON";
-            if(parentId !== undefined && parentId !== null) { qry += "/" + parentId; }
-
-            $.getJSON(qry, function(jsonresult)
-            {
-                console.log(jsonresult);
-                var options = "<option value=''>Select Category</option>";
-                $.each(jsonresult, function(idx, val)
-                {
-                    options += "<option value='" + val.id + "'>" + val.name + "</option>";
-                });
-
-                dropdownToPopulate.html(options);
-
-            });
-
-        }
-
-        function getFoodCategories(parentId)
-        {
-
         }
 
     </script>
