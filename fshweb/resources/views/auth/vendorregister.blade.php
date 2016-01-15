@@ -55,6 +55,8 @@
                         <div>
                             <label for="state_province">{{trans('ui.vendor_label_state_province')}}</label>
                             <select id="state_province" name="state_province" class="form-control">
+                                <option value=""></option>
+                                <option value="">{{trans('ui.vendor_label_choose_country')}}</option>
                             </select>
                         </div>
 

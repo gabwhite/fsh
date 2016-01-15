@@ -74,7 +74,7 @@ class LookupManager
         $categories = $this->cacheManager->getItem(env('CACHE_DRIVER'), $key);
         if($categories == null)
         {
-            $categories = $this->dataAccess->getFoodCategoriesForParent($parentId);
+            $categories = $this->dataAccess->getFoodCategoriesForParent(true, $parentId, ['id', 'name', 'parent_id']);
             $this->cacheManager->setItem(env('CACHE_DRIVER'), $key, $categories, 10);
         }
 

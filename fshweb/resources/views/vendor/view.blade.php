@@ -43,11 +43,6 @@
                     
                     <p>{{isset($profile) ? $profile->address1 : ''}}</p>
                     
-                    
-                    <label for="state/province">{{trans('ui.vendor_label_state_province')}}</label>
-                    
-                    <p>{{trans('ui.vendor_label_country')}}</p>
-        
                     <label for="address two">{{trans('ui.vendor_label_address2')}}</label>
                     
                     <p>{{isset($profile) ? $profile->address2 : ''}}</p>
@@ -58,6 +53,14 @@
                     </label>
                     <p>{{isset($profile) ? $profile->city : ''}}</p>
 
+                    
+                    <label for="state/province">{{trans('ui.vendor_label_state_province')}}</label>
+                    <p>{{isset($profile) ? $profile->state_province : ''}}</p>
+                    
+                    <label for="country">{{trans('ui.vendor_label_country')}}</label>
+                    <p>{{isset($profile) ? $profile->country : ''}}</p>
+        
+                    
                     <label for="postal-code">{{trans('ui.vendor_label_zip_postal')}}</label>
                     <p>{{isset($profile) ? $profile->zip_postal : ''}}</p>
 
@@ -93,6 +96,35 @@
                 <p>{{isset($profile) ? $profile->about_text : ''}}</p>
                 
             </div>
+
+            <div class="row">
+                <div class="col-xs-12">
+                    
+                    <h2 class="item-subhead">Our Brands</h2>
+
+                    <div class="col-xs-12 well">
+                        <div class="flexslider">
+                          <ul class="slides">
+                            <li style="background: url(../public/img/slider/campbells-brand-logo.png); background-repeat: no-repeat; background-position: center center;">
+                              
+                            </li>
+
+                            <li style="background: url(../public/img/slider/pepperidgefarm-logo.png); background-repeat: no-repeat; background-position: center center;">
+                            </li>
+
+                            <li style="background: url(../public/img/slider/ROLAND-LOGO-BANNER-SIZE.png); background-repeat: no-repeat; background-position: center center;">
+                            </li>
+                            <li style="background: url(../public/img/slider/ROLAND-LOGO-BANNER-SIZE.png); background-repeat: no-repeat; background-position: center center;">
+                        
+                            </li>
+                            <!-- items mirrored twice, total of 12 -->
+                          </ul>
+                        </div>
+                           
+                    </div>
+                </div>
+            </div>
+
             
         </div>
 
@@ -104,6 +136,15 @@
 
 @section('scripts')
 
-
+<script>
+    $(document).ready(function(){
+        $('.flexslider').flexslider({
+            animation: "slide",
+            animationLoop: false,
+            itemWidth: 225,
+            itemMargin: 10
+        });
+    });
+</script>
 
 @endsection

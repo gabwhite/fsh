@@ -10,70 +10,87 @@
 @endsection
 
 @section('sectionheader')
-    {{trans('ui.navigation_editavatar')}}
+<section class='clearfix container-wrap profile-head'>
+    <div class="container">
+        <div class="col-xs-12 col-md-4">
+            @if(isset($profile) && isset($profile->avatar_image_path) && !isset($isCropMode))
+                <img id="imgCurrentAvatar" src="{{url(config('app.avatar_storage') . '/' . $profile->avatar_image_path)}}" title="{{trans('ui.user_label_currentavatar')}}" width="200" height="200"/>
+            @else
+                <img id="imgCurrentAvatar" src="{{url(config('app.avatar_none'))}}" title="{{trans('ui.user_label_noavatar')}}" width="200" height="200"/>
+            @endif
+        </div>
+        <div class="col-xs-12 col-md-8">
+            <h1 class="item-title">{{trans('ui.navigation_editavatar')}}</h1>
+            
+        </div>
+    </div>
+</section>
 @endsection
 
 @section('content')
 
     <div class="row">
 
-        <div class="col-md-12">
+        <div class="col-xs-12 col-md-8 col-md-offset-4">
+            <div class="col-xs-12 well">
+            
+                <form id="form1" name="form1" method="post" enctype="multipart/form-data" action="{{url('profile/avatar')}}">
+                        
+                    @if(isset($profile) && isset($profile->avatar_image_path))
+                        <div class="col-xs-12 bg-info">
+                            <p>Delete your existing avatar?</p>
+                        
+                            <div class="delete-avatar">
+                                <img src="../../public/img/icons/trash.svg" alt="">
+                                <a href="#" id="hlRemoveAvatar" class="delete-avatar">{{trans('ui.navigation_link_deleteavatar')}}</a>
+                            </div>
+                         </div>
+                    @endif
 
-            <form id="form1" name="form1" method="post" enctype="multipart/form-data" action="{{url('profile/avatar')}}">
+                    <div class="bg-info col-xs-12">
+                        <p>Select a new avatar for your profile.</p>
+                        <div class="change-avatar">
+                            <img src="../../public/img/icons/user.svg">
+                            <a href="#" id="hlNewAvatar">{{trans('ui.navigation_link_changeavatar')}}</a>
+                        </div>
+                    
+                        <input type="file" id="avatar_image_path" name="avatar_image_path" style="opacity: 0; height: 0px; width: 0px;"/>
+                    </div>
+                    
+                    <div class="row">
+                        @if(isset($isCropMode))
 
-                <div class="row">
+                        <div class="col-xs-12" id="divCropArea">
+                            <img id="uncroppedImage" src="{{url(config('app.avatar_storage') . '/' . $profile->avatar_image_path)}}"/>
+                        </div>
 
-                    <div class="col-md-2">
-                        @if(isset($profile) && isset($profile->avatar_image_path) && !isset($isCropMode))
-                            <img id="imgCurrentAvatar" src="{{url(config('app.avatar_storage') . '/' . $profile->avatar_image_path)}}" title="{{trans('ui.user_label_currentavatar')}}" width="200" height="200"/>
-                        @else
-                            <img id="imgCurrentAvatar" src="{{url(config('app.avatar_none'))}}" title="{{trans('ui.user_label_noavatar')}}" width="200" height="200"/>
-                        @endif
+                    </div>
+                    
+                    <div class="row">
+                        <div class="btn-row">
+                            <a href="#" id="hlCropAvatar" class="btn-primary">Crop</a>
+                            <a href="#" id="hlCancelCropAvatar" class="btn">{{trans('ui.button_cancel')}}</a>
+                        </div>
                     </div>
 
-                    <div class="col-md-7">
-                        @if(isset($profile) && isset($profile->avatar_image_path))
-                            <span class="glyphicon glyphicon-trash" aria-hidden="true"></span>&nbsp;<a href="#" id="hlRemoveAvatar">{{trans('ui.navigation_link_deleteavatar')}}</a><br/>
-                        @endif
-                            <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;<a href="#" id="hlNewAvatar">{{trans('ui.navigation_link_changeavatar')}}</a>
-                            <input type="file" id="avatar_image_path" name="avatar_image_path" style="opacity: 0; height: 0px; width: 0px;"/>
+                    @endif
+
+                    @if(!isset($isCropMode))
+                    <div class="col-xs-12">
+                        <div class="btn-row">
+                            <input type="submit" id="btnUpdate" value="{{trans('ui.button_update')}}" class="btn-primary"/>
+                            <a href="{{url('/profile/')}}" class="btn">{{trans('ui.button_cancel')}}</a>
+                        </div>
                     </div>
+                    @endif
 
-                </div>
+                    <input type="hidden" id="current_avatar_image_path" name="current_avatar_image_path" value="{{isset($profile) ? 1 : 0}}"/>
+                    <input type="hidden" id="action" name="action" value="UPDATE"/>
+                    <input type="hidden" id="cropdata" name="cropdata" value=""/>
 
-                @if(isset($isCropMode))
-                <div class="row">
-
-                    <div class="col-md-offset-2" id="divCropArea">
-                        <img id="uncroppedImage" src="{{url(config('app.avatar_storage') . '/' . $profile->avatar_image_path)}}"/>
-                    </div>
-
-                </div>
-                <div class="row">
-                    <div class="col-md-offset-2">
-                        <a href="#" id="hlCropAvatar" class="btn btn-primary btn-lg">Crop</a>
-                        <a href="#" id="hlCancelCropAvatar" class="btn btn-lg">{{trans('ui.button_cancel')}}</a>
-                    </div>
-                </div>
-
-                @endif
-
-                @if(!isset($isCropMode))
-                <div class="row">
-                    <div class="col-md-offset-2">
-                        <input type="submit" id="btnUpdate" value="{{trans('ui.button_update')}}" class="btn btn-primary btn-lg"/>
-                        <a href="{{url('/profile/')}}" class="btn btn-lg">{{trans('ui.button_cancel')}}</a>
-                    </div>
-                </div>
-                @endif
-
-                <input type="hidden" id="current_avatar_image_path" name="current_avatar_image_path" value="{{isset($profile) ? 1 : 0}}"/>
-                <input type="hidden" id="action" name="action" value="UPDATE"/>
-                <input type="hidden" id="cropdata" name="cropdata" value=""/>
-
-                {!! csrf_field() !!}
-            </form>
-
+                    {!! csrf_field() !!}
+                </form>
+            </div>
         </div>
 
     </div>

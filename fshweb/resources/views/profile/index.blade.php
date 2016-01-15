@@ -7,17 +7,46 @@
 @endsection
 
 @section('sectionheader')
-<section class='clearfix container-wrap main-title'>
-    <div class="container ">
-        <div class="col-xs-12 vendor-profile">
+<section class='clearfix container-wrap profile-head'>
+    <div class="container">
+        <div class="col-xs-12 col-md-4">
             @if(isset($avatarFilename))
                 <img id="imgCurrentAvatar" src="{{url(config('app.avatar_storage') . '/' . $avatarFilename)}}" title="{{trans('ui.user_label_currentavatar')}}" width="200" height="200"/>
             @else
                 <img id="imgCurrentAvatar" src="{{url(config('app.avatar_none'))}}" title="{{trans('ui.user_label_noavatar')}}" width="200" height="200"/>
             @endif
-            <h1 class="page-title">
+        </div>
+
+        <div class="col-xs-12 col-md-8">  
+            
+            <h1 class="item-title">
                 {{$user->name}}
             </h1>
+
+            <div class="btn-row">
+                <button class="btn-sm"><a href="{{url('profile/edit')}}">{{trans('ui.navigation_link_editprofile')}}</a></button>
+            </div>
+
+            @if($user->hasRole('vendor'))
+
+                @if(isset($vendorId))
+                <button class="btn-sm">
+                    <a href="{{url('vendor/detail', $vendorId)}}">{{trans('ui.navigation_link_viewvendor')}}</a>
+                </button>
+               
+                @endif
+
+                @if($vendorOwner)
+                <button class="btn-sm">
+                    
+                    <a href="{{url('vendor/edit')}}">{{trans('ui.navigation_link_editvendor')}}</a>
+                </button>
+                @endif
+
+                
+                
+            @endif
+
         </div>
     </div>
 </section>
@@ -44,7 +73,7 @@
         <div class="row">
             <div class="col-xs-12">
                 
-                <h2 class="item-subhead">About Us</h2>
+                <h2 class="item-subhead">Bio</h2>
 
                 <div class="col-xs-12 well">
                     <p>{{$user->bio}}</p>
@@ -52,61 +81,27 @@
 
             </div>
         </div>
-
-        <div class="row">
-            <div class="col-xs-12">
-                
-                <h2 class="item-subhead">Our Brands</h2>
-
-                <div class="col-xs-12 well">
-                    <div class="flexslider">
-                      <ul class="slides">
-                        <li style="background: url(../public/img/slider/campbells-brand-logo.png); background-repeat: no-repeat; background-position: center center;">
-                          
-                        </li>
-
-                        <li style="background: url(../public/img/slider/pepperidgefarm-logo.png); background-repeat: no-repeat; background-position: center center;">
-                        </li>
-
-                        <li style="background: url(../public/img/slider/ROLAND-LOGO-BANNER-SIZE.png); background-repeat: no-repeat; background-position: center center;">
-                        </li>
-                        <li style="background: url(../public/img/slider/ROLAND-LOGO-BANNER-SIZE.png); background-repeat: no-repeat; background-position: center center;">
-                    
-                        </li>
-                        <!-- items mirrored twice, total of 12 -->
-                      </ul>
-                    </div>
-                       
-                </div>
-            </div>
-        </div>
-
-
-        <p class="bg-info">
-            <a href="{{url('profile/edit')}}">{{trans('ui.navigation_link_editprofile')}}</a>
-        </p>
-
-        <p class="bg-info">
-            <a href="{{url('profile/avatar')}}">{{trans('ui.navigation_link_changeavatar')}}</a>
-        </p>
-
+        
         @if($user->hasRole('vendor'))
-
-            @if(isset($vendorId))
-            <p class="bg-info">
-                <a href="{{url('vendor/detail', $vendorId)}}">{{trans('ui.navigation_link_viewvendor')}}</a>
-            </p>
-            @endif
-
             @if($vendorOwner)
-            <p class="bg-info">
-                <a href="{{url('vendor/edit')}}">{{trans('ui.navigation_link_editvendor')}}</a>
-            </p>
-            @endif
+            <div class="row">
+                <div class="col-xs-12">
+                    <h2 class="item-subhead">My Products</h2>
+                    <div class="col-xs-12 well">
+                        
+                        <p>Edit existing products or upload new products.</p>
+                        
+                        <button class="btn-primary">
+                            <a href="{{url('product/vendor')}}">{{trans('ui.navigation_link_myproducts')}}</a>
+                        </button>
 
-            <p class="bg-info">
-                <a href="{{url('product/vendor')}}">{{trans('ui.navigation_link_myproducts')}}</a>&nbsp;(<a href="{{url('product/edit')}}">{{trans('ui.navigation_link_addnewproduct')}}</a>)
-            </p>
+                        <button class="btn-primary">
+                            <a href="{{url('product/edit')}}">{{trans('ui.navigation_link_addnewproduct')}}</a>
+                        </button>
+                    </div>
+                </div>
+            </div>   
+            @endif
         @endif
 
         @if($user->hasRole('admin'))
@@ -122,15 +117,6 @@
 @endsection
 
 @section('scripts')
-<script>
-    $(document).ready(function(){
-        $('.flexslider').flexslider({
-            animation: "slide",
-            animationLoop: false,
-            itemWidth: 225,
-            itemMargin: 10
-        });
-    });
-</script>
+
 
 @endsection

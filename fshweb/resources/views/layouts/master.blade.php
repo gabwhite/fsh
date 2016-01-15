@@ -134,7 +134,7 @@
                 <!-- START BOOTSTRAP ALERT AREA -->
                 @if(session('successMessage'))
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-xs-12 ">
                             <p class="bg-success">{{session('successMessage')}}</p>
                         </div>
                     </div>
