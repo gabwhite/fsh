@@ -91,6 +91,13 @@ h4 {
 	font-weight: 700;
 }
 
+h4.modal-title {
+    font-family: $display;
+    color: $primary;
+    text-align: center;
+    font-size: 24px;
+}
+
 /*----------  Link Related styling  ----------*/
 
 .login-links {
@@ -221,6 +228,11 @@ h4 {
 .bg-danger {
     @extend .bg-info;
     border-left: 5px solid $danger;
+}
+
+.bg-success {
+    @extend .bg-info;
+    border-left: 5px solid $primary-button;
 }
 
 /*----------  Search sidebar tree  ----------*/
