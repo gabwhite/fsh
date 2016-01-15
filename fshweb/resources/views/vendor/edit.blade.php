@@ -16,9 +16,13 @@
             @else
                 <img id="imgCurrentAvatar" src="{{url(config('app.avatar_none'))}}" title="{{trans('ui.user_label_noavatar')}}" width="200" height="200"/>
             @endif
+           
+                    
             <div class="col-md-8 col-md-offset-2">
                 <h1 class="page-title"> {{isset($vendor) ? $vendor->company_name : ''}}</h1>
             </div>
+
+            <button class="btn-primary pull-right" data-toggle="modal" data-target="#headerModal">Edit Header</button>
         </div>
     </div>
 </section>
@@ -28,7 +32,7 @@
 
     <div class="row">
 
-        <div class="col-md-12">
+        <div class="col-xs-12">
 
             <form id="form1" name="form1" method="post" enctype="multipart/form-data" action="{{url('vendor/edit')}}">
                 <div class="row">
@@ -40,8 +44,6 @@
 
                             <div class="col-xs-12 well">
                                 
-                                <label for="company name">{{trans('ui.vendor_label_company')}}</label>
-                                <input type="text" name="company_name" placeholder="Company Name" maxlength="200" class="form-control" value="{{isset($vendor) ? $vendor->company_name : ''}}"/>
 
                                 <label for="address">{{trans('ui.vendor_label_address1')}}</label>
                                 <input type="text" name="address1" placeholder="" maxlength="200" class="form-control" value="{{isset($vendor) ? $vendor->address1 : ''}}"/>
@@ -77,79 +79,85 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                
+                    <div class="col-xs-12 col-md-8">
+                        <h2 class="item-subhead">{{trans('ui.vendor_label_about_text')}}</h2>
 
+                        <div class="col-xs-12 well">
+                            
+                            <label for="Intro Text">{{trans('ui.vendor_label_intro_text')}}</label>
 
-                <div class="row">
-                    <div class="col-md-3">
+                            <textarea name="intro_text" class="form-control" placeholder="" cols="80" rows="3">{{isset($vendor) ? $vendor->intro_text : ''}}</textarea>
+                            
+
+                            <label for="about_text">{{trans('ui.vendor_label_about_text')}}</label>
                         
-                    </div>
-                    <div class="col-md-9">
-                        
+                            <textarea name="about_text" class="form-control" placeholder="" cols="80" rows="3">{{isset($vendor) ? $vendor->about_text : ''}}</textarea>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <h2 class="item-subhead">{{trans('ui.vendor_label_brands')}}</h2>
+                                
+                                <div class="col-xs-12 well">
+                                    @forelse($vendor->brands as $b)
+                                    {{$b->name}} <a href="#" class="deletebrand">Delete</a><br/>
+                                    @empty
+                                       <p>No Brands Defined</p> 
+                                    @endforelse
+                                    
+                                    <a href="#"><button class="btn-primary">Add Brand</button></a>
+                                </div>
+
+                                <input type="submit" value="Update" class="btn-primary"/>
+                                <a href="{{url('/profile/')}}"><button class="btn">{{trans('ui.button_cancel')}}</button></a>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                <div class="row">
-                    <div class="col-md-3">
-                        {{trans('ui.vendor_label_intro_text')}}
-                    </div>
-                    <div class="col-md-9">
-                        <textarea name="intro_text" class="form-control" placeholder="" cols="80" rows="3">{{isset($vendor) ? $vendor->intro_text : ''}}</textarea>
-                    </div>
-                </div>
+                <div class="modal fade" id="headerModal" tabindex="-1" role="dialog">
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                          <div class="modal-header">
+                            <h4 class="modal-title">Edit Profile Header</h4>
+                          </div>
+                      
+                          <div class="modal-body">
+                            <label for="company name">{{trans('ui.vendor_label_company')}}</label>
+                            <input type="text" name="company_name" placeholder="Company Name" maxlength="200" class="form-control" value="{{isset($vendor) ? $vendor->company_name : ''}}"/>
 
-                <div class="row">
-                    <div class="col-md-3">
-                        {{trans('ui.vendor_label_about_text')}}
-                    </div>
-                    <div class="col-md-9">
-                        <textarea name="about_text" class="form-control" placeholder="" cols="80" rows="3">{{isset($vendor) ? $vendor->about_text : ''}}</textarea>
-                    </div>
-                </div>
+                            <div class="logo-zone clearfix">
+                                <label for="logo">{{trans('ui.vendor_label_logo_image')}}</label>
+                                
+                                <div class="vendor-logo"></div>
+                                
+                                <div class="logo-upload">
+                                    <input type="file" name="logo_image_path"/>
+                                </div>
+                            </div>
 
-                <div class="row">
-                    <div class="col-md-3">
-                        {{trans('ui.vendor_label_brands')}}
-                    </div>
+                            <div class="logo-zone clearfix">
+                                <label for="background_image">{{trans('ui.vendor_label_background_image')}}</label>
+                                <p>For best results, crop your photo to 930px x 275px</p>
+                                <div class="vendor-background"></div>
+                                
+                                <div class="logo-upload">
+                                    <input type="file" name="background_image_path"/>
+                                </div>
+                            </div>
+                          </div>
+                      
+                          <div class="modal-footer">
+                            <button type="button" class="btn" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn-primary">Save changes</button>
+                          </div>
+                    </div><!-- /.modal-content -->
+                  </div><!-- /.modal-dialog -->
+                </div><!-- /.modal -->
 
-                    <div class="col-md-9">
-                    @forelse($vendor->brands as $b)
-                    {{$b->name}} <a href="#" class="deletebrand">Delete</a><br/>
-                    @empty
-                        No Brands Defined
-                    @endforelse
-
-                    <br/>
-                    <a href="#">Add Brand</a>
-
-                    </div>
-                </div>
-
-
-                <div class="row">
-                    <div class="col-md-3">
-                        {{trans('ui.vendor_label_logo_image')}}
-                    </div>
-                    <div class="col-md-9">
-                        <input type="file" name="logo_image_path"/>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-3">
-                        {{trans('ui.vendor_label_background_image')}}
-                    </div>
-                    <div class="col-md-9">
-                        <input type="file" name="background_image_path"/>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <input type="submit" value="Update" class="btn btn-primary btn-lg"/>
-                        <a href="{{url('/profile/')}}">{{trans('ui.button_cancel')}}</a>
-                    </div>
-                </div>
+                
 
                 {!! csrf_field() !!}
             </form>
