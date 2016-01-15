@@ -76,7 +76,7 @@
                 <h2 class="item-subhead">Bio</h2>
 
                 <div class="col-xs-12 well">
-                    <p>{{$user->bio}}</p>
+                    <p>{{$bio}}</p>
                 </div>
 
             </div>
