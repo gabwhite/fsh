@@ -95,6 +95,7 @@
     <script type="text/javascript" src="{{url('js/vendor/jstree/jstree.min.js')}}"></script>
     <script type="text/javascript">
 
+        var $categoryTree = $("#jstree_demo_div")
         var $resultTable = $("#product_list");
 
         var $categoryDdlb = $("#ddlbCategory");
@@ -106,7 +107,7 @@
         $(document).ready(function()
         {
 
-            $("#jstree_demo_div").jstree({
+            $categoryTree.jstree({
                 "core" :
                 {
                     "themes" : { "stripes" : false },
@@ -134,7 +135,7 @@
                 }
             });
 
-            $("#jstree_demo_div").off("changed.jstree").on("changed.jstree", function(e, data)
+            $categoryTree.off("changed.jstree").on("changed.jstree", function(e, data)
             {
                 //console.log(data);
                 var qry = "{{url('ajax/getproducts')}}" + "/" + data.node.id;
