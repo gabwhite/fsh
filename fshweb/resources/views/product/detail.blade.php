@@ -12,15 +12,15 @@
         <div class="col-xs-12">
             <h1 class="item-title">{{$product->name}}</h1>
             <div class="btn-row">
-                <button class="btn-primary">{{trans('ui.product_label_add_to_my_products')}}</button>
+                <a href="javascript:alert('Coming Soon');"><button class="btn-primary">{{trans('ui.product_label_add_to_my_products')}}</button></a>
             </div>
 
             <div class="btn-row">
-                <button class="btn-primary">{{trans('ui.product_label_goto_vendor_profile')}}</button>
+                <a href="{{url('vendor/detail', $product->vendor_id)}}"><button class="btn-primary">{{trans('ui.product_label_goto_vendor_profile')}}</button></a>
             </div>
 
             <div class="btn-row">
-                <button class="btn">{{trans('ui.product_label_request_sample')}}</button>
+                <a href="javascript:alert('Coming Soon');"><button class="btn">{{trans('ui.product_label_request_sample')}}</button></a>
             </div>
         </div>
 
