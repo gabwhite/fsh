@@ -93,142 +93,17 @@
 
 @section('scripts')
     <script type="text/javascript" src="{{url('js/vendor/jstree/jstree.min.js')}}"></script>
+    <script type="text/javascript" src="{{url('js/fsh.search.js')}}"></script>
     <script type="text/javascript">
-
-        var $resultTable = $("#product_list");
-        var $categoryDdlb = $("#ddlbCategory");
-        var $subCategoryDdlb = $("#ddlbSubCategory");
-        var $productTypeDdlb = $("#ddlbProductType");
-
-        var foodCategoryUrl = "{{url('ajax/getfoodcategories/')}}";
 
         $(document).ready(function()
         {
-
-            $("#jstree_demo_div").jstree({
-                "core" :
-                {
-                    "themes" : { "stripes" : false },
-                    "multiple" : false,
-                    "animation" : 0,
-                    "data" :
-                    {
-                        "url": function(node)
-                        {
-                            //console.log(node);
-                            if(node.id === "#")
-                            {
-                                return foodCategoryUrl + "/TREEJSON";
-                            }
-                            else
-                            {
-                                return foodCategoryUrl + "/TREEJSON/" + node.id;
-                            }
-                        },
-                        "data": function(node)
-                        {
-                            //console.log(node);
-                        }
-                    }
-                }
-            });
-
-            $("#jstree_demo_div").off("changed.jstree").on("changed.jstree", function(e, data)
-            {
-                //console.log(data);
-                var qry = "{{url('ajax/getproducts')}}" + "/" + data.node.id;
-                $.getJSON(qry, function(jsonresult)
-                {
-                    console.log(jsonresult);
-                    var tableRows = "";
-                    $.each(jsonresult, function(idx, val)
-                    {
-                        console.log(val);
-                        tableRows += "<tr><td><a href='{{url('product/detail')}}/" + val.id + "'>" + val.name + "</a></td><td>" + val.brand + "</td><td></td></tr>";
-                    });
-
-                    $resultTable.html(tableRows);
-                });
-
-            });
-
-            $("#tbSearchQuery").on("keydown", performSearch);
-            $("#hlSearchButton").on("click", performSearch);
-
-            populateSearchDropdown(1);
-
-            $categoryDdlb.on("change", populateSearchDropdown);
-            $subCategoryDdlb.on("change", populateSearchDropdown);
-            $productTypeDdlb.on("change", populateSearchDropdown);
-
+            fsh.search.init("{{url('ajax/getfoodcategories/')}}",
+                            "{{url('ajax/getproducts')}}",
+                            "{{url('ajax/productsearch')}}",
+                            "{{url('product/detail')}}"
+                            );
         });
-
-        function performSearch(e)
-        {
-            if(e.which === 13 || e.target.id === "hlSearchButton")
-            {
-                var qry = "{{url('ajax/productsearch')}}" + "/" + $("#tbSearchQuery").val();
-                $.getJSON(qry, function(jsonresult)
-                {
-                    var tableRows = "";
-                    $.each(jsonresult, function(idx, val)
-                    {
-                        //console.log(val);
-                        tableRows += "<tr><td><a href='{{url('product/detail')}}/" + val.id + "'>" + val.name + "</a></td><td>" + val.brand + "</td><td></td></tr>";
-                    });
-
-                    if(jsonresult.length === 0)
-                    {
-                        tableRows += "<tr><td colspan='3'>{{trans('ui.search_label_no_results')}}</td></tr>";
-                    }
-
-                    $resultTable.html(tableRows);
-``
-                });
-
-                e.preventDefault();
-            }
-        }
-
-        function populateSearchDropdown(dropdownType)
-        {
-            var parentId;
-            var dropdownToPopulate;
-            if(dropdownType === 1)
-            {
-                dropdownToPopulate = $categoryDdlb;
-            }
-            else if(dropdownType === 2)
-            {
-                dropdownToPopulate = $subCategoryDdlb;
-            }
-            else if(dropdownType === 3)
-            {
-                dropdownToPopulate = $productTypeDdlb;
-            }
-
-            var qry = foodCategoryUrl + "/JSON";
-            if(parentId !== undefined && parentId !== null) { qry += "/" + parentId; }
-
-            $.getJSON(qry, function(jsonresult)
-            {
-                console.log(jsonresult);
-                var options = "<option value=''>Select Category</option>";
-                $.each(jsonresult, function(idx, val)
-                {
-                    options += "<option value='" + val.id + "'>" + val.name + "</option>";
-                });
-
-                dropdownToPopulate.html(options);
-
-            });
-
-        }
-
-        function getFoodCategories(parentId)
-        {
-
-        }
 
     </script>
 
