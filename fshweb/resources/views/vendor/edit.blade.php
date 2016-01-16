@@ -22,7 +22,7 @@
                 <h1 class="page-title"> {{isset($vendor) ? $vendor->company_name : ''}}</h1>
             </div>
 
-            <button class="btn-primary pull-right" data-toggle="modal" data-target="#headerModal">Edit Header</button>
+            <button class="btn-primary pull-right" data-toggle="modal" data-target="#headerModal">{{trans('ui.vendor_label_edit_header')}}</button>
         </div>
     </div>
 </section>
@@ -101,15 +101,15 @@
                                 
                                 <div class="col-xs-12 well">
                                     @forelse($vendor->brands as $b)
-                                    {{$b->name}} <a href="#" class="deletebrand">Delete</a><br/>
+                                    {{$b->name}} <a href="#" class="deletebrand">{{trans('ui.button_delete')}}</a><br/>
                                     @empty
-                                       <p>No Brands Defined</p> 
+                                       <p>{{trans('ui.vendor_label_no_brands')}}</p>
                                     @endforelse
                                     
-                                    <a href="#"><button class="btn-primary">Add Brand</button></a>
+                                    <a href="#"><button class="btn-primary">{{trans('ui.vendor_label_add_brand')}}</button></a>
                                 </div>
 
-                                <input type="submit" value="Update" class="btn-primary"/>
+                                <input type="submit" value="{{trans('ui.button_update')}}" class="btn-primary"/>
                                 <a href="{{url('/profile/')}}"><button class="btn">{{trans('ui.button_cancel')}}</button></a>
                             </div>
                         </div>
@@ -121,12 +121,12 @@
                     <div class="modal-content">
                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                           <div class="modal-header">
-                            <h4 class="modal-title">Edit Profile Header</h4>
+                            <h4 class="modal-title">{{trans('ui.vendor_label_edit_profile_header')}}</h4>
                           </div>
                       
                           <div class="modal-body">
                             <label for="company name">{{trans('ui.vendor_label_company')}}</label>
-                            <input type="text" name="company_name" placeholder="Company Name" maxlength="200" class="form-control" value="{{isset($vendor) ? $vendor->company_name : ''}}"/>
+                            <input type="text" name="company_name" placeholder="{{trans('ui.vendor_label_company')}}" maxlength="200" class="form-control" value="{{isset($vendor) ? $vendor->company_name : ''}}"/>
 
                             <div class="logo-zone clearfix">
                                 <label for="logo">{{trans('ui.vendor_label_logo_image')}}</label>
@@ -140,7 +140,7 @@
 
                             <div class="logo-zone clearfix">
                                 <label for="background_image">{{trans('ui.vendor_label_background_image')}}</label>
-                                <p>For best results, crop your photo to 930px x 275px</p>
+                                <p>{{trans('messages.vendor_background_image_notice')}}</p>
                                 <div class="vendor-background"></div>
                                 
                                 <div class="logo-upload">
@@ -150,8 +150,8 @@
                           </div>
                       
                           <div class="modal-footer">
-                            <button type="button" class="btn" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn-primary">Save changes</button>
+                            <button type="button" class="btn" data-dismiss="modal">{{trans('ui.button_close')}}</button>
+                            <button type="button" class="btn-primary">{{trans('ui.button_save')}}</button>
                           </div>
                     </div><!-- /.modal-content -->
                   </div><!-- /.modal-dialog -->
