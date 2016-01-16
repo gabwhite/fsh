@@ -196,13 +196,12 @@
 
             Dropzone.options.brandUploader =
             {
-                url: "/vendor/edit/addbrand",
+                url: "{{url('/vendor/edit/addbrand')}}",
                 paramName: "brand_image_path",
                 uploadMultiple: false,
                 addRemoveLinks: false,
                 previewsContainer: null,
-                //previewTemplate: document.getElementById("dropzoneFileTemplate").innerHTML,
-                headers: { "X-CSRF-TOKEN": "{{ csrf_token() }}"},
+                headers: { "X-CSRF-TOKEN": "{{ csrf_token() }}", "VID": "{{\Session::get(config('app.session_key_vendor'))}}"},
                 init: function()
                 {
                     console.log("Dropzone init'ed");

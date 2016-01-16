@@ -75,12 +75,17 @@ class VendorController extends Controller
                                             config('app.vendor_brand_image_width'),
                                             config('app.vendor_brand_image_height'));
 
+                //            $vendorId = $this->dataAccess->upsertVendor(\Session::get(config('app.session_key_vendor')), $data);
+
+
+                // Now add brand to db
+
+
                 return response()->json([
                     'error' => false,
                     'code'  => 200,
                     'filename' => $newFilename
                 ], 200);
-
 
             }
             catch(Exception $ex)

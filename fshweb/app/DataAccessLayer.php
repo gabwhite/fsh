@@ -338,16 +338,9 @@ class DataAccessLayer
         return $vendor->id;
     }
 
-    public function upsertBrand($brandId, $data)
+    public function insertBrand($data)
     {
-        $brand = $this->getBrand($brandId);
-        $isAdd = false;
-        if(!isset($brand))
-        {
-            $brand = new VendorBrand();
-            $isAdd = true;
-        }
-
+        $brand = new VendorBrand();
         $brand->vendor_id = $data['vendor_id'];
         $brand->name = $data['name'];
         $brand->logo_image_path = $data['logo_image_path'];
