@@ -3,7 +3,7 @@
 @section('title', 'Page Title')
 
 @section('css')
-
+<link type="text/css" rel="stylesheet" href="{{url('css/dropzone/dropzone.min.css')}}"/>
 @endsection
 
 @section('sectionheader')
@@ -100,12 +100,14 @@
                                 <h2 class="item-subhead">{{trans('ui.vendor_label_brands')}}</h2>
                                 
                                 <div class="col-xs-12 well">
+                                    <div id="currentbrands">
                                     @forelse($vendor->brands as $b)
                                     {{$b->name}} <a href="#" class="deletebrand">{{trans('ui.button_delete')}}</a><br/>
                                     @empty
                                        <p>{{trans('ui.vendor_label_no_brands')}}</p>
                                     @endforelse
-                                    
+                                    </div>
+                                    <div id="brandUploader" class="dropzone"></div>
                                     <a href="#"><button class="btn-primary">{{trans('ui.vendor_label_add_brand')}}</button></a>
                                 </div>
 
@@ -166,15 +168,53 @@
 
     </div>
 
+    <div id="dropzoneFileTemplate" class="dz-preview dz-file-preview" style="display:none;">
+        <div class="dz-details">
+            <div class="dz-size" data-dz-size></div>
+            <img data-dz-thumbnail />
+        </div>
+        <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
+        <div class="dz-success-mark"><span>✔</span></div>
+        <div class="dz-error-mark"><span>✘</span></div>
+        <div class="dz-error-message"><span data-dz-errormessage></span></div>
+    </div>
+
 @endsection
 
 @section('scripts')
 
+    <script type="text/javascript" src="{{url('js/vendor/dropzone/dropzone.min.js')}}"></script>
     <script type="text/javascript" src="{{url('js/vendor/validation/jquery.validate.min.js')}}"></script>
     <script type="text/javascript">
 
         $(document).ready(function()
         {
+            var $brandContainer = $("#currentbrands");
+
+            Dropzone.options.brandUploader =
+            {
+                url: "/vendor/edit/addbrand",
+                paramName: "brand_image_path",
+                uploadMultiple: false,
+                addRemoveLinks: false,
+                previewsContainer: null,
+                //previewTemplate: document.getElementById("dropzoneFileTemplate").innerHTML,
+                headers: { "X-CSRF-TOKEN": "{{ csrf_token() }}"},
+                init: function()
+                {
+                    console.log("Dropzone init'ed");
+
+                    this.on("success", function(e, response)
+                    {
+                        var imgSrc = "{{url('img/vendors/')}}/" + response.filename;
+                        $brandContainer.append("<img src='" + imgSrc + "'/>");
+                        this.removeAllFiles();
+                        console.log(response);
+                    });
+                }
+            };
+
+
 
             var $country = $("#country");
 

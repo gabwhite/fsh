@@ -10,9 +10,11 @@ namespace App\Http\Controllers;
 
 use App\DataAccessLayer;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\Routing\ResponseFactory;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\UploadHandler;
 use Illuminate\Support\Facades\Validator;
 
 class VendorController extends Controller
@@ -58,6 +60,50 @@ class VendorController extends Controller
         }
 
         return redirect('/');
+    }
+
+    public function addBrand(Request $request)
+    {
+        $uploader = new UploadHandler();
+        if ($request->hasFile('brand_image_path'))
+        {
+            try
+            {
+                $newFilename = $uploader->uploadVendorAsset($request->file('brand_image_path'));
+
+                $uploader->resizeVendorAsset($newFilename,
+                                            config('app.vendor_brand_image_width'),
+                                            config('app.vendor_brand_image_height'));
+
+                return response()->json([
+                    'error' => false,
+                    'code'  => 200,
+                    'filename' => $newFilename
+                ], 200);
+
+
+            }
+            catch(Exception $ex)
+            {
+                return response()->json([
+                    'error' => true,
+                    'message' => 'Server error while uploading',
+                    'code' => 500
+                ], 500);
+            }
+        }
+
+        return response()->json([
+            'error' => true,
+            'message' => 'Server error while uploading',
+            'code' => 500
+        ], 500);
+
+    }
+
+    public function deleteBrand(Request $request)
+    {
+
     }
 
     public function upsertBrand(Request $request)
