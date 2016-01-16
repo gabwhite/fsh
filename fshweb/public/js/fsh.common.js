@@ -54,6 +54,65 @@ fsh.common = (function ($, document)
         }
     };
 
+    var getCountries = function(url, elem, selected)
+    {
+        doAjax(url, {}, "GET", true,
+            function(data)
+            {
+                var html = "<option value=''></option>";
+                $.each(data, function(idx, val)
+                {
+                    //console.log(val);
+                    if(val.id == selected)
+                    {
+                        html += "<option value='" + val.id + "' selected='selected'>" + val.name + "</option>";
+                    }
+                    else
+                    {
+                        html += "<option value='" + val.id + "'>" + val.name + "</option>";
+                    }
+
+                });
+                elem.html(html);
+                elem.trigger("change");
+            },
+            function(jqXhr, textStatus, errorThrown)
+            {
+
+            }
+        );
+    };
+
+    var getStateProvincesForCountry = function(url, elem, selected)
+    {
+        doAjax(url, {}, "GET", true,
+            function(data)
+            {
+                //console.log(data);
+                var html = "<option value=''></option>";
+                $.each(data, function(idx, val)
+                {
+                    //console.log(val);
+                    if(val.id == selected)
+                    {
+                        html += "<option value='" + val.id + "' selected='selected'>" + val.name + "</option>";
+                    }
+                    else
+                    {
+                        html += "<option value='" + val.id + "'>" + val.name + "</option>";
+                    }
+
+                });
+                elem.html(html);
+            },
+            function(jqXhr, textStatus, errorThrown)
+            {
+
+            }
+        );
+    };
+
+
     var globalInitialization = function()
     {
         // Set event handler for global search button
@@ -70,7 +129,9 @@ fsh.common = (function ($, document)
         p: p,
         setDebug: setDebug,
         doAjax: doAjax,
-        globalInitialization: globalInitialization
+        globalInitialization: globalInitialization,
+        getCountries: getCountries,
+        getStateProvincesForCountry: getStateProvincesForCountry
     };
 
     return pub;

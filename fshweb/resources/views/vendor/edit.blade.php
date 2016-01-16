@@ -55,7 +55,10 @@
                                 <input type="text" name="city" placeholder="" maxlength="200" class="form-control" value="{{isset($vendor) ? $vendor->city : ''}}"/>
 
                                 <label for="state/province">{{trans('ui.vendor_label_state_province')}}</label>
-                                <select id="state_province" name="state_province" class="form-control"></select>
+                                <select id="state_province" name="state_province" class="form-control">
+                                    <option value=""></option>
+                                    <option value="">{{trans('ui.vendor_label_choose_country')}}</option>
+                                </select>
                                 
                                 <label for="country">{{trans('ui.vendor_label_country')}}</label>
                                  <select id="country" name="country" class="form-control"></select>
@@ -217,67 +220,23 @@
 
 
             var $country = $("#country");
+            var $stateProvince = $("#state_province");
 
-            fsh.common.doAjax("{{url('ajax/getcountries')}}", {}, "GET", true,
-                    function(data)
-                    {
-                        var html = "<option value=''></option>";
-                        $.each(data, function(idx, val)
-                        {
-                            //console.log(val);
-                            if(val.id == "{{isset($vendor) ? $vendor->country : ''}}")
-                            {
-                                html += "<option value='" + val.id + "' selected='selected'>" + val.name + "</option>";
-                            }
-                            else
-                            {
-                                html += "<option value='" + val.id + "'>" + val.name + "</option>";
-                            }
+            fsh.common.getCountries("{{url('ajax/getcountries')}}", $country, "{{isset($vendor) ? $vendor->country : ''}}");
 
-                        });
-                        $country.html(html);
-                        $country.trigger("change");
-                    },
-                    function(jqXhr, textStatus, errorThrown)
-                    {
-
-                    }
-            );
 
             $country.on("change", function(e)
             {
                 if($(this).val() === "")
                 {
                     $("#state_province option[value != '']").remove();
+                    $stateProvince.html("<option value=\"\"></option><option value=\"\">{{trans('ui.vendor_label_choose_country')}}</option>");
                 }
                 else
                 {
-                    fsh.common.doAjax("{{url('ajax/getstateprovincesforcountry')}}/" + $(this).val(), {}, "GET", true,
-                            function(data)
-                            {
-                                //console.log(data);
-                                var html = "<option value=''></option>";
-                                $.each(data, function(idx, val)
-                                {
-                                    //console.log(val);
-                                    if(val.id == "{{isset($vendor) ? $vendor->state_province : ''}}")
-                                    {
-                                        html += "<option value='" + val.id + "' selected='selected'>" + val.name + "</option>";
-                                    }
-                                    else
-                                    {
-                                        html += "<option value='" + val.id + "'>" + val.name + "</option>";
-                                    }
-
-                                });
-                                $("#state_province").html(html);
-                            },
-                            function(jqXhr, textStatus, errorThrown)
-                            {
-
-                            }
-                    );
-
+                    fsh.common.getStateProvincesForCountry("{{url('ajax/getstateprovincesforcountry')}}/" + $(this).val(),
+                                                            $stateProvince,
+                                                            "{{isset($vendor) ? $vendor->state_province : ''}}");
                 }
 
                 e.preventDefault();
