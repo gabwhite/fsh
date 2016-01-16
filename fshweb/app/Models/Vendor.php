@@ -37,7 +37,7 @@ class Vendor extends Model
 
     public function stateProvince()
     {
-        return $this->belongsTo('\App\Models\StateProvince', 'id', 'state_province_id');
+        return $this->hasOne('\App\Models\StateProvince', 'id', 'state_province_id');
     }
 
     public function products()
