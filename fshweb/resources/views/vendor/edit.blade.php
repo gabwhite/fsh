@@ -248,8 +248,8 @@
                 rules:
                 {
                     company_name: { required: true, maxlength: 200 },
-                    country: { required: true },
-                    state_province: { required: true },
+                    country_id: { required: true },
+                    state_province_id: { required: true },
                     address1: { required: true, maxlength: 200 },
                     address2: { required: true, maxlength: 200 },
                     city: { required: true, maxlength: 200 },
