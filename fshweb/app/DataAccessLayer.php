@@ -320,8 +320,8 @@ class DataAccessLayer
 
         $vendor->user_id = $data['user_id'];
         $vendor->company_name = $data['company_name'] ? $data['company_name'] : $vendor->company_name;
-        $vendor->country = $data['country'] ? $data['country'] : $vendor->country;
-        $vendor->state_province = $data['state_province'] ? $data['state_province'] : $vendor->state_province;
+        $vendor->country_id = $data['country_id'] ? $data['country_id'] : $vendor->country_id;
+        $vendor->state_province_id = $data['state_province_id'] ? $data['state_province_id'] : $vendor->state_province_id;
         $vendor->address1 = $data['address1'] ? $data['address1'] : $vendor->address1;
         $vendor->address2 = $data['address2'] ? $data['address2'] : $vendor->address2;
         $vendor->city = $data['city'] ? $data['city'] : $vendor->city;

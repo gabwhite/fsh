@@ -55,10 +55,10 @@
 
                     
                     <label for="state/province">{{trans('ui.vendor_label_state_province')}}</label>
-                    <p>{{isset($profile) ? $profile->state_province : ''}}</p>
+                    <p>{{isset($profile) ? $profile->state_province_id : ''}}</p>
                     
                     <label for="country">{{trans('ui.vendor_label_country')}}</label>
-                    <p>{{isset($profile) ? $profile->country : ''}}</p>
+                    <p>{{isset($profile) ? $profile->country_id : ''}}</p>
         
                     
                     <label for="postal-code">{{trans('ui.vendor_label_zip_postal')}}</label>

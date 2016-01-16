@@ -54,14 +54,14 @@
                                 <label for="city">{{trans('ui.vendor_label_city')}}</label>
                                 <input type="text" name="city" placeholder="" maxlength="200" class="form-control" value="{{isset($vendor) ? $vendor->city : ''}}"/>
 
-                                <label for="state/province">{{trans('ui.vendor_label_state_province')}}</label>
-                                <select id="state_province" name="state_province" class="form-control">
+                                <label for="state_province_id">{{trans('ui.vendor_label_state_province')}}</label>
+                                <select id="state_province_id" name="state_province_id" class="form-control">
                                     <option value=""></option>
                                     <option value="">{{trans('ui.vendor_label_choose_country')}}</option>
                                 </select>
                                 
-                                <label for="country">{{trans('ui.vendor_label_country')}}</label>
-                                 <select id="country" name="country" class="form-control"></select>
+                                <label for="country_id">{{trans('ui.vendor_label_country')}}</label>
+                                 <select id="country_id" name="country_id" class="form-control"></select>
                                 
                                 <label for="zip_postal">{{trans('ui.vendor_label_zip_postal')}}</label>
 
@@ -219,24 +219,24 @@
 
 
 
-            var $country = $("#country");
-            var $stateProvince = $("#state_province");
+            var $country = $("#country_id");
+            var $stateProvince = $("#state_province_id");
 
-            fsh.common.getCountries("{{url('ajax/getcountries')}}", $country, "{{isset($vendor) ? $vendor->country : ''}}");
+            fsh.common.getCountries("{{url('ajax/getcountries')}}", $country, "{{isset($vendor) ? $vendor->country_id : ''}}");
 
 
             $country.on("change", function(e)
             {
                 if($(this).val() === "")
                 {
-                    $("#state_province option[value != '']").remove();
+                    $("#state_province_id option[value != '']").remove();
                     $stateProvince.html("<option value=\"\"></option><option value=\"\">{{trans('ui.vendor_label_choose_country')}}</option>");
                 }
                 else
                 {
                     fsh.common.getStateProvincesForCountry("{{url('ajax/getstateprovincesforcountry')}}/" + $(this).val(),
                                                             $stateProvince,
-                                                            "{{isset($vendor) ? $vendor->state_province : ''}}");
+                                                            "{{isset($vendor) ? $vendor->state_province_id : ''}}");
                 }
 
                 e.preventDefault();

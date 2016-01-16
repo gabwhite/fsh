@@ -47,14 +47,14 @@
                         </div>
 
                         <div>
-                            <label for="country">{{trans('ui.vendor_label_country')}}</label>
-                            <select id="country" name="country" class="form-control">
+                            <label for="country_id">{{trans('ui.vendor_label_country')}}</label>
+                            <select id="country_id" name="country_id" class="form-control">
                             </select>
                         </div>
 
                         <div>
-                            <label for="state_province">{{trans('ui.vendor_label_state_province')}}</label>
-                            <select id="state_province" name="state_province" class="form-control">
+                            <label for="state_province_id">{{trans('ui.vendor_label_state_province')}}</label>
+                            <select id="state_province_id" name="state_province_id" class="form-control">
                                 <option value=""></option>
                                 <option value="">{{trans('ui.vendor_label_choose_country')}}</option>
                             </select>
@@ -148,7 +148,7 @@
                         //console.log(val);
                         html += "<option value='" + val.id + "'>" + val.name + "</option>";
                     });
-                    $("#country").html(html);
+                    $("#country_id").html(html);
                 },
                 function(jqXhr, textStatus, errorThrown)
                 {
@@ -156,7 +156,7 @@
                 }
             );
 
-            $("#country").on("change", function(e)
+            $("#country_id").on("change", function(e)
             {
                 if($(this).val() === "")
                 {
@@ -174,7 +174,7 @@
                                 //console.log(val);
                                 html += "<option value='" + val.id + "'>" + val.name + "</option>";
                             });
-                            $("#state_province").html(html);
+                            $("#state_province_id").html(html);
                         },
                         function(jqXhr, textStatus, errorThrown)
                         {

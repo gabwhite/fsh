@@ -29,7 +29,7 @@ class VendorController extends Controller
 
     public function detail($id)
     {
-        $vendor = $this->dataAccess->getVendor($id);
+        $vendor = $this->dataAccess->getVendor($id, null, 'country');
 
         return view('vendor.view')->with('profile', $vendor);
     }
