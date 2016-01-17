@@ -79,12 +79,15 @@ class VendorController extends Controller
 
 
                 // Now add brand to db
+                $data = ['vendor_id' => $request->header('VID'), 'name' => $newFilename, 'logo_image_path' => $newFilename, 'active' => 1];
+                $newBrandId = $this->dataAccess->insertBrand($data);
 
 
                 return response()->json([
                     'error' => false,
                     'code'  => 200,
-                    'filename' => $newFilename
+                    'filename' => $newFilename,
+                    'id' => $newBrandId
                 ], 200);
 
             }
@@ -108,7 +111,40 @@ class VendorController extends Controller
 
     public function deleteBrand(Request $request)
     {
+        try
+        {
+            $brandId = $request->header('BID');
+            $vendorId = $request->header('VID');
+            $file = $request->header('FNAME');
 
+            // Delete brand from DB
+            $rowsAffected = $this->dataAccess->deleteBrand($brandId, $vendorId);
+            if($rowsAffected > 0)
+            {
+                // Delete brand image from file system
+                $uploader = new UploadHandler();
+                $uploader->removeVendorAsset($file);
+
+                return response()->json([
+                    'error' => false,
+                    'code'  => 200
+                ], 200);
+            }
+        }
+        catch(Exception $ex)
+        {
+            return response()->json([
+                'error' => true,
+                'message' => 'Server error while deleting',
+                'code' => 500
+            ], 500);
+        }
+
+        return response()->json([
+            'error' => true,
+            'message' => 'Server error while deleting',
+            'code' => 500
+        ], 500);
     }
 
     public function upsertBrand(Request $request)

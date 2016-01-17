@@ -104,11 +104,14 @@
                                 
                                 <div class="col-xs-12 well">
                                     <div id="currentbrands">
-                                    @forelse($vendor->brands as $b)
-                                    {{$b->name}} <a href="#" class="deletebrand">{{trans('ui.button_delete')}}</a><br/>
-                                    @empty
-                                       <p>{{trans('ui.vendor_label_no_brands')}}</p>
-                                    @endforelse
+                                    @foreach($vendor->brands as $b)
+                                        <div class="divBrand">
+                                            <img src="{{url(config('app.vendor_storage'))}}/{{$b->logo_image_path}}"/>
+                                            <br/>
+                                            <a href="#" class="deletebrand" data-brandid="{{$b->id}}" data-imagename="{{$b->logo_image_path}}">{{trans('ui.button_delete')}}</a>
+                                        </div>
+                                    @endforeach
+                                        <p id="nobrands" style="display:none;">{{trans('ui.vendor_label_no_brands')}}</p>
                                     </div>
                                     <div id="brandUploader" class="dropzone"></div>
                                     <a href="#"><button class="btn-primary">{{trans('ui.vendor_label_add_brand')}}</button></a>
@@ -171,28 +174,50 @@
 
     </div>
 
-    <div id="dropzoneFileTemplate" class="dz-preview dz-file-preview" style="display:none;">
-        <div class="dz-details">
-            <div class="dz-size" data-dz-size></div>
-            <img data-dz-thumbnail />
-        </div>
-        <div class="dz-progress"><span class="dz-upload" data-dz-uploadprogress></span></div>
-        <div class="dz-success-mark"><span>✔</span></div>
-        <div class="dz-error-mark"><span>✘</span></div>
-        <div class="dz-error-message"><span data-dz-errormessage></span></div>
-    </div>
-
 @endsection
 
 @section('scripts')
 
     <script type="text/javascript" src="{{url('js/vendor/dropzone/dropzone.min.js')}}"></script>
     <script type="text/javascript" src="{{url('js/vendor/validation/jquery.validate.min.js')}}"></script>
+    <script type="text/javascript" src="{{url('js/fsh.common.js')}}"></script>
     <script type="text/javascript">
 
         $(document).ready(function()
         {
             var $brandContainer = $("#currentbrands");
+            var $noBrands = $("#nobrands");
+            var vid = "{{\Session::get(config('app.session_key_vendor'))}}";
+
+            if($brandContainer.find(".divBrand").length === 0) { $noBrands.show(); }
+
+            $("#currentbrands").on("click", ".deletebrand", function(e)
+            {
+                e.preventDefault();
+                if(confirm("Delete Brand?"))
+                {
+                    var parentElem = $(this).parent();
+
+                    var headers = {
+                        "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                        "BID": $(this).data("brandid"),
+                        "VID": vid,
+                        "FNAME": $(this).data("imagename")
+                    };
+
+                    fsh.common.doAjax("{{url('/vendor/edit/deletebrand')}}", {}, "POST", true, headers,
+                            function (data)
+                            {
+                                parentElem.remove();
+                                if($brandContainer.find(".divBrand").length === 0) { $noBrands.show(); }
+                            },
+                            function (jqXhr, textStatus, errorThrown)
+                            {
+                                alert("Error deleting file");
+                            }
+                    );
+                }
+            });
 
             Dropzone.options.brandUploader =
             {
@@ -201,28 +226,26 @@
                 uploadMultiple: false,
                 addRemoveLinks: false,
                 previewsContainer: null,
-                headers: { "X-CSRF-TOKEN": "{{ csrf_token() }}", "VID": "{{\Session::get(config('app.session_key_vendor'))}}"},
+                headers: { "X-CSRF-TOKEN": "{{ csrf_token() }}", "VID": vid},
                 init: function()
                 {
-                    console.log("Dropzone init'ed");
-
+                    //console.log("Dropzone init'ed");
                     this.on("success", function(e, response)
                     {
+                        $noBrands.hide();
+
                         var imgSrc = "{{url('img/vendors/')}}/" + response.filename;
-                        $brandContainer.append("<img src='" + imgSrc + "'/>");
+                        $brandContainer.append("<div class='divBrand'><img src='" + imgSrc + "'/><br/><a href='#' class='deletebrand' data-brandid='" + response.id + "' data-imagename='" + response.filename + "'>Delete</a></div>");
                         this.removeAllFiles();
-                        console.log(response);
+                        //console.log(response);
                     });
                 }
             };
-
-
 
             var $country = $("#country_id");
             var $stateProvince = $("#state_province_id");
 
             fsh.common.getCountries("{{url('ajax/getcountries')}}", $country, "{{isset($vendor) ? $vendor->country_id : ''}}");
-
 
             $country.on("change", function(e)
             {

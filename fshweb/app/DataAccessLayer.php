@@ -271,9 +271,14 @@ class DataAccessLayer
         return $vendor;
     }
 
-    public function getBrand($brandId, $fields = null)
+    public function getBrand($brandId, $vendorId = null, $fields = null)
     {
         $query = VendorBrand::where('id', '=', $brandId);
+        if(isset($vendorId))
+        {
+            $query->where('vendor_id', '=', $vendorId);
+        }
+
         if(isset($fields))
         {
             $query->select($fields);
@@ -351,13 +356,16 @@ class DataAccessLayer
         return $brand->id;
     }
 
-    public function deleteBrand($brandId)
+    public function deleteBrand($brandId, $vendorId)
     {
-        $brand = $this->getBrand($brandId);
-        if(!isset($brand))
+        $brand = $this->getBrand($brandId, $vendorId);
+        if(isset($brand))
         {
-            $brand->delete();
+            $rowsAffected = $brand->delete();
+            return $rowsAffected;
         }
+
+        return 0;
     }
 
     public function getAllAllergens($activeOnly = true)
