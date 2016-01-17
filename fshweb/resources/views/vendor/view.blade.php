@@ -105,18 +105,10 @@
                     <div class="col-xs-12 well">
                         <div class="flexslider">
                           <ul class="slides">
-                            <li style="background: url(../public/img/slider/campbells-brand-logo.png); background-repeat: no-repeat; background-position: center center;">
-                              
-                            </li>
-
-                            <li style="background: url(../public/img/slider/pepperidgefarm-logo.png); background-repeat: no-repeat; background-position: center center;">
-                            </li>
-
-                            <li style="background: url(../public/img/slider/ROLAND-LOGO-BANNER-SIZE.png); background-repeat: no-repeat; background-position: center center;">
-                            </li>
-                            <li style="background: url(../public/img/slider/ROLAND-LOGO-BANNER-SIZE.png); background-repeat: no-repeat; background-position: center center;">
-                        
-                            </li>
+                          @foreach($profile->brands as $b)
+                              <li style="background: url('{{url(config('app.vendor_storage'))}}/{{$b->logo_image_path}}'); background-repeat: no-repeat; background-position: center center;">
+                              </li>
+                          @endforeach
                             <!-- items mirrored twice, total of 12 -->
                           </ul>
                         </div>
