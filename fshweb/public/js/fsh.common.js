@@ -12,13 +12,14 @@ fsh.common = (function ($, document)
         isProduction = !enabled;
     };
 
-    var doAjax = function (url, data, method, isAsync, successFunction, errorFunction)
+    var doAjax = function (url, data, method, isAsync, headers, successFunction, errorFunction)
     {
         $.ajax({
             type: method,
             url: url,
             data: data,
             async: isAsync,
+            headers: headers,
             //contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: successFunction,
@@ -56,7 +57,7 @@ fsh.common = (function ($, document)
 
     var getCountries = function(url, elem, selected)
     {
-        doAjax(url, {}, "GET", true,
+        doAjax(url, {}, "GET", true, {},
             function(data)
             {
                 var html = "<option value=''></option>";
@@ -85,7 +86,7 @@ fsh.common = (function ($, document)
 
     var getStateProvincesForCountry = function(url, elem, selected)
     {
-        doAjax(url, {}, "GET", true,
+        doAjax(url, {}, "GET", true, {},
             function(data)
             {
                 //console.log(data);

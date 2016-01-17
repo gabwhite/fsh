@@ -139,7 +139,7 @@
         $(document).ready(function()
         {
 
-            fsh.common.doAjax("{{url('ajax/getcountries')}}", {}, "GET", true,
+            fsh.common.doAjax("{{url('ajax/getcountries')}}", {}, "GET", true, {},
                 function(data)
                 {
                     var html = "<option value=''></option>";
@@ -164,7 +164,7 @@
                 }
                 else
                 {
-                    fsh.common.doAjax("{{url('ajax/getstateprovincesforcountry')}}/" + $(this).val(), {}, "GET", true,
+                    fsh.common.doAjax("{{url('ajax/getstateprovincesforcountry')}}/" + $(this).val(), {}, "GET", true, {},
                         function(data)
                         {
                             //console.log(data);
