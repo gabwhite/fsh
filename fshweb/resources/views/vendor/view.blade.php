@@ -12,8 +12,8 @@
 <section class='clearfix container-wrap main-title'>
     <div class="container ">
         <div class="col-xs-12 vendor-profile">
-            @if(isset($avatarFilename))
-                <img id="imgCurrentAvatar" src="{{url(config('app.avatar_storage') . '/' . $avatarFilename)}}" title="{{trans('ui.user_label_currentavatar')}}" width="200" height="200"/>
+            @if($profile->logo_image_path)
+                <img id="imgCurrentAvatar" src="{{url(config('app.vendor_storage') . '/' . $profile->logo_image_path)}}" title="{{trans('ui.user_label_currentavatar')}}" width="200" height="200"/>
             @else
                 <img id="imgCurrentAvatar" src="{{url(config('app.avatar_none'))}}" title="{{trans('ui.user_label_noavatar')}}" width="200" height="200"/>
             @endif
