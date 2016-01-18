@@ -43,7 +43,7 @@
                     </div>
 
                     <div class="text-center">
-                        <button type="submit" class=" btn-primary">{{trans('ui.button_register')}}</button>
+                        <button type="submit" class="btn-primary">{{trans('ui.button_register')}}</button>
                     </div>
                 </form>
             </div>

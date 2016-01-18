@@ -8563,6 +8563,7 @@ h4.modal-title {
 .nutrition-block label {
   padding: 0;
   margin: 0;
+  float: left;
 }
 
 .nutrition-meta .calories-left,
@@ -8580,10 +8581,16 @@ h4.modal-title {
   font-weight: 300;
 }
 
+.nutrition-meta span {
+  font-size: 12px;
+  font-weight: 400;
+  padding-left: 5px;
+}
+
 .nutrition-meta.saturated-fat,
 .nutrition-meta.dietary-fibre,
 .nutrition-meta.sugars {
-  padding-left: 20px;
+  padding: 5px 0 5px 20px;
 }
 
 .nutrition-meta .daily-value {
@@ -8839,6 +8846,26 @@ label {
   height: 35px;
 }
 
+/*----------  Dropdown <select> elements  ----------*/
+
+select.search-dropdown {
+  border: 1px solid #c2c2c2;
+  border-radius: 3px;
+  font-size: 16px;
+  height: 35px;
+  width: 100%;
+  font-weight: 600;
+  color: #7D7D7D;
+}
+
+@media (min-width: 768px) {
+  select.search-dropdown {
+    height: 50px;
+    width: 20%;
+    margin: 0 10px;
+  }
+}
+
 /*----------  Buttons  ----------*/
 
 .btn-primary,
@@ -8853,6 +8880,7 @@ label {
   border-radius: 3px;
   width: auto;
   margin: 25px auto;
+  line-height: 1.2;
   transition: all ease 0.5s;
   -webkit-transition: all ease 0.5s;
   -moz-transition: all ease 0.5s;
@@ -8866,6 +8894,7 @@ label {
   .btn-primary,
   .btn-sm,
   .btn-group-sm > .btn {
+    height: 50px;
     padding: 10px 30px;
   }
 }
@@ -8899,6 +8928,7 @@ label {
   border-radius: 3px;
   width: auto;
   margin: 25px auto;
+  line-height: 1.2;
   transition: all ease 0.5s;
   -webkit-transition: all ease 0.5s;
   -moz-transition: all ease 0.5s;
@@ -8911,6 +8941,7 @@ label {
 
 @media (min-width: 768px) {
   .btn {
+    height: 50px;
     padding: 10px 30px;
   }
 }
@@ -8932,13 +8963,15 @@ label {
   margin-bottom: 30px;
 }
 
-.btn-row :first-child {
-  margin-left: 0;
-}
-
 .btn-row button,
 .btn-row input[type="submit"] {
   margin: 0 10px;
+  float: left;
+}
+
+.btn-row input[type="submit"],
+.btn-row :first-child {
+  margin-left: 0;
 }
 
 .btn-sm,
@@ -9128,8 +9161,52 @@ a.contact {
 /*=====  End of Footer Styling  ======*/
 
 /*==================================================
-=            Bootstrap Carousel Styling            =
+=            Flexslider Carousel Styling & Brand uploads            =
 ==================================================*/
+
+/*----------  Upload new Brand  ----------*/
+
+#brandUploader.dropzone {
+  min-height: 150px;
+  border: 1px solid #c2c2c2 !important;
+  background: white;
+  padding: 20px 20px;
+  margin-bottom: 30px;
+  background: url(../../public/img/icons/upload-image.svg) no-repeat;
+  background-size: 60px;
+  background-position: center 30px;
+  position: relative;
+}
+
+#brandUploader.dropzone .dz-message {
+  margin-top: 70px;
+}
+
+.divBrand {
+  width: 32.9%;
+  height: 150px;
+  border: 1px solid #c2c2c2;
+  display: inline-block;
+  position: relative;
+}
+
+a.deletebrand {
+  display: inline-block;
+  width: 33.333%;
+  color: #de5328;
+  font-weight: 700;
+  position: absolute;
+  bottom: 0;
+  right: 5px;
+  margin: 10px auto;
+}
+
+a.deletebrand img {
+  width: 15px;
+  margin-right: 5px;
+}
+
+/*----------  View The slider  ----------*/
 
 ul.slides {
   margin-left: -5%;
@@ -9144,6 +9221,14 @@ ul.slides {
   display: block;
   margin: 0 auto;
   padding: 10px 0;
+}
+
+.flex-direction-nav a.flex-prev {
+  background: url(../../public/img/icons/chevron-left.svg) no-repeat;
+}
+
+.flex-direction-nav a.flex-next {
+  background: url(../../public/img/icons/chevron-right.svg) no-repeat;
 }
 
 /*=====  End of Bootstrap Carousel Styling  ======*/
@@ -9190,3 +9275,31 @@ ul.slides {
 }
 
 /*=====  End of Modal Styling  ======*/
+
+/*======================================
+=            Search Results            =
+======================================*/
+
+.search-row {
+  padding: 20px 0;
+  border-bottom: 1px solid #c2c2c2;
+}
+
+.search-row a {
+  font-family: "Open Sans";
+  font-weight: 700;
+  color: #4b4a4a;
+  font-size: 18px;
+  margin-right: 12px;
+}
+
+.search-row .brand {
+  color: #de5328;
+  font-weight: 600;
+  border: 1px solid #de5328;
+  border-radius: 3px;
+  text-align: center;
+  padding: 5px;
+}
+
+/*=====  End of Search Results  ======*/

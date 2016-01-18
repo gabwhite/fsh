@@ -23,8 +23,8 @@ class CreateVendorsTable extends Migration
             $table->string('address1', 200)->nullable();
             $table->string('address2', 200)->nullable();
             $table->string('city', 200)->nullable();
-            $table->integer('state_province')->unsigned()->nullable();
-            $table->integer('country')->unsigned()->nullable();
+            $table->integer('state_province_id')->unsigned()->nullable();
+            $table->integer('country_id')->unsigned()->nullable();
             $table->string('zip_postal', 50)->nullable();
             $table->string('contact_name', 200)->nullable();
             $table->string('contact_title', 200)->nullable();
@@ -38,8 +38,8 @@ class CreateVendorsTable extends Migration
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('country')->references('id')->on('countries');
-            $table->foreign('state_province')->references('id')->on('stateprovinces');
+            $table->foreign('country_id')->references('id')->on('countries');
+            $table->foreign('state_province_id')->references('id')->on('stateprovinces');
         });
     }
 

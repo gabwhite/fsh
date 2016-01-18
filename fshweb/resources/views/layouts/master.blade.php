@@ -28,12 +28,13 @@
 
     <link rel="stylesheet" href="{{url('/js/vendor/jstree/themes/default/style.min.css')}}">
 
-    <link rel="stylesheet" href="{{url('/js/vendor/flexslider/jquery.flexslider-min.js')}}">
+    <!-- <link rel="stylesheet" href="{{url('/css/flexslider.css')}}"> -->
    
     <link rel="stylesheet" href="{{url('/css/app.css')}}">
 
     <script src="{{url('js/kleo/init.js')}}"></script>
     <script src="{{url('js/kleo/modernizr.custom.46504.js')}}"></script>
+    
 
     <noscript><style> .wpb_animate_when_almost_visible { opacity: 1; }</style></noscript>
 
@@ -160,29 +161,6 @@
         </section>
 
     </div><!-- #main -->
-
-    <!--start kleo-quick-contact-wrapper-->
-   <!--  <a class="kleo-go-top" href="#"><i class="icon-up-open-big"></i></a>
-    <div class="kleo-quick-contact-wrapper">
-        <a class="kleo-quick-contact-link" href="#"><i class="icon-mail-alt"></i></a>
-        <div id="kleo-quick-contact">
-            <h4 class="kleo-qc-title">CONTACT US</h4>
-            <p>We're not around right now. But you can send us an email and we'll get back to you, asap.</p>
-            <form class="kleo-contact-form" action="#" method="post" novalidate>
-                <input type="text" placeholder="Your Name" required id="contact_name" name="contact_name" class="form-control" value="" tabindex="276" />
-                <input type="email" required placeholder="Your Email" id="contact_email" name="contact_email" class="form-control" value="" tabindex="277"  />
-                <textarea placeholder="Type your message..." required id="contact_content" name="contact_content" class="form-control" tabindex="278"></textarea>
-                <input type="hidden" name="action" value="kleo_sendmail">
-                <button tabindex="279" class="btn btn-default pull-right" type="submit">Send</button>
-                <div class="kleo-contact-loading">Sending <i class="icon-spinner icon-spin icon-large"></i></div>
-                <div class="kleo-contact-success">
-                </div>
-            </form>
-            <div class="bottom-arrow"></div>
-        </div>
-    </div>
-
-     --><!--end kleo-quick-contact-wrapper-->
 
     <!-- start footer -->
     <div id="socket" class="socket-color">

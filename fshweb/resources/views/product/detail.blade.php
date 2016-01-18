@@ -11,16 +11,13 @@
     <div class='container'>
         <div class="col-xs-12">
             <h1 class="item-title">{{$product->name}}</h1>
+            
             <div class="btn-row">
-                <button class="btn-primary">{{trans('ui.product_label_add_to_my_products')}}</button>
-            </div>
-
-            <div class="btn-row">
-                <button class="btn-primary">{{trans('ui.product_label_goto_vendor_profile')}}</button>
-            </div>
-
-            <div class="btn-row">
-                <button class="btn">{{trans('ui.product_label_request_sample')}}</button>
+                <a href="javascript:alert('Coming Soon');"><button class="btn-primary">{{trans('ui.product_label_add_to_my_products')}}</button></a>
+           
+                <a href="{{url('vendor/detail', $product->vendor_id)}}"><button class="btn-primary">{{trans('ui.product_label_goto_vendor_profile')}}</button></a>
+           
+                <a href="javascript:alert('Coming Soon');"><button class="btn">{{trans('ui.product_label_request_sample')}}</button></a>
             </div>
         </div>
 
@@ -29,9 +26,9 @@
 
                 <div class="bg-info clearfix">
                     <p class="pull-left">{{trans('messages.product_administrator_notice')}}</p>
-                    <button class="btn-sm pull-right">
-                        <a href="{{url('product/edit', $product->id)}}">{{trans('ui.product_label_edit_product')}}</a>
-                    </button>
+                    
+                    <a href="{{url('product/edit', $product->id)}}"><button class="btn-sm pull-right">{{trans('ui.product_label_edit_product')}}</button></a>
+                    
                 </div>
 
             @endif
@@ -64,7 +61,7 @@
                 <div class="col-xs-12 col-md-10">
                     <div class="nutrition">
 
-                        <div class="nutrition-block">
+                        <div class="col-xs-12 nutrition-block">
 
                             <h4>{{trans('ui.product_label_nutrition_facts')}}</h4>
 
@@ -72,53 +69,53 @@
                                 <span class="nutrition-value">{{trans('ui.product_label_serving_size')}}&nbsp;{{$product->serving_size}}</span>
                             </div>
 
-                            <div class="nutrition-meta amount-per-serving">
+                            <div class="col-xs-12 nutrition-meta amount-per-serving">
                                 <label>{{trans('ui.product_label_amount_per_serving')}}</label>
                             </div>
 
-                            <div class="nutrition-meta calories">
+                            <div class="col-xs-12 nutrition-meta calories">
                                 <div class="col-lg-6 calories-left">
-                                    <label>{{trans('ui.product_label_calories')}}&nbsp;</label><span class="nutrition-value">{{$product->calories}}</span>
+                                    <label>{{trans('ui.product_label_calories')}}
+                                    <span class="nutrition-value">{{$product->calories}}</span></label>
                                 </div>
 
                                 <div class="col-lg-6 calories-right">
-                                    <span class="nutrition-value">{{trans('ui.product_label_calories_from_fat')}}&nbsp;{{$product->calories_from_fat}}</span>
+                                    <label for="calories_from_fat"><span class="nutrition-value"> {{trans('ui.product_label_calories_from_fat')}} {{$product->calories_from_fat}}</span></label>
                                 </div>
 
-                                <div class="clearfix"></div>
-
                             </div>
 
-                            <div class="nutrition-meta total-fat">
-                                <label>{{trans('ui.product_label_total_fat')}}&nbsp;</label><span class="nutrition-value">{{$product->total_fat}}</span>
+                            <div class="col-xs-12 nutrition-meta total-fat">
+                                <label>{{trans('ui.product_label_total_fat')}}<span class="nutrition-value"> {{$product->total_fat}}</span></label>
                             </div>
 
-                            <div class="nutrition-meta saturated-fat">
+                            <div class="col-xs-12 nutrition-meta saturated-fat">
                                 <span class="nutrition-value">{{trans('ui.product_label_saturated_fat')}}&nbsp;{{$product->saturated_fats}}</span>
                             </div>
 
-                            <div class="nutrition-meta cholesteral">
-                                <label>{{trans('ui.product_label_cholesterol')}}&nbsp;</label><span class="nutrition-value"></span>
+                            <div class="col-xs-12 nutrition-meta cholesteral">
+                                <label>{{trans('ui.product_label_cholesterol')}}&nbsp;<span class="nutrition-value">{{$product->cholesterol}}</span></label>
                             </div>
 
-                            <div class="nutrition-meta sodium">
-                                <label>{{trans('ui.product_label_sodium')}}&nbsp;</label><span class="nutrition-value">{{$product->sodium}}</span>
+                            <div class="col-xs-12 nutrition-meta sodium">
+                                <label>{{trans('ui.product_label_sodium')}}&nbsp;<span class="nutrition-value">{{$product->sodium}}</span></label>
                             </div>
 
-                            <div class="nutrition-meta carbohydrates">
-                                <label>{{trans('ui.product_label_total_carbs')}}&nbsp;</label><span class="nutrition-value">{{$product->carbs}}</span>
+                            <div class="col-xs-12 nutrition-meta carbohydrates">
+                                <label>{{trans('ui.product_label_total_carbs')}}&nbsp;<span class="nutrition-value">{{$product->carbs}}</span></label>
                             </div>
 
-                            <div class="nutrition-meta dietary-fibre">
-                                <span class="nutrition-value">{{trans('ui.product_label_dietary_fibre')}}&nbsp;{{$product->fibre}}</span>
+                            <div class="col-xs-12 nutrition-meta dietary-fibre">
+                               <span class="nutrition-value">{{trans('ui.product_label_dietary_fibre')}}&nbsp;{{$product->fibre}}</span>
                             </div>
 
-                            <div class="nutrition-meta sugars">
+                            <div class="col-xs-12 nutrition-meta sugars">
                                 <span class="nutrition-value">{{trans('ui.product_label_sugars')}}&nbsp;{{$product->sugar}}</span>
                             </div>
 
-                            <div class="nutrition-meta protein">
-                                <label>{{trans('ui.product_label_protein')}}&nbsp;</label><span class="nutrition-value">{{$product->protein}}</span>
+                            <div class="col-xs-12 nutrition-meta protein">
+                                <label>{{trans('ui.product_label_protein')}}
+                                <span class="nutrition-value">{{$product->protein}}</span></label>
                             </div>
                         </div>
                     </div>

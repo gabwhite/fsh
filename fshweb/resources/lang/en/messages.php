@@ -17,6 +17,7 @@ return [
     'profile_update_success' => 'Profile successfully updated',
 
     'vendor_update_success' => 'Vendor successfully updated',
+    'vendor_background_image_notice' => 'For best results, crop your photo to 930px x 275px',
 
     'product_update_success' => 'Product successfully updated',
 

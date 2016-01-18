@@ -38,10 +38,12 @@ class ProfileController extends Controller
         $avatarFilename = null;
         $vendorId = null;
         $vendorOwner = false;
+        $bio = null;
 
         $up = $user->userProfile;
         if (!is_null($up))
         {
+            $bio = $up->bio;
             $avatarFilename = $up->avatar_image_path;
         }
 
@@ -52,7 +54,7 @@ class ProfileController extends Controller
         // TODO: We're only supporting one vendor owner per person for now.
         if(count($vendors) > 0) { $vendorOwner = true; $vendorId = $vendors[0]->id; }
 
-        return view('profile.index')->with('user', $user)->with(['avatarFilename' => $avatarFilename, 'vendorId' => $vendorId, 'vendorOwner' => $vendorOwner]);
+        return view('profile.index')->with('user', $user)->with(['avatarFilename' => $avatarFilename, 'bio' => $bio, 'vendorId' => $vendorId, 'vendorOwner' => $vendorOwner]);
     }
 
     public function profileAvatar()

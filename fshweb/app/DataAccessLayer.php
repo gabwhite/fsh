@@ -271,9 +271,14 @@ class DataAccessLayer
         return $vendor;
     }
 
-    public function getBrand($brandId, $fields = null)
+    public function getBrand($brandId, $vendorId = null, $fields = null)
     {
         $query = VendorBrand::where('id', '=', $brandId);
+        if(isset($vendorId))
+        {
+            $query->where('vendor_id', '=', $vendorId);
+        }
+
         if(isset($fields))
         {
             $query->select($fields);
@@ -320,8 +325,8 @@ class DataAccessLayer
 
         $vendor->user_id = $data['user_id'];
         $vendor->company_name = $data['company_name'] ? $data['company_name'] : $vendor->company_name;
-        $vendor->country = $data['country'] ? $data['country'] : $vendor->country;
-        $vendor->state_province = $data['state_province'] ? $data['state_province'] : $vendor->state_province;
+        $vendor->country_id = $data['country_id'] ? $data['country_id'] : $vendor->country_id;
+        $vendor->state_province_id = $data['state_province_id'] ? $data['state_province_id'] : $vendor->state_province_id;
         $vendor->address1 = $data['address1'] ? $data['address1'] : $vendor->address1;
         $vendor->address2 = $data['address2'] ? $data['address2'] : $vendor->address2;
         $vendor->city = $data['city'] ? $data['city'] : $vendor->city;
@@ -338,16 +343,9 @@ class DataAccessLayer
         return $vendor->id;
     }
 
-    public function upsertBrand($brandId, $data)
+    public function insertBrand($data)
     {
-        $brand = $this->getBrand($brandId);
-        $isAdd = false;
-        if(!isset($brand))
-        {
-            $brand = new VendorBrand();
-            $isAdd = true;
-        }
-
+        $brand = new VendorBrand();
         $brand->vendor_id = $data['vendor_id'];
         $brand->name = $data['name'];
         $brand->logo_image_path = $data['logo_image_path'];
@@ -358,13 +356,16 @@ class DataAccessLayer
         return $brand->id;
     }
 
-    public function deleteBrand($brandId)
+    public function deleteBrand($brandId, $vendorId)
     {
-        $brand = $this->getBrand($brandId);
-        if(!isset($brand))
+        $brand = $this->getBrand($brandId, $vendorId);
+        if(isset($brand))
         {
-            $brand->delete();
+            $rowsAffected = $brand->delete();
+            return $rowsAffected;
         }
+
+        return 0;
     }
 
     public function getAllAllergens($activeOnly = true)

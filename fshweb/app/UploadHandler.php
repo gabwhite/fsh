@@ -139,6 +139,24 @@ class UploadHandler
         }
     }
 
+    public function isImage(UploadedFile $file)
+    {
+        $result = false;
+
+        $extensions = ['jpg', 'jpeg', 'gif', 'png'];
+        $mimeTypes = ['image/jpeg', 'image/jpeg', 'image/gif', 'image/png'];
+
+        $fileExt = $file->getClientOriginalExtension();
+        $fileMime = $file->getMimeType();
+
+        if(array_has($extensions, $fileExt))
+        {
+            $result = true;
+        }
+
+        return $result;
+    }
+
     public function cropImage($path, $fileName, $cropData)
     {
         // $cropData is an array with the following order:
