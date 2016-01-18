@@ -225,5 +225,9 @@ return [
     'contact_email_to' => 'breen@foodservicehound.com',
     'vendor_brand_image_width' => 200,
     'vendor_brand_image_height' => 200,
+    'vendor_logo_image_width' => 200,
+    'vendor_logo_image_height' => 200,
+    'vendor_background_image_width' => 200,
+    'vendor_background_image_height' => 200,
     'session_key_vendor' => 'vendor_id',
 ];

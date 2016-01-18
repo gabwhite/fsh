@@ -139,12 +139,56 @@ class VendorController extends Controller
                 'code' => 500
             ], 500);
         }
+    }
 
-        return response()->json([
-            'error' => true,
-            'message' => 'Server error while deleting',
-            'code' => 500
-        ], 500);
+    public function addAsset(Request $request)
+    {
+        if ($request->hasFile('logo_image_path') || $request->hasFile('background_image_path'))
+        {
+            try
+            {
+                $vendorId = $request->header('VID');
+                //$assetType = $request->header('ASSET_TYPE');
+                //$file = $request->header('FNAME');
+
+                $vendor = $this->dataAccess->getVendor($vendorId);
+                if(isset($vendor))
+                {
+                    $uploader = new UploadHandler();
+
+                    $filename = null;
+                    if(!is_null($vendor->logo_image_path) && $vendor->logo_image_path != '')
+                    {
+                        $filename = $vendor->logo_image_path;
+                    }
+
+                    $newFilename = $uploader->uploadVendorAsset($request->file('logo_image_path'), $filename);
+
+                    $uploader->resizeVendorAsset($newFilename,
+                        config('app.vendor_logo_image_width'),
+                        config('app.vendor_logo_image_height'));
+
+                    $vendor->logo_image_path = $newFilename;
+                    //$vendor->background_image_path = $newFilename;
+                    $vendor->save();
+
+                    return response()->json([
+                        'error' => false,
+                        'code'  => 200,
+                        'filename' => $newFilename
+                    ], 200);
+                }
+            }
+            catch(Exception $ex)
+            {
+                return response()->json([
+                    'error' => true,
+                    'message' => 'Server error while uploading',
+                    'exception' => $ex->getMessage(),
+                    'code' => 500
+                ], 500);
+            }
+        }
     }
 
     public function upsertBrand(Request $request)

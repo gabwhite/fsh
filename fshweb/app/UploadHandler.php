@@ -143,8 +143,8 @@ class UploadHandler
     {
         $result = false;
 
-        $extensions = ['jpg', 'gif', 'png', 'jpeg'];
-        $mimeTypes = [];
+        $extensions = ['jpg', 'jpeg', 'gif', 'png'];
+        $mimeTypes = ['image/jpeg', 'image/jpeg', 'image/gif', 'image/png'];
 
         $fileExt = $file->getClientOriginalExtension();
         $fileMime = $file->getMimeType();
@@ -153,7 +153,6 @@ class UploadHandler
         {
             $result = true;
         }
-
 
         return $result;
     }
