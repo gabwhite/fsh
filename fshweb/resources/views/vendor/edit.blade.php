@@ -11,8 +11,8 @@
     <div class="container ">
         <div class="col-xs-12 vendor-profile">
 
-            @if(isset($avatarFilename))
-                <img id="imgCurrentAvatar" src="{{url(config('app.avatar_storage') . '/' . $avatarFilename)}}" title="{{trans('ui.user_label_currentavatar')}}" width="200" height="200"/>
+            @if($vendor->logo_image_path)
+                <img id="imgCurrentAvatar" src="{{url(config('app.vendor_storage') . '/' . $vendor->logo_image_path)}}" title="{{trans('ui.user_label_currentavatar')}}" width="200" height="200"/>
             @else
                 <img id="imgCurrentAvatar" src="{{url(config('app.avatar_none'))}}" title="{{trans('ui.user_label_noavatar')}}" width="200" height="200"/>
             @endif
@@ -139,10 +139,15 @@
                             <div class="logo-zone clearfix">
                                 <label for="logo">{{trans('ui.vendor_label_logo_image')}}</label>
                                 
-                                <div class="vendor-logo"></div>
+                                <div class="vendor-logo">
+                                    @if($vendor->logo_image_path)
+                                        <img id="logoImageModal" src="{{url('img/vendors', $vendor->logo_image_path)}}" width="200" height="200"/>
+                                    @else
+                                        <img id="logoImageModal" src="{{url(config('app.avatar_none'))}}" width="200" height="200"/>
+                                    @endif
+                                </div>
                                 
-                                <div class="logo-upload">
-                                    <input type="file" name="logo_image_path"/>
+                                <div id="logoUploader" class="logo-upload dropzone">
                                 </div>
                             </div>
 
@@ -186,8 +191,12 @@
         $(document).ready(function()
         {
             var $brandContainer = $("#currentbrands");
+            var $logoImage = $("#imgCurrentAvatar");
+            var $logoImageModal = $("#logoImage");
+
             var $noBrands = $("#nobrands");
             var vid = "{{\Session::get(config('app.session_key_vendor'))}}";
+            var csrf = "{{ csrf_token() }}";
 
             if($brandContainer.find(".divBrand").length === 0) { $noBrands.show(); }
 
@@ -199,7 +208,7 @@
                     var parentElem = $(this).parent();
 
                     var headers = {
-                        "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                        "X-CSRF-TOKEN": csrf,
                         "BID": $(this).data("brandid"),
                         "VID": vid,
                         "FNAME": $(this).data("imagename")
@@ -226,7 +235,7 @@
                 uploadMultiple: false,
                 addRemoveLinks: false,
                 previewsContainer: null,
-                headers: { "X-CSRF-TOKEN": "{{ csrf_token() }}", "VID": vid},
+                headers: { "X-CSRF-TOKEN": csrf, "VID": vid},
                 init: function()
                 {
                     //console.log("Dropzone init'ed");
@@ -241,6 +250,27 @@
                     });
                 }
             };
+
+            Dropzone.options.logoUploader =
+            {
+                url: "{{url('/vendor/edit/addasset')}}",
+                paramName: "logo_image_path",
+                uploadMultiple: false,
+                addRemoveLinks: false,
+                previewsContainer: null,
+                headers: { "X-CSRF-TOKEN": csrf, "VID": vid},
+                init: function()
+                {
+                    //console.log("Dropzone init'ed");
+                    this.on("success", function(e, response)
+                    {
+                        $logoImage.attr("src", "{{url('img/vendors/')}}/" + response.filename);
+                        $logoImageModal.attr("src", "{{url('img/vendors/')}}/" + response.filename);
+                        this.removeAllFiles();
+                    });
+                }
+            };
+
 
             var $country = $("#country_id");
             var $stateProvince = $("#state_province_id");
