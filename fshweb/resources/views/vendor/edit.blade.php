@@ -12,7 +12,7 @@
         <div class="col-xs-12 vendor-profile">
 
             @if($vendor->logo_image_path)
-                <img id="imgCurrentAvatar" src="{{url(config('app.vendor_storage') . '/' . $vendor->logo_image_path)}}" title="{{trans('ui.user_label_currentavatar')}}" width="200" height="200"/>
+                <img id="imgCurrentAvatar" src="{{url(config('app.vendor_storage') . '/' . $vendor->logo_image_path)}}" title="{{trans('ui.user_label_currentavatar')}}"/>
             @else
                 <img id="imgCurrentAvatar" src="{{url(config('app.avatar_none'))}}" title="{{trans('ui.user_label_noavatar')}}" width="200" height="200"/>
             @endif

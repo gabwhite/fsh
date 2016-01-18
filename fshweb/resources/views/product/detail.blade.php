@@ -46,7 +46,6 @@
             </div>
 
             <div class="col-xs-12 col-md-8">
-                <h3>{{trans('ui.product_label_description')}}</h3>
                 <h3>{{$product->description}}</h3>
 
                 <button class="btn">{{trans('ui.product_label_rate_product')}}</button>
