@@ -21,9 +21,8 @@
 
             <h1 class="item-title">{{trans('ui.navigation_link_editprofile')}}</h1>
             
-            <button class="btn-primary">
-                <a href="{{url('profile/avatar')}}">{{trans('ui.navigation_link_changeavatar')}}</a>
-            </button>
+            <a href="{{url('profile/avatar')}}"><button class="btn-primary">{{trans('ui.navigation_link_changeavatar')}}</button></a>
+            
         </div>
     </div>
 </section>
@@ -38,7 +37,6 @@
     <div class="col-xs-12 col-md-8 col-md-offset-4">
         <div class="col-xs-12 well">
             
-        
             <form id="form1" name="form1" method="post" action="{{url('profile/edit')}}">
 
                 <div class="detail-row">
@@ -78,16 +76,16 @@
                 </div>
 
 
-                <div class="row btn-row">
-                    <div class="col-md-12">
-                        <input type="submit" value="{{trans('ui.button_update')}}" class=" btn-primary"/>
-                        <a href="{{url('/profile')}}" class="btn ">{{trans('ui.button_cancel')}}</a>
-                    </div>
-                </div>
-
-                {!! csrf_field() !!}
             </form>
         </div>
+        <div class="row btn-row">
+            <div class="col-xs-12">
+                <input type="submit" value="{{trans('ui.button_update')}}" class="btn-primary"/>
+                <a href="{{url('/profile')}}"><button class="btn">{{trans('ui.button_cancel')}}</button</a>
+            </div>
+        </div>
+
+        {!! csrf_field() !!}
     </div>
 
 </div>

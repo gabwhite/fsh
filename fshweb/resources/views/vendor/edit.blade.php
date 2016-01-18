@@ -103,22 +103,31 @@
                                 <h2 class="item-subhead">{{trans('ui.vendor_label_brands')}}</h2>
                                 
                                 <div class="col-xs-12 well">
+                                    <div id="brandUploader" class="dropzone"></div>
+
                                     <div id="currentbrands">
                                     @foreach($vendor->brands as $b)
-                                        <div class="divBrand">
-                                            <img src="{{url(config('app.vendor_storage'))}}/{{$b->logo_image_path}}"/>
-                                            <br/>
-                                            <a href="#" class="deletebrand" data-brandid="{{$b->id}}" data-imagename="{{$b->logo_image_path}}">{{trans('ui.button_delete')}}</a>
+                                
+                                        <div class="divBrand" style="background: url('{{url(config('app.vendor_storage'))}}/{{$b->logo_image_path}}') no-repeat; background-size:100px; background-position: center center;">
+                                        
+                                            <a href="#" class="deletebrand" data-brandid="{{$b->id}}" data-imagename="{{$b->logo_image_path}}"><span><img src="../../public/img/icons/trash.svg" alt=""></span>{{trans('ui.button_delete')}}</a>
                                         </div>
-                                    @endforeach
-                                        <p id="nobrands" style="display:none;">{{trans('ui.vendor_label_no_brands')}}</p>
+                                                
+                                       
+                                        @endforeach
+                                            <p id="nobrands" style="display:none;">{{trans('ui.vendor_label_no_brands')}}</p>
                                     </div>
-                                    <div id="brandUploader" class="dropzone"></div>
-                                    <a href="#"><button class="btn-primary">{{trans('ui.vendor_label_add_brand')}}</button></a>
+                                    
+                                    
+                                <a href="#"><button class="btn-primary">{{trans('ui.vendor_label_add_brand')}}</button></a>
+                                    </div>
+                                <div class="col-xs-12">
+                                    
+                                    <div class="row btn-row">
+                                        <input type="submit" value="{{trans('ui.button_update')}}" class="btn-primary"/>
+                                        <a href="{{url('/profile/')}}"><button class="btn">{{trans('ui.button_cancel')}}</button></a>
+                                    </div>
                                 </div>
-
-                                <input type="submit" value="{{trans('ui.button_update')}}" class="btn-primary"/>
-                                <a href="{{url('/profile/')}}"><button class="btn">{{trans('ui.button_cancel')}}</button></a>
                             </div>
                         </div>
                     </div>

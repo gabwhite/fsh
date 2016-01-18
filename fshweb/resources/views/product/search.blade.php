@@ -64,26 +64,20 @@
                         </form>
 
                         <table id="product_list" width="100%" class="table">
-                        <thead>
-                        <tr>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @if (isset($searchresults))
-                            @foreach($searchresults as $r)
-                                <tr>
-                                    <td>
-                                        <a href="{{url('/product/detail', $r->id)}}">{{$r->name}}</a>
-                                    </td>
-                                    <td>{{$r->brand}}</td>
-                                </tr>
-                            @endforeach
-                        @endif
-                        </tbody>
-                    </table>
+                        
+                            <tbody>
+                            @if (isset($searchresults))
+                                @foreach($searchresults as $r)
+                                    <tr>
+                                        <td>
+                                            <h4><a href="{{url('/product/detail', $r->id)}}">{{$r->name}}</a></h4>
+                                        </td>
+                                        <td class="brand">{{$r->brand}}</td>
+                                    </tr>
+                                @endforeach
+                            @endif
+                            </tbody>
+                        </table>
                     </div>
 
                     

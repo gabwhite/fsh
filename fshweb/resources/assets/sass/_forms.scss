@@ -79,11 +79,15 @@ select.search-dropdown {
 	display: inline-block;
 	margin-bottom: 30px;
 	
-	:first-child {
-			margin-left: 0;
-		}
-	button, input[type="submit"] {
+	button, 
+	input[type="submit"] {
 		margin: 0 10px;
+		float: left;
+	}
+	
+	input[type="submit"], 
+	:first-child{
+		margin-left: 0;
 	}
 }
 

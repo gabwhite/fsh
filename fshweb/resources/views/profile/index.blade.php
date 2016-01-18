@@ -24,28 +24,22 @@
             </h1>
 
             <div class="btn-row">
-                <button class="btn-sm"><a href="{{url('profile/edit')}}">{{trans('ui.navigation_link_editprofile')}}</a></button>
-            </div>
+                <a href="{{url('profile/edit')}}"><button class="btn-sm">{{trans('ui.navigation_link_editprofile')}}</button></a>
 
-            @if($user->hasRole('vendor'))
+                @if($user->hasRole('vendor'))
 
-                @if(isset($vendorId))
-                <button class="btn-sm">
-                    <a href="{{url('vendor/detail', $vendorId)}}">{{trans('ui.navigation_link_viewvendor')}}</a>
-                </button>
-               
-                @endif
-
-                @if($vendorOwner)
-                <button class="btn-sm">
+                    @if(isset($vendorId))
+                        <a href="{{url('vendor/detail', $vendorId)}}"><button class="btn-sm">{{trans('ui.navigation_link_viewvendor')}}</button></a>
                     
-                    <a href="{{url('vendor/edit')}}">{{trans('ui.navigation_link_editvendor')}}</a>
-                </button>
-                @endif
+                    @endif
 
-                
-                
-            @endif
+                    @if($vendorOwner)
+                    <a href="{{url('vendor/edit')}}"><button class="btn-sm">{{trans('ui.navigation_link_editvendor')}}</button></a>
+                    
+                    @endif
+
+                @endif
+            </div>
 
         </div>
     </div>
@@ -91,13 +85,17 @@
                         
                         <p>Edit existing products or upload new products.</p>
                         
-                        <button class="btn-primary">
-                            <a href="{{url('product/vendor')}}">{{trans('ui.navigation_link_myproducts')}}</a>
-                        </button>
+                        <div class="row btn-row">
+                            <div class="col-xs-12">
+                                
+                                <a href="{{url('product/vendor')}}"><button class="btn-primary">{{trans('ui.navigation_link_myproducts')}}</button></a>
+                                
 
-                        <button class="btn-primary">
-                            <a href="{{url('product/edit')}}">{{trans('ui.navigation_link_addnewproduct')}}</a>
-                        </button>
+                                <a href="{{url('product/edit')}}"><button class="btn-primary">{{trans('ui.navigation_link_addnewproduct')}}</button></a>
+
+                            </div>
+                        </div>
+                       
                     </div>
                 </div>
             </div>   

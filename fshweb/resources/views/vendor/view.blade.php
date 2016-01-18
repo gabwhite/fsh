@@ -82,9 +82,6 @@
                 
             </div>
 
-
-
-
         </div> <!-- end of sidebar -->
 
         <div class="col-xs-12 col-md-8">
@@ -106,7 +103,7 @@
                         <div class="flexslider">
                           <ul class="slides">
                           @foreach($profile->brands as $b)
-                              <li style="background: url('{{url(config('app.vendor_storage'))}}/{{$b->logo_image_path}}'); background-repeat: no-repeat; background-position: center center;">
+                              <li style="background: url('{{url(config('app.vendor_storage'))}}/{{$b->logo_image_path}}'); background-repeat: no-repeat; background-position: center center; background-size: contain;">
                               </li>
                           @endforeach
                             <!-- items mirrored twice, total of 12 -->
@@ -133,6 +130,7 @@
         $('.flexslider').flexslider({
             animation: "slide",
             animationLoop: false,
+            controlNav: false,
             itemWidth: 225,
             itemMargin: 10
         });

@@ -167,6 +167,7 @@ h4.modal-title {
 .nutrition-block label {
     padding: 0;
     margin: 0;
+    float: left;
 }
 
 
@@ -185,9 +186,15 @@ h4.modal-title {
     font-weight: 300;
 }
 
+.nutrition-meta span {
+    font-size: 12px;
+    font-weight: 400;
+    padding-left: 5px;
+}
+
 .nutrition-meta.saturated-fat, .nutrition-meta.dietary-fibre,
 .nutrition-meta.sugars {
-    padding-left: 20px;
+    padding: 5px 0 5px 20px;
 }
 
 .nutrition-meta .daily-value {
