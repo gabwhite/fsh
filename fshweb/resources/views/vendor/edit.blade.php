@@ -3,7 +3,7 @@
 @section('title', 'Page Title')
 
 @section('css')
-
+<link type="text/css" rel="stylesheet" href="{{url('css/dropzone/dropzone.min.css')}}"/>
 @endsection
 
 @section('sectionheader')
@@ -22,7 +22,7 @@
                 <h1 class="page-title"> {{isset($vendor) ? $vendor->company_name : ''}}</h1>
             </div>
 
-            <button class="btn-primary pull-right" data-toggle="modal" data-target="#headerModal">Edit Header</button>
+            <button class="btn-primary pull-right" data-toggle="modal" data-target="#headerModal">{{trans('ui.vendor_label_edit_header')}}</button>
         </div>
     </div>
 </section>
@@ -54,11 +54,14 @@
                                 <label for="city">{{trans('ui.vendor_label_city')}}</label>
                                 <input type="text" name="city" placeholder="" maxlength="200" class="form-control" value="{{isset($vendor) ? $vendor->city : ''}}"/>
 
-                                <label for="state/province">{{trans('ui.vendor_label_state_province')}}</label>
-                                <select id="state_province" name="state_province" class="form-control"></select>
+                                <label for="state_province_id">{{trans('ui.vendor_label_state_province')}}</label>
+                                <select id="state_province_id" name="state_province_id" class="form-control">
+                                    <option value=""></option>
+                                    <option value="">{{trans('ui.vendor_label_choose_country')}}</option>
+                                </select>
                                 
-                                <label for="country">{{trans('ui.vendor_label_country')}}</label>
-                                 <select id="country" name="country" class="form-control"></select>
+                                <label for="country_id">{{trans('ui.vendor_label_country')}}</label>
+                                 <select id="country_id" name="country_id" class="form-control"></select>
                                 
                                 <label for="zip_postal">{{trans('ui.vendor_label_zip_postal')}}</label>
 
@@ -100,16 +103,21 @@
                                 <h2 class="item-subhead">{{trans('ui.vendor_label_brands')}}</h2>
                                 
                                 <div class="col-xs-12 well">
-                                    @forelse($vendor->brands as $b)
-                                    {{$b->name}} <a href="#" class="deletebrand">Delete</a><br/>
-                                    @empty
-                                       <p>No Brands Defined</p> 
-                                    @endforelse
-                                    
-                                    <a href="#"><button class="btn-primary">Add Brand</button></a>
+                                    <div id="currentbrands">
+                                    @foreach($vendor->brands as $b)
+                                        <div class="divBrand">
+                                            <img src="{{url(config('app.vendor_storage'))}}/{{$b->logo_image_path}}"/>
+                                            <br/>
+                                            <a href="#" class="deletebrand" data-brandid="{{$b->id}}" data-imagename="{{$b->logo_image_path}}">{{trans('ui.button_delete')}}</a>
+                                        </div>
+                                    @endforeach
+                                        <p id="nobrands" style="display:none;">{{trans('ui.vendor_label_no_brands')}}</p>
+                                    </div>
+                                    <div id="brandUploader" class="dropzone"></div>
+                                    <a href="#"><button class="btn-primary">{{trans('ui.vendor_label_add_brand')}}</button></a>
                                 </div>
 
-                                <input type="submit" value="Update" class="btn-primary"/>
+                                <input type="submit" value="{{trans('ui.button_update')}}" class="btn-primary"/>
                                 <a href="{{url('/profile/')}}"><button class="btn">{{trans('ui.button_cancel')}}</button></a>
                             </div>
                         </div>
@@ -121,12 +129,12 @@
                     <div class="modal-content">
                          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                           <div class="modal-header">
-                            <h4 class="modal-title">Edit Profile Header</h4>
+                            <h4 class="modal-title">{{trans('ui.vendor_label_edit_profile_header')}}</h4>
                           </div>
                       
                           <div class="modal-body">
                             <label for="company name">{{trans('ui.vendor_label_company')}}</label>
-                            <input type="text" name="company_name" placeholder="Company Name" maxlength="200" class="form-control" value="{{isset($vendor) ? $vendor->company_name : ''}}"/>
+                            <input type="text" name="company_name" placeholder="{{trans('ui.vendor_label_company')}}" maxlength="200" class="form-control" value="{{isset($vendor) ? $vendor->company_name : ''}}"/>
 
                             <div class="logo-zone clearfix">
                                 <label for="logo">{{trans('ui.vendor_label_logo_image')}}</label>
@@ -140,7 +148,7 @@
 
                             <div class="logo-zone clearfix">
                                 <label for="background_image">{{trans('ui.vendor_label_background_image')}}</label>
-                                <p>For best results, crop your photo to 930px x 275px</p>
+                                <p>{{trans('messages.vendor_background_image_notice')}}</p>
                                 <div class="vendor-background"></div>
                                 
                                 <div class="logo-upload">
@@ -150,8 +158,8 @@
                           </div>
                       
                           <div class="modal-footer">
-                            <button type="button" class="btn" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn-primary">Save changes</button>
+                            <button type="button" class="btn" data-dismiss="modal">{{trans('ui.button_close')}}</button>
+                            <button type="button" class="btn-primary">{{trans('ui.button_save')}}</button>
                           </div>
                     </div><!-- /.modal-content -->
                   </div><!-- /.modal-dialog -->
@@ -170,74 +178,87 @@
 
 @section('scripts')
 
+    <script type="text/javascript" src="{{url('js/vendor/dropzone/dropzone.min.js')}}"></script>
     <script type="text/javascript" src="{{url('js/vendor/validation/jquery.validate.min.js')}}"></script>
+    <script type="text/javascript" src="{{url('js/fsh.common.js')}}"></script>
     <script type="text/javascript">
 
         $(document).ready(function()
         {
+            var $brandContainer = $("#currentbrands");
+            var $noBrands = $("#nobrands");
+            var vid = "{{\Session::get(config('app.session_key_vendor'))}}";
 
-            var $country = $("#country");
+            if($brandContainer.find(".divBrand").length === 0) { $noBrands.show(); }
 
-            fsh.common.doAjax("{{url('ajax/getcountries')}}", {}, "GET", true,
-                    function(data)
-                    {
-                        var html = "<option value=''></option>";
-                        $.each(data, function(idx, val)
-                        {
-                            //console.log(val);
-                            if(val.id == "{{isset($vendor) ? $vendor->country : ''}}")
+            $("#currentbrands").on("click", ".deletebrand", function(e)
+            {
+                e.preventDefault();
+                if(confirm("Delete Brand?"))
+                {
+                    var parentElem = $(this).parent();
+
+                    var headers = {
+                        "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                        "BID": $(this).data("brandid"),
+                        "VID": vid,
+                        "FNAME": $(this).data("imagename")
+                    };
+
+                    fsh.common.doAjax("{{url('/vendor/edit/deletebrand')}}", {}, "POST", true, headers,
+                            function (data)
                             {
-                                html += "<option value='" + val.id + "' selected='selected'>" + val.name + "</option>";
-                            }
-                            else
+                                parentElem.remove();
+                                if($brandContainer.find(".divBrand").length === 0) { $noBrands.show(); }
+                            },
+                            function (jqXhr, textStatus, errorThrown)
                             {
-                                html += "<option value='" + val.id + "'>" + val.name + "</option>";
+                                alert("Error deleting file");
                             }
+                    );
+                }
+            });
 
-                        });
-                        $country.html(html);
-                        $country.trigger("change");
-                    },
-                    function(jqXhr, textStatus, errorThrown)
+            Dropzone.options.brandUploader =
+            {
+                url: "{{url('/vendor/edit/addbrand')}}",
+                paramName: "brand_image_path",
+                uploadMultiple: false,
+                addRemoveLinks: false,
+                previewsContainer: null,
+                headers: { "X-CSRF-TOKEN": "{{ csrf_token() }}", "VID": vid},
+                init: function()
+                {
+                    //console.log("Dropzone init'ed");
+                    this.on("success", function(e, response)
                     {
+                        $noBrands.hide();
 
-                    }
-            );
+                        var imgSrc = "{{url('img/vendors/')}}/" + response.filename;
+                        $brandContainer.append("<div class='divBrand'><img src='" + imgSrc + "'/><br/><a href='#' class='deletebrand' data-brandid='" + response.id + "' data-imagename='" + response.filename + "'>Delete</a></div>");
+                        this.removeAllFiles();
+                        //console.log(response);
+                    });
+                }
+            };
+
+            var $country = $("#country_id");
+            var $stateProvince = $("#state_province_id");
+
+            fsh.common.getCountries("{{url('ajax/getcountries')}}", $country, "{{isset($vendor) ? $vendor->country_id : ''}}");
 
             $country.on("change", function(e)
             {
                 if($(this).val() === "")
                 {
-                    $("#state_province option[value != '']").remove();
+                    $("#state_province_id option[value != '']").remove();
+                    $stateProvince.html("<option value=\"\"></option><option value=\"\">{{trans('ui.vendor_label_choose_country')}}</option>");
                 }
                 else
                 {
-                    fsh.common.doAjax("{{url('ajax/getstateprovincesforcountry')}}/" + $(this).val(), {}, "GET", true,
-                            function(data)
-                            {
-                                //console.log(data);
-                                var html = "<option value=''></option>";
-                                $.each(data, function(idx, val)
-                                {
-                                    //console.log(val);
-                                    if(val.id == "{{isset($vendor) ? $vendor->state_province : ''}}")
-                                    {
-                                        html += "<option value='" + val.id + "' selected='selected'>" + val.name + "</option>";
-                                    }
-                                    else
-                                    {
-                                        html += "<option value='" + val.id + "'>" + val.name + "</option>";
-                                    }
-
-                                });
-                                $("#state_province").html(html);
-                            },
-                            function(jqXhr, textStatus, errorThrown)
-                            {
-
-                            }
-                    );
-
+                    fsh.common.getStateProvincesForCountry("{{url('ajax/getstateprovincesforcountry')}}/" + $(this).val(),
+                                                            $stateProvince,
+                                                            "{{isset($vendor) ? $vendor->state_province_id : ''}}");
                 }
 
                 e.preventDefault();
@@ -249,8 +270,8 @@
                 rules:
                 {
                     company_name: { required: true, maxlength: 200 },
-                    country: { required: true },
-                    state_province: { required: true },
+                    country_id: { required: true },
+                    state_province_id: { required: true },
                     address1: { required: true, maxlength: 200 },
                     address2: { required: true, maxlength: 200 },
                     city: { required: true, maxlength: 200 },

@@ -226,7 +226,7 @@
                    
 
                     <input type="submit" class="btn-primary" value="Add / Update"/>
-                    <a href="{{url('productdetail', $product->id)}}" class="btn">Cancel</a>
+                    <a href="{{url('product/detail', $product->id)}}" class="btn">Cancel</a>
 
                 </div>
             </div> <!-- end of container -->

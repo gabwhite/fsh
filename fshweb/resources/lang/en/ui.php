@@ -48,6 +48,8 @@ return [
     'button_edit_header' =>  'Edit Header',
     'button_back' => 'Back',
     'button_save' => 'Save Changes',
+    'button_delete' => 'Delete',
+    'button_close' => 'Close',
 
     'general_label_yes' => 'Yes',
     'general_label_no' => 'No',
@@ -90,9 +92,12 @@ return [
     'vendor_label_about_text' => 'About Us',
     'vendor_label_brands' => 'Our Brands',
     'vendor_label_contact' => 'Contact Vendor',
-    'vendor_label_add_brands' => 'Add New Brands',
+    'vendor_label_add_brand' => 'Add Brand',
+    'vendor_label_no_brands' => 'No Brands Defined',
     'vendor_label_edit_logo' => 'Edit Logo',
     'vendor_label_edit_background' => 'Edit Background',
+    'vendor_label_edit_header' => 'Edit Header',
+    'vendor_label_edit_profile_header' => 'Edit Profile Header',
     'vendor_label_choose_country' => 'Please choose a country first',
 
 

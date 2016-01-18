@@ -47,14 +47,14 @@
                         </div>
 
                         <div>
-                            <label for="country">{{trans('ui.vendor_label_country')}}</label>
-                            <select id="country" name="country" class="form-control">
+                            <label for="country_id">{{trans('ui.vendor_label_country')}}</label>
+                            <select id="country_id" name="country_id" class="form-control">
                             </select>
                         </div>
 
                         <div>
-                            <label for="state_province">{{trans('ui.vendor_label_state_province')}}</label>
-                            <select id="state_province" name="state_province" class="form-control">
+                            <label for="state_province_id">{{trans('ui.vendor_label_state_province')}}</label>
+                            <select id="state_province_id" name="state_province_id" class="form-control">
                                 <option value=""></option>
                                 <option value="">{{trans('ui.vendor_label_choose_country')}}</option>
                             </select>
@@ -139,7 +139,7 @@
         $(document).ready(function()
         {
 
-            fsh.common.doAjax("{{url('ajax/getcountries')}}", {}, "GET", true,
+            fsh.common.doAjax("{{url('ajax/getcountries')}}", {}, "GET", true, {},
                 function(data)
                 {
                     var html = "<option value=''></option>";
@@ -148,7 +148,7 @@
                         //console.log(val);
                         html += "<option value='" + val.id + "'>" + val.name + "</option>";
                     });
-                    $("#country").html(html);
+                    $("#country_id").html(html);
                 },
                 function(jqXhr, textStatus, errorThrown)
                 {
@@ -156,7 +156,7 @@
                 }
             );
 
-            $("#country").on("change", function(e)
+            $("#country_id").on("change", function(e)
             {
                 if($(this).val() === "")
                 {
@@ -164,7 +164,7 @@
                 }
                 else
                 {
-                    fsh.common.doAjax("{{url('ajax/getstateprovincesforcountry')}}/" + $(this).val(), {}, "GET", true,
+                    fsh.common.doAjax("{{url('ajax/getstateprovincesforcountry')}}/" + $(this).val(), {}, "GET", true, {},
                         function(data)
                         {
                             //console.log(data);
@@ -174,7 +174,7 @@
                                 //console.log(val);
                                 html += "<option value='" + val.id + "'>" + val.name + "</option>";
                             });
-                            $("#state_province").html(html);
+                            $("#state_province_id").html(html);
                         },
                         function(jqXhr, textStatus, errorThrown)
                         {
@@ -197,8 +197,8 @@
                     password: { required: true, maxlength: 25, minlength: 6 },
                     password_confirmation: { equalTo: "#password", maxlength: 25, minlength: 6 },
                     company_name: { required: true, maxlength: 200 },
-                    country: { required: true },
-                    state_province: { required: true },
+                    country_id: { required: true },
+                    state_province_id: { required: true },
                     address1: { required: true, maxlength: 200 },
                     address2: { required: true, maxlength: 200 },
                     city: { required: true, maxlength: 200 },
