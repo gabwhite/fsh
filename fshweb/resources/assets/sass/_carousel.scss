@@ -1,6 +1,52 @@
 /*==================================================
-=            Bootstrap Carousel Styling            =
+=            Flexslider Carousel Styling & Brand uploads            =
 ==================================================*/
+
+/*----------  Upload new Brand  ----------*/
+
+
+
+#brandUploader.dropzone {
+    min-height: 150px;
+    border: 1px solid $border !important;
+    background: white;
+    padding: 20px 20px;
+    margin-bottom: 30px;
+    background: url(../../public/img/icons/upload-image.svg) no-repeat;
+    background-size: 60px;
+    background-position: center 30px;
+    position: relative;
+
+    .dz-message {
+    	margin-top: 70px;
+    }
+}
+
+.divBrand {
+	width: 32.9%;
+	height: 150px;
+	border: 1px solid $border;
+	display: inline-block;
+	position: relative;
+}
+
+a.deletebrand {
+	display: inline-block;
+	width: 33.333%;
+	color: $primary;
+	font-weight: 700;
+	position: absolute;
+	bottom: 0;
+	right: 5px;
+	margin: 10px auto;
+
+	img {
+		width: 15px;
+		margin-right: 5px;
+	}
+}
+
+/*----------  View The slider  ----------*/
 
 ul.slides {
 	margin-left: -5%;
@@ -15,5 +61,13 @@ ul.slides {
 		margin: 0 auto;
 		padding: 10px 0;
 	}
+}
+
+.flex-direction-nav a.flex-prev{
+	background: url(../../public/img/icons/chevron-left.svg) no-repeat;
+}
+
+.flex-direction-nav a.flex-next{
+	background: url(../../public/img/icons/chevron-right.svg) no-repeat;
 }
 /*=====  End of Bootstrap Carousel Styling  ======*/

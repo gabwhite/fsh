@@ -73,8 +73,7 @@ fsh.search = (function ($, document)
                 $.each(jsonresult, function(idx, val)
                 {
                     //console.log(val);
-                    tableRows += "<tr><td><a href='" + _detailUrl + "/" + val.id + "'>"
-                                + val.name + "</a></td><td>" + val.brand + "</td><td></td></tr>";
+                    tableRows += "<div class='col-xs-12 search-row'><a href='" + _detailUrl + "/" + val.id + "'>" + val.name + "</a><span class='brand'>" + val.brand + "</span></div>";
                 });
 
                 $resultTable.html(tableRows);
