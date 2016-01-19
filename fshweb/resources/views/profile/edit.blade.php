@@ -10,11 +10,11 @@
 <section class='clearfix container-wrap profile-head'>
     <div class="container">
         <div class="col-xs-12 col-md-4">
-          @if($profile->avatar_image_path)
+          @if($profile && $profile->avatar_image_path)
               <img id="imgCurrentAvatar" src="{{url(config('app.avatar_storage') . '/' . $profile->avatar_image_path)}}" title="{{trans('ui.user_label_currentavatar')}}" width="200" height="200"/>
           @else
               <img id="imgCurrentAvatar" src="{{url(config('app.avatar_none'))}}" title="{{trans('ui.user_label_noavatar')}}" width="200" height="200"/>
-          @endif      
+          @endif
         </div>
 
         <div class="col-xs-12 col-md-8">  
