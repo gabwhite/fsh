@@ -224,9 +224,13 @@
 
                     </div>  
                    
-
-                    <input type="submit" class="btn-primary" value="Add / Update"/>
-                    <a href="{{url('product/detail', $product->id)}}" class="btn">Cancel</a>
+                    <div class="btn-row row">
+                        <div class="col-xs-12">
+                            <input type="submit" class="btn-primary" value="Add / Update"/>
+                            <a href="{{url('product/detail', $product->id)}}"><button class="btn">Cancel</button></a>
+                        </div>
+                    </div>
+                        
 
                 </div>
             </div> <!-- end of container -->

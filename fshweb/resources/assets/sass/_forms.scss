@@ -42,6 +42,11 @@ select.search-dropdown {
 	}
 }
 
+select.drop-sm {
+	@extend select.search-dropdown;
+	height:35px;
+}
+
 /*----------  Buttons  ----------*/
 .btn-primary {
 	@include btn;

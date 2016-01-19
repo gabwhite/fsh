@@ -1,6 +1,17 @@
 /*======================================
 =            Search Results            =
 ======================================*/
+
+.item-thumb {
+	width: 80px;
+	height: 80px;
+	border: 1px solid $primary;
+	border-radius: 50%;
+}
+
+
+
+
 .search-row {
 	padding: 20px 0;
 	border-bottom: 1px solid $border;
@@ -23,6 +34,37 @@
 	}
 }
 
+/*----------  Sort By  ----------*/
 
+
+.sort-menu {
+	width: 100%;
+	border-bottom: 2px solid $primary;
+	padding: 0;
+	padding-bottom: 5px;
+	margin-bottom: 15px;
+
+	.btn.btn-sm {
+		margin: 0;
+		height: 34px;
+	}
+}
+
+h2.sort-title {
+	font-weight: 600;
+	color: $primary;
+	float: left;
+	margin: 6px 10px 0 0;
+}
+
+/*----------  Keyword Search  ----------*/
+
+.keyword-search{
+	border-bottom: 1px solid $border;
+	
+	.btn {
+		margin-top: 0;
+	}
+} 
 
 /*=====  End of Search Results  ======*/

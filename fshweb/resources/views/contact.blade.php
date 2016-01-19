@@ -45,8 +45,8 @@
                             <textarea class="form-control" name="contact_message" rows="4"></textarea>
                         </div>
 
-                        <div>
-                            <button type="submit" class="btn btn-primary">{{trans('ui.button_submit')}}</button>
+                        <div class="text-center">
+                            <button type="submit" class="btn-primary">{{trans('ui.button_submit')}}</button>
                         </div>
 
 

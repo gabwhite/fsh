@@ -12,7 +12,7 @@
         <div class="col-xs-12 vendor-profile">
 
             @if($vendor->logo_image_path)
-                <img id="imgCurrentAvatar" src="{{url(config('app.vendor_storage') . '/' . $vendor->logo_image_path)}}" title="{{trans('ui.user_label_currentavatar')}}" width="200" height="200"/>
+                <img id="imgCurrentAvatar" src="{{url(config('app.vendor_storage') . '/' . $vendor->logo_image_path)}}" title="{{trans('ui.user_label_currentavatar')}}"/>
             @else
                 <img id="imgCurrentAvatar" src="{{url(config('app.avatar_none'))}}" title="{{trans('ui.user_label_noavatar')}}" width="200" height="200"/>
             @endif
@@ -53,6 +53,9 @@
                                 
                                 <label for="city">{{trans('ui.vendor_label_city')}}</label>
                                 <input type="text" name="city" placeholder="" maxlength="200" class="form-control" value="{{isset($vendor) ? $vendor->city : ''}}"/>
+                                
+                                <label for="country_id">{{trans('ui.vendor_label_country')}}</label>
+                                 <select id="country_id" name="country_id" class="form-control"></select>
 
                                 <label for="state_province_id">{{trans('ui.vendor_label_state_province')}}</label>
                                 <select id="state_province_id" name="state_province_id" class="form-control">
@@ -60,8 +63,7 @@
                                     <option value="">{{trans('ui.vendor_label_choose_country')}}</option>
                                 </select>
                                 
-                                <label for="country_id">{{trans('ui.vendor_label_country')}}</label>
-                                 <select id="country_id" name="country_id" class="form-control"></select>
+                               
                                 
                                 <label for="zip_postal">{{trans('ui.vendor_label_zip_postal')}}</label>
 

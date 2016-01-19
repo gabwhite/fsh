@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="77px" height="13px" viewBox="0 0 77 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.4.4 (17249) - http://www.bohemiancoding.com/sketch -->
+    <title>Star Rating</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="01f.-Search-Desktop--Sort-by" sketch:type="MSArtboardGroup" transform="translate(-570.000000, -1024.000000)" fill="#FFCE0D">
+            <g id="03.-Products-Copy-5" sketch:type="MSLayerGroup" transform="translate(548.000000, 345.000000)">
+                <g id="Black-Lumpfish-Caviar" transform="translate(22.000000, 603.000000)" sketch:type="MSShapeGroup">
+                    <g id="Star-Rating" transform="translate(0.000000, 76.000000)">
+                        <polygon id="Star-1" points="6.5 10.2916667 2.67939586 12.4118666 3.40906632 7.92121108 0.318132644 4.74091118 4.58969793 4.08573337 6.5 0 8.41030207 4.08573337 12.6818674 4.74091118 9.59093368 7.92121108 10.3206041 12.4118666 "></polygon>
+                        <polygon id="Star-1-Copy" points="23.5 10.2916667 19.6793959 12.4118666 20.4090663 7.92121108 17.3181326 4.74091118 21.5896979 4.08573337 23.5 0 25.4103021 4.08573337 29.6818674 4.74091118 26.5909337 7.92121108 27.3206041 12.4118666 "></polygon>
+                        <polygon id="Star-1-Copy-2" points="39.5 10.2916667 35.6793959 12.4118666 36.4090663 7.92121108 33.3181326 4.74091118 37.5896979 4.08573337 39.5 0 41.4103021 4.08573337 45.6818674 4.74091118 42.5909337 7.92121108 43.3206041 12.4118666 "></polygon>
+                        <polygon id="Star-1-Copy-3" points="55.5 10.2916667 51.6793959 12.4118666 52.4090663 7.92121108 49.3181326 4.74091118 53.5896979 4.08573337 55.5 0 57.4103021 4.08573337 61.6818674 4.74091118 58.5909337 7.92121108 59.3206041 12.4118666 "></polygon>
+                        <polygon id="Star-1-Copy-3" points="70.5 10.2916667 66.6793959 12.4118666 67.4090663 7.92121108 64.3181326 4.74091118 68.5896979 4.08573337 70.5 0 72.4103021 4.08573337 76.6818674 4.74091118 73.5909337 7.92121108 74.3206041 12.4118666 "></polygon>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
