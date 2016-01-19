@@ -337,7 +337,7 @@
 
                     <div class="col-xs-12 col-md-12 detail-row">
                         <label for="email">{{trans('ui.user_label_email')}}</label>
-                        <input type="text" name="email" placeholder="" class="form-control" value="{{Auth::user()->email}}" maxlength="100"/> 
+                        <input type="text" name="email" placeholder="" class="form-control" value="{{(Auth::check()) ? Auth::user()->email : ''}}" maxlength="100"/>
                     </div>
                     
                     <div class="col-xs-12 col-md-12 detail-row">
