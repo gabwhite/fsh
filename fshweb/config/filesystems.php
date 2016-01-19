@@ -50,17 +50,17 @@ return [
 
         'avatars' => [
             'driver' => 'local',
-            'root'   => public_path('img/avatars'),
+            'root'   => public_path(config('app.avatar_storage')),
         ],
 
         'vendors' => [
             'driver' => 'local',
-            'root'   => public_path('img/vendors'),
+            'root'   => public_path(config('app.vendor_storage')),
         ],
 
         'imports' => [
             'driver' => 'local',
-            'root' => storage_path('app/imports'),
+            'root' => storage_path(config('app.csv_storage')),
         ],
 
         'ftp' => [

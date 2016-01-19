@@ -75,61 +75,85 @@ class ProfileController extends Controller
 
         if(!is_null($user))
         {
-            $action = $request->input('action');
-            if(isset($action) && !is_null($action))
+            try
             {
-                $up = $user->userProfile;
-                $uploader = new UploadHandler();
-
-                if($action == 'UPDATE')
+                $action = $request->header('ACTION');
+                if(isset($action) && !is_null($action))
                 {
-                    if ($request->hasFile('avatar_image_path'))
+                    $up = $user->userProfile;
+                    $uploader = new UploadHandler();
+
+                    if($action == 'UPDATE')
                     {
-                        $avatarFilename = null;
-
-                        if (!is_null($up) && isset($up->avatar_image_path))
+                        if ($request->hasFile('avatar_image_path'))
                         {
-                            $avatarFilename = $up->avatar_image_path;
+                            $avatarFilename = null;
+
+                            if (!is_null($up) && isset($up->avatar_image_path))
+                            {
+                                $avatarFilename = $up->avatar_image_path;
+                            }
+
+                            $newFilename = $uploader->uploadAvatar($request->file('avatar_image_path'), $avatarFilename);
+
+                            if(!is_null($up))
+                            {
+                                $up->avatar_image_path = $newFilename;
+                                $up->save();
+                            }
+                            else
+                            {
+                                // UserProfile doesn't exist, create a row
+                                $input = ['user_id' => $user->id, 'avatar_image_path' => $newFilename];
+                                $user->userProfile()->create($input);
+                            }
+
+                            return response()->json([
+                                'error' => false,
+                                'code'  => 200,
+                                'filename' => $newFilename
+                            ], 200);
                         }
-
-                        $newFilename = $uploader->uploadAvatar($request->file('avatar_image_path'), $avatarFilename);
-
-                        if(!is_null($up))
+                    }
+                    else if($action == 'DELETE')
+                    {
+                        // Remove existing avatar
+                        if (!is_null($up))
                         {
-                            $up->avatar_image_path = $newFilename;
+                            $uploader->removeAvatar($up->avatar_image_path);
+
+                            $up->avatar_image_path = null;
                             $up->save();
                         }
-                        else
-                        {
-                            // UserProfile doesn't exist, create a row
-                            $input = ['user_id' => $user->id, 'avatar_image_path' => $newFilename];
-                            $user->userProfile()->create($input);
-                        }
 
-                        return view('profile.editavatar')->with('profile', $up)->with('isCropMode', true);
+                        return response()->json([
+                            'error' => false,
+                            'code'  => 200
+                        ], 200);
                     }
-                }
-                else if($action == 'DELETE')
-                {
-                    // Remove existing avatar
-                    if (!is_null($up))
+                    else if($action == 'CROP')
                     {
-                        $uploader->removeAvatar($up->avatar_image_path);
+                        $cropData = explode(';', $request->header('cropdata'));
+                        $uploader->cropAvatar($up->avatar_image_path, $cropData);
 
-                        $up->avatar_image_path = null;
-                        $up->save();
+                        return response()->json([
+                            'error' => false,
+                            'code'  => 200,
+                            'filename' => $up->avatar_image_path
+                        ], 200);
                     }
-
-                    return redirect('profile/avatar');
-                }
-                else if($action == 'CROP')
-                {
-                    $cropData = explode(';', $request->input('cropdata'));
-                    $uploader->cropAvatar($up->avatar_image_path, $cropData);
-
-                    return redirect('profile/avatar');
                 }
             }
+            catch(Exception $ex)
+            {
+                return response()->json([
+                    'error' => true,
+                    'message' => 'Server error while uploading/saving/deleting',
+                    'code' => 500
+                ], 500);
+            }
+
+
         }
 
         return redirect('/');

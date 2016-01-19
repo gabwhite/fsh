@@ -56,6 +56,7 @@ Route::group(['middleware' => 'auth'], function()
         Route::post('/vendor/edit/addbrand', 'VendorController@addBrand');
         Route::post('/vendor/edit/deletebrand', 'VendorController@deleteBrand');
         Route::post('/vendor/edit/addasset', 'VendorController@addAsset');
+        Route::post('/vendor/edit/variableupdate', 'VendorController@updateVendorVariable');
     });
 
 
