@@ -117,8 +117,8 @@ class CsvProductImporter implements iProductImporter
                         $product->uniquekey = (isset($row[8])) ? $row[8] : $row[11]; // MPC or GTIN
                     }
 
-                    $product->name =                $row[3];
-                    $product->brand =               $row[4];
+                    $product->name =                ucfirst(mb_strtolower($row[3]));
+                    $product->brand =               ucfirst(mb_strtolower($row[4]));
                     $product->pack =                $row[5];
                     $product->size =                $row[6];
                     $product->uom =                 $row[7];

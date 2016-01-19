@@ -105,8 +105,8 @@ class DataAccessLayer
             $isAdd = true;
         }
 
-        $product->name = $data['name'];
-        $product->brand = (isset($data['brand']) ? $data['brand'] : null);
+        $product->name = ucfirst(mb_strtolower($data['name']));
+        $product->brand = (isset($data['brand']) ? ucfirst(mb_strtolower($data['brand'])) : null);
         $product->pack = (isset($data['pack']) ? $data['pack'] : null);
         $product->size = (isset($data['size']) ? $data['size'] : null);
         $product->uom = (isset($data['uom']) ? $data['uom'] : null);
