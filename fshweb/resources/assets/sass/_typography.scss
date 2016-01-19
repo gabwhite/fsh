@@ -403,6 +403,32 @@ h2 {
     color: red;
 }
 
+/*----------  Pagination Styles  ----------*/
 
+ul.pagination p {
+    float: left;
+    font-weight: 600;
+    margin: 5px 0 0 0;
+}
+
+ul.pagination li.active span{
+    color: $primary;
+    background: none;
+    font-weight: 600;
+    border: 0;
+}
+
+ul.pagination li a {
+    border: 0;
+    font-weight: 600;
+    color: $body;
+    font-size: 16px;
+    padding: 6px 8px;
+
+    &:hover, &:active, &:focus {
+        color: $primary;
+        background: none;
+    }
+}
 /*=====  End of Typography for the entire site  ======*/
 	

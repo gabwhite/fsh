@@ -8808,6 +8808,36 @@ h2 {
   color: red;
 }
 
+/*----------  Pagination Styles  ----------*/
+
+ul.pagination p {
+  float: left;
+  font-weight: 600;
+  margin: 5px 0 0 0;
+}
+
+ul.pagination li.active span {
+  color: #de5328;
+  background: none;
+  font-weight: 600;
+  border: 0;
+}
+
+ul.pagination li a {
+  border: 0;
+  font-weight: 600;
+  color: #4b4a4a;
+  font-size: 16px;
+  padding: 6px 8px;
+}
+
+ul.pagination li a:hover,
+ul.pagination li a:active,
+ul.pagination li a:focus {
+  color: #de5328;
+  background: none;
+}
+
 /*=====  End of Typography for the entire site  ======*/
 
 /*=========================================
@@ -8848,7 +8878,8 @@ label {
 
 /*----------  Dropdown <select> elements  ----------*/
 
-select.search-dropdown {
+select.search-dropdown,
+select.drop-sm {
   border: 1px solid #c2c2c2;
   border-radius: 3px;
   font-size: 16px;
@@ -8859,11 +8890,16 @@ select.search-dropdown {
 }
 
 @media (min-width: 768px) {
-  select.search-dropdown {
+  select.search-dropdown,
+  select.drop-sm {
     height: 50px;
     width: 20%;
     margin: 0 10px;
   }
+}
+
+select.drop-sm {
+  height: 35px;
 }
 
 /*----------  Buttons  ----------*/
@@ -8888,6 +8924,15 @@ select.search-dropdown {
   -o-transition: all ease 0.5s;
   background: #4dd371;
   border: 2px solid #2fbe55;
+}
+
+.btn-primary:active,
+.btn-sm:active,
+.btn-group-sm > .btn:active,
+.btn-primary:focus,
+.btn-sm:focus,
+.btn-group-sm > .btn:focus {
+  outline: 0;
 }
 
 @media (min-width: 768px) {
@@ -8937,6 +8982,11 @@ select.search-dropdown {
   background: #de5328;
   border: 2px solid #a13919;
   color: white;
+}
+
+.btn:active,
+.btn:focus {
+  outline: 0;
 }
 
 @media (min-width: 768px) {
@@ -9107,6 +9157,7 @@ a.search {
 
 .item-header {
   text-align: left;
+  margin-top: 30px;
 }
 
 .item-header .container,
@@ -9274,11 +9325,24 @@ ul.slides {
   margin-top: 20px;
 }
 
+/*----------  Centered buttons  ----------*/
+
+.modal.centered .modal-footer {
+  text-align: center;
+}
+
 /*=====  End of Modal Styling  ======*/
 
 /*======================================
 =            Search Results            =
 ======================================*/
+
+.item-thumb {
+  width: 80px;
+  height: 80px;
+  border: 1px solid #de5328;
+  border-radius: 50%;
+}
 
 .search-row {
   padding: 20px 0;
@@ -9302,4 +9366,77 @@ ul.slides {
   padding: 5px;
 }
 
+/*----------  Sort By  ----------*/
+
+.sort-menu {
+  width: 100%;
+  border-bottom: 2px solid #de5328;
+  padding: 0;
+  padding-bottom: 5px;
+  margin-bottom: 15px;
+}
+
+.sort-menu .btn.btn-sm,
+.sort-menu .btn-group-sm > .btn {
+  margin: 0;
+  height: 34px;
+}
+
+h2.sort-title {
+  font-weight: 600;
+  color: #de5328;
+  float: left;
+  margin: 6px 10px 0 0;
+}
+
+/*----------  Keyword Search  ----------*/
+
+.keyword-search {
+  border-bottom: 1px solid #c2c2c2;
+}
+
+.keyword-search .btn {
+  margin-top: 0;
+}
+
 /*=====  End of Search Results  ======*/
+
+/*======================================
+=            Rating Styings            =
+======================================*/
+
+/*----------  Search page rating  ----------*/
+
+.star-rating {
+  height: 25px;
+  margin-top: 10px;
+}
+
+/*----------  Item Detail Rating  ----------*/
+
+.star-detail {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.star-detail img {
+  height: 20px;
+}
+
+/*----------  Submit rating  ----------*/
+
+.rate-this {
+  text-align: center;
+  margin-top: 30px;
+}
+
+.rate-this .each-star {
+  background: url(../../public/img/icons/stars-unrated.svg) no-repeat;
+  background-size: cover;
+  width: 35px;
+  height: 35px;
+  display: inline-block;
+  margin: 0 2px;
+}
+
+/*=====  End of Rating Styings  ======*/

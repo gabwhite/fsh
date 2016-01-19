@@ -43,6 +43,7 @@ return [
     'button_update' => 'Update',
     'button_cancel' => 'Cancel',
     'button_submit' => 'Submit',
+    'button_submit_rating' => 'Submit Rating',
     'button_addupdate' => 'Add / Update',
     'button_edit' => 'Edit',
     'button_edit_header' =>  'Edit Header',

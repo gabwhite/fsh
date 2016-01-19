@@ -49,39 +49,67 @@
                 </div>
 
                 <div class="col-xs-12 col-md-8">
+                    <div class="col-xs-12 sort-menu">
+                        <h2 class="sort-title">Sort by:</h2>
+                        <select name="sortby" id="sortby" class="drop-sm">
+                            <option value="brand">Brand</option>
+                            <option value="pack">Pack</option>
+                            <option value="units">Units</option>
+                            <option value="vendors">Vendors</option>
+                        </select>
+
+                        <select name="View all" id="viewall" class="drop-sm">
+                            <option value="view10">View 10</option>
+                            <option value="view25">View 25</option>
+                            <option value="view50">View 50</option>
+                            <option value="viewall">View all</option>
+                        </select>
+
+                        <button class="btn btn-sm">Sort Results</button>
+                    </div>
                     <div class="col-xs-12 well">
                         <form>
 
-                            <div class="row">
-                                <div class="col-md-9">
+                            <div class="row keyword-search">
+                                <div class="col-xs-8">
                                     <input type="text" name="tbSearchQuery" id="tbSearchQuery" autocomplete="off" placeholder="{{trans('ui.search_placeholder')}}" value="{{$query or ''}}" class="form-control"/>
                                 </div>
-                                <div class="col-md-3">
-                                    <a href="#" id="hlSearchButton" class="btn btn-primary">{{trans('ui.button_search')}}</a>
+                                <div class="col-xs-4">
+                                    <a href="#" id="hlSearchButton"><button class="btn">{{trans('ui.button_search')}}</button></a>
                                 </div>
                             </div>
 
                         </form>
 
-                        <table id="product_list" width="100%" class="table">
-                        
-                            <tbody>
-                            @if (isset($searchresults))
-                                @foreach($searchresults as $r)
-                                    <tr>
-                                        <td>
-                                            <h4><a href="{{url('/product/detail', $r->id)}}">{{$r->name}}</a></h4>
-                                        </td>
-                                        <td class="brand">{{$r->brand}}</td>
-                                    </tr>
-                                @endforeach
-                            @endif
-                            </tbody>
-                        </table>
+                        <div id="product_list">
+                            <!-- Products from fsh.search.js populated here -->
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12">
+                               <nav class="text-center">
+                                 <ul class="pagination">
+                                    <p>Page</p>
+                                   <li>
+                                     <a href="#" aria-label="Previous">
+                                       <span aria-hidden="true">&laquo;</span>
+                                     </a>
+                                   </li>
+                                   <li><a href="#">1</a></li>
+                                   <li><a href="#">2</a></li>
+                                   <li><a href="#">3</a></li>
+                                   <li><a href="#">4</a></li>
+                                   <li><a href="#">5</a></li>
+                                   <li>
+                                     <a href="#" aria-label="Next">
+                                       <span aria-hidden="true">&raquo;</span>
+                                     </a>
+                                   </li>
+                                 </ul>
+                               </nav> 
+                            </div>
+                        </div>
                     </div>
-
-                    
-
                 </div>
 
             </div>

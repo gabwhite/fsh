@@ -12,14 +12,14 @@
         <div class="col-xs-12 vendor-profile">
 
             @if($vendor->logo_image_path)
-                <img id="imgCurrentAvatar" src="{{url(config('app.vendor_storage') . '/' . $vendor->logo_image_path)}}" title="{{trans('ui.user_label_currentavatar')}}" width="200" height="200"/>
+                <img id="imgCurrentAvatar" src="{{url(config('app.vendor_storage') . '/' . $vendor->logo_image_path)}}" title="{{trans('ui.user_label_currentavatar')}}"/>
             @else
                 <img id="imgCurrentAvatar" src="{{url(config('app.avatar_none'))}}" title="{{trans('ui.user_label_noavatar')}}" width="200" height="200"/>
             @endif
            
                     
             <div class="col-md-8 col-md-offset-2">
-                <h1 class="page-title"> {{isset($vendor) ? $vendor->company_name : ''}}</h1>
+                <h1 id="h1CompanyName" class="page-title"> {{isset($vendor) ? $vendor->company_name : ''}}</h1>
             </div>
 
             <button class="btn-primary pull-right" data-toggle="modal" data-target="#headerModal">{{trans('ui.vendor_label_edit_header')}}</button>
@@ -53,6 +53,9 @@
                                 
                                 <label for="city">{{trans('ui.vendor_label_city')}}</label>
                                 <input type="text" name="city" placeholder="" maxlength="200" class="form-control" value="{{isset($vendor) ? $vendor->city : ''}}"/>
+                                
+                                <label for="country_id">{{trans('ui.vendor_label_country')}}</label>
+                                 <select id="country_id" name="country_id" class="form-control"></select>
 
                                 <label for="state_province_id">{{trans('ui.vendor_label_state_province')}}</label>
                                 <select id="state_province_id" name="state_province_id" class="form-control">
@@ -60,8 +63,7 @@
                                     <option value="">{{trans('ui.vendor_label_choose_country')}}</option>
                                 </select>
                                 
-                                <label for="country_id">{{trans('ui.vendor_label_country')}}</label>
-                                 <select id="country_id" name="country_id" class="form-control"></select>
+                               
                                 
                                 <label for="zip_postal">{{trans('ui.vendor_label_zip_postal')}}</label>
 
@@ -143,7 +145,7 @@
                       
                           <div class="modal-body">
                             <label for="company name">{{trans('ui.vendor_label_company')}}</label>
-                            <input type="text" name="company_name" placeholder="{{trans('ui.vendor_label_company')}}" maxlength="200" class="form-control" value="{{isset($vendor) ? $vendor->company_name : ''}}"/>
+                            <input type="text" id="company_name" name="company_name" placeholder="{{trans('ui.vendor_label_company')}}" maxlength="200" class="form-control" value="{{isset($vendor) ? $vendor->company_name : ''}}"/>
 
                             <div class="logo-zone clearfix">
                                 <label for="logo">{{trans('ui.vendor_label_logo_image')}}</label>
@@ -173,7 +175,7 @@
                       
                           <div class="modal-footer">
                             <button type="button" class="btn" data-dismiss="modal">{{trans('ui.button_close')}}</button>
-                            <button type="button" class="btn-primary">{{trans('ui.button_save')}}</button>
+                            <a href="#" id="hlSaveHeader"><button type="button" class="btn-primary">{{trans('ui.button_save')}}</button></a>
                           </div>
                     </div><!-- /.modal-content -->
                   </div><!-- /.modal-dialog -->
@@ -202,6 +204,8 @@
             var $brandContainer = $("#currentbrands");
             var $logoImage = $("#imgCurrentAvatar");
             var $logoImageModal = $("#logoImage");
+            var $companyNameHeader = $("#h1CompanyName");
+            var $companyNameTextbox = $("#company_name");
 
             var $noBrands = $("#nobrands");
             var vid = "{{\Session::get(config('app.session_key_vendor'))}}";
@@ -303,6 +307,24 @@
                 e.preventDefault();
             });
 
+            $("#hlSaveHeader").on("click", function(e)
+            {
+                e.preventDefault();
+
+                var headers = { "X-CSRF-TOKEN": csrf };
+
+                fsh.common.doAjax("{{url('/vendor/edit/variableupdate')}}", { "VID": vid, "company_name": $companyNameTextbox.val()}, "POST", true, headers,
+                    function(result)
+                    {
+                        $companyNameHeader.html($companyNameTextbox.val());
+                        $("#headerModal").modal("hide");
+                    },
+                    function()
+                    {
+                        alert("Error updating header info");
+                    });
+
+            });
 
             $("#form1").validate({
                 errorClass: "validationError",

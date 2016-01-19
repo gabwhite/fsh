@@ -17,7 +17,7 @@
            
                 <a href="{{url('vendor/detail', $product->vendor_id)}}"><button class="btn-primary">{{trans('ui.product_label_goto_vendor_profile')}}</button></a>
            
-                <a href="javascript:alert('Coming Soon');"><button class="btn">{{trans('ui.product_label_request_sample')}}</button></a>
+                <button data-target="#request-sample" data-toggle="modal" class="btn">{{trans('ui.product_label_request_sample')}}</button>
             </div>
         </div>
 
@@ -41,15 +41,17 @@
 @section('content')
     <div class="container">
         <div class="col-xs-12 well">  
-            <div class="col-xs-12 col-md-4">
-                <img src="http://placehold.it/200x300" alt="">
+            <div class="col-xs-12 col-md-4 reset-left">
+                <img src="../../img/no-photo-avail.svg" alt="item not pictured">
+                <div class="star-detail">
+                    <img src="../../img/icons/star.svg" alt="star-rating">
+                </div>
             </div>
 
             <div class="col-xs-12 col-md-8">
-                <h3>{{trans('ui.product_label_description')}}</h3>
                 <h3>{{$product->description}}</h3>
 
-                <button class="btn">{{trans('ui.product_label_rate_product')}}</button>
+                <button data-target="#rate-product" data-toggle="modal" class="btn">{{trans('ui.product_label_rate_product')}}</button>
             </div>
         </div>
     </div>
@@ -275,7 +277,107 @@
         </div>
         
     </div><!-- end of container -->
+    
+    <!-- RATING MODAL -->
 
+    <div class="modal fade centered" id="rate-product" tabindex="-1" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content col-xs-12">
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <div class="modal-header">
+                <h4 class="modal-title">Rate this Product</h4>
+              </div>
+          
+              <div class="modal-body text-center col-xs-12">
+                <p>Select a star rating to add your rating to the product average.</p>
+
+                <div class="rate-this col-xs-12">
+                    <div class="each-star"></div>
+                    <div class="each-star"></div>
+                    <div class="each-star"></div>
+                    <div class="each-star"></div>
+                    <div class="each-star"></div>
+                    
+                </div>
+              </div>
+          
+              <div class="modal-footer col-xs-12">
+                <a href="#" id="hlSaveHeader"><button type="button" class="btn-primary">{{trans('ui.button_submit_rating')}}</button></a>
+              </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+
+
+    <!-- Request a Sample Modal -->
+    <div class="modal fade centered" id="request-sample" tabindex="-1" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content col-xs-12">
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <div class="modal-header">
+                <h4 class="modal-title">Request a Sample</h4>
+              </div>
+          
+              <div class="modal-body col-xs-12">
+                <p class="text-center">Contact the product vendor to request a sample.</p>
+
+                <div class="col-xs-12">
+                    <div class="col-xs-12 col-md-6 detail-row">
+                        <label for="firstname">{{trans('ui.user_label_firstname')}}</label>
+                        
+                        <input type="text" name="firstname" placeholder="" class="form-control" maxlength="100" value="{{isset($profile) ? $profile->firstname : ''}}"/>
+                    </div>
+
+                    <div class="col-xs-12 col-md-6 detail-row">
+                        <label for="lastname">{{trans('ui.user_label_lastname')}}</label>
+                    
+                        <input type="text" name="lastname" placeholder="" class="form-control" maxlength="100" value="{{isset($profile) ? $profile->lastname : ''}}"/>
+                    </div>
+
+                    <div class="col-xs-12 col-md-12 detail-row">
+                        <label for="email">{{trans('ui.user_label_email')}}</label>
+                        <input type="text" name="email" placeholder="" class="form-control" value="{{Auth::user()->email}}" maxlength="100"/> 
+                    </div>
+                    
+                    <div class="col-xs-12 col-md-12 detail-row">
+                        <label for="address">{{trans('ui.vendor_label_address1')}}</label>
+                        <input type="text" name="address1" placeholder="" maxlength="200" class="form-control" value=""/>
+                    </div>
+                    
+                    <div class="col-xs-12 col-md-12 detail-row">
+                        <label for="city">{{trans('ui.vendor_label_city')}}</label>
+                        <input type="text" name="city" placeholder="" maxlength="200" class="form-control" value=""/>
+                    </div>
+                    
+                    <div class="col-xs-12 col-md-12 detail-row">
+                        <label for="country_id">{{trans('ui.vendor_label_country')}}</label>
+                         <select id="country_id" name="country_id" class="form-control"></select>
+                    </div>
+                    
+                    <div class="col-xs-12 col-md-6 detail-row">
+                        <label for="state_province_id">{{trans('ui.vendor_label_state_province')}}</label>
+                        <select id="state_province_id" name="state_province_id" class="form-control">
+                            <option value=""></option>
+                            <option value="">{{trans('ui.vendor_label_choose_country')}}</option>
+                        </select>
+                    </div>
+                    
+                    <div class="col-xs-12 col-md-6 detail-row">
+                        <label for="zip_postal">{{trans('ui.vendor_label_zip_postal')}}</label>
+
+                        <input type="text" name="zip_postal" placeholder="" maxlength="50" class="form-control" value=""/>
+                    </div>
+                    
+                </div>
+              </div>
+          
+              <div class="modal-footer col-xs-12">
+                <a href="#" id="hlSaveHeader"><button type="button" class="btn-primary">{{trans('ui.button_submit')}}</button></a>
+              </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 
 @endsection
 

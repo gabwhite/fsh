@@ -3,6 +3,7 @@
 @section('title', trans('ui.navigation_editavatar'))
 
 @section('css')
+    <link type="text/css" rel="stylesheet" href="{{url('css/dropzone/dropzone.min.css')}}"/>
     <link type="text/css" rel="stylesheet" href="{{url('css/cropper.min.css')}}"/>
     <style type="text/css">
         #divCropArea { width: 400px; height: 400px;  }
@@ -14,14 +15,13 @@
     <div class="container">
         <div class="col-xs-12 col-md-4">
             @if(isset($profile) && isset($profile->avatar_image_path) && !isset($isCropMode))
-                <img id="imgCurrentAvatar" src="{{url(config('app.avatar_storage') . '/' . $profile->avatar_image_path)}}" title="{{trans('ui.user_label_currentavatar')}}" width="200" height="200"/>
+                <img id="imgCurrentAvatar" src="{{url(config('app.avatar_storage') . '/' . $profile->avatar_image_path)}}?{{\Carbon\Carbon::now()->timestamp}}" title="{{trans('ui.user_label_currentavatar')}}" width="200" height="200"/>
             @else
                 <img id="imgCurrentAvatar" src="{{url(config('app.avatar_none'))}}" title="{{trans('ui.user_label_noavatar')}}" width="200" height="200"/>
             @endif
         </div>
         <div class="col-xs-12 col-md-8">
             <h1 class="item-title">{{trans('ui.navigation_editavatar')}}</h1>
-            
         </div>
     </div>
 </section>
@@ -41,54 +41,36 @@
                             <p>Delete your existing avatar?</p>
                         
                             <div class="delete-avatar">
-                                <img src="../../public/img/icons/trash.svg" alt="">
+                                <img src="{{url('/img/icons/trash.svg')}}" alt="">
                                 <a href="#" id="hlRemoveAvatar" class="delete-avatar">{{trans('ui.navigation_link_deleteavatar')}}</a>
                             </div>
                          </div>
                     @endif
 
+                    <div id="divCropArea" class="bg-info col-xs-12" style="display:none">
+
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <img id="uncroppedImage" src=""/>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="btn-row">
+                                <a href="#" id="hlCropAvatar" class="btn-primary">Crop</a>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="bg-info col-xs-12">
                         <p>Select a new avatar for your profile.</p>
-                        <div class="change-avatar">
-                            <img src="../../public/img/icons/user.svg">
-                            <a href="#" id="hlNewAvatar">{{trans('ui.navigation_link_changeavatar')}}</a>
-                        </div>
-                    
-                        <input type="file" id="avatar_image_path" name="avatar_image_path" style="opacity: 0; height: 0px; width: 0px;"/>
+                        <div id="avatarUploader" class="dropzone"></div>
                     </div>
-                    
-                    <div class="row">
-                        @if(isset($isCropMode))
-
-                        <div class="col-xs-12" id="divCropArea">
-                            <img id="uncroppedImage" src="{{url(config('app.avatar_storage') . '/' . $profile->avatar_image_path)}}"/>
-                        </div>
-
-                    </div>
-                    
-                    <div class="row">
-                        <div class="btn-row">
-                            <a href="#" id="hlCropAvatar" class="btn-primary">Crop</a>
-                            <a href="#" id="hlCancelCropAvatar" class="btn">{{trans('ui.button_cancel')}}</a>
-                        </div>
-                    </div>
-
-                    @endif
-
-                    @if(!isset($isCropMode))
-                    <div class="col-xs-12">
-                        <div class="btn-row">
-                            <input type="submit" id="btnUpdate" value="{{trans('ui.button_update')}}" class="btn-primary"/>
-                            <a href="{{url('/profile/')}}"><button class="btn">{{trans('ui.button_cancel')}}</button></a>
-                        </div>
-                    </div>
-                    @endif
 
                     <input type="hidden" id="current_avatar_image_path" name="current_avatar_image_path" value="{{isset($profile) ? 1 : 0}}"/>
                     <input type="hidden" id="action" name="action" value="UPDATE"/>
                     <input type="hidden" id="cropdata" name="cropdata" value=""/>
 
-                    {!! csrf_field() !!}
                 </form>
             </div>
         </div>
@@ -99,11 +81,17 @@
 
 @section('scripts')
 
+    <script type="text/javascript" src="{{url('js/vendor/dropzone/dropzone.min.js')}}"></script>
     <script type="text/javascript" src="{{url('js/vendor/cropper/cropper.min.js')}}"></script>
+    <script type="text/javascript" src="{{url('js/fsh.search.js')}}"></script>
     <script type="text/javascript">
 
         $(document).ready(function()
         {
+            var csrf = "{{ csrf_token() }}";
+            var $uncroppedImage = $("#uncroppedImage");
+            var $cropArea = $("#divCropArea");
+            var $currentAvatar = $("#imgCurrentAvatar");
 
             $("#uncroppedImage").cropper({
 
@@ -111,6 +99,7 @@
                 scalable: false,
                 zoomable: false,
                 movable: false,
+                viewMode: 0,
                 aspectRatio: 1 / 1,
                 crop: function(e)
                 {
@@ -122,48 +111,94 @@
                     //console.log(e.scaleX);
                     //console.log(e.scaleY);
 
-                    var cropData = e.width + ";" + e.height + ";" + e.x + ";" + e.y + ";" + e.rotate + ";" + e.scaleX + ";" + e.scaleY;
-                    console.log(cropData);
-                    $("#cropdata").val(cropData);
-
+                    //var cropData = e.width + ";" + e.height + ";" + e.x + ";" + e.y + ";" + e.rotate + ";" + e.scaleX + ";" + e.scaleY;
+                    //console.log(cropData);
+                    //$("#cropdata").val(cropData);
                 }
             });
 
-            $("#btnUpdate").on("click", function(e)
+            Dropzone.options.avatarUploader =
             {
-                $("#action").val("UPDATE");
-                $("#form1").submit();
-            });
+                url: "{{url('/profile/avatar')}}",
+                paramName: "avatar_image_path",
+                uploadMultiple: false,
+                addRemoveLinks: false,
+                previewsContainer: null,
+                headers: { "X-CSRF-TOKEN": csrf, "ACTION": "UPDATE"},
+                init: function()
+                {
+                    //console.log("Dropzone init'ed");
+                    this.on("success", function(e, response)
+                    {
+                        $cropArea.show();
+                        var imgSrc = "{{url('img/avatars/')}}/" + response.filename + "?" + (Math.floor(Date.now() / 1000));
+                        console.log(imgSrc);
+                        //$uncroppedImage.attr("src", imgSrc);
+                        this.removeAllFiles();
+                        //console.log(response);
+
+                        $("#uncroppedImage").cropper("replace", imgSrc);
+
+                    });
+                }
+            };
 
             $("#hlCropAvatar").on("click", function(e)
             {
-                $("#action").val("CROP");
-                $("#form1").submit();
-            });
-
-            $("#hlCancelCropAvatar").on("click", function(e)
-            {
-                $("#action").val("DELETE");
-                $("#form1").submit();
-            });
-
-            $("#hlNewAvatar").on("click", function(e)
-            {
-                $("#avatar_image_path").click();
                 e.preventDefault();
+
+                var objCropData = $("#uncroppedImage").cropper("getData", true)
+                var cropData = objCropData.width + ";" + objCropData.height + ";" + objCropData.x + ";" + objCropData.y;
+
+                //var headers = { "X-CSRF-TOKEN": csrf, "ACTION": "CROP", "cropdata": $("#cropdata").val() };
+                var headers = { "X-CSRF-TOKEN": csrf, "ACTION": "CROP", "cropdata": cropData };
+
+                fsh.common.doAjax("{{url('/profile/avatar')}}", {}, "POST", true, headers,
+                    function(result)
+                    {
+                        $cropArea.hide();
+                        var imgSrc = "{{url('img/avatars/')}}/" + result.filename;
+                        $currentAvatar.attr("src", imgSrc);
+                    },
+                    function()
+                    {
+                        alert("Error cropping image");
+                    }
+                );
             });
 
             $("#hlRemoveAvatar").on("click", function(e)
             {
+                e.preventDefault();
+
                 if(confirm("Remove current avatar?"))
                 {
-                    //$("#current_avatar_image_path").val("0");
-                    $("#action").val("DELETE");
-                    $("#form1").submit();
+                    deleteAvatar();
                 }
+            });
+
+            $("#hlCancelCropAvatar").on("click", function(e)
+            {
                 e.preventDefault();
+                deleteAvatar();
             });
 
         });
+
+
+        function deleteAvatar()
+        {
+            var headers = { "X-CSRF-TOKEN": csrf, "ACTION": "DELETE" };
+            fsh.common.doAjax("{{url('/profile/avatar')}}", {}, "POST", true, headers,
+                function(result)
+                {
+                    alert("deleted");
+                },
+                function()
+                {
+                    alert("Error deleting image");
+                }
+            );
+        }
     </script>
 @endsection

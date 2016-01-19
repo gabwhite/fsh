@@ -53,6 +53,10 @@
 	width: auto;
 	margin: 25px auto;
 	line-height: 1.2;
+
+	&:active, &:focus {
+		outline: 0;
+	}
 	@include transition;
 	@include breakpoint(tablet){
 		height: 50px;
