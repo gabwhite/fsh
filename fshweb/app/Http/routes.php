@@ -107,3 +107,17 @@ Route::get('ajax/getproducts/{categoryId}', 'AjaxController@getProducts');
 Route::get('ajax/getcountries', 'AjaxController@getCountries');
 Route::get('ajax/getstateprovincesforcountry/{countryId}', 'AjaxController@getStateProvincesForCountry');
 Route::get('ajax/productsearch/{query}', 'AjaxController@getProductFullTextSearch');
+
+Route::get('datacleanup', function()
+{
+    $products = \App\Models\Product::all();
+    foreach($products as $p)
+    {
+        $p->name = ucfirst(strtolower($p->name));
+        $p->brand = ucfirst(strtolower($p->brand));
+
+        $p->save();
+    }
+
+    echo "Done cleanup";
+});
