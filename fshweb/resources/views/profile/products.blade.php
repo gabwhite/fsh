@@ -10,7 +10,6 @@
     <section class='clearfix container-wrap profile-head'>
         <div class="container">
             <h1 class="item-title">My Products</h1>
-                
         </div>
     </section>
 @endsection
