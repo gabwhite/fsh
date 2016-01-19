@@ -54,7 +54,7 @@ class VendorController extends Controller
 
             $data = array_add($data, 'user_id', $user->id);
 
-            $vendorId = $this->dataAccess->upsertVendor(\Session::get(config('app.session_key_vendor')), $data);
+            $vendorId = $this->dataAccess->updateVendor(\Session::get(config('app.session_key_vendor')), $data);
 
             return redirect('vendor/edit')->with('successMessage', trans('messages.vendor_update_success'));
         }
@@ -191,22 +191,32 @@ class VendorController extends Controller
         }
     }
 
-    public function upsertBrand(Request $request)
+    public function updateVendorVariable(Request $request)
     {
-        $user = \Auth::user();
+        try
+        {
+            $data = $request->all();
+            $vendorId = $data['VID'];
+            $companyName = $data['company_name'];
 
-        //$this->dataAccess->upsertBrand(1, $request->all());
+            $vendorId = $this->dataAccess->updateVendor($vendorId, ['company_name' => $companyName]);
 
-        echo 'Updated / Added brand';
-    }
+            return response()->json([
+                'error' => false,
+                'code'  => 200,
+                'vendorid' => $vendorId
+            ], 200);
 
-    protected function brandValidator(array $data)
-    {
-        return Validator::make($data, [
-            'name' => 'required|max:200',
-            'logo_image_path' => 'required|max:200',
-            'active' => 'required'
-        ]);
+        }
+        catch(Exception $ex)
+        {
+            return response()->json([
+                'error' => true,
+                'message' => 'Server error while uploading',
+                'exception' => $ex->getMessage(),
+                'code' => 500
+            ], 500);
+        }
     }
 
 

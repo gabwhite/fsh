@@ -311,36 +311,32 @@ class DataAccessLayer
         return $vendors;
     }
 
-    public function upsertVendor($vendorId, $data)
+    public function updateVendor($vendorId, $data)
     {
-
         $vendor = $this->getVendor($vendorId);
 
-        $isAdd = false;
-        if(!isset($vendor))
+        if(isset($vendor))
         {
-            $vendor = new Vendor();
-            $isAdd = true;
+            if(isset($data['user_id'])) { $vendor->user_id = $data['user_id']; }
+            if(isset($data['company_name'])) { $vendor->company_name = $data['company_name']; }
+            if(isset($data['country_id'])) { $vendor->country_id = $data['country_id']; }
+            if(isset($data['state_province_id'])) { $vendor->state_province_id = $data['state_province_id']; }
+            if(isset($data['address1'])) { $vendor->address1 = $data['address1']; }
+            if(isset($data['address2'])) { $vendor->address2 = $data['address2']; }
+            if(isset($data['city'])) { $vendor->city = $data['city']; }
+            if(isset($data['zip_postal'])) { $vendor->zip_postal = $data['zip_postal']; }
+            if(isset($data['contact_name'])) { $vendor->contact_name = $data['contact_name']; }
+            if(isset($data['contact_phone'])) { $vendor->contact_phone = $data['contact_phone']; }
+            if(isset($data['contact_url'])) { $vendor->contact_url = $data['contact_url']; }
+            if(isset($data['intro_text'])) { $vendor->intro_text = $data['intro_text']; }
+            if(isset($data['about_text'])) { $vendor->about_text = $data['about_text']; }
+
+            $vendor->save();
+
+            return $vendor->id;
         }
 
-        $vendor->user_id = $data['user_id'];
-        $vendor->company_name = $data['company_name'] ? $data['company_name'] : $vendor->company_name;
-        $vendor->country_id = $data['country_id'] ? $data['country_id'] : $vendor->country_id;
-        $vendor->state_province_id = $data['state_province_id'] ? $data['state_province_id'] : $vendor->state_province_id;
-        $vendor->address1 = $data['address1'] ? $data['address1'] : $vendor->address1;
-        $vendor->address2 = $data['address2'] ? $data['address2'] : $vendor->address2;
-        $vendor->city = $data['city'] ? $data['city'] : $vendor->city;
-        $vendor->zip_postal = $data['zip_postal'] ? $data['zip_postal'] : $vendor->zip_postal;
-        $vendor->contact_name = $data['contact_name'] ? $data['contact_name'] : $vendor->contact_name;
-        $vendor->contact_title = $data['contact_title'] ? $data['contact_title'] : $vendor->contact_title;
-        $vendor->contact_phone = $data['contact_phone'] ? $data['contact_phone'] : $vendor->contact_phone;
-        $vendor->contact_url = $data['contact_url'] ? $data['contact_url'] : $vendor->contact_url;
-        $vendor->intro_text = $data['intro_text'] ? $data['intro_text'] : $vendor->intro_text;
-        $vendor->about_text = $data['about_text'] ? $data['about_text'] : $vendor->about_text;
-
-        $vendor->save();
-
-        return $vendor->id;
+        return 0;
     }
 
     public function insertBrand($data)
