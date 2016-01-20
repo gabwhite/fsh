@@ -34,12 +34,12 @@ class ProductController extends Controller
 
     public function detail($id)
     {
-
-        $product = $this->cacheManager->getItem(env('CACHE_DRIVER'), 'product-'.$id);
+        $cacheKey = 'product-'.$id;
+        $product = $this->cacheManager->getItem(env('CACHE_DRIVER'), $cacheKey);
         if(is_null($product) || !isset($product))
         {
             $product = $this->dataAccess->getProduct($id, ['allergens']);
-            $this->cacheManager->setItem(env('CACHE_DRIVER'), 'product-'.$id, $product, config('app.cache_expiry_time_products'));
+            $this->cacheManager->setItem(env('CACHE_DRIVER'), $cacheKey, $product, config('app.cache_expiry_time_products'));
         }
 
         $canEdit = false;
