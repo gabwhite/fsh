@@ -39,7 +39,7 @@ class ProductController extends Controller
         if(is_null($product) || !isset($product))
         {
             $product = $this->dataAccess->getProduct($id, ['allergens']);
-            $this->cacheManager->setItem(env('CACHE_DRIVER'), 'product-'.$id, $product, 10);
+            $this->cacheManager->setItem(env('CACHE_DRIVER'), 'product-'.$id, $product, config('app.cache_expiry_time_products'));
         }
 
         $canEdit = false;

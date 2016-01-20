@@ -231,4 +231,10 @@ return [
     'vendor_background_image_height' => 200,
     'session_key_vendor' => 'vendor_id',
     'search_default_page_size' => 25,
+    'cache_expiry_time_products' => 10, // Minutes
+    'cache_expiry_time_countries' => 10, // Minutes
+    'cache_expiry_time_stateprovinces' => 10, // Minutes
+    'cache_expiry_time_allergens' => 10, // Minutes
+    'cache_expiry_time_vendors' => 10, // Minutes
+    'cache_expiry_time_categories' => 10, // Minutes
 ];
