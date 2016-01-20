@@ -1,41 +1,7 @@
 /*======================================================
 =            Typography for the entire site            =
 ======================================================*/
-/*----------  Globals  ----------*/
 
-body {
-	background: $body-background;
-	color: $body;
-	font-family: $body-font;
-}
-
-p {
-	font-size: 16px;
-}
-
-.well {
-	@include well;
-}
-
-.reset-left {
-    @include breakpoint(tablet){
-        padding-left: 0;
-    }
-}
-
-.reset-right {
-    @include breakpoint(tablet){
-        padding-right: 0;
-    }
-}
-
-.reset-padding {
-    padding: 0;
-}
-
-.hide {
-    display: none;
-}
 
 /*----------  Headers  ----------*/
 
@@ -57,14 +23,19 @@ h1.page-title {
 }
 
 h1.item-title {
-	text-transform: none;
 	color: $primary;
 	font-weight: 600;
+    width: auto;
+    display: inline-block;
+    margin-top: 0;
+    @include breakpoint(tablet){
+        margin-top: 30px;
+    }
 }
 
 h2.subhead {
 	font-weight: 600;
-	font-size: 16px;
+	font-size: 20px;
 	text-align: center;
 	margin-bottom: 20px;
 	color: $primary;
@@ -113,7 +84,10 @@ h4.modal-title {
 /*----------  Item Detail Page  ----------*/
 
 .detail-row {
-	margin-bottom: 30px;
+	margin-bottom: 20px;
+    @include breakpoint(tablet){
+        margin-bottom: 30px;
+    }
 }
 
 /*----------  Table Row  ----------*/

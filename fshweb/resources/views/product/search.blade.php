@@ -3,13 +3,7 @@
 @section('title', 'Page Title')
 
 @section('css')
-    <style type="text/css">
-        .loadProgress
-        {
-            background: rgba(0,0,0,.5) url('{{url('img/spinner.gif')}}') no-repeat;
-            z-index:999;
-        }
-    </style>
+
 @endsection
 
 
@@ -23,21 +17,9 @@
                 <select id="ddlbCategory" class="search-dropdown"><option value="">Select Category</option></select>
                 <select id="ddlbSubCategory" class="search-dropdown"><option value="">Select Sub Category</option></select>
                 <select id="ddlbProductType" class="search-dropdown"><option value="">Select Product Type</option></select>
-                <a id="hlDropdownSearch" href="#"><button class="btn btn-sm">Go</button></a>
+                <a id="hlDropdownSearch" href="#"><button class="btn-primary">Search</button></a>
             </div>
         </div>
-
-        <!-- BREADCRUMBS, NOT SURE IF THEY'RE NEEDED?  -->
-
-        <!-- <div class='breadcrumb-extra'>
-            <div class="kleo_framework breadcrumb" xmlns:v="http://rdf.data-vocabulary.org/#">
-                <span typeof="v:Breadcrumb">
-                    <a rel="v:url" property="v:title" href="http://www.foodservicehound.com" title="FoodserviceHound.com" >Home</a>
-                </span>
-                <span class="sep"> </span>
-                <span class="active">Find What You're Looking For</span>
-            </div>
-        </div> -->
     </div>
 </section>
 @endsection

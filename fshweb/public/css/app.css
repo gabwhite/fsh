@@ -8384,11 +8384,9 @@ button.close {
 
 /*=====  End of Mixins: Variables and reusable bits of common code  ======*/
 
-/*======================================================
-=            Typography for the entire site            =
-======================================================*/
-
-/*----------  Globals  ----------*/
+/*=======================================
+=            Global Stylings            =
+=======================================*/
 
 body {
   background: #F8F8F8;
@@ -8405,6 +8403,16 @@ p {
   color: #4b4a4a;
   border: 1px solid #c2c2c2;
   border-radius: 3px;
+}
+
+.drop-padding {
+  padding: 0;
+}
+
+@media (min-width: 768px) {
+  .drop-padding {
+    padding: 0 15px;
+  }
 }
 
 @media (min-width: 768px) {
@@ -8426,6 +8434,26 @@ p {
 .hide {
   display: none;
 }
+
+img {
+  max-width: 100%;
+}
+
+.container {
+  padding: 0 5px;
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: 0 15px;
+  }
+}
+
+/*=====  End of Global Stylings  ======*/
+
+/*======================================================
+=            Typography for the entire site            =
+======================================================*/
 
 /*----------  Headers  ----------*/
 
@@ -8451,14 +8479,22 @@ h1.page-title {
 }
 
 h1.item-title {
-  text-transform: none;
   color: #de5328;
   font-weight: 600;
+  width: auto;
+  display: inline-block;
+  margin-top: 0;
+}
+
+@media (min-width: 768px) {
+  h1.item-title {
+    margin-top: 30px;
+  }
 }
 
 h2.subhead {
   font-weight: 600;
-  font-size: 16px;
+  font-size: 20px;
   text-align: center;
   margin-bottom: 20px;
   color: #de5328;
@@ -8510,7 +8546,13 @@ h4.modal-title {
 /*----------  Item Detail Page  ----------*/
 
 .detail-row {
-  margin-bottom: 30px;
+  margin-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+  .detail-row {
+    margin-bottom: 30px;
+  }
 }
 
 /*----------  Table Row  ----------*/
@@ -8917,6 +8959,7 @@ select.drop-sm {
   width: auto;
   margin: 25px auto;
   line-height: 1.2;
+  height: 35px;
   transition: all ease 0.5s;
   -webkit-transition: all ease 0.5s;
   -moz-transition: all ease 0.5s;
@@ -8974,6 +9017,7 @@ select.drop-sm {
   width: auto;
   margin: 25px auto;
   line-height: 1.2;
+  height: 35px;
   transition: all ease 0.5s;
   -webkit-transition: all ease 0.5s;
   -moz-transition: all ease 0.5s;
@@ -9015,13 +9059,8 @@ select.drop-sm {
 
 .btn-row button,
 .btn-row input[type="submit"] {
-  margin: 0 10px;
+  margin: 10px 15px 10px 0;
   float: left;
-}
-
-.btn-row input[type="submit"],
-.btn-row :first-child {
-  margin-left: 0;
 }
 
 .btn-sm,
@@ -9098,6 +9137,7 @@ ul.nav {
 
 .navbar-form {
   padding: 0;
+  border-bottom: 0;
 }
 
 .navbar-form .form-control,
@@ -9112,8 +9152,15 @@ ul.nav {
 a.search {
   float: right;
   position: absolute;
-  top: 20px;
-  right: 10%;
+  top: 15px;
+  right: 3%;
+}
+
+@media (min-width: 768px) {
+  a.search {
+    top: 20px;
+    right: 10%;
+  }
 }
 
 .navbar-default .navbar-nav > li > a {
@@ -9158,11 +9205,6 @@ a.search {
 .item-header {
   text-align: left;
   margin-top: 30px;
-}
-
-.item-header .container,
-.item-header .auth-check {
-  padding-right: 0;
 }
 
 .vendor-profile {
@@ -9297,6 +9339,20 @@ ul.slides {
   border: 0;
 }
 
+.modal-body {
+  padding: 0;
+}
+
+@media (min-width: 768px) {
+  .modal-body {
+    padding: 0 15px;
+  }
+}
+
+.modal-body .detail-row {
+  margin-bottom: 10px;
+}
+
 .logo-zone {
   padding: 30px 0;
   border-top: 1px solid #c2c2c2;
@@ -9331,11 +9387,28 @@ ul.slides {
   text-align: center;
 }
 
+.modal.centered .modal-footer .btn-primary,
+.modal.centered .modal-footer .btn-sm,
+.modal.centered .modal-footer .btn-group-sm > .btn {
+  margin-top: 0;
+}
+
 /*=====  End of Modal Styling  ======*/
 
 /*======================================
 =            Search Results            =
 ======================================*/
+
+/*----------  Spinning Load  ----------*/
+
+.loadProgress {
+  background: rgba(242, 242, 242, 0.5) url("../../public/img/spinner.gif") no-repeat;
+  z-index: 999;
+  background-size: 45px;
+  background-position: center 120px;
+}
+
+/*----------  Search Feed  ----------*/
 
 .item-thumb {
   width: 80px;
@@ -9357,13 +9430,26 @@ ul.slides {
   margin-right: 12px;
 }
 
+.search-row p {
+  margin-top: 15px;
+}
+
 .search-row .brand {
   color: #de5328;
   font-weight: 600;
   border: 1px solid #de5328;
   border-radius: 3px;
   text-align: center;
-  padding: 5px;
+  padding: 2px 5px;
+}
+
+.search-row a.goto-item {
+  color: #4dd371;
+  background: url("../../public/img/icons/go-icon.svg") no-repeat;
+  font-size: 14px;
+  background-position: right;
+  background-size: contain;
+  padding-right: 30px;
 }
 
 .search-details {
@@ -9426,13 +9512,28 @@ h2.sort-title {
 
 /*----------  Item Detail Rating  ----------*/
 
+.title-wrap {
+  width: 100%;
+  display: block;
+}
+
 .star-detail {
-  text-align: center;
-  margin-top: 10px;
+  text-align: left;
+  width: auto;
+  display: inline-block;
+  margin: 15px 0;
 }
 
 .star-detail img {
   height: 20px;
+  margin: -10px 0 5px 0;
+}
+
+@media (min-width: 768px) {
+  .star-detail {
+    margin-left: 15px;
+    margin-top: 0;
+  }
 }
 
 /*----------  Submit rating  ----------*/

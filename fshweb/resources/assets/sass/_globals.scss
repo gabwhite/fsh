@@ -1,0 +1,57 @@
+/*=======================================
+=            Global Stylings            =
+=======================================*/
+
+body {
+	background: $body-background;
+	color: $body;
+	font-family: $body-font;
+}
+
+p {
+	font-size: 16px;
+}
+
+.well {
+	@include well;
+}
+
+.drop-padding {
+	padding: 0;
+	@include breakpoint(tablet){
+		padding: 0 15px;
+	}
+}
+
+.reset-left {
+    @include breakpoint(tablet){
+        padding-left: 0;
+    }
+}
+
+.reset-right {
+    @include breakpoint(tablet){
+        padding-right: 0;
+    }
+}
+
+.reset-padding {
+    padding: 0;
+}
+
+.hide {
+    display: none;
+}
+
+img {
+    max-width: 100%;
+}
+
+.container {
+	padding: 0 5px;
+	@include breakpoint(tablet) {
+		padding: 0 15px;
+	}
+}
+
+/*=====  End of Global Stylings  ======*/

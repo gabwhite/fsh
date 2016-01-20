@@ -86,13 +86,8 @@ select.drop-sm {
 	
 	button, 
 	input[type="submit"] {
-		margin: 0 10px;
+		margin: 10px 15px 10px 0;
 		float: left;
-	}
-	
-	input[type="submit"], 
-	:first-child{
-		margin-left: 0;
 	}
 }
 

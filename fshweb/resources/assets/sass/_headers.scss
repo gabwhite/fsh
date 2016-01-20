@@ -46,6 +46,7 @@ ul.nav {
 
 .navbar-form {
 	padding: 0;
+	border-bottom: 0;
 
 	.form-control, 
 	.form-group {
@@ -59,8 +60,13 @@ ul.nav {
 a.search {
 	float: right;
     position: absolute;
-    top: 20px;
-    right: 10%;
+    top: 15px;
+    right: 3%;
+
+    @include breakpoint(tablet){
+    	top: 20px;
+    	right: 10%;
+    }
 }
 
 .navbar-default .navbar-nav > li > a {
@@ -111,7 +117,7 @@ a.search {
 	margin-top: 30px;
 
 	.container, .auth-check {
-		padding-right: 0;
+		//padding-right: 0;
 	}
 
 }

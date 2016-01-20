@@ -11,6 +11,16 @@
 	border: 0;
 }
 
+.modal-body {
+	padding: 0;
+	@include breakpoint(tablet){
+		padding: 0 15px;
+	}
+
+	.detail-row {
+		margin-bottom: 10px;
+	}
+}
 
 // Vendor Profile
 
@@ -46,6 +56,10 @@
 
 .modal.centered .modal-footer {
 	text-align: center;
+
+	.btn-primary {
+		margin-top: 0;
+	}
 }
 
 /*=====  End of Modal Styling  ======*/

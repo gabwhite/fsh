@@ -2,6 +2,19 @@
 =            Search Results            =
 ======================================*/
 
+/*----------  Spinning Load  ----------*/
+
+.loadProgress{
+    background: rgba(242,242,242,0.5) url('../../public/img/spinner.gif') no-repeat;
+    z-index: 999;
+    background-size: 45px;
+    background-position: center 120px;
+}
+
+
+
+/*----------  Search Feed  ----------*/
+
 .item-thumb {
 	width: 80px;
 	height: 80px;
@@ -21,13 +34,26 @@
 		margin-right: 12px;
 	}
 
+	p {
+		margin-top: 15px;
+	}
+
 	.brand {
 		color: $primary;
 		font-weight: 600;
 		border: 1px solid $primary;
 		border-radius: 3px;
 		text-align: center;
-		padding: 5px;
+		padding: 2px 5px;
+	}
+
+	a.goto-item {
+		color: $primary-button;
+		background: url('../../public/img/icons/go-icon.svg') no-repeat;
+		font-size: 14px;
+		background-position: right;
+		background-size: contain;
+		padding-right: 30px;
 	}
 }
 
