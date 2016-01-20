@@ -2,6 +2,16 @@
 
 @section('title', 'Page Title')
 
+@section('css')
+    <style type="text/css">
+        .loadProgress
+        {
+            background: rgba(0,0,0,.5) url('{{url('img/spinner.gif')}}') no-repeat;
+            z-index:999;
+        }
+    </style>
+@endsection
+
 
 @section('sectionheader')
 
@@ -69,7 +79,7 @@
 
                         <a id="hlSort" href="#"><button class="btn btn-sm">Sort Results</button></a>
                     </div>
-                    <div class="col-xs-12 well">
+                    <div id="rootResultContainer" class="col-xs-12 well">
                         <form>
 
                             <div class="row keyword-search">
@@ -108,7 +118,8 @@
             fsh.search.init("{{url('ajax/getfoodcategories/')}}",
                             "{{url('ajax/getproducts')}}",
                             "{{url('ajax/productsearch')}}",
-                            "{{url('product/detail')}}"
+                            "{{url('product/detail')}}",
+                            "{{url('img/spinner.gif')}}"
                             );
         });
 
