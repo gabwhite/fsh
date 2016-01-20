@@ -225,7 +225,7 @@ class DataAccessLayer
         return DB::table('stateprovinces')->where('country_id', '=', $countryId)->get();
     }
 
-    public function getProductsByFullText($rawQuery, $paginate = false, $pageSize = 25)
+    public function getProductsByFullText($rawQuery, $orderBy, $paginate = false, $pageSize = 25)
     {
         $arrTerms = $this->prepareFullTextSearchQuery($rawQuery);
 
@@ -235,11 +235,11 @@ class DataAccessLayer
 
         if($paginate)
         {
-            $products = Product::select('id', 'name', 'brand')->whereRaw($query)->paginate($pageSize);
+            $products = Product::select('id', 'name', 'brand')->whereRaw($query)->orderBy($orderBy)->paginate($pageSize);
         }
         else
         {
-            $products = Product::select('id', 'name', 'brand')->whereRaw($query)->get();
+            $products = Product::select('id', 'name', 'brand')->whereRaw($query)->orderBy($orderBy)->get();
         }
 
 

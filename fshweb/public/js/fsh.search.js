@@ -15,6 +15,10 @@ fsh.search = (function ($, document)
     var $productTypeDdlb = $("#ddlbProductType");
 
     var $searchQueryTb = $("#tbSearchQuery");
+    var $searchButton = $("#hlSearchButton");
+
+    var $sortBy = $("#sortby");
+    var $pageSize = $("#viewall");
 
 
     var init = function(categoryUrl, productUrl, searchUrl, detailUrl)
@@ -24,12 +28,39 @@ fsh.search = (function ($, document)
         _searchUrl = searchUrl;
         _detailUrl = detailUrl;
 
+        getProducts(productUrl);
+
         initTree();
 
         initCategoryDropdowns();
 
         $searchQueryTb.on("keydown", doSearch);
-        $searchQueryTb.on("click", doSearch);
+        $searchButton.on("click", doSearch);
+
+        $(document).on('click', '.pagination a', function (e)
+        {
+            e.preventDefault();
+            getProducts($(this).attr('href'));
+        });
+
+        $("#hlDropdownSearch").on("click", function(e)
+        {
+            var categoryId = "";
+            if($productTypeDdlb.val() !== "") { categoryId = $productTypeDdlb.val(); }
+            else if($subCategoryDdlb.val() !== "") { categoryId = $subCategoryDdlb.val(); }
+            else if($categoryDdlb.val() !== "") { categoryId = $categoryDdlb.val(); }
+
+            if(categoryId !== "") { getProducts(productUrl + "/" + categoryId); }
+
+            e.preventDefault();
+        });
+
+        $("#hlSort").on("click", function(e)
+        {
+            e.preventDefault();
+            resortResults();
+        });
+
     };
 
     var initTree = function()
@@ -64,20 +95,7 @@ fsh.search = (function ($, document)
 
         $categoryTree.off("changed.jstree").on("changed.jstree", function(e, data)
         {
-            //console.log(data);
-            var qry = _productUrl + "/" + data.node.id;
-            $.getJSON(qry, function(jsonresult)
-            {
-                //console.log(jsonresult);
-                var tableRows = "";
-                $.each(jsonresult, function(idx, val)
-                {
-                    //console.log(val);
-                    tableRows += "<div class='col-xs-12 search-row'><div class='col-xs-3'><div class='item-thumb'></div><div class='star-rating'><img src='../img/icons/star.svg'></div></div><div class='col-xs-9'><a href='" + _detailUrl + "/" + val.id + "'>" + val.name + "</a><span class='brand'>" + val.brand + "</span></div></div>";
-                });
-
-                $resultTable.html(tableRows);
-            });
+            getProducts(_productUrl + "/" + data.node.id);
         });
     };
 
@@ -135,30 +153,34 @@ fsh.search = (function ($, document)
 
     var doSearch = function(e)
     {
+        if(e.target.id === "hlSearchButton") { e.preventDefault(); }
+
         if(e.which === 13 || e.target.id === "hlSearchButton")
         {
+
             var qry = _searchUrl + "/" + $searchQueryTb.val();
             $.getJSON(qry, function(jsonresult)
             {
-                var tableRows = "";
-                $.each(jsonresult, function(idx, val)
-                {
-                    //console.log(val);
-                    tableRows += "<tr><td><a href='" + _detailUrl + "/" + val.id + "'>" + val.name + "</a></td><td>" + val.brand + "</td><td></td></tr>";
-                });
-
-                if(jsonresult.length === 0)
-                {
-                    tableRows += "<tr><td colspan='3'>{{trans('ui.search_label_no_results')}}</td></tr>";
-                }
-
-                $resultTable.html(tableRows);
+                $resultTable.html(jsonresult);
             });
-
-            e.preventDefault();
         }
     };
 
+    var getProducts = function(node)
+    {
+        //var qry = _productUrl + (node ? "/" + node : "");
+        //{'sort': $sortBy.val(), 'pagesize': $pageSize.val() },
+        $.getJSON(node, function(jsonresult)
+        {
+            //console.log(jsonresult);
+            $resultTable.html(jsonresult);
+        });
+    };
+
+    var resortResults = function()
+    {
+        alert("TODO");
+    };
 
     var pub =
     {

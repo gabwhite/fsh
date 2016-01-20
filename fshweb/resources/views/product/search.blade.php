@@ -13,6 +13,7 @@
                 <select id="ddlbCategory" class="search-dropdown"><option value="">Select Category</option></select>
                 <select id="ddlbSubCategory" class="search-dropdown"><option value="">Select Sub Category</option></select>
                 <select id="ddlbProductType" class="search-dropdown"><option value="">Select Product Type</option></select>
+                <a id="hlDropdownSearch" href="#"><button class="btn btn-sm">Go</button></a>
             </div>
         </div>
 
@@ -52,20 +53,21 @@
                     <div class="col-xs-12 sort-menu">
                         <h2 class="sort-title">Sort by:</h2>
                         <select name="sortby" id="sortby" class="drop-sm">
+                            <option value="name">Product Name</option>
                             <option value="brand">Brand</option>
                             <option value="pack">Pack</option>
                             <option value="units">Units</option>
                             <option value="vendors">Vendors</option>
                         </select>
 
-                        <select name="View all" id="viewall" class="drop-sm">
-                            <option value="view10">View 10</option>
-                            <option value="view25">View 25</option>
-                            <option value="view50">View 50</option>
-                            <option value="viewall">View all</option>
+                        <select name="viewall" id="viewall" class="drop-sm">
+                            <option value="10">View 10</option>
+                            <option value="25">View 25</option>
+                            <option value="50">View 50</option>
+                            <option value="100">View 100</option>
                         </select>
 
-                        <button class="btn btn-sm">Sort Results</button>
+                        <a id="hlSort" href="#"><button class="btn btn-sm">Sort Results</button></a>
                     </div>
                     <div class="col-xs-12 well">
                         <form>
@@ -82,7 +84,6 @@
                         </form>
 
                         <div id="product_list">
-                            <!-- Products from fsh.search.js populated here -->
                         </div>
 
                         <div class="row">
