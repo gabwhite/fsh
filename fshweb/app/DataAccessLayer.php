@@ -57,8 +57,6 @@ class DataAccessLayer
 
     public function getAllProducts($fields = null, $relationships = null, $publishedOnly = true, $sortBy = 'name', $paginate = false, $pageSize = 25)
     {
-        $query = Product::all();
-
         if(isset($fields))
         {
             $query = Product::select($fields);
@@ -84,7 +82,6 @@ class DataAccessLayer
         {
             $products = $query->get();
         }
-
 
         return $products;
 
