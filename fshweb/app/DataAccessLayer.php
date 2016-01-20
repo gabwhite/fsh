@@ -365,10 +365,10 @@ class DataAccessLayer
 
             $vendor->save();
 
-            return $vendor->id;
+            return $vendor;
         }
 
-        return 0;
+        return null;
     }
 
     public function insertBrand($data)
