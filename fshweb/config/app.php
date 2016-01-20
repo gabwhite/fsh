@@ -230,4 +230,5 @@ return [
     'vendor_background_image_width' => 200,
     'vendor_background_image_height' => 200,
     'session_key_vendor' => 'vendor_id',
+    'search_default_page_size' => 25,
 ];
