@@ -9,9 +9,6 @@
 	border-radius: 50%;
 }
 
-
-
-
 .search-row {
 	padding: 20px 0;
 	border-bottom: 1px solid $border;
@@ -31,6 +28,18 @@
 		border-radius: 3px;
 		text-align: center;
 		padding: 5px;
+	}
+}
+
+.search-details { 
+	padding: 0;
+
+	p {
+		color: $placeholder;
+		font-size: 14px;
+		font-weight: 600;
+		float: left;
+		margin-right: 10px;
 	}
 }
 

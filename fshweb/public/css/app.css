@@ -9366,6 +9366,18 @@ ul.slides {
   padding: 5px;
 }
 
+.search-details {
+  padding: 0;
+}
+
+.search-details p {
+  color: #7D7D7D;
+  font-size: 14px;
+  font-weight: 600;
+  float: left;
+  margin-right: 10px;
+}
+
 /*----------  Sort By  ----------*/
 
 .sort-menu {
