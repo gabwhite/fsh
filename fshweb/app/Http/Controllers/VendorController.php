@@ -9,6 +9,7 @@
 namespace App\Http\Controllers;
 
 use App\DataAccessLayer;
+use App\CacheManager;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Routing\ResponseFactory;
 
@@ -21,15 +22,23 @@ class VendorController extends Controller
 {
 
     protected $dataAccess;
+    protected $cacheManager;
 
-    public function __construct(DataAccessLayer $dataAccess)
+    public function __construct(DataAccessLayer $dataAccess, CacheManager $cacheManager)
     {
         $this->dataAccess = $dataAccess;
+        $this->cacheManager = $cacheManager;
     }
 
     public function detail($id)
     {
-        $vendor = $this->dataAccess->getVendor($id, null, ['country', 'stateProvince', 'brands']);
+        $cacheKey = 'vendor-'.$id;
+        $vendor = $this->cacheManager->getItem(env('CACHE_DRIVER'), $cacheKey);
+        if(is_null($vendor) || !isset($vendor))
+        {
+            $vendor = $this->dataAccess->getVendor($id, null, ['country', 'stateProvince', 'brands']);
+            $this->cacheManager->setItem(env('CACHE_DRIVER'), $cacheKey, $vendor, config('app.cache_expiry_time_vendors'));
+        }
 
         return view('vendor.view')->with('profile', $vendor);
     }
