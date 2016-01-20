@@ -8,9 +8,11 @@
 
 namespace App\Http\Controllers;
 
+use App\CacheManager;
 use App\DataAccessLayer;
 use App\LookupManager;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -21,16 +23,24 @@ class ProductController extends Controller
 
     protected $dataAccess;
     protected $lookupManager;
+    protected $cacheManager;
 
-    public function __construct(DataAccessLayer $dataAccess, LookupManager $lookupManager)
+    public function __construct(DataAccessLayer $dataAccess, LookupManager $lookupManager, CacheManager $cacheManager)
     {
         $this->dataAccess = $dataAccess;
         $this->lookupManager = $lookupManager;
+        $this->cacheManager = $cacheManager;
     }
 
     public function detail($id)
     {
-        $product = $this->dataAccess->getProduct($id, ['allergens', 'vendor']);
+
+        $product = $this->cacheManager->getItem(env('CACHE_DRIVER'), 'product-'.$id);
+        if(is_null($product) || !isset($product))
+        {
+            $product = $this->dataAccess->getProduct($id, ['allergens']);
+            $this->cacheManager->setItem(env('CACHE_DRIVER'), 'product-'.$id, $product, 10);
+        }
 
         $canEdit = false;
 
@@ -39,7 +49,7 @@ class ProductController extends Controller
             $user = \Auth::user();
 
             if($user->hasRole(config('app.role_admin_name'))
-                || \Session::get(config('app.session_key_vendor')) == $product->vendor->id)
+                || \Session::get(config('app.session_key_vendor')) == $product->vendor_id)
             {
                 $canEdit = true;
             }
