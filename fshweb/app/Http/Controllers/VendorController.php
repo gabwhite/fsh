@@ -33,6 +33,7 @@ class VendorController extends Controller
     public function detail($id)
     {
         $cacheKey = 'vendor-'.$id;
+
         $vendor = $this->cacheManager->getItem(env('CACHE_DRIVER'), $cacheKey);
         if(is_null($vendor) || !isset($vendor))
         {
@@ -63,7 +64,10 @@ class VendorController extends Controller
 
             $data = array_add($data, 'user_id', $user->id);
 
-            $vendorId = $this->dataAccess->updateVendor(\Session::get(config('app.session_key_vendor')), $data);
+            $vendor = $this->dataAccess->updateVendor(\Session::get(config('app.session_key_vendor')), $data);
+
+            // Update cache entry
+            $this->updateVendorCache($vendor, 'UPDATE');
 
             return redirect('vendor/edit')->with('successMessage', trans('messages.vendor_update_success'));
         }
@@ -92,6 +96,10 @@ class VendorController extends Controller
                     // Now add brand to db
                     $data = ['vendor_id' => $request->header('VID'), 'name' => $newFilename, 'logo_image_path' => $newFilename, 'active' => 1];
                     $newBrandId = $this->dataAccess->insertBrand($data);
+
+                    // Update cache entry
+                    $vendor = $this->dataAccess->getVendor($request->header('VID'), null, ['country', 'stateProvince', 'brands']);
+                    $this->updateVendorCache($vendor, 'UPDATE');
 
                     return response()->json([
                         'error' => false,
@@ -142,6 +150,10 @@ class VendorController extends Controller
                 // Delete brand image from file system
                 $uploader = new UploadHandler();
                 $uploader->removeVendorAsset($file);
+
+                // Update cache entry
+                $vendor = $this->dataAccess->getVendor($vendorId, null, ['country', 'stateProvince', 'brands']);
+                $this->updateVendorCache($vendor, 'UPDATE');
 
                 return response()->json([
                     'error' => false,
@@ -194,6 +206,9 @@ class VendorController extends Controller
                         //$vendor->background_image_path = $newFilename;
                         $vendor->save();
 
+                        // Update cache entry
+                        $this->updateVendorCache($vendor, 'UPDATE');
+
                         return response()->json([
                             'error' => false,
                             'code'  => 200,
@@ -238,7 +253,10 @@ class VendorController extends Controller
             $vendorId = $data['VID'];
             $companyName = $data['company_name'];
 
-            $vendorId = $this->dataAccess->updateVendor($vendorId, ['company_name' => $companyName]);
+            $vendor = $this->dataAccess->updateVendor($vendorId, ['company_name' => $companyName]);
+
+            // Update cache entry
+            $this->updateVendorCache($vendor, 'UPDATE');
 
             return response()->json([
                 'error' => false,
@@ -258,5 +276,14 @@ class VendorController extends Controller
         }
     }
 
+    private function updateVendorCache($vendor, $action)
+    {
+        if($action == 'UPDATE')
+        {
+            // Update cache entry
+            $cacheKey = 'vendor-'.$vendor->id;
+            $this->cacheManager->setItem(env('CACHE_DRIVER'), $cacheKey, $vendor, config('app.cache_expiry_time_vendors'));
+        }
+    }
 
 }
