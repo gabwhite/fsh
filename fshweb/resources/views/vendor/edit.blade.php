@@ -261,6 +261,11 @@
                         this.removeAllFiles();
                         //console.log(response);
                     });
+
+                    this.on("error", function(e, errorMessage, xhr)
+                    {
+                        console.log(errorMessage);
+                    });
                 }
             };
 
@@ -280,6 +285,13 @@
                         $logoImage.attr("src", "{{url('img/vendors/')}}/" + response.filename);
                         $logoImageModal.attr("src", "{{url('img/vendors/')}}/" + response.filename);
                         this.removeAllFiles();
+                    });
+
+                    this.on("error", function(e, response, xhr)
+                    {
+                        this.removeAllFiles();
+                        alert("Error: " + response.message);
+                        //console.log(response);
                     });
                 }
             };

@@ -78,27 +78,36 @@ class VendorController extends Controller
         {
             try
             {
-                $newFilename = $uploader->uploadVendorAsset($request->file('brand_image_path'));
+                if($uploader->isImage($request->file('brand_image_path')))
+                {
+                    $newFilename = $uploader->uploadVendorAsset($request->file('brand_image_path'));
 
-                $uploader->resizeVendorAsset($newFilename,
-                                            config('app.vendor_brand_image_width'),
-                                            config('app.vendor_brand_image_height'));
+                    //$uploader->resizeVendorAsset($newFilename,
+                    //                            config('app.vendor_brand_image_width'),
+                    //                            config('app.vendor_brand_image_height'));
 
-                //            $vendorId = $this->dataAccess->upsertVendor(\Session::get(config('app.session_key_vendor')), $data);
-
-
-                // Now add brand to db
-                $data = ['vendor_id' => $request->header('VID'), 'name' => $newFilename, 'logo_image_path' => $newFilename, 'active' => 1];
-                $newBrandId = $this->dataAccess->insertBrand($data);
+                    //            $vendorId = $this->dataAccess->upsertVendor(\Session::get(config('app.session_key_vendor')), $data);
 
 
-                return response()->json([
-                    'error' => false,
-                    'code'  => 200,
-                    'filename' => $newFilename,
-                    'id' => $newBrandId
-                ], 200);
+                    // Now add brand to db
+                    $data = ['vendor_id' => $request->header('VID'), 'name' => $newFilename, 'logo_image_path' => $newFilename, 'active' => 1];
+                    $newBrandId = $this->dataAccess->insertBrand($data);
 
+                    return response()->json([
+                        'error' => false,
+                        'code'  => 200,
+                        'filename' => $newFilename,
+                        'id' => $newBrandId
+                    ], 200);
+                }
+                else
+                {
+                    return response()->json([
+                        'error' => true,
+                        'message' => 'Invalid image file',
+                        'code' => 500
+                    ], 500);
+                }
             }
             catch(Exception $ex)
             {
@@ -152,7 +161,8 @@ class VendorController extends Controller
 
     public function addAsset(Request $request)
     {
-        if ($request->hasFile('logo_image_path') || $request->hasFile('background_image_path'))
+        if ( ($request->hasFile('logo_image_path') || $request->hasFile('background_image_path'))
+            && ($request->file('logo_image_path')->isValid() || $request->file('background_image_path')->isValid()) )
         {
             try
             {
@@ -171,32 +181,52 @@ class VendorController extends Controller
                         $filename = $vendor->logo_image_path;
                     }
 
-                    $newFilename = $uploader->uploadVendorAsset($request->file('logo_image_path'), $filename);
+                    if($uploader->isImage($request->file('logo_image_path')))
+                    {
+                        $newFilename = $uploader->uploadVendorAsset($request->file('logo_image_path'), $filename);
 
-                    //$uploader->resizeVendorAsset($newFilename,
-                    //    config('app.vendor_logo_image_width'),
-                    //    config('app.vendor_logo_image_height'));
+                        //$uploader->resizeVendorAsset($newFilename,
+                        //    config('app.vendor_logo_image_width'),
+                        //    config('app.vendor_logo_image_height'));
 
-                    $vendor->logo_image_path = $newFilename;
-                    //$vendor->background_image_path = $newFilename;
-                    $vendor->save();
 
-                    return response()->json([
-                        'error' => false,
-                        'code'  => 200,
-                        'filename' => $newFilename
-                    ], 200);
+                        $vendor->logo_image_path = $newFilename;
+                        //$vendor->background_image_path = $newFilename;
+                        $vendor->save();
+
+                        return response()->json([
+                            'error' => false,
+                            'code'  => 200,
+                            'filename' => $newFilename
+                        ], 200);
+                    }
+                    else
+                    {
+                        return response()->json([
+                            'error' => true,
+                            'message' => trans('messages.system_error_invalid_image'),
+                            'code' => 500
+                        ], 500);
+                    }
                 }
             }
             catch(Exception $ex)
             {
                 return response()->json([
                     'error' => true,
-                    'message' => 'Server error while uploading',
+                    'message' => trans('messages.system_error_upload'),
                     'exception' => $ex->getMessage(),
                     'code' => 500
                 ], 500);
             }
+        }
+        else
+        {
+            return response()->json([
+                'error' => true,
+                'message' => trans('messages.system_error_upload'),
+                'code' => 500
+            ], 500);
         }
     }
 
