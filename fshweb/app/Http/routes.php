@@ -103,7 +103,7 @@ Route::post('auth/vendorregister', 'Auth\AuthController@postVendorRegister');
 
 // AJAX routes
 Route::get('ajax/getfoodcategories/{format}/{parentId?}', 'AjaxController@getFoodCategoriesForParent');
-Route::get('ajax/getproducts/{categoryId}', 'AjaxController@getProducts');
+Route::get('ajax/getproducts/{categoryId?}', 'AjaxController@getProducts');
 Route::get('ajax/getcountries', 'AjaxController@getCountries');
 Route::get('ajax/getstateprovincesforcountry/{countryId}', 'AjaxController@getStateProvincesForCountry');
 Route::get('ajax/productsearch/{query}', 'AjaxController@getProductFullTextSearch');
@@ -117,6 +117,13 @@ Route::get('datacleanup', function()
         $p->brand = ucfirst(strtolower($p->brand));
 
         $p->save();
+    }
+
+    $categories = \App\Models\Category::all();
+    foreach($categories as $c)
+    {
+        $c->name = ucfirst(strtolower($c->name));
+        $c->save();
     }
 
     echo "Done cleanup";
