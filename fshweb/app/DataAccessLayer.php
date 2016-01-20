@@ -55,6 +55,41 @@ class DataAccessLayer
         return Permission::all();
     }
 
+    public function getAllProducts($fields = null, $relationships = null, $publishedOnly = true, $sortBy = 'name', $paginate = false, $pageSize = 25)
+    {
+        $query = Product::all();
+
+        if(isset($fields))
+        {
+            $query = Product::select($fields);
+        }
+
+        if(isset($relationships))
+        {
+            $query = $query->with($relationships);
+        }
+
+        if($publishedOnly)
+        {
+            $query = $query->where('published', '=', true);
+        }
+
+        $query = $query->orderBy($sortBy);
+
+        if($paginate)
+        {
+            $products = $query->paginate($pageSize);
+        }
+        else
+        {
+            $products = $query->get();
+        }
+
+
+        return $products;
+
+    }
+
     public function getProduct($productId, $relationships = null)
     {
         if(isset($relationships))
@@ -375,13 +410,13 @@ class DataAccessLayer
 
     }
 
-    public function getProductsByCategory($categoryId, $paginate = false, $pageSize = 25)
+    public function getProductsByCategory($categoryId, $paginate = false, $pageSize = 25, $sortBy = 'products.name')
     {
         $query = \DB::table('products')
             ->join('product_categories', 'products.id', '=', 'product_categories.product_id')
             ->where('product_categories.category_id', '=', $categoryId)
             //->where('products.published', '=', true)
-            ->select('products.id', 'products.name', 'products.brand')->orderBy('products.name');
+            ->select('products.id', 'products.name', 'products.brand', 'products.uom', 'products.description')->orderBy($sortBy);
 
         if($paginate)
         {
