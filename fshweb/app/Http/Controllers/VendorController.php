@@ -173,9 +173,9 @@ class VendorController extends Controller
 
                     $newFilename = $uploader->uploadVendorAsset($request->file('logo_image_path'), $filename);
 
-                    $uploader->resizeVendorAsset($newFilename,
-                        config('app.vendor_logo_image_width'),
-                        config('app.vendor_logo_image_height'));
+                    //$uploader->resizeVendorAsset($newFilename,
+                    //    config('app.vendor_logo_image_width'),
+                    //    config('app.vendor_logo_image_height'));
 
                     $vendor->logo_image_path = $newFilename;
                     //$vendor->background_image_path = $newFilename;
