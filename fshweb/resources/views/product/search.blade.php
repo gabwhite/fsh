@@ -32,7 +32,7 @@
 
             <div class="row">
 
-                <div class="col-xs-12 col-md-4">
+                <div class="col-xs-12 col-md-4 sidebar-section">
                     <div class="col-xs-12 col-md-11">
                         
                         <h2 class="item-subhead">{{trans('ui.search_label_categories')}}</h2>
@@ -42,33 +42,39 @@
                 </div>
 
                 <div class="col-xs-12 col-md-8">
-                    <div class="col-xs-12 sort-menu">
-                        <h2 class="sort-title">Sort by:</h2>
-                        <select name="sortby" id="sortby" class="drop-sm">
-                            <option value="name">Product Name</option>
-                            <option value="brand">Brand</option>
-                            <option value="pack">Pack</option>
-                            <option value="units">Units</option>
-                            <option value="vendors">Vendors</option>
-                        </select>
+                    
+                    <div class="container">
+                        
+                        <div class="col-xs-12 sort-menu">
+                            <h2 class="sort-title">Sort by:</h2>
+                            <select name="sortby" id="sortby" class="drop-sm">
+                                <option value="name">Product Name</option>
+                                <option value="brand">Brand</option>
+                                <option value="pack">Pack</option>
+                                <option value="units">Units</option>
+                                <option value="vendors">Vendors</option>
+                            </select>
 
-                        <select name="viewall" id="viewall" class="drop-sm">
-                            <option value="10">View 10</option>
-                            <option value="25">View 25</option>
-                            <option value="50">View 50</option>
-                            <option value="100">View 100</option>
-                        </select>
+                            <select name="viewall" id="viewall" class="drop-sm">
+                                <option value="10">View 10</option>
+                                <option value="25">View 25</option>
+                                <option value="50">View 50</option>
+                                <option value="100">View 100</option>
+                            </select>
 
-                        <a id="hlSort" href="#"><button class="btn btn-sm">Sort Results</button></a>
+                            <a id="hlSort" href="#"><button class="btn btn-sm">Sort Results</button></a>
+                        </div>
+
                     </div>
+
                     <div id="rootResultContainer" class="col-xs-12 well">
                         <form>
 
                             <div class="row keyword-search">
-                                <div class="col-xs-8">
+                                <div class="colxs-12 col-sm-8">
                                     <input type="text" name="tbSearchQuery" id="tbSearchQuery" autocomplete="off" placeholder="{{trans('ui.search_placeholder')}}" value="{{$query or ''}}" class="form-control"/>
                                 </div>
-                                <div class="col-xs-4">
+                                <div class="col-xs-12 col-sm-4">
                                     <a href="#" id="hlSearchButton"><button class="btn">{{trans('ui.button_search')}}</button></a>
                                 </div>
                             </div>

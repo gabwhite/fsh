@@ -2,9 +2,9 @@
 
     <div class="col-xs-12 search-row">
 
-        <div class="col-xs-3 col-lg-2">
+        <div class="col-xs-3 col-md-2 drop-padding">
 
-            <div class="item-thumb">
+            <div class="item-thumb" style="background: url('../../public/img/no-photo-avail.svg') no-repeat; background-size: cover; background-position: center center;">
             </div>
 
             <div class="star-rating">
@@ -13,10 +13,13 @@
 
         </div>
 
-        <div class="col-xs-9 col-lg-10">
+        <div class="col-xs-9 col-md-10">
             <a href="{{url('product/detail', $p->id)}}">{{$p->name}}</a>
-            <span class="brand">{{$p->brand}}</span>
-
+            <p class="brand">{{$p->brand}}</p>
+        </div>
+        
+        <div class="col-xs-12 col-md-10 drop-padding">
+            
             <p>{{$p->description}}</p>
             
             <div class="col-xs-12 search-details">

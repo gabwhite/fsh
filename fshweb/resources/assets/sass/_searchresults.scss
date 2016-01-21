@@ -2,6 +2,25 @@
 =            Search Results            =
 ======================================*/
 
+/*----------  Hide Sidebar on mobile  ----------*/
+
+.sidebar-section {
+	display: none;
+	@include breakpoint(tablet){
+		display: block;
+	}
+}
+
+/*----------  Hide Second Keyword search on mobile  ----------*/
+
+.keyword-search {
+	display: none;
+	@include breakpoint(tablet){
+		display: block;
+	}
+}
+
+
 /*----------  Spinning Load  ----------*/
 
 .loadProgress{
@@ -16,15 +35,25 @@
 /*----------  Search Feed  ----------*/
 
 .item-thumb {
-	width: 80px;
-	height: 80px;
+	width: 50px;
+	height: 50px;
 	border: 1px solid $primary;
 	border-radius: 50%;
+	margin: 0 auto;
+
+	@include breakpoint(tablet){
+		width: 80px;
+		height: 80px;
+	}
+
 }
 
 .search-row {
-	padding: 20px 0;
+	padding: 10px 0;
 	border-bottom: 1px solid $border;
+	@include breakpoint(tablet){
+		padding: 20px 0;
+	}
 
 	a {
 		font-family: $body-font;
@@ -32,6 +61,11 @@
 		color: $body;
 		font-size: 18px;
 		margin-right: 12px;
+		margin-bottom: 10px;
+		
+		@include breakpoint(tablet){
+			margin-bottom: 0;
+		}
 	}
 
 	p {
@@ -45,6 +79,9 @@
 		border-radius: 3px;
 		text-align: center;
 		padding: 2px 5px;
+		display: inline-block;
+		width: auto;
+		margin-top: 3px;
 	}
 
 	a.goto-item {
@@ -85,12 +122,6 @@
 	}
 }
 
-h2.sort-title {
-	font-weight: 600;
-	color: $primary;
-	float: left;
-	margin: 6px 10px 0 0;
-}
 
 /*----------  Keyword Search  ----------*/
 
