@@ -99,7 +99,7 @@ Route::post('password/reset', 'Auth\PasswordController@postReset');
 Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 Route::get('auth/vendorregister', 'Auth\AuthController@getVendorRegister');
-Route::post('auth/vendorregister', 'Auth\AuthController@postVendorRegister');
+Route::post('auth/vendorregister', ['middleware' => 'postlogin', 'uses' => 'Auth\AuthController@postVendorRegister']);
 
 // AJAX routes
 Route::get('ajax/getfoodcategories/{format}/{parentId?}', 'AjaxController@getFoodCategoriesForParent');
