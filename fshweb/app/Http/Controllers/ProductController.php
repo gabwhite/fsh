@@ -96,7 +96,10 @@ class ProductController extends Controller
             $this->throwValidationException($request, $productValidator);
         }
 
-        $productId = $this->dataAccess->upsertProduct($productId, $user->id, $request->all());
+        $product = $this->dataAccess->upsertProduct($productId, $user->id, $request->all());
+
+        // Update cache entry
+        $this->updateProductCache($product, 'UPDATE');
 
         return redirect('product/detail/' . $productId)->with('successMessage', trans('messages.product_update_success'));;
     }
@@ -120,4 +123,13 @@ class ProductController extends Controller
         ]);
     }
 
+    private function updateProductCache($product, $action)
+    {
+        if($action == 'UPDATE')
+        {
+            // Update cache entry
+            $cacheKey = 'product-'.$product->id;
+            $this->cacheManager->setItem(env('CACHE_DRIVER'), $cacheKey, $product, config('app.cache_expiry_time_products'));
+        }
+    }
 }
