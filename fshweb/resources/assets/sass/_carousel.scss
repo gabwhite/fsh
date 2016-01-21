@@ -63,11 +63,27 @@ ul.slides {
 	}
 }
 
-.flex-direction-nav a.flex-prev{
-	background: url(../../public/img/icons/chevron-left.svg) no-repeat;
+.flex-direction-nav {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	*height: 0;
+
+	a {
+		text-decoration: none;
+		display: block;
+		width: 40px;
+		height: 40px;
+		margin: -20px 0 0;
+		position: absolute;
+		top: 50%;
+		z-index: 10;
+		overflow: hidden;
+		opacity: 0;
+		cursor: pointer;
+		color: rgba(0, 0, 0, 0.8);
+		text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.3);
+	}
 }
 
-.flex-direction-nav a.flex-next{
-	background: url(../../public/img/icons/chevron-right.svg) no-repeat;
-}
 /*=====  End of Bootstrap Carousel Styling  ======*/

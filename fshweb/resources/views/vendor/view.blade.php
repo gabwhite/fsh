@@ -10,7 +10,7 @@
 
 @section('sectionheader')
 <section class='clearfix container-wrap main-title'>
-    <div class="container ">
+    <div class="container">
         <div class="col-xs-12 vendor-profile">
             @if($profile->logo_image_path)
                 <img id="imgCurrentAvatar" src="{{url(config('app.vendor_storage') . '/' . $profile->logo_image_path)}}" title="{{trans('ui.user_label_currentavatar')}}" width="200" height="200"/>
@@ -85,31 +85,39 @@
         </div> <!-- end of sidebar -->
 
         <div class="col-xs-12 col-md-8">
-            <h2 class="item-subhead">{{trans('ui.vendor_label_about_text')}}</h2>
+            <div class="col-xs-12">
+                <h2 class="item-subhead">{{trans('ui.vendor_label_about_text')}}</h2>
 
-            <div class="col-xs-12 well">
-                <h3>{{isset($profile) ? $profile->intro_text : ''}}</h3>
+                <div class="col-xs-12 well">
+                    <h3>{{isset($profile) ? $profile->intro_text : ''}}</h3>
 
-                <p>{{isset($profile) ? $profile->about_text : ''}}</p>
-                
-            </div>
-
-            <div class="row">
-                <div class="col-xs-12">
+                    <p>{{isset($profile) ? $profile->about_text : ''}}</p>
                     
-                    <h2 class="item-subhead">Our Brands</h2>
+                </div>
 
-                    <div class="col-xs-12 well">
-                        <div class="flexslider">
-                          <ul class="slides">
-                          @foreach($profile->brands as $b)
-                              <li style="background: url('{{url(config('app.vendor_storage'))}}/{{$b->logo_image_path}}'); background-repeat: no-repeat; background-position: center center; background-size: contain;">
-                              </li>
-                          @endforeach
-                            <!-- items mirrored twice, total of 12 -->
-                          </ul>
+                <div class="row">
+                    <div class="col-xs-12">
+                        
+                        <h2 class="item-subhead">Our Brands</h2>
+
+                        <div class="col-xs-12 well">
+                            <div class="flexslider">
+                              <ul class="slides">
+                              @foreach($profile->brands as $b)
+                                  <li style="background: url('{{url(config('app.vendor_storage'))}}/{{$b->logo_image_path}}'); background-repeat: no-repeat; background-position: center center; background-size: contain;">
+                                  </li>
+                              @endforeach
+                                <!-- items mirrored twice, total of 12 -->
+                              </ul>
+                            </div>
+
+                            <div class="custom-navigation">
+                              <a href="#" class="flex-prev">Prev</a>
+                              <div class="custom-controls-container"></div>
+                              <a href="#" class="flex-next">Next</a>
+                            </div>
+                               
                         </div>
-                           
                     </div>
                 </div>
             </div>
@@ -132,7 +140,8 @@
             animationLoop: false,
             controlNav: false,
             itemWidth: 225,
-            itemMargin: 10
+            itemMargin: 10,
+            customDirectionNav: $(".custom-navigation a")
         });
     });
 </script>
