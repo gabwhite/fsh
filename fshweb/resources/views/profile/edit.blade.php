@@ -32,12 +32,13 @@
 
 @section('content')
 
+<form id="form1" name="form1" method="post" action="{{url('profile/edit')}}">
+
 <div class="row">
 
     <div class="col-xs-12 col-md-8 col-md-offset-4">
         <div class="col-xs-12 well">
             
-            <form id="form1" name="form1" method="post" action="{{url('profile/edit')}}">
 
                 <div class="detail-row">
                     <label for="email">{{trans('ui.user_label_email')}}</label>
@@ -76,12 +77,11 @@
                 </div>
 
 
-            </form>
         </div>
         <div class="row btn-row">
             <div class="col-xs-12">
                 <input type="submit" value="{{trans('ui.button_update')}}" class="btn-primary"/>
-                <a href="{{url('/profile')}}"><button class="btn">{{trans('ui.button_cancel')}}</button</a>
+                <a href="{{url('/profile')}}"><button class="btn">{{trans('ui.button_cancel')}}</button></a>
             </div>
         </div>
 
@@ -89,6 +89,8 @@
     </div>
 
 </div>
+
+</form>
 
 @endsection
 

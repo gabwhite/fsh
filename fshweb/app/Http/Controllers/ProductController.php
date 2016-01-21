@@ -34,12 +34,12 @@ class ProductController extends Controller
 
     public function detail($id)
     {
-
-        $product = $this->cacheManager->getItem(env('CACHE_DRIVER'), 'product-'.$id);
+        $cacheKey = 'product-'.$id;
+        $product = $this->cacheManager->getItem(env('CACHE_DRIVER'), $cacheKey);
         if(is_null($product) || !isset($product))
         {
             $product = $this->dataAccess->getProduct($id, ['allergens']);
-            $this->cacheManager->setItem(env('CACHE_DRIVER'), 'product-'.$id, $product, config('app.cache_expiry_time_products'));
+            $this->cacheManager->setItem(env('CACHE_DRIVER'), $cacheKey, $product, config('app.cache_expiry_time_products'));
         }
 
         $canEdit = false;
@@ -61,6 +61,13 @@ class ProductController extends Controller
     public function search()
     {
         return view('product.search');
+    }
+
+    public function doSearch(Request $request)
+    {
+        $results = $this->dataAccess->getProductsByFullText($request->input('searchquery'), 'name', true, config('app.search_default_page_size'));
+
+        return view('product.search')->with(['searchresults' => $results, 'searchquery' => $request->input('searchquery')]);
     }
 
     public function showEditProduct($id = null)
@@ -96,9 +103,12 @@ class ProductController extends Controller
             $this->throwValidationException($request, $productValidator);
         }
 
-        $productId = $this->dataAccess->upsertProduct($productId, $user->id, $request->all());
+        $product = $this->dataAccess->upsertProduct($productId, $user->id, $request->all());
 
-        return redirect('product/detail/' . $productId)->with('successMessage', trans('messages.product_update_success'));;
+        // Update cache entry
+        $this->updateProductCache($product, 'UPDATE');
+
+        return redirect('product/detail/' . $product->id)->with('successMessage', trans('messages.product_update_success'));;
     }
 
     public function vendorProducts()
@@ -120,4 +130,13 @@ class ProductController extends Controller
         ]);
     }
 
+    private function updateProductCache($product, $action)
+    {
+        if($action == 'UPDATE')
+        {
+            // Update cache entry
+            $cacheKey = 'product-'.$product->id;
+            $this->cacheManager->setItem(env('CACHE_DRIVER'), $cacheKey, $product, config('app.cache_expiry_time_products'));
+        }
+    }
 }

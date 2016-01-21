@@ -10,6 +10,9 @@
 
 return [
 
+    'system_error_upload' => 'Server error while uploading',
+    'system_error_invalid_image' => 'Invalid image file',
+
     'contact_subject_to' => 'Contact Us message received',
     'contact_subject_from' => 'Thank you for your inquiry',
     'contact_received_success' => 'Thanks for reaching out. We\'ll be in touch soon.',
