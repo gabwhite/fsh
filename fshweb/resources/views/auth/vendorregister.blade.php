@@ -18,7 +18,7 @@
             <div class="col-xs-12 well">
                 <div class="col-xs-12 col-md-10 col-md-offset-1">
                     <h2 class="subhead">Create a Vendor Account</h2>
-                    <form id="form1" name="form1" method="POST" action="{{url('/auth/vendorregister')}}">
+                    <form id="form1" name="form1" method="POST" action="{{url('/auth/vendorregister')}}" enctype="multipart/form-data">
                         {!! csrf_field() !!}
 
                         <div>
@@ -116,15 +116,15 @@
                         </div>
 
                         <div>
-                            <label for="logo_image_path">{{trans('ui.vendor_label_background_image')}}</label>
+                            <label for="background_image_path">{{trans('ui.vendor_label_background_image')}}</label>
                             <input type="file" name="background_image_path"/>
                         </div>
 
                         <div class="text-center">
                             <button type="submit" class="btn-primary">{{trans('ui.button_register')}}</button>
                         </div>
-                    </div>    
-                </form>
+                    </form>
+                </div>
             </div> <!-- end of well -->
         </div>
 
