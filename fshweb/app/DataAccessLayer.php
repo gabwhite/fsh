@@ -176,7 +176,7 @@ class DataAccessLayer
 
         $product->save();
 
-        return $product->id;
+        return $product;
 
     }
 
