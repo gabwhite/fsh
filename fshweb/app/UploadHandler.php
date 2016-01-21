@@ -149,7 +149,7 @@ class UploadHandler
         $fileExt = $file->getClientOriginalExtension();
         $fileMime = $file->getMimeType();
 
-        if(array_has($extensions, $fileExt))
+        if(in_array($fileExt, $extensions, true) && in_array($fileMime, $mimeTypes, true))
         {
             $result = true;
         }

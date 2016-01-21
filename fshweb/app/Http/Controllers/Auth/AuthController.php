@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Models\User;
 use App\Models\UserProfile;
 use App\Http\Controllers\Controller;
+use App\UploadHandler;
 
 use Validator;
 
@@ -72,8 +73,8 @@ class AuthController extends Controller
             'contact_title' => 'max:200',
             'contact_url' => 'max:200',
             'contact_phone' => 'max:200',
-            'logo_image_path' => 'max:200',
-            'background_image_path' => 'max:200',
+            //'logo_image_path' => 'max:200',
+            //'background_image_path' => 'max:200',
         ]);
     }
 
@@ -153,14 +154,31 @@ class AuthController extends Controller
 
 
             // Now validate / create vendor profile
-            $vendorValidator = $this->vendorValidator($request->all());
+            $data = $request->all();
+
+
+            $vendorValidator = $this->vendorValidator($data);
 
             if ($vendorValidator->fails())
             {
                 $this->throwValidationException($request, $vendorValidator);
             }
 
-            $this->createVendor($user->id, $request->all());
+            // Attempt to upload the images
+            $uploader = new UploadHandler();
+            if ($request->hasFile('logo_image_path') && $request->file('logo_image_path')->isValid() && $uploader->isImage($request->file('logo_image_path')))
+            {
+                $newFilename = $uploader->uploadVendorAsset($request->file('logo_image_path'));
+                $data['logo_image_path'] = $newFilename;
+            }
+
+            if ($request->hasFile('background_image_path') && $request->file('background_image_path')->isValid() && $uploader->isImage($request->file('background_image_path')))
+            {
+                $newFilename = $uploader->uploadVendorAsset($request->file('background_image_path'));
+                $data['background_image_path'] = $newFilename;
+            }
+
+            $vendor = $this->createVendor($user->id, $data);
 
             DB::commit();
 
