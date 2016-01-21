@@ -101,7 +101,7 @@ class ProductController extends Controller
         // Update cache entry
         $this->updateProductCache($product, 'UPDATE');
 
-        return redirect('product/detail/' . $productId)->with('successMessage', trans('messages.product_update_success'));;
+        return redirect('product/detail/' . $product->id)->with('successMessage', trans('messages.product_update_success'));;
     }
 
     public function vendorProducts()
