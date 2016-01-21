@@ -65,7 +65,7 @@
                     </div>
                 </div>
                 
-                <div class="col-xs-6 col-md-9">
+                <div class="col-xs-12 col-md-9">
                     <div class="col-xs-12 col-md-4">
                         <form class="navbar-form" id="frmNavigationSearch" method="post" action="{{url('product/navsearch')}}">
                             <div class="form-group">

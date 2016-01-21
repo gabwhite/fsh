@@ -19,6 +19,12 @@ label {
 		margin-bottom: 20px;
 		height: 50px;
 	}
+	&:focus {
+		border: 1px solid $placeholder;
+		outline: 0;
+		@include vendor-prefixes(box-shadow, none);
+		box-shadow: none;
+	}
 }
 
 .input-sm {
@@ -35,16 +41,48 @@ select.search-dropdown {
 	width: 100%;
 	font-weight: 600;
 	color: $placeholder;
+	margin-bottom: 15px;
 	@include breakpoint(tablet){
 		height: 50px;
 		width: 20%;
-		margin: 0 10px;
+		margin: 0 5px;
 	}
 }
+
+select:focus {
+	outline: 0;
+	border: 1px solid $placeholder;
+}
+
+/*----------  Sort Form  ----------*/
 
 select.drop-sm {
 	@extend select.search-dropdown;
 	height:35px;
+}
+
+select#sortby {
+	margin-right: 1%;
+	@include breakpoint(tablet){
+		margin-right: 5px;
+	}
+}
+
+.sort-menu select.drop-sm {
+	width: 36%;
+
+	@include breakpoint(tablet){
+		width: auto;
+	}
+}
+
+#hlSort {
+	display: block;
+	text-align: center;
+	@include breakpoint(tablet){
+		text-align: left;
+		display: inline-block;
+	}
 }
 
 /*----------  Buttons  ----------*/
@@ -86,13 +124,8 @@ select.drop-sm {
 	
 	button, 
 	input[type="submit"] {
-		margin: 0 10px;
+		margin: 10px 15px 10px 0;
 		float: left;
-	}
-	
-	input[type="submit"], 
-	:first-child{
-		margin-left: 0;
 	}
 }
 

@@ -55,6 +55,38 @@ class DataAccessLayer
         return Permission::all();
     }
 
+    public function getAllProducts($fields = null, $relationships = null, $publishedOnly = true, $sortBy = 'name', $paginate = false, $pageSize = 25)
+    {
+        if(isset($fields))
+        {
+            $query = Product::select($fields);
+        }
+
+        if(isset($relationships))
+        {
+            $query = $query->with($relationships);
+        }
+
+        if($publishedOnly)
+        {
+            $query = $query->where('published', '=', true);
+        }
+
+        $query = $query->orderBy($sortBy);
+
+        if($paginate)
+        {
+            $products = $query->paginate($pageSize);
+        }
+        else
+        {
+            $products = $query->get();
+        }
+
+        return $products;
+
+    }
+
     public function getProduct($productId, $relationships = null)
     {
         if(isset($relationships))
@@ -105,8 +137,8 @@ class DataAccessLayer
             $isAdd = true;
         }
 
-        $product->name = $data['name'];
-        $product->brand = (isset($data['brand']) ? $data['brand'] : null);
+        $product->name = ucfirst(mb_strtolower($data['name']));
+        $product->brand = (isset($data['brand']) ? ucfirst(mb_strtolower($data['brand'])) : null);
         $product->pack = (isset($data['pack']) ? $data['pack'] : null);
         $product->size = (isset($data['size']) ? $data['size'] : null);
         $product->uom = (isset($data['uom']) ? $data['uom'] : null);
@@ -144,7 +176,7 @@ class DataAccessLayer
 
         $product->save();
 
-        return $product->id;
+        return $product;
 
     }
 
@@ -190,7 +222,7 @@ class DataAccessLayer
         return DB::table('stateprovinces')->where('country_id', '=', $countryId)->get();
     }
 
-    public function getProductsByFullText($rawQuery, $paginate = false, $pageSize = 25)
+    public function getProductsByFullText($rawQuery, $orderBy, $paginate = false, $pageSize = 25)
     {
         $arrTerms = $this->prepareFullTextSearchQuery($rawQuery);
 
@@ -200,11 +232,11 @@ class DataAccessLayer
 
         if($paginate)
         {
-            $products = Product::select('id', 'name', 'brand')->whereRaw($query)->paginate($pageSize);
+            $products = Product::select('id', 'name', 'brand')->whereRaw($query)->orderBy($orderBy)->paginate($pageSize);
         }
         else
         {
-            $products = Product::select('id', 'name', 'brand')->whereRaw($query)->get();
+            $products = Product::select('id', 'name', 'brand')->whereRaw($query)->orderBy($orderBy)->get();
         }
 
 
@@ -333,10 +365,10 @@ class DataAccessLayer
 
             $vendor->save();
 
-            return $vendor->id;
+            return $vendor;
         }
 
-        return 0;
+        return null;
     }
 
     public function insertBrand($data)
@@ -375,13 +407,13 @@ class DataAccessLayer
 
     }
 
-    public function getProductsByCategory($categoryId, $paginate = false, $pageSize = 25)
+    public function getProductsByCategory($categoryId, $paginate = false, $pageSize = 25, $sortBy = 'products.name')
     {
         $query = \DB::table('products')
             ->join('product_categories', 'products.id', '=', 'product_categories.product_id')
             ->where('product_categories.category_id', '=', $categoryId)
             //->where('products.published', '=', true)
-            ->select('products.id', 'products.name', 'products.brand')->orderBy('products.name');
+            ->select('products.id', 'products.name', 'products.brand', 'products.uom', 'products.description')->orderBy($sortBy);
 
         if($paginate)
         {

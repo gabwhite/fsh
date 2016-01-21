@@ -1,41 +1,7 @@
 /*======================================================
 =            Typography for the entire site            =
 ======================================================*/
-/*----------  Globals  ----------*/
 
-body {
-	background: $body-background;
-	color: $body;
-	font-family: $body-font;
-}
-
-p {
-	font-size: 16px;
-}
-
-.well {
-	@include well;
-}
-
-.reset-left {
-    @include breakpoint(tablet){
-        padding-left: 0;
-    }
-}
-
-.reset-right {
-    @include breakpoint(tablet){
-        padding-right: 0;
-    }
-}
-
-.reset-padding {
-    padding: 0;
-}
-
-.hide {
-    display: none;
-}
 
 /*----------  Headers  ----------*/
 
@@ -57,14 +23,26 @@ h1.page-title {
 }
 
 h1.item-title {
-	text-transform: none;
 	color: $primary;
 	font-weight: 600;
+    width: auto;
+    display: inline-block;
+    margin-top: 0;
+    @include breakpoint(tablet){
+        margin-top: 30px;
+    }
+}
+
+h2 {
+    font-size: 20px;
+    @include breakpoint(tablet){
+        font-size: 30px;
+    }
 }
 
 h2.subhead {
 	font-weight: 600;
-	font-size: 16px;
+	font-size: 20px;
 	text-align: center;
 	margin-bottom: 20px;
 	color: $primary;
@@ -82,6 +60,14 @@ h2.item-subhead {
 	line-height: 110%;
 	margin-top: 10px;
 }
+
+h2.sort-title {
+    font-weight: 600;
+    color: $primary;
+    margin: 6px 10px 0 0;
+    float: left;
+}
+
 
 h3 {
     line-height: 1.5;
@@ -113,7 +99,10 @@ h4.modal-title {
 /*----------  Item Detail Page  ----------*/
 
 .detail-row {
-	margin-bottom: 30px;
+	margin-bottom: 20px;
+    @include breakpoint(tablet){
+        margin-bottom: 30px;
+    }
 }
 
 /*----------  Table Row  ----------*/
@@ -405,10 +394,11 @@ h2 {
 
 /*----------  Pagination Styles  ----------*/
 
-ul.pagination p {
-    float: left;
-    font-weight: 600;
-    margin: 5px 0 0 0;
+ul.pagination {
+    padding: 0;
+    @include breakpoint(tablet){
+        padding: 0 25%;
+    }
 }
 
 ul.pagination li.active span{
@@ -430,5 +420,23 @@ ul.pagination li a {
         background: none;
     }
 }
+
+.pagination > li > a, 
+.pagination > li > span {
+    border: 0;
+}
+
+.pagination > .active > a, 
+.pagination > .active > a:hover, 
+.pagination > .active > a:focus, 
+.pagination > .active > span, 
+.pagination > .active > span:hover, 
+.pagination > .active > span:focus {
+    background: none;
+    color: $primary;
+    border: 0;
+    font-size: 16px;
+}
+
 /*=====  End of Typography for the entire site  ======*/
 	

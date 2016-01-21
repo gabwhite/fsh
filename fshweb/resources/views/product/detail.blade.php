@@ -10,8 +10,12 @@
 <section class='clearfix container-wrap item-header'>
     <div class='container'>
         <div class="col-xs-12">
-            <h1 class="item-title">{{$product->name}}</h1>
-            
+            <div class="title-wrap">
+                <h1 class="item-title">{{$product->name}}</h1>
+                <div class="star-detail">
+                    <img src="../../img/icons/star.svg" alt="star-rating">
+                </div>
+            </div>
             <div class="btn-row">
                 <a href="javascript:alert('Coming Soon');"><button class="btn-primary">{{trans('ui.product_label_add_to_my_products')}}</button></a>
            
@@ -41,10 +45,11 @@
 @section('content')
     <div class="container">
         <div class="col-xs-12 well">  
-            <div class="col-xs-12 col-md-4 reset-left">
+            <div class="col-xs-12 col-md-4 text-center reset-left">
                 <img src="../../img/no-photo-avail.svg" alt="item not pictured">
-                <div class="star-detail">
-                    <img src="../../img/icons/star.svg" alt="star-rating">
+                
+                <div class="detail-brand">
+                    <img src="../../img/slider/ROLAND-LOGO-BANNER-SIZE.png" alt="brand-logo">
                 </div>
             </div>
 
@@ -76,12 +81,12 @@
                             </div>
 
                             <div class="col-xs-12 nutrition-meta calories">
-                                <div class="col-lg-6 calories-left">
+                                <div class="col-xs-6 calories-left">
                                     <label>{{trans('ui.product_label_calories')}}
                                     <span class="nutrition-value">{{$product->calories}}</span></label>
                                 </div>
 
-                                <div class="col-lg-6 calories-right">
+                                <div class="col-xs-6 calories-right">
                                     <label for="calories_from_fat"><span class="nutrition-value"> {{trans('ui.product_label_calories_from_fat')}} {{$product->calories_from_fat}}</span></label>
                                 </div>
 
@@ -211,7 +216,7 @@
                     <h2 class="item-subhead">{{trans('ui.product_label_packaging_weights')}}</h2>
                 
                     <div class="well col-xs-12">
-                        <div class="col-xs-12 col-sm-6">
+                        <div class="col-xs-12 col-sm-6 drop-padding">
                             
                             <div class="table-row">
                                 <p>{{trans('ui.product_label_pack')}}:</p>
@@ -244,7 +249,7 @@
                             </div>
                         </div>
                         
-                        <div class="col-xs-12 col-sm-6">
+                        <div class="col-xs-12 col-sm-6 drop-padding">
                             
                             <div class="table-row">
                                 <p>{{trans('ui.product_label_gross_weight')}}:</p>
@@ -337,7 +342,7 @@
 
                     <div class="col-xs-12 col-md-12 detail-row">
                         <label for="email">{{trans('ui.user_label_email')}}</label>
-                        <input type="text" name="email" placeholder="" class="form-control" value="{{Auth::user()->email}}" maxlength="100"/> 
+                        <input type="text" name="email" placeholder="" class="form-control" value="{{(Auth::check()) ? Auth::user()->email : ''}}" maxlength="100"/>
                     </div>
                     
                     <div class="col-xs-12 col-md-12 detail-row">

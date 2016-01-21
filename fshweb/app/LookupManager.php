@@ -35,7 +35,7 @@ class LookupManager
         if($countries == null)
         {
             $countries = $this->dataAccess->getAllCountries();
-            $this->cacheManager->setItem(env('CACHE_DRIVER'), 'countries', $countries, 10);
+            $this->cacheManager->setItem(env('CACHE_DRIVER'), 'countries', $countries, config('app.cache_expiry_time_countries'));
         }
 
         return $countries;
@@ -45,7 +45,7 @@ class LookupManager
     {
         $key = 'stateprovince-' . $countryId;
 
-        $stateProvinces = Cache::remember($key, 5, function() use ($countryId)
+        $stateProvinces = Cache::remember($key, config('app.cache_expiry_time_stateprovinces'), function() use ($countryId)
         {
             return $this->dataAccess->getStateProvincesForCountry($countryId);
         });
@@ -61,7 +61,7 @@ class LookupManager
         if($allergens == null)
         {
             $allergens = $this->dataAccess->getAllAllergens();
-            $this->cacheManager->setItem(env('CACHE_DRIVER'), 'allergens', $allergens, 10);
+            $this->cacheManager->setItem(env('CACHE_DRIVER'), 'allergens', $allergens, config('app.cache_expiry_time_allergens'));
         }
 
         return $allergens;
@@ -75,7 +75,7 @@ class LookupManager
         if($categories == null)
         {
             $categories = $this->dataAccess->getFoodCategoriesForParent(true, $parentId, ['id', 'name', 'parent_id']);
-            $this->cacheManager->setItem(env('CACHE_DRIVER'), $key, $categories, 10);
+            $this->cacheManager->setItem(env('CACHE_DRIVER'), $key, $categories, config('app.cache_expiry_time_categories'));
         }
 
         return $categories;

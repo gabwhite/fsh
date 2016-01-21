@@ -29,9 +29,14 @@ class AjaxController extends Controller
 
     public function getProductFullTextSearch($query)
     {
-        $results = $this->dataAccess->getProductsByFullText($query);
+        $results = $this->dataAccess->getProductsByFullText($query, 'name', true, 10);
 
-        return response()->json($results);
+        $view = \View::make('product.productresults', ['products' => $results, 'sort' => 'name']);
+
+        return response()->json($view->render());
+
+
+        //return response()->json($results);
     }
 
     public function getFoodCategoriesForParent($format, $parentId = null)
@@ -60,11 +65,21 @@ class AjaxController extends Controller
         }
     }
 
-    public function getProducts($categoryId)
+    public function getProducts($categoryId = null)
     {
-        $products = $this->dataAccess->getProductsByCategory($categoryId);
+        if(isset($categoryId))
+        {
+            $products = $this->dataAccess->getProductsByCategory($categoryId, true, 10);
+        }
+        else
+        {
+            $products = $this->dataAccess->getAllProducts(['id', 'name', 'brand'], null, false, 'name', true, 10);
+        }
 
-        return response()->json($products);
+        $view = \View::make('product.productresults', ['products' => $products, 'sort' => 'name']);
+
+        return response()->json($view->render());
+        //return response()->json($products);
     }
 
     public function getCountries()

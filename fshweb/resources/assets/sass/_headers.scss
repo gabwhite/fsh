@@ -11,6 +11,7 @@
 
 /*----------  Navigation  ----------*/
 
+
 nav.navbar {
 	margin-bottom: 0;
 }
@@ -19,20 +20,32 @@ nav.navbar {
 	float: right;
 }
 
+.navbar-header {
+	padding-top: 10px;
+}
+
 .navbar-default{
 	background: white;
 	border: 1px solid $border;
 }
 
 #logo_img {
-	max-height: 50px;
+	max-height: 30px;
 	margin: 0 auto;
+	@include breakpoint(tablet){
+		max-height: 50px;
+		margin-bottom: 10px;
+	}
 }
 
 .navbar-brand {
 	float: left;
 	height: auto;
-	padding: 10px 0;
+	padding: 0;
+}
+
+.navbar-toggle {
+	margin-top: 0;
 }
 
 button.navbar-collapse, 
@@ -46,6 +59,8 @@ ul.nav {
 
 .navbar-form {
 	padding: 0;
+	border-bottom: 0;
+	margin-top: 0;
 
 	.form-control, 
 	.form-group {
@@ -54,13 +69,22 @@ ul.nav {
 	input {
 		margin-bottom: 0;
 	}
+
+	@include breakpoint(tablet){
+		margin-top: 10px;
+	}
 }
 
 a.search {
 	float: right;
     position: absolute;
-    top: 20px;
-    right: 10%;
+    top: 5px;
+    right: 3%;
+
+    @include breakpoint(tablet){
+    	top: 20px;
+    	right: 10%;
+    }
 }
 
 .navbar-default .navbar-nav > li > a {
@@ -111,7 +135,7 @@ a.search {
 	margin-top: 30px;
 
 	.container, .auth-check {
-		padding-right: 0;
+		//padding-right: 0;
 	}
 
 }
