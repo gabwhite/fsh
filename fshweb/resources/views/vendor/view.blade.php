@@ -11,7 +11,7 @@
 @section('sectionheader')
 <section class='clearfix container-wrap main-title'>
     <div class="container">
-        <div class="col-xs-12 vendor-profile">
+        <div class="col-xs-12 vendor-profile" style="background-image: url('{{ ($profile->background_image_path) ? url(config('app.vendor_storage') . '/' . $profile->background_image_path) : '' }}')">
             @if($profile->logo_image_path)
                 <img id="imgCurrentAvatar" src="{{url(config('app.vendor_storage') . '/' . $profile->logo_image_path)}}" title="{{trans('ui.user_label_currentavatar')}}" width="200" height="200"/>
             @else
