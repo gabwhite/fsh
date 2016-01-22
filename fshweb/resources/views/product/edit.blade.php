@@ -241,7 +241,7 @@
                     <div class="btn-row row">
                         <div class="col-xs-12">
                             <input type="submit" class="btn-primary" value="{{trans('ui.button_addupdate')}}"/>
-                            <a href="{{url('product/detail', $product->id)}}"><button class="btn">{{trans('ui.button_cancel')}}</button></a>
+                            <a href="{{($product->id) ? url('product/detail', $product->id) : url('profile/')}}"><button type="button" class="btn">{{trans('ui.button_cancel')}}</button></a>
                         </div>
                     </div>
                 </div>
