@@ -46,7 +46,12 @@
     <div class="container">
         <div class="col-xs-12 well">  
             <div class="col-xs-12 col-md-4 text-center reset-left">
-                <img src="../../img/no-photo-avail.svg" alt="item not pictured">
+
+                @if($product->product_image)
+                    <img src="{{url(config('app.product_storage') . '/' . $product->product_image)}}" alt="" />
+                @else
+                    <img src="{{url('/img/no-photo-avail.svg')}}" alt="item not pictured" />
+                @endif
                 
                 <div class="detail-brand">
                     <img src="../../img/slider/ROLAND-LOGO-BANNER-SIZE.png" alt="brand-logo">
