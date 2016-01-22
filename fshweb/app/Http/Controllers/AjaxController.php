@@ -27,17 +27,6 @@ class AjaxController extends Controller
         $this->lookupManager = $lookupManager;
     }
 
-    public function getProductFullTextSearch($query)
-    {
-        $results = $this->dataAccess->getProductsByFullText($query, ['id', 'name', 'brand', 'pack', 'uom', 'mpc', 'calc_size', 'description'], 'name', true, 10);
-
-        $view = \View::make('product.productresults', ['products' => $results, 'sort' => 'name', 'pageSize' => 10]);
-
-        return response()->json($view->render());
-
-        //return response()->json($results);
-    }
-
     public function getFoodCategoriesForParent($format, $parentId = null)
     {
         $categories = $this->lookupManager->getFoodCategoriesForParent($parentId);
