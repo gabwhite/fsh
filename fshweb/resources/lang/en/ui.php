@@ -80,7 +80,6 @@ return [
     'vendor_label_state_province' => 'State / Province',
     'vendor_label_address1' => 'Address 1',
     'vendor_label_address2' => 'Address 2',
-
     'vendor_label_city' => 'City',
     'vendor_label_zip_postal' => 'Zip / Postal',
     'vendor_label_contact_name' => 'Contact Name',
@@ -100,6 +99,8 @@ return [
     'vendor_label_edit_header' => 'Edit Header',
     'vendor_label_edit_profile_header' => 'Edit Profile Header',
     'vendor_label_choose_country' => 'Please choose a country first',
+    'vendor_label_my_products' => 'My Products',
+    'vendor_label_my_products_instruction' => 'Edit existing products or upload new products.',
 
 
 

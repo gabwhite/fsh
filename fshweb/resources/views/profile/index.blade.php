@@ -70,7 +70,7 @@
                 <h2 class="item-subhead">Bio</h2>
 
                 <div class="col-xs-12 well">
-                    <p>{{$bio}}</p>
+                    <p>{{$bio or trans('messages.profile_no_bio')}}</p>
                 </div>
 
             </div>
@@ -80,10 +80,10 @@
             @if($vendorOwner)
             <div class="row">
                 <div class="col-xs-12">
-                    <h2 class="item-subhead">My Products</h2>
+                    <h2 class="item-subhead">{{trans('ui.vendor_label_my_products')}}</h2>
                     <div class="col-xs-12 well">
                         
-                        <p>Edit existing products or upload new products.</p>
+                        <p>{{trans('ui.vendor_label_my_products_instruction')}}</p>
                         
                         <div class="row btn-row">
                             <div class="col-xs-12">
