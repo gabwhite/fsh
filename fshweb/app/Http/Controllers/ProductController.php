@@ -111,12 +111,10 @@ class ProductController extends Controller
                 $this->throwValidationException($request, $productValidator);
             }
 
+            $data = $request->all();
             try
             {
-                $data = $request->all();
-
                 // Upload product file if present
-                $newFilename = null;
                 $uploader = new UploadHandler();
                 if ($request->hasFile('product_image') && $request->file('product_image')->isValid() && $uploader->isImage($request->file('product_image')))
                 {
@@ -134,7 +132,7 @@ class ProductController extends Controller
             catch(Exception $ex)
             {
                 // Clean up uploaded image if needed
-                if(isset($newFilename)) { $uploader->removeProductAsset($newFilename); }
+                if(isset($data['product_image'])) { $uploader->removeProductAsset($newFilename); }
             }
         }
 
