@@ -72,14 +72,22 @@
                             <div class="row keyword-search">
                                 <div class="colxs-12 col-sm-8">
                                     <input type="text" name="tbSearchQuery" id="tbSearchQuery" autocomplete="off" placeholder="{{trans('ui.search_placeholder')}}" value="{{$query or ''}}" class="form-control"/>
+                                    <a id="hlToggleSearchTips" href="#">Search Tips</a>
+                                    <div id="divSearchTips" class="row" style="display:none;">
+                                        <div class="colxs-12">
+                                            <p>"+" : Two or more terms or phrases must be in the result.</p>
+                                            <p><i>+swiss +cheese</i></p>
+                                            <p>"-" : A term or phrase specified is excluded from the search</p>
+                                            <p><i>milk -coconut</i></p>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-4">
                                     <a href="#" id="hlSearchButton"><button class="btn">{{trans('ui.button_search')}}</button></a>
                                 </div>
                             </div>
 
-                        <div id="product_list">
-                        </div>
+                            <div id="product_list"></div>
 
                     </div>
                 </div>

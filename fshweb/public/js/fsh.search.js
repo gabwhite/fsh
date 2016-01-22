@@ -72,6 +72,12 @@ fsh.search = (function ($, document)
             resortResults();
         });
 
+        $("#hlToggleSearchTips").on("click", function(e)
+        {
+            e.preventDefault();
+            $("#divSearchTips").slideToggle();
+        });
+
     };
 
     var initTree = function()
