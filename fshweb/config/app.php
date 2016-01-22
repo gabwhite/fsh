@@ -145,7 +145,6 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\ProductImportProvider::class,
-        App\Providers\SearchIndexerProvider::class,
         App\Providers\MailServiceProvider::class,
 
         Zizaco\Entrust\EntrustServiceProvider::class,
