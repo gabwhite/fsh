@@ -5,7 +5,7 @@ var fsh = fsh || {};
 
 fsh.search = (function ($, document)
 {
-    var _categoryUrl, _productUrl, _searchUrl, _detailUrl, _progressImage;
+    var _categoryUrl, _productUrl, _detailUrl, _progressImage;
 
     var $categoryTree = $("#jstree_demo_div");
     var $resultTable = $("#product_list");
@@ -24,11 +24,10 @@ fsh.search = (function ($, document)
     var currentSearchType = "";
     var productSearchQueryStringFormat = "?type=%s&sort=%s&pageSize=%s";
 
-    var init = function(categoryUrl, productUrl, searchUrl, detailUrl, progressImage)
+    var init = function(categoryUrl, productUrl, detailUrl, progressImage)
     {
         _categoryUrl = categoryUrl;
         _productUrl = productUrl;
-        _searchUrl = searchUrl;
         _detailUrl = detailUrl;
         _progressImage = progressImage;
 

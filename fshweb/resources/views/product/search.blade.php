@@ -103,7 +103,6 @@
         {
             fsh.search.init("{{url('ajax/getfoodcategories/')}}",
                             "{{url('ajax/getproducts')}}",
-                            "{{url('ajax/productsearch')}}",
                             "{{url('product/detail')}}",
                             "{{url('img/spinner.gif')}}"
                             );
