@@ -20,9 +20,9 @@ fsh.search = (function ($, document)
     var $sortBy = $("#sortby");
     var $pageSize = $("#viewall");
 
-    var $currentSort = "";
-    var $currentPageSize = "";
-
+    var currentSort = "";
+    var currentPageSize = "";
+    var currentQuery = "";
     var productSearchQueryStringFormat = "?type=%s&sort=%s&pageSize=%s";
 
     var init = function(categoryUrl, productUrl, searchUrl, detailUrl, progressImage)
@@ -178,6 +178,7 @@ fsh.search = (function ($, document)
         $.getJSON(url, function(jsonresult)
         {
             //console.log(jsonresult);
+            currentQuery = jsonresult.query;
             $resultTable.html(jsonresult.view);
             removeResultLoader();
         });
@@ -185,9 +186,15 @@ fsh.search = (function ($, document)
 
     var resortResults = function()
     {
-
-        alert("TODO");
-
+        if($sortBy.val() === "vendors")
+        {
+            alert("TODO vendors sorting");
+        }
+        else
+        {
+            var url = _productUrl + (currentQuery ? "/" + currentQuery : "") + sprintf(productSearchQueryStringFormat, "fc", $sortBy.val(), $pageSize.val());
+            getProducts(url);
+        }
     };
 
     var applyResultLoader = function()

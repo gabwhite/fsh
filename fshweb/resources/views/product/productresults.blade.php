@@ -1,5 +1,4 @@
 @foreach ($products as $p)
-
     <div class="col-xs-12 search-row">
 
         <div class="col-xs-3 col-md-2 drop-padding">
@@ -35,8 +34,6 @@
             <a class="goto-item" href="{{url('product/detail', $p->id)}}">View Product Details</a>
         </div>
     </div>
-
 @endforeach
 
 {!!$products->appends(['sort' => $sort, 'type' => $type, 'pageSize' => $pageSize])->render() !!}
-

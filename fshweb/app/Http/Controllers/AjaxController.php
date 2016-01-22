@@ -90,7 +90,7 @@ class AjaxController extends Controller
 
         $view = \View::make('product.productresults', ['products' => $products, 'sort' => $sort, 'pageSize' => $pageSize, 'type' => $searchType]);
 
-        $returnData = ['sort' => $sort, 'type' => $searchType, 'pageSize' => $pageSize, 'view' => $view->render()];
+        $returnData = ['sort' => $sort, 'type' => $searchType, 'pageSize' => $pageSize, 'query' => $query, 'view' => $view->render()];
 
         return response()->json($returnData);
         //return response()->json($view->render());
