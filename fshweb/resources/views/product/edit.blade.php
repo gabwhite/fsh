@@ -25,7 +25,7 @@
 
     <div class="container">
         
-        <form id="form1" name="form1" method="post" action="{{url('product/edit')}}">
+        <form id="form1" name="form1" method="post" action="{{url('product/edit')}}" enctype="multipart/form-data">
 
             <div class="col-xs-12 well">
                 <h4>{{trans('ui.product_label_name')}}</h4>
@@ -221,17 +221,32 @@
 
                       </div>
 
-                    </div>  
-                   
+                    </div>
+
+                </div>
+
+                <div class="col-xs-12 col-md-8">
+                    <h2 class="item-subhead">Product Image</h2>
+
+                    <div class="well col-xs-12">
+                        @if($product->product_image)
+                            <img src="{{url(config('app.product_storage') . '/' . $product->product_image)}}" alt="" />
+                        @else
+                            <img src="{{url('/img/no-photo-avail.svg')}}" alt="item not pictured" />
+                        @endif
+
+                        <input type="file" name="product_image"/>
+                    </div>
+
                     <div class="btn-row row">
                         <div class="col-xs-12">
                             <input type="submit" class="btn-primary" value="{{trans('ui.button_addupdate')}}"/>
                             <a href="{{url('product/detail', $product->id)}}"><button class="btn">{{trans('ui.button_cancel')}}</button></a>
                         </div>
                     </div>
-                        
-
                 </div>
+
+
             </div> <!-- end of container -->
 
             <input type="hidden" name="id" value="{{$product->id}}"/>

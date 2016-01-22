@@ -11,6 +11,8 @@ namespace App\Http\Controllers;
 use App\CacheManager;
 use App\DataAccessLayer;
 use App\LookupManager;
+use App\UploadHandler;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
@@ -97,7 +99,6 @@ class ProductController extends Controller
 
     public function editProduct(Request $request)
     {
-        $user = \Auth::user();
         $productId = $request->input('id');
         $vendorId = \Session::get(config('app.session_key_vendor'));
 
@@ -110,12 +111,31 @@ class ProductController extends Controller
                 $this->throwValidationException($request, $productValidator);
             }
 
-            $product = $this->dataAccess->upsertProduct($productId, $vendorId, $request->all());
+            try
+            {
+                $data = $request->all();
 
-            // Update cache entry
-            $this->updateProductCache($product, 'UPDATE');
+                // Upload product file if present
+                $newFilename = null;
+                $uploader = new UploadHandler();
+                if ($request->hasFile('product_image') && $request->file('product_image')->isValid() && $uploader->isImage($request->file('product_image')))
+                {
+                    $newFilename = $uploader->uploadProductAsset($request->file('product_image'));
+                    $data['product_image'] = $newFilename;
+                }
 
-            return redirect('product/detail/' . $product->id)->with('successMessage', trans('messages.product_update_success'));
+                $product = $this->dataAccess->upsertProduct($productId, $vendorId, $data);
+
+                // Update cache entry
+                $this->updateProductCache($product, 'UPDATE');
+
+                return redirect('product/detail/' . $product->id)->with('successMessage', trans('messages.product_update_success'));
+            }
+            catch(Exception $ex)
+            {
+                // Clean up uploaded image if needed
+                if(isset($newFilename)) { $uploader->removeProductAsset($newFilename); }
+            }
         }
 
         return redirect('product/detail/' . $productId);
