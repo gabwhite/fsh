@@ -44,7 +44,7 @@
                         <h4>{{trans('ui.product_label_nutrition_facts')}}</h4>
 
                         <div class="nutrition-meta serving-size">
-                            <span class="nutrition-value">Serving Size&nbsp;<input type="text" name="serving_size" class="form-control input-sm" maxlength="10" value="{{$product->serving_size}}"/></span>
+                            <span class="nutrition-value">{{trans('ui.product_label_serving_size')}}&nbsp;<input type="text" name="serving_size" class="form-control input-sm" maxlength="10" value="{{$product->serving_size}}"/></span>
                         </div>
 
                         <div class="nutrition-meta amount-per-serving">
