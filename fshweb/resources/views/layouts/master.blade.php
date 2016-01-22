@@ -71,7 +71,7 @@
                      
                     <div class="collapse navbar-collapse nav-collapse  pull-right" id="bs-example-navbar-collapse-1">
                     
-                    @if (Auth::check())
+                        @if (Auth::check())
                         
                         <ul class="nav navbar-nav">
                             
@@ -84,7 +84,7 @@
                                     @endif
 
                                     {{$user->name}}
-                                    <img class="drop-arrow" src="../public/img/icons/chevron-down.svg" alt="drop-down">
+                                    <img class="drop-arrow" src="{{url('img/icons/chevron-down.svg')}}" alt="drop-down">
 
                                 </a>
 
@@ -95,7 +95,7 @@
                                     </li>
                                     
                                     <li class="menu-item">
-                                        <a title="{{trans('ui.navigation_profile')}}" href="{{url('profile/')}}"><img class="pull-left" src="{{url('img/icons/user.svg')}}" alt="">{{trans('ui.navigation_profile')}}</a>
+                                        <a title="{{trans('ui.navigation_profile')}}" href="{{url('profile/')}}"><img src="{{url('img/icons/user.svg')}}" alt="">{{trans('ui.navigation_profile')}}</a>
                                     </li>
 
                                     <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-723">
@@ -103,29 +103,29 @@
                                     </li>
                                 </ul>
                             </li> <!-- end of dropdown menu -->
-                        </ul>
-                    @else 
+                            
+                        @else 
+                            
 
-                    <ul class="nav navbar-nav">
-                        <li class="menu-item">
-                            <a title="{{trans('ui.navigation_vendorreg')}}" href="{{url('auth/vendorregister')}}">{{trans('ui.navigation_vendorreg')}}</a>
-                        </li>
+                            <li class="menu-item">
+                                <a title="{{trans('ui.navigation_vendorreg')}}" href="{{url('auth/vendorregister')}}">{{trans('ui.navigation_vendorreg')}}</a>
+                            </li>
 
-                        <li class="menu-item">
-                            <a title="{{trans('ui.navigation_login')}}" href="{{url('auth/login')}}">{{trans('ui.navigation_login')}}</a>
-                        </li>
+                            <li class="menu-item">
+                                <a title="{{trans('ui.navigation_login')}}" href="{{url('auth/login')}}">{{trans('ui.navigation_login')}}</a>
+                            </li>
                         
-                        <!-- Hidden menu item -->
-                        <li class="hide menu-item">
-                            <a title="{{trans('ui.navigation_industryforums')}}" href="{{url('industryforums')}}">{{trans('ui.navigation_industryforums')}}</a>
-                        </li>
-                        <!-- hidden menu item -->
-                        <li class="hide menu-item">
-                            <a title="{{trans('ui.navigation_tools')}}" href="{{url('toolsresources')}}">{{trans('ui.navigation_tools')}}</a>
-                        </li>
-                    </ul>
-                                    
+                            <!-- Hidden menu item -->
+                            <li class="hide menu-item">
+                                <a title="{{trans('ui.navigation_industryforums')}}" href="{{url('industryforums')}}">{{trans('ui.navigation_industryforums')}}</a>
+                            </li>
+                            <!-- hidden menu item -->
+                            <li class="hide menu-item">
+                                <a title="{{trans('ui.navigation_tools')}}" href="{{url('toolsresources')}}">{{trans('ui.navigation_tools')}}</a>
+                            </li>
+                        </ul>
                     @endif
+                                        
                     
                 </div>
                     
