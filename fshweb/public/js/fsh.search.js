@@ -20,6 +20,10 @@ fsh.search = (function ($, document)
     var $sortBy = $("#sortby");
     var $pageSize = $("#viewall");
 
+    var $currentSort = "";
+    var $currentPageSize = "";
+
+    var productSearchQueryStringFormat = "?type=%s&sort=%s&pageSize=%s";
 
     var init = function(categoryUrl, productUrl, searchUrl, detailUrl, progressImage)
     {
@@ -29,7 +33,7 @@ fsh.search = (function ($, document)
         _detailUrl = detailUrl;
         _progressImage = progressImage;
 
-        getProducts(productUrl);
+        getProducts(productUrl + sprintf(productSearchQueryStringFormat, "fc", $sortBy.val(), $pageSize.val()));
 
         initTree();
 
@@ -51,7 +55,7 @@ fsh.search = (function ($, document)
             else if($subCategoryDdlb.val() !== "") { categoryId = $subCategoryDdlb.val(); }
             else if($categoryDdlb.val() !== "") { categoryId = $categoryDdlb.val(); }
 
-            if(categoryId !== "") { getProducts(productUrl + "/" + categoryId); }
+            if(categoryId !== "") { getProducts(productUrl + "/" + categoryId + sprintf(productSearchQueryStringFormat, "fc", $sortBy.val(), $pageSize.val())); }
 
             e.preventDefault();
         });
@@ -96,7 +100,7 @@ fsh.search = (function ($, document)
 
         $categoryTree.off("changed.jstree").on("changed.jstree", function(e, data)
         {
-            getProducts(_productUrl + "/" + data.node.id);
+            getProducts(_productUrl + "/" + data.node.id + sprintf(productSearchQueryStringFormat, "fc", $sortBy.val(), $pageSize.val()));
         });
     };
 
@@ -168,23 +172,22 @@ fsh.search = (function ($, document)
         }
     };
 
-    var getProducts = function(node)
+    var getProducts = function(url)
     {
-        //var qry = _productUrl + (node ? "/" + node : "");
-        //{'sort': $sortBy.val(), 'pagesize': $pageSize.val() },
-
         applyResultLoader();
-        $.getJSON(node, function(jsonresult)
+        $.getJSON(url, function(jsonresult)
         {
             //console.log(jsonresult);
-            $resultTable.html(jsonresult);
+            $resultTable.html(jsonresult.view);
             removeResultLoader();
         });
     };
 
     var resortResults = function()
     {
+
         alert("TODO");
+
     };
 
     var applyResultLoader = function()

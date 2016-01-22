@@ -51,7 +51,7 @@
                                 <option value="name">Product Name</option>
                                 <option value="brand">Brand</option>
                                 <option value="pack">Pack</option>
-                                <option value="units">Units</option>
+                                <option value="uom">Units</option>
                                 <option value="vendors">Vendors</option>
                             </select>
 
@@ -95,6 +95,7 @@
 
 @section('scripts')
     <script type="text/javascript" src="{{url('js/vendor/jstree/jstree.min.js')}}"></script>
+    <script type="text/javascript" src="{{url('js/vendor/sprintf/sprintf.min.js')}}"></script>
     <script type="text/javascript" src="{{url('js/fsh.search.js')}}"></script>
     <script type="text/javascript">
 
