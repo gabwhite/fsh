@@ -205,16 +205,15 @@
 
                             <div class="col-xs-12 col-md-6">
 
-
                                 Gross Weight:<input type="text" name="gross_weight" title="gross_weight" class="form-control" maxlength="9" value="{{$product->gross_weight}}"/>
 
                                 Tare Weight:<input type="text" name="tare_weight" title="tare_weight" class="form-control" maxlength="9" value="{{$product->tare_weight}}"/>
                                 
-                                Brand: <input type="text" name="brand" title"brand" class="form-control" max-length="20" value="{{$product->brand}}">
+                                Brand: <input type="text" name="brand" title="brand" class="form-control" maxlength="20" value="{{$product->brand}}">
 
-                                Calories: <input type="text" name="calories" class="form-control" max-length="9" value="{{$product->calories}}">
+                                Calories: <input type="text" name="calories" title="calories" class="form-control" maxlength="9" value="{{$product->calories}}">
                                 
-                                Unit of Measure: <input type="text" name="calories" class="form-control" max-length="9" value="{{$product->uom}}">
+                                Unit of Measure: <input type="text" name="uom" title="uom" class="form-control" maxlength="9" value="{{$product->uom}}">
 
                             </div>
 
@@ -234,14 +233,14 @@
 
                 </div>
             </div> <!-- end of container -->
-        </div><!-- End of main row -->
-    <input type="hidden" name="id" value="{{$product->id}}"/>
 
-    {!! csrf_field() !!}
+            <input type="hidden" name="id" value="{{$product->id}}"/>
 
-    </form>
+            {!! csrf_field() !!}
 
-</div>
+        </form>
+
+    </div><!-- End of main row -->
 
 @endsection
 
