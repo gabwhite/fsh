@@ -23,13 +23,13 @@
             <p>{{$p->description}}</p>
             
             <div class="col-xs-12 search-details">
-                <p>Pack:</p>
+                <p>Pack: {{$p->pack}}</p>
 
-                <p>Size:</p>
+                <p>Size: {{$p->calc_size}}</p>
 
-                <p>Unit of Measure:</p>
+                <p>Unit of Measure: {{$p->uom}}</p>
 
-                <p>Product Code:</p>
+                <p>Product Code: {{$p->mpc}}</p>
             </div>
 
             <a class="goto-item" href="{{url('product/detail', $p->id)}}">View Product Details</a>
@@ -38,5 +38,5 @@
 
 @endforeach
 
-{!!$products->appends(['sort' => $sort])->render() !!}
+{!!$products->appends(['sort' => $sort, 'pageSize' => $pageSize])->render() !!}
 
