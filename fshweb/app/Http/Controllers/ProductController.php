@@ -99,20 +99,26 @@ class ProductController extends Controller
     {
         $user = \Auth::user();
         $productId = $request->input('id');
+        $vendorId = \Session::get(config('app.session_key_vendor'));
 
-        // Now validate user product
-        $productValidator = $this->productValidator($request->all());
-        if ($productValidator->fails())
+        if(isset($vendorId))
         {
-            $this->throwValidationException($request, $productValidator);
+            // Now validate user product
+            $productValidator = $this->productValidator($request->all());
+            if ($productValidator->fails())
+            {
+                $this->throwValidationException($request, $productValidator);
+            }
+
+            $product = $this->dataAccess->upsertProduct($productId, $vendorId, $request->all());
+
+            // Update cache entry
+            $this->updateProductCache($product, 'UPDATE');
+
+            return redirect('product/detail/' . $product->id)->with('successMessage', trans('messages.product_update_success'));;
         }
 
-        $product = $this->dataAccess->upsertProduct($productId, $user->id, $request->all());
-
-        // Update cache entry
-        $this->updateProductCache($product, 'UPDATE');
-
-        return redirect('product/detail/' . $product->id)->with('successMessage', trans('messages.product_update_success'));;
+        return redirect('product/detail/' . $productId);
     }
 
     public function vendorProducts()
