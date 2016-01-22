@@ -262,17 +262,17 @@
                             </div>
                             
                             <div class="table-row">    
-                                <p>Brand:</p>
+                                <p>{{trans('ui.product_label_brand')}}:</p>
                                 <p>{{$product->brand}}</p>
                             </div>
                             
                             <div class="table-row">    
-                                <p>Calories:</p>
+                                <p>{{trans('ui.product_label_calories')}}:</p>
                                 <p>{{$product->calories}}</p>
                             </div>
                             
                             <div class="table-row">   
-                                <p>Unit of Measure:</p>
+                                <p>{{trans('ui.product_label_uom')}}:</p>
                                 <p>{{$product->uom}}</p>
                             </div>
                         </div>
