@@ -95,6 +95,7 @@
                     
                 </div>
 
+                @if($profile->brands && count($profile->brands) > 0))
                 <div class="row">
                     <div class="col-xs-12">
                         
@@ -120,6 +121,7 @@
                         </div>
                     </div>
                 </div>
+                @endif
             </div>
 
             
