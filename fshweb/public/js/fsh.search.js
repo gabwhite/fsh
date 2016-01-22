@@ -154,11 +154,10 @@ fsh.search = (function ($, document)
 
     var doSearch = function(e)
     {
-        if(e.target.id === "hlSearchButton") { e.preventDefault(); }
+        if(e.type === "click") { e.preventDefault(); }
 
-        if(e.which === 13 || e.target.id === "hlSearchButton")
+        if(e.which === 13 || e.type === "click")
         {
-
             applyResultLoader();
             var qry = _searchUrl + "/" + $searchQueryTb.val();
             $.getJSON(qry, function(jsonresult)

@@ -68,7 +68,6 @@
                     </div>
 
                     <div id="rootResultContainer" class="col-xs-12 well">
-                        <form>
 
                             <div class="row keyword-search">
                                 <div class="colxs-12 col-sm-8">
@@ -78,8 +77,6 @@
                                     <a href="#" id="hlSearchButton"><button class="btn">{{trans('ui.button_search')}}</button></a>
                                 </div>
                             </div>
-
-                        </form>
 
                         <div id="product_list">
                         </div>
