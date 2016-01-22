@@ -11,11 +11,15 @@
 @section('sectionheader')
 <section class='clearfix container-wrap main-title'>
     <div class="container">
-        <div class="col-xs-12 vendor-profile">
+        <div class="col-xs-12 vendor-profile" style="background: url('{{ ($profile->background_image_path) ? url(config('app.vendor_storage') . '/' . $profile->background_image_path) : '' }}') no-repeat; background-size: cover; background-position: center center;">
             @if($profile->logo_image_path)
-                <img id="imgCurrentAvatar" src="{{url(config('app.vendor_storage') . '/' . $profile->logo_image_path)}}" title="{{trans('ui.user_label_currentavatar')}}" width="200" height="200"/>
+                <div class="vendor-profile-img" id="imgCurrentAvatar" style="background: url({{url(config('app.vendor_storage') . '/' . $profile->logo_image_path)}}) #fff no-repeat; background-size: 80%; background-position: center center;">
+                    
+                </div>
+                
             @else
-                <img id="imgCurrentAvatar" src="{{url(config('app.avatar_none'))}}" title="{{trans('ui.user_label_noavatar')}}" width="200" height="200"/>
+                <div class="vendor-profile-img"id="imgCurrentAvatar" style="background: url({{url(config('app.avatar_none'))}}) #fff no-repeat; background-size: cover; background-position: center center;" ></div>
+                
             @endif
             <h1 class="page-title">{{isset($profile) ? $profile->company_name : ''}}</h1>
         </div>
@@ -36,48 +40,57 @@
                 <div class="col-xs-12 well">
                     
                     <label for="company name">{{trans('ui.vendor_label_company')}}</label>
-
                     <p>{{isset($profile) ? $profile->company_name : ''}}</p>
-                    
+
+                    @if($profile->address1)
                     <label for="vendor address">{{trans('ui.vendor_label_address1')}}</label>
-                    
-                    <p>{{isset($profile) ? $profile->address1 : ''}}</p>
-                    
+                    <p>{{$profile->address1}}</p>
+                    @endif
+
+                    @if($profile->address2)
                     <label for="address two">{{trans('ui.vendor_label_address2')}}</label>
-                    
-                    <p>{{isset($profile) ? $profile->address2 : ''}}</p>
+                    <p>{{$profile->address2}}</p>
+                    @endif
 
+                    @if($profile->city)
+                    <label for="city">{{trans('ui.vendor_label_city')}}</label>
+                    <p>{{$profile->city}}</p>
+                    @endif
 
-                    <label for="city">
-                        {{trans('ui.vendor_label_city')}}
-                    </label>
-                    <p>{{isset($profile) ? $profile->city : ''}}</p>
-
-                    
+                    @if($profile->state_province_id)
                     <label for="state/province">{{trans('ui.vendor_label_state_province')}}</label>
-                    <p>{{isset($profile) ? $profile->stateProvince->name : ''}}</p>
-                    
+                    <p>{{$profile->stateProvince->name}}</p>
+                    @endif
+
+                    @if($profile->country_id)
                     <label for="country">{{trans('ui.vendor_label_country')}}</label>
-                    <p>{{isset($profile) ? $profile->country->name : ''}}</p>
-        
-                    
+                    <p>{{$profile->country->name}}</p>
+                    @endif
+
+                    @if($profile->zip_postal)
                     <label for="postal-code">{{trans('ui.vendor_label_zip_postal')}}</label>
-                    <p>{{isset($profile) ? $profile->zip_postal : ''}}</p>
+                    <p>{{$profile->zip_postal}}</p>
+                    @endif
 
-
+                    @if($profile->contact_name)
                     <label for="contact">{{trans('ui.vendor_label_contact_name')}}</label>
-                    <p>{{isset($profile) ? $profile->contact_name : ''}}</p>
-                    
+                    <p>{{$profile->contact_name}}</p>
+                    @endif
+
+                    @if($profile->contact_title)
                     <label for="contact-title">{{trans('ui.vendor_label_contact_title')}}</label>
+                    <p>{{$profile->contact_title}}</p>
+                    @endif
 
-                    <p>{{isset($profile) ? $profile->contact_title : ''}}</p>
-                    
+                    @if($profile->contact_phone)
                     <label for="Phone">{{trans('ui.vendor_label_contact_phone')}}</label>
-                    <p> {{isset($profile) ? $profile->contact_phone : ''}}</p>
+                    <p> {{$profile->contact_phone}}</p>
+                    @endif
 
+                    @if($profile->contact_url)
                     <label for="website">{{trans('ui.vendor_label_contact_url')}}</label>
-
-                    <p><a href="{{isset($profile) ? $profile->contact_url : ''}}" target="_blank">{{isset($profile) ? $profile->contact_url : ''}}</a></p>
+                    <p><a href="{{$profile->contact_url}}" target="_blank">{{isset($profile) ? $profile->contact_url : ''}}</a></p>
+                    @endif
                 </div>
                 
             </div>
@@ -87,7 +100,7 @@
         <div class="col-xs-12 col-md-8">
             <div class="col-xs-12">
                 <h2 class="item-subhead">{{trans('ui.vendor_label_about_text')}}</h2>
-
+                <a href="" class="edit"><button class="btn-primary ">Edit</button></a>
                 <div class="col-xs-12 well">
                     <h3>{{isset($profile) ? $profile->intro_text : ''}}</h3>
 
@@ -95,6 +108,7 @@
                     
                 </div>
 
+                @if($profile->brands && count($profile->brands) > 0)
                 <div class="row">
                     <div class="col-xs-12">
                         
@@ -112,14 +126,15 @@
                             </div>
 
                             <div class="custom-navigation">
-                              <a href="#" class="flex-prev">Prev</a>
+                              <a href="#" class="flex-prev"></a>
                               <div class="custom-controls-container"></div>
-                              <a href="#" class="flex-next">Next</a>
+                              <a href="#" class="flex-next"></a>
                             </div>
                                
                         </div>
                     </div>
                 </div>
+                @endif
             </div>
 
             
@@ -139,7 +154,7 @@
             animation: "slide",
             animationLoop: false,
             controlNav: false,
-            itemWidth: 225,
+            itemWidth: 222,
             itemMargin: 10,
             customDirectionNav: $(".custom-navigation a")
         });

@@ -116,6 +116,34 @@ class UploadHandler
     }
 
     //===================================================================
+    // Product Functions
+    //===================================================================
+
+    public function uploadProductAsset(UploadedFile $file, $fileName = null)
+    {
+        if(!isset($fileName))
+        {
+            $fileName = $this->generateUniqueFilename($file->getClientOriginalExtension());
+        }
+
+        $this->uploadFile($file, $fileName, public_path(config('app.product_storage')));
+
+        return $fileName;
+    }
+
+    public function removeProductAsset($file)
+    {
+        try
+        {
+            Storage::disk('products')->delete($file);
+        }
+        catch(Exception $ex)
+        {
+            throw $ex;
+        }
+    }
+
+    //===================================================================
     // General Functions
     //===================================================================
 

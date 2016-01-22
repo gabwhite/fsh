@@ -40,6 +40,16 @@ h1.item-title {
     }
 }
 
+h1.username {
+    @extend h1.item-title;
+    text-align: center;
+    display: block;
+    @include breakpoint(laptop){
+        text-align: left;
+        display: inline-block;
+    }
+}
+
 h2 {
     font-size: 20px;
     @include breakpoint(tablet){

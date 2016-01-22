@@ -8,8 +8,8 @@
 
 @section('sectionheader')
 <section class='clearfix container-wrap main-title'>
-    <div class="container ">
-        <div class="col-xs-12 vendor-profile">
+    <div class="container">
+        <div id="bgImage" class="col-xs-12 vendor-profile" style="background-image: url('{{ ($vendor->background_image_path) ? url(config('app.vendor_storage') . '/' . $vendor->background_image_path) : '' }}')">
 
             @if($vendor->logo_image_path)
                 <img id="imgCurrentAvatar" src="{{url(config('app.vendor_storage') . '/' . $vendor->logo_image_path)}}" title="{{trans('ui.user_label_currentavatar')}}"/>
@@ -165,11 +165,12 @@
                             <div class="logo-zone clearfix">
                                 <label for="background_image">{{trans('ui.vendor_label_background_image')}}</label>
                                 <p>{{trans('messages.vendor_background_image_notice')}}</p>
-                                <div class="vendor-background"></div>
-                                
-                                <div class="logo-upload">
-                                    <input type="file" name="background_image_path"/>
+                                <div class="vendor-background">
+                                    @if($vendor->background_image_path)
+                                        <img id="backgroundImageModal" src="{{url('img/vendors', $vendor->background_image_path)}}" width="200" height="200"/>
+                                    @endif
                                 </div>
+                                <div id="backgroundUploader" class="logo-upload dropzone"></div>
                             </div>
                           </div>
                       
@@ -204,6 +205,8 @@
             var $brandContainer = $("#currentbrands");
             var $logoImage = $("#imgCurrentAvatar");
             var $logoImageModal = $("#logoImage");
+            var $bgImage = $("#bgImage");
+            var $bgImageModal = $("#backgroundImageModal");
             var $companyNameHeader = $("#h1CompanyName");
             var $companyNameTextbox = $("#company_name");
 
@@ -213,7 +216,7 @@
 
             if($brandContainer.find(".divBrand").length === 0) { $noBrands.show(); }
 
-            $("#currentbrands").on("click", ".deletebrand", function(e)
+            $brandContainer.on("click", ".deletebrand", function(e)
             {
                 e.preventDefault();
                 if(confirm("Delete Brand?"))
@@ -284,6 +287,33 @@
                     {
                         $logoImage.attr("src", "{{url('img/vendors/')}}/" + response.filename);
                         $logoImageModal.attr("src", "{{url('img/vendors/')}}/" + response.filename);
+                        this.removeAllFiles();
+                    });
+
+                    this.on("error", function(e, response, xhr)
+                    {
+                        this.removeAllFiles();
+                        alert("Error: " + response.message);
+                        //console.log(response);
+                    });
+                }
+            };
+
+            Dropzone.options.backgroundUploader =
+            {
+                url: "{{url('/vendor/edit/addasset')}}",
+                paramName: "background_image_path",
+                uploadMultiple: false,
+                addRemoveLinks: false,
+                previewsContainer: null,
+                headers: { "X-CSRF-TOKEN": csrf, "VID": vid},
+                init: function()
+                {
+                    //console.log("Dropzone init'ed");
+                    this.on("success", function(e, response)
+                    {
+                        $bgImage.attr("src", "{{url('img/vendors/')}}/" + response.filename);
+                        $bgImageModal.attr("src", "{{url('img/vendors/')}}/" + response.filename);
                         this.removeAllFiles();
                     });
 

@@ -1,10 +1,9 @@
 @foreach ($products as $p)
-
     <div class="col-xs-12 search-row">
 
         <div class="col-xs-3 col-md-2 drop-padding">
 
-            <div class="item-thumb" style="background: url('../../public/img/no-photo-avail.svg') no-repeat; background-size: cover; background-position: center center;">
+            <div class="item-thumb" style="background: url('{{url('img/no-photo-avail.svg')}}') no-repeat; background-size: cover; background-position: center center;">
             </div>
 
             <div class="star-rating">
@@ -23,20 +22,18 @@
             <p>{{$p->description}}</p>
             
             <div class="col-xs-12 search-details">
-                <p>Pack:</p>
+                <p>Pack: {{$p->pack}}</p>
 
-                <p>Size:</p>
+                <p>Size: {{$p->calc_size}}</p>
 
-                <p>Unit of Measure:</p>
+                <p>Unit of Measure: {{$p->uom}}</p>
 
-                <p>Product Code:</p>
+                <p>Product Code: {{$p->mpc}}</p>
             </div>
 
             <a class="goto-item" href="{{url('product/detail', $p->id)}}">View Product Details</a>
         </div>
     </div>
-
 @endforeach
 
-{!!$products->appends(['sort' => $sort])->render() !!}
-
+{!!$products->appends(['sort' => $sort, 'type' => $type, 'pageSize' => $pageSize])->render() !!}

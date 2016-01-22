@@ -61,16 +61,19 @@ ul.nav {
 	padding: 0;
 	border-bottom: 0;
 	margin-top: 0;
+	width: 100%;
 
 	.form-control, 
 	.form-group {
 		width: 100%;
+		position: relative;
 	}
 	input {
 		margin-bottom: 0;
 	}
 
 	@include breakpoint(tablet){
+		width: 40%;
 		margin-top: 10px;
 	}
 }
@@ -82,8 +85,8 @@ a.search {
     right: 3%;
 
     @include breakpoint(tablet){
-    	top: 20px;
-    	right: 10%;
+    	top: 12px;
+    	right: 3%;
     }
 }
 
@@ -95,6 +98,48 @@ a.search {
 	font-size: 16px;
 }
 
+/*----------  Dropdown Nav menu  ----------*/
+
+ul.dropdown-menu {
+	width: 100%;
+}
+
+li.menu-item {
+	display: block;
+
+	img {
+		width: 25px;
+		margin-right: 10px;
+	}
+}
+
+
+ul.dropdown-menu li a {
+	color: $primary;
+	font-weight: 600;
+	font-size: 16px;
+	padding: 10px 15px;
+
+
+	&:hover, &:active, &:focus {
+		background: $primary;
+		color: white;
+	}
+}
+
+img.menu-img {
+	border: 1px solid $primary;
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	margin-right: 5px;
+}
+
+img.drop-arrow {
+	width: 15px;
+	height: 15px;
+	margin-left: 5px;
+}
 
 /*----------  Individual page headers  ----------*/
 
@@ -153,9 +198,13 @@ a.search {
 #imgCurrentAvatar {
 	border-radius: 50%;
 	max-width: 140px;
-	height: auto;
+	height: 140px;
 	display: block;
-	margin: 0 auto;
+	border: 2px solid $border;
+	margin: 10px auto 30px auto;
+	@include breakpoint(tablet){
+		margin: 0 auto;
+	}
 }
 
 // Profile Page

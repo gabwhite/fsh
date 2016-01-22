@@ -11,6 +11,8 @@ namespace App\Http\Controllers;
 use App\CacheManager;
 use App\DataAccessLayer;
 use App\LookupManager;
+use App\UploadHandler;
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 
@@ -65,9 +67,7 @@ class ProductController extends Controller
 
     public function doSearch(Request $request)
     {
-        $results = $this->dataAccess->getProductsByFullText($request->input('searchquery'), 'name', true, config('app.search_default_page_size'));
-
-        return view('product.search')->with(['searchresults' => $results, 'searchquery' => $request->input('searchquery')]);
+        return \Redirect::to('product/search')->with('searchquery', $request->input('searchquery'));
     }
 
     public function showEditProduct($id = null)
@@ -93,22 +93,44 @@ class ProductController extends Controller
 
     public function editProduct(Request $request)
     {
-        $user = \Auth::user();
         $productId = $request->input('id');
+        $vendorId = \Session::get(config('app.session_key_vendor'));
 
-        // Now validate user product
-        $productValidator = $this->productValidator($request->all());
-        if ($productValidator->fails())
+        if(isset($vendorId))
         {
-            $this->throwValidationException($request, $productValidator);
+            // Now validate user product
+            $productValidator = $this->productValidator($request->all());
+            if ($productValidator->fails())
+            {
+                $this->throwValidationException($request, $productValidator);
+            }
+
+            $data = $request->all();
+            try
+            {
+                // Upload product file if present
+                $uploader = new UploadHandler();
+                if ($request->hasFile('product_image') && $request->file('product_image')->isValid() && $uploader->isImage($request->file('product_image')))
+                {
+                    $newFilename = $uploader->uploadProductAsset($request->file('product_image'));
+                    $data['product_image'] = $newFilename;
+                }
+
+                $product = $this->dataAccess->upsertProduct($productId, $vendorId, $data);
+
+                // Update cache entry
+                $this->updateProductCache($product, 'UPDATE');
+
+                return redirect('product/detail/' . $product->id)->with('successMessage', trans('messages.product_update_success'));
+            }
+            catch(Exception $ex)
+            {
+                // Clean up uploaded image if needed
+                if(isset($data['product_image'])) { $uploader->removeProductAsset($newFilename); }
+            }
         }
 
-        $product = $this->dataAccess->upsertProduct($productId, $user->id, $request->all());
-
-        // Update cache entry
-        $this->updateProductCache($product, 'UPDATE');
-
-        return redirect('product/detail/' . $product->id)->with('successMessage', trans('messages.product_update_success'));;
+        return redirect('product/detail/' . $productId);
     }
 
     public function vendorProducts()

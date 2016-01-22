@@ -69,6 +69,7 @@ return [
     'user_label_bio' => 'Bio',
     'user_label_currentavatar' => 'Current Avatar',
     'user_label_noavatar' => 'No Avatar',
+    'user_label_contact' => 'Contact',
 
 
     'vendor_label_name' => 'Name',
@@ -80,7 +81,6 @@ return [
     'vendor_label_state_province' => 'State / Province',
     'vendor_label_address1' => 'Address 1',
     'vendor_label_address2' => 'Address 2',
-
     'vendor_label_city' => 'City',
     'vendor_label_zip_postal' => 'Zip / Postal',
     'vendor_label_contact_name' => 'Contact Name',
@@ -100,6 +100,8 @@ return [
     'vendor_label_edit_header' => 'Edit Header',
     'vendor_label_edit_profile_header' => 'Edit Profile Header',
     'vendor_label_choose_country' => 'Please choose a country first',
+    'vendor_label_my_products' => 'My Products',
+    'vendor_label_my_products_instruction' => 'Edit existing products or upload new products.',
 
 
 
@@ -107,7 +109,10 @@ return [
     'contact_label_email' => 'Email',
     'contact_label_message' => 'Message',
 
+    'product_label_product_details' => 'Product Details',
+    'product_label_published' => 'Published',
     'product_label_name' => 'Product Name',
+    'product_label_name_placeholder' => 'Enter Product Name',
     'product_label_description' => 'Description',
     'product_label_ingredients' => 'Ingredients',
     'product_label_features' => 'Features, Advantages and Benefits',
@@ -122,7 +127,7 @@ return [
     'product_label_gross_weight' => 'Gross Weight',
     'product_label_tare_weight' => 'Tare Weight',
     'product_label_brand' => 'Brand',
-    'product_label_uom' => 'UOM',
+    'product_label_uom' => 'Unit of Measure',
     'product_label_halal' => 'Halal',
     'product_label_organic' => 'Organic',
     'product_label_kosher' => 'Kosher',

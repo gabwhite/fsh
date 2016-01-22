@@ -18,6 +18,7 @@ return [
     'contact_received_success' => 'Thanks for reaching out. We\'ll be in touch soon.',
 
     'profile_update_success' => 'Profile successfully updated',
+    'profile_no_bio' => 'Edit your profile to add a Bio',
 
     'vendor_update_success' => 'Vendor successfully updated',
     'vendor_background_image_notice' => 'For best results, crop your photo to 930px x 275px',

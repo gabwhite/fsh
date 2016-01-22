@@ -58,6 +58,11 @@ return [
             'root'   => public_path(config('app.vendor_storage')),
         ],
 
+        'products' => [
+            'driver' => 'local',
+            'root'   => public_path(config('app.product_storage')),
+        ],
+
         'imports' => [
             'driver' => 'local',
             'root' => storage_path(config('app.csv_storage')),

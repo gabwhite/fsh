@@ -46,7 +46,16 @@
     <div class="container">
         <div class="col-xs-12 well">  
             <div class="col-xs-12 col-md-4 text-center reset-left">
-                <img src="../../img/no-photo-avail.svg" alt="item not pictured">
+
+                @if($product->product_image)
+                    @if(strpos($product->product_image, 'http') !== false)
+                        <img src="{{$product->product_image}}" alt="" />
+                    @else
+                        <img src="{{url(config('app.product_storage') . '/' . $product->product_image)}}" alt="" />
+                    @endif
+                @else
+                    <img src="{{url('/img/no-photo-avail.svg')}}" alt="item not pictured" />
+                @endif
                 
                 <div class="detail-brand">
                     <img src="../../img/slider/ROLAND-LOGO-BANNER-SIZE.png" alt="brand-logo">
@@ -262,17 +271,17 @@
                             </div>
                             
                             <div class="table-row">    
-                                <p>Brand:</p>
+                                <p>{{trans('ui.product_label_brand')}}:</p>
                                 <p>{{$product->brand}}</p>
                             </div>
                             
                             <div class="table-row">    
-                                <p>Calories:</p>
+                                <p>{{trans('ui.product_label_calories')}}:</p>
                                 <p>{{$product->calories}}</p>
                             </div>
                             
                             <div class="table-row">   
-                                <p>Unit of Measure:</p>
+                                <p>{{trans('ui.product_label_uom')}}:</p>
                                 <p>{{$product->uom}}</p>
                             </div>
                         </div>

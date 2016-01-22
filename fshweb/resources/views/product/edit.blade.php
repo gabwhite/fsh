@@ -14,7 +14,7 @@
         </div>
         <div class="col-xs-12 reset-right">
             <div class="{{($product->published) ? 'bg-success' : 'bg-danger'}}">
-                <input type="checkbox" id="published" name="published" {{($product->published) ? 'checked="checked"' : ''}}/> <label for="published">Published</label>
+                <input type="checkbox" id="published" name="published" {{($product->published) ? 'checked="checked"' : ''}}/> <label for="published">{{trans('ui.product_label_published')}}</label>
             </div>
         </div>
     </div>
@@ -25,13 +25,13 @@
 
     <div class="container">
         
-        <form id="form1" name="form1" method="post" action="{{url('product/edit')}}">
+        <form id="form1" name="form1" method="post" action="{{url('product/edit')}}" enctype="multipart/form-data">
 
             <div class="col-xs-12 well">
-                <h4>Product Title</h4>
-                <input type="text" name="name" class="form-control input-lg" maxlength="500" placeholder="Enter Product Name" value="{{$product->name}}"/>
+                <h4>{{trans('ui.product_label_name')}}</h4>
+                <input type="text" name="name" class="form-control input-lg" maxlength="500" placeholder="{{trans('ui.product_label_name_placeholder')}}" value="{{$product->name}}"/>
 
-                <h4>Description</h4>
+                <h4>{{trans('ui.product_label_description')}}</h4>
                 <textarea title="description" name="description" class="form-control" cols="80" rows="3">{{$product->description}}</textarea>
             
             </div>
@@ -41,26 +41,26 @@
                 <div class="col-xs-12 col-md-4">
                     <div class="nutrition-block col-xs-12 col-md-10">
                         
-                        <h4>Nutrition Facts</h4>
+                        <h4>{{trans('ui.product_label_nutrition_facts')}}</h4>
 
                         <div class="nutrition-meta serving-size">
-                            <span class="nutrition-value">Serving Size&nbsp;<input type="text" name="serving_size" class="form-control input-sm" maxlength="10" value="{{$product->serving_size}}"/></span>
+                            <span class="nutrition-value">{{trans('ui.product_label_serving_size')}}&nbsp;<input type="text" name="serving_size" class="form-control input-sm" maxlength="10" value="{{$product->serving_size}}"/></span>
                         </div>
 
                         <div class="nutrition-meta amount-per-serving">
                             
-                            <label>Amount Per Serving</label>
+                            <label>{{trans('ui.product_label_amount_per_serving')}}</label>
                         
                         </div>
 
                         <div class="nutrition-meta calories">
                             
                             <div class="col-xs-6 calories-left">
-                                <label>Calories&nbsp;</label><span class="nutrition-value"><input type="text" name="calories" class="form-control input-sm" maxlength="10" value="{{$product->calories}}"/></span>
+                                <label>{{trans('ui.product_label_calories')}}&nbsp;</label><span class="nutrition-value"><input type="text" name="calories" class="form-control input-sm" maxlength="10" value="{{$product->calories}}"/></span>
                             </div>
 
                             <div class="col-xs-6 calories-right">
-                                <label class="nutrition-value">Calories from Fat&nbsp;
+                                <label class="nutrition-value">{{trans('ui.product_label_calories_from_fat')}}&nbsp;
                                 </label>
                                 <input type="text" name="calories_from_fat" class="form-control input-sm" maxlength="10" value="{{$product->calories_from_fat}}"/>
                             </div>
@@ -68,35 +68,35 @@
                         </div>
                                 
                         <div class="nutrition-meta total-fat">  
-                            <label>Total Fat&nbsp;</label><span class="nutrition-value"><input type="text" name="total_fat" class="form-control input-sm" maxlength="10" value="{{$product->total_fat}}"/></span>
+                            <label>{{trans('ui.product_label_total_fat')}}&nbsp;</label><span class="nutrition-value"><input type="text" name="total_fat" class="form-control input-sm" maxlength="10" value="{{$product->total_fat}}"/></span>
                         </div>
                         
                         <div class="nutrition-meta">
-                            <label class="nutrition-value">Saturated Fat&nbsp;</label><input type="text" name="saturated_fats" class="form-control input-sm" maxlength="10" value="{{$product->saturated_fats}}"/>
+                            <label class="nutrition-value">{{trans('ui.product_label_saturated_fat')}}&nbsp;</label><input type="text" name="saturated_fats" class="form-control input-sm" maxlength="10" value="{{$product->saturated_fats}}"/>
                         </div>
                                 
                         <div class="nutrition-meta cholesteral">
-                            <label>Cholesteral&nbsp;</label><input type="text" name="saturated_fats" class="form-control input-sm" maxlength="10" value="{{$product->cholesteral}}"/>
+                            <label>{{trans('ui.product_label_cholesterol')}}&nbsp;</label><input type="text" name="saturated_fats" class="form-control input-sm" maxlength="10" value="{{$product->cholesteral}}"/>
                         </div>
                                 
                         <div class="nutrition-meta sodium">
-                            <label>Sodium&nbsp;</label><span class="nutrition-value"><input type="text" name="sodium" class="form-control input-sm" maxlength="10" value="{{$product->sodium}}"/></span>
+                            <label>{{trans('ui.product_label_sodium')}}&nbsp;</label><span class="nutrition-value"><input type="text" name="sodium" class="form-control input-sm" maxlength="10" value="{{$product->sodium}}"/></span>
                         </div>
 
                         <div class="nutrition-meta carbohydrates">
-                            <label>Total Carbohydrates&nbsp;</label><span class="nutrition-value"><input type="text" name="carbs" class="form-control input-sm" maxlength="10" value="{{$product->carbs}}"/></span>
+                            <label>{{trans('ui.product_label_total_carbs')}}&nbsp;</label><span class="nutrition-value"><input type="text" name="carbs" class="form-control input-sm" maxlength="10" value="{{$product->carbs}}"/></span>
                         </div>
                         
                         <div class="nutrition-meta">
-                            <label class="nutrition-value">Dietary Fibre&nbsp;</label><input type="text" name="fibre" class="form-control input-sm" maxlength="10" value="{{$product->fibre}}"/>
+                            <label class="nutrition-value">{{trans('ui.product_label_dietary_fibre')}}&nbsp;</label><input type="text" name="fibre" class="form-control input-sm" maxlength="10" value="{{$product->fibre}}"/>
                         </div>
                         
                         <div class="nutrition-meta">
-                            <label class="nutrition-value">Sugars&nbsp;</label><input type="text" name="sugar" class="form-control input-sm" maxlength="10" value="{{$product->sugar}}"/>
+                            <label class="nutrition-value">{{trans('ui.product_label_sugars')}}&nbsp;</label><input type="text" name="sugar" class="form-control input-sm" maxlength="10" value="{{$product->sugar}}"/>
                         </div>
                         
                         <div class="nutrition-meta protein">
-                            <label>Protein&nbsp;</label><span class="nutrition-value"><input type="text" name="protein" class="form-control input-sm" maxlength="10" value="{{$product->protein}}"/></span>
+                            <label>{{trans('ui.product_label_protein')}}&nbsp;</label><span class="nutrition-value"><input type="text" name="protein" class="form-control input-sm" maxlength="10" value="{{$product->protein}}"/></span>
                         </div>
                     
                     </div><!--  end of nutrition block -->
@@ -104,7 +104,7 @@
                     <!-- beginning of nutrition info -->
                     <div class="row">
                         <div class="col-xs-12 col-md-10">
-                            <h2 class="item-subhead">Dietary Information</h2>
+                            <h2 class="item-subhead">{{trans('ui.product_label_dietary_info')}}</h2>
 
                             <div class="col-xs-12 well">
                                 <div class="nutrition-meta">
@@ -134,10 +134,10 @@
                         </div>
                     </div>
                     
-                    <!-- Allergy Info     -->
+                    <!-- Allergy Info -->
                     <div class="row">
                         <div class="col-xs-12 col-md-10">
-                            <h2 class="item-subhead">Allergy Information</h2>
+                            <h2 class="item-subhead">{{trans('ui.product_label_allergy_info')}}</h2>
                             
                             <div class="well col-xs-12">
                                 @foreach($allergens as $a)
@@ -155,26 +155,26 @@
                 <!-- Main column Product details -->
 
                 <div class="col-xs-12 col-md-8">
-                    <h2 class="item-subhead">Product Details</h2>
+                    <h2 class="item-subhead">{{trans('ui.product_label_product_details')}}</h2>
 
                     <div class="well col-xs-12">
                       <div class="detail-row">
-                          <h4>Ingredients</h4>
+                          <h4>{{trans('ui.product_label_ingredients')}}</h4>
                           <textarea title="ingredient_deck" name="ingredient_deck" class="form-control" cols="80" rows="3">{{$product->ingredient_deck}}</textarea>
                       </div>
 
                       <div class="detail-row">
-                          <h4>Features, Advantages and Benefits</h4>
+                          <h4>{{trans('ui.product_label_features')}}</h4>
                           <textarea title="features_benefits" name="features_benefits" class="form-control" cols="80" rows="3">{{$product->features_benefits}}</textarea>
                       </div>
 
                       <div class="detail-row">
-                          <h4>Allergen Disclaimer</h4>
+                          <h4>{{trans('ui.product_label_allergen_disclaimer')}}</h4>
                           <textarea title="allergen_disclaimer" name="allergen_disclaimer" class="form-control" cols="80" rows="3">{{$product->allergen_disclaimer}}</textarea>
                       </div>
 
                       <div class="detail-row">
-                          <h4>Preparation &amp; Cooking Suggestions</h4>
+                          <h4>{{trans('ui.product_label_preparation')}}</h4>
                           <textarea title="preparation" name="preparation" class="form-control" cols="80" rows="3">{{$product->preparation}}</textarea><br/>
                       </div>
                     </div>
@@ -183,38 +183,37 @@
                         
                       <div class="col-xs-12">
                           
-                        <h2 class="item-subhead">Packaging &amp; Weights</h2>
+                        <h2 class="item-subhead">{{trans('ui.product_label_packaging_weights')}}</h2>
                         
                         <div class="well col-xs-12">
                             
                             <div class="col-xs-12 col-md-6">
                                 
-                                Pack:<input type="text" name="pack" title="pack" class="form-control" maxlength="10" value="{{$product->pack}}"/>
+                                {{trans('ui.product_label_pack')}}:<input type="text" name="pack" title="pack" class="form-control" maxlength="10" value="{{$product->pack}}"/>
 
-                                Size:<input type="text" name="size" title="size" class="form-control" maxlength="9" value="{{$product->size}}"/>
+                                {{trans('ui.product_label_size')}}:<input type="text" name="size" title="size" class="form-control" maxlength="9" value="{{$product->size}}"/>
 
-                                Calculation Size:<input type="text" name="calc_size" title="calc_size" class="form-control" maxlength="10" value="{{$product->calc_size}}"/>
+                                {{trans('ui.product_label_calculation_size')}}:<input type="text" name="calc_size" title="calc_size" class="form-control" maxlength="10" value="{{$product->calc_size}}"/>
 
-                                Product Code:<input type="text" name="mpc" title="mpc" class="form-control" maxlength="250" value="{{$product->mpc}}"/>
+                                {{trans('ui.product_label_product_code')}}:<input type="text" name="mpc" title="mpc" class="form-control" maxlength="250" value="{{$product->mpc}}"/>
                                 
-                                GTIN:<input type="text" name="gtin" title="gtin" class="form-control" maxlength="250" value="{{$product->gtin}}"/>
+                                {{trans('ui.product_label_gtin')}}:<input type="text" name="gtin" title="gtin" class="form-control" maxlength="250" value="{{$product->gtin}}"/>
                                 
-                                Net Weight:<input type="text" name="net_weight" title="net_weight" class="form-control" maxlength="9" value="{{$product->net_weight}}"/>
+                                {{trans('ui.product_label_net_weight')}}:<input type="text" name="net_weight" title="net_weight" class="form-control" maxlength="9" value="{{$product->net_weight}}"/>
                             
                             </div>
 
                             <div class="col-xs-12 col-md-6">
 
+                                {{trans('ui.product_label_gross_weight')}}:<input type="text" name="gross_weight" title="gross_weight" class="form-control" maxlength="9" value="{{$product->gross_weight}}"/>
 
-                                Gross Weight:<input type="text" name="gross_weight" title="gross_weight" class="form-control" maxlength="9" value="{{$product->gross_weight}}"/>
-
-                                Tare Weight:<input type="text" name="tare_weight" title="tare_weight" class="form-control" maxlength="9" value="{{$product->tare_weight}}"/>
+                                {{trans('ui.product_label_tare_weight')}}:<input type="text" name="tare_weight" title="tare_weight" class="form-control" maxlength="9" value="{{$product->tare_weight}}"/>
                                 
-                                Brand: <input type="text" name="brand" title"brand" class="form-control" max-length="20" value="{{$product->brand}}">
+                                {{trans('ui.product_label_brand')}}: <input type="text" name="brand" title="brand" class="form-control" maxlength="20" value="{{$product->brand}}">
 
-                                Calories: <input type="text" name="calories" class="form-control" max-length="9" value="{{$product->calories}}">
+                                {{trans('ui.product_label_calories')}}: <input type="text" name="calories" title="calories" class="form-control" maxlength="9" value="{{$product->calories}}">
                                 
-                                Unit of Measure: <input type="text" name="calories" class="form-control" max-length="9" value="{{$product->uom}}">
+                                {{trans('ui.product_label_uom')}}: <input type="text" name="uom" title="uom" class="form-control" maxlength="9" value="{{$product->uom}}">
 
                             </div>
 
@@ -222,26 +221,41 @@
 
                       </div>
 
-                    </div>  
-                   
-                    <div class="btn-row row">
-                        <div class="col-xs-12">
-                            <input type="submit" class="btn-primary" value="Add / Update"/>
-                            <a href="{{url('product/detail', $product->id)}}"><button class="btn">Cancel</button></a>
-                        </div>
                     </div>
-                        
 
                 </div>
+
+                <div class="col-xs-12 col-md-8">
+                    <h2 class="item-subhead">Product Image</h2>
+
+                    <div class="well col-xs-12">
+                        @if($product->product_image)
+                            <img src="{{url(config('app.product_storage') . '/' . $product->product_image)}}" alt="" />
+                        @else
+                            <img src="{{url('/img/no-photo-avail.svg')}}" alt="item not pictured" />
+                        @endif
+
+                        <input type="file" name="product_image"/>
+                    </div>
+
+                    <div class="btn-row row">
+                        <div class="col-xs-12">
+                            <input type="submit" class="btn-primary" value="{{trans('ui.button_addupdate')}}"/>
+                            <a href="{{url('product/detail', $product->id)}}"><button class="btn">{{trans('ui.button_cancel')}}</button></a>
+                        </div>
+                    </div>
+                </div>
+
+
             </div> <!-- end of container -->
-        </div><!-- End of main row -->
-    <input type="hidden" name="id" value="{{$product->id}}"/>
 
-    {!! csrf_field() !!}
+            <input type="hidden" name="id" value="{{$product->id}}"/>
 
-    </form>
+            {!! csrf_field() !!}
 
-</div>
+        </form>
+
+    </div><!-- End of main row -->
 
 @endsection
 

@@ -173,11 +173,18 @@ class VendorController extends Controller
 
     public function addAsset(Request $request)
     {
-        if ( ($request->hasFile('logo_image_path') || $request->hasFile('background_image_path'))
-            && ($request->file('logo_image_path')->isValid() || $request->file('background_image_path')->isValid()) )
+        if ( ($request->hasFile('logo_image_path') && $request->file('logo_image_path')->isValid())
+            ||
+            ($request->hasFile('background_image_path') && $request->file('background_image_path')->isValid()) )
         {
             try
             {
+                $dbField = null;
+                $file = null;
+
+                if($request->hasFile('logo_image_path')) { $dbField = "logo_image_path"; $file = $request->file('logo_image_path'); }
+                if($request->hasFile('background_image_path')) { $dbField = "background_image_path"; $file = $request->file('background_image_path'); }
+
                 $vendorId = $request->header('VID');
                 //$assetType = $request->header('ASSET_TYPE');
                 //$file = $request->header('FNAME');
@@ -188,22 +195,21 @@ class VendorController extends Controller
                     $uploader = new UploadHandler();
 
                     $filename = null;
-                    if(!is_null($vendor->logo_image_path) && $vendor->logo_image_path != '')
+                    if(!is_null($vendor[$dbField]) && $vendor[$dbField] != '')
                     {
-                        $filename = $vendor->logo_image_path;
+                        $filename = $vendor[$dbField];
                     }
 
-                    if($uploader->isImage($request->file('logo_image_path')))
+                    if($uploader->isImage($file))
                     {
-                        $newFilename = $uploader->uploadVendorAsset($request->file('logo_image_path'), $filename);
+                        $newFilename = $uploader->uploadVendorAsset($file, $filename);
 
                         //$uploader->resizeVendorAsset($newFilename,
                         //    config('app.vendor_logo_image_width'),
                         //    config('app.vendor_logo_image_height'));
 
 
-                        $vendor->logo_image_path = $newFilename;
-                        //$vendor->background_image_path = $newFilename;
+                        $vendor[$dbField] = $newFilename;
                         $vendor->save();
 
                         // Update cache entry
