@@ -65,7 +65,11 @@ class ProductController extends Controller
 
     public function doSearch(Request $request)
     {
-        $results = $this->dataAccess->getProductsByFullText($request->input('searchquery'), 'name', true, config('app.search_default_page_size'));
+        $results = $this->dataAccess->getProductsByFullText($request->input('searchquery'),
+                                    ['id', 'name', 'brand', 'pack', 'uom', 'mpc', 'calc_size', 'description'],
+                                    'name',
+                                    true,
+                                    config('app.search_default_page_size'));
 
         return view('product.search')->with(['searchresults' => $results, 'searchquery' => $request->input('searchquery')]);
     }

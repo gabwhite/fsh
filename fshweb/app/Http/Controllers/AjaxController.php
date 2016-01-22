@@ -29,12 +29,11 @@ class AjaxController extends Controller
 
     public function getProductFullTextSearch($query)
     {
-        $results = $this->dataAccess->getProductsByFullText($query, 'name', true, 10);
+        $results = $this->dataAccess->getProductsByFullText($query, ['id', 'name', 'brand', 'pack', 'uom', 'mpc', 'calc_size', 'description'], 'name', true, 10);
 
-        $view = \View::make('product.productresults', ['products' => $results, 'sort' => 'name']);
+        $view = \View::make('product.productresults', ['products' => $results, 'sort' => 'name', 'pageSize' => 10]);
 
         return response()->json($view->render());
-
 
         //return response()->json($results);
     }
@@ -73,10 +72,10 @@ class AjaxController extends Controller
         }
         else
         {
-            $products = $this->dataAccess->getAllProducts(['id', 'name', 'brand'], null, false, 'name', true, 10);
+            $products = $this->dataAccess->getAllProducts(['id', 'name', 'brand', 'pack', 'calc_size', 'uom', 'mpc'], null, false, 'name', true, 10);
         }
 
-        $view = \View::make('product.productresults', ['products' => $products, 'sort' => 'name']);
+        $view = \View::make('product.productresults', ['products' => $products, 'sort' => 'name', 'pageSize' => '10']);
 
         return response()->json($view->render());
         //return response()->json($products);
