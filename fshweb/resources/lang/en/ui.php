@@ -69,6 +69,7 @@ return [
     'user_label_bio' => 'Bio',
     'user_label_currentavatar' => 'Current Avatar',
     'user_label_noavatar' => 'No Avatar',
+    'user_label_contact' => 'Contact',
 
 
     'vendor_label_name' => 'Name',

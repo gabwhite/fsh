@@ -53,10 +53,10 @@
     <div class="col-xs-12 col-md-4">
         <div class="col-xs-12 col-md-11">
             
-            <h2 class="item-subhead">Contact</h2>
+            <h2 class="item-subhead">{{trans('ui.user_label_contact')}}</h2>
 
             <div class="col-xs-12 well">
-                <label for="email">Email</label>
+                <label for="email">{{trans('ui.user_label_email')}}</label>
                 <p>{{$user->email}}</p>
             </div>
 
@@ -67,7 +67,7 @@
         <div class="row">
             <div class="col-xs-12">
                 
-                <h2 class="item-subhead">Bio</h2>
+                <h2 class="item-subhead">{{trans('ui.user_label_bio')}}</h2>
 
                 <div class="col-xs-12 well">
                     <p>{{$bio or trans('messages.profile_no_bio')}}</p>
