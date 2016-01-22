@@ -24,14 +24,22 @@ fsh.search = (function ($, document)
     var currentSearchType = "";
     var productSearchQueryStringFormat = "?type=%s&sort=%s&pageSize=%s";
 
-    var init = function(categoryUrl, productUrl, detailUrl, progressImage)
+    var init = function(categoryUrl, productUrl, detailUrl, existingQuery, progressImage)
     {
         _categoryUrl = categoryUrl;
         _productUrl = productUrl;
         _detailUrl = detailUrl;
         _progressImage = progressImage;
 
-        getProducts(productUrl + sprintf(productSearchQueryStringFormat, "fc", $sortBy.val(), $pageSize.val()));
+        if(existingQuery !== "")
+        {
+            getProducts(_productUrl + "/" + existingQuery + sprintf(productSearchQueryStringFormat, "ft", $sortBy.val(), $pageSize.val()));
+            $searchQueryTb.val(existingQuery);
+        }
+        else
+        {
+            getProducts(productUrl + sprintf(productSearchQueryStringFormat, "fc", $sortBy.val(), $pageSize.val()));
+        }
 
         initTree();
 

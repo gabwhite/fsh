@@ -104,6 +104,7 @@
             fsh.search.init("{{url('ajax/getfoodcategories/')}}",
                             "{{url('ajax/getproducts')}}",
                             "{{url('product/detail')}}",
+                            "{{\Session::get('searchquery')}}",
                             "{{url('img/spinner.gif')}}"
                             );
         });
