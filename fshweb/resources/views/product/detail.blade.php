@@ -48,7 +48,11 @@
             <div class="col-xs-12 col-md-4 text-center reset-left">
 
                 @if($product->product_image)
-                    <img src="{{url(config('app.product_storage') . '/' . $product->product_image)}}" alt="" />
+                    @if(strpos($product->product_image, 'http') !== false)
+                        <img src="{{$product->product_image}}" alt="" />
+                    @else
+                        <img src="{{url(config('app.product_storage') . '/' . $product->product_image)}}" alt="" />
+                    @endif
                 @else
                     <img src="{{url('/img/no-photo-avail.svg')}}" alt="item not pictured" />
                 @endif
