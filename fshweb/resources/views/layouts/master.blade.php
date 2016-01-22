@@ -65,59 +65,77 @@
                     </div>
                 </div>
                 
-                <div class="col-xs-12 col-md-9">
-                    <div class="col-xs-12 col-md-4">
-                        <form class="navbar-form" id="frmNavigationSearch" method="post" action="{{url('product/navsearch')}}">
-                            <div class="form-group">
-                                <input type="text" name="searchquery" autocomplete="off" placeholder="{{trans('ui.search_placeholder')}}" value="{{$query or ''}}" class="form-control"/>
-                                <a href="#" class="search"><img src="{{url('img/icons/search.svg')}}" alt=""></a>
-                            </div>
-                            {!! csrf_field() !!}
-                        </form>
-                    </div>    
+                <div class="col-xs-12 col-md-9">    
 
                     <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="col-xs-12 col-md-8">
                      
-                        <div class="collapse navbar-collapse nav-collapse" id="bs-example-navbar-collapse-1">
+                    <div class="collapse navbar-collapse nav-collapse  pull-right" id="bs-example-navbar-collapse-1">
+                    
+                    @if (Auth::check())
+                        
+                        <ul class="nav navbar-nav">
+                            
+                            <li role="presentation" class="dropdown">
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                    @if(isset($avatarFilename))
+                                        <img class="menu-img" src="{{url(config('app.avatar_storage') . '/' . $avatarFilename)}}" title="{{trans('ui.user_label_currentavatar')}}"/>
+                                    @else
+                                        <img class="menu-img" src="{{url(config('app.avatar_none'))}}" title="{{trans('ui.user_label_noavatar')}}" />
+                                    @endif
 
-                            <ul class="nav navbar-nav">
-                                <li class="menu-item">
-                                    <a title="{{trans('ui.navigation_productsearch')}}" href="{{url('/product/search')}}">{{trans('ui.navigation_productsearch')}}</a>
-                                </li>
-                                
-                                <!-- Hidden menu item -->
-                                <li class="hide menu-item">
-                                    <a title="{{trans('ui.navigation_industryforums')}}" href="{{url('industryforums')}}">{{trans('ui.navigation_industryforums')}}</a>
-                                </li>
-                                
-                                <!-- hidden menu item -->
-                                <li class="hide menu-item">
-                                    <a title="{{trans('ui.navigation_tools')}}" href="{{url('toolsresources')}}">{{trans('ui.navigation_tools')}}</a>
-                                </li>
+                                    {{$user->name}}
+                                    <img class="drop-arrow" src="../public/img/icons/chevron-down.svg" alt="drop-down">
 
-                                @if (Auth::check())
+                                </a>
+
+                                <ul class="dropdown-menu">
+                                    
                                     <li class="menu-item">
-                                        <a title="{{trans('ui.navigation_profile')}}" href="{{url('profile/')}}">{{trans('ui.navigation_profile')}}</a>
+                                        <a title="{{trans('ui.navigation_productsearch')}}" href="{{url('/product/search')}}"><img src="{{url('img/icons/search.svg')}}" alt="search">{{trans('ui.navigation_productsearch')}}</a>
                                     </li>
-
-                                    <li id="menu-item-723" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-723">
-                                        <a title="{{trans('ui.navigation_logout')}}" href="{{url('auth/logout')}}">{{trans('ui.navigation_logout')}}</a>
-                                    </li>
-                                @else
+                                    
                                     <li class="menu-item">
-                                        <a title="{{trans('ui.navigation_vendorreg')}}" href="{{url('auth/vendorregister')}}">{{trans('ui.navigation_vendorreg')}}</a>
+                                        <a title="{{trans('ui.navigation_profile')}}" href="{{url('profile/')}}"><img class="pull-left" src="{{url('img/icons/user.svg')}}" alt="">{{trans('ui.navigation_profile')}}</a>
                                     </li>
 
-                                    <li class="menu-item">
-                                        <a title="{{trans('ui.navigation_login')}}" href="{{url('auth/login')}}">{{trans('ui.navigation_login')}}</a>
+                                    <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-723">
+                                        <a title="{{trans('ui.navigation_logout')}}" href="{{url('auth/logout')}}"><img src="{{url('img/icons/logout.svg')}}" alt="logout">{{trans('ui.navigation_logout')}}</a>
                                     </li>
-                                @endif
+                                </ul>
+                            </li> <!-- end of dropdown menu -->
+                        </ul>
+                    @else 
 
-                            </ul>
-                        </div>
+                    <ul class="nav navbar-nav">
+                        <li class="menu-item">
+                            <a title="{{trans('ui.navigation_vendorreg')}}" href="{{url('auth/vendorregister')}}">{{trans('ui.navigation_vendorreg')}}</a>
+                        </li>
 
+                        <li class="menu-item">
+                            <a title="{{trans('ui.navigation_login')}}" href="{{url('auth/login')}}">{{trans('ui.navigation_login')}}</a>
+                        </li>
+                        
+                        <!-- Hidden menu item -->
+                        <li class="hide menu-item">
+                            <a title="{{trans('ui.navigation_industryforums')}}" href="{{url('industryforums')}}">{{trans('ui.navigation_industryforums')}}</a>
+                        </li>
+                        <!-- hidden menu item -->
+                        <li class="hide menu-item">
+                            <a title="{{trans('ui.navigation_tools')}}" href="{{url('toolsresources')}}">{{trans('ui.navigation_tools')}}</a>
+                        </li>
+                    </ul>
+                                    
+                    @endif
+                    
+                </div>
+                    
+                <form class="navbar-form pull-right" id="frmNavigationSearch" method="post" action="{{url('product/navsearch')}}">
+                    <div class="form-group">
+                        <input type="text" name="searchquery" autocomplete="off" placeholder="{{trans('ui.search_placeholder')}}" value="{{$query or ''}}" class="form-control"/>
+                        <a href="#" class="search"><img src="{{url('img/icons/search.svg')}}" alt=""></a>
                     </div>
+                    {!! csrf_field() !!}
+                </form>
                 </div>
 
             </div><!--end container-->

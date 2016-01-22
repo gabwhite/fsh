@@ -11,11 +11,15 @@
 @section('sectionheader')
 <section class='clearfix container-wrap main-title'>
     <div class="container">
-        <div class="col-xs-12 vendor-profile" style="background-image: url('{{ ($profile->background_image_path) ? url(config('app.vendor_storage') . '/' . $profile->background_image_path) : '' }}')">
+        <div class="col-xs-12 vendor-profile" style="background: url('{{ ($profile->background_image_path) ? url(config('app.vendor_storage') . '/' . $profile->background_image_path) : '' }}') no-repeat; background-size: cover; background-position: center center;">
             @if($profile->logo_image_path)
-                <img id="imgCurrentAvatar" src="{{url(config('app.vendor_storage') . '/' . $profile->logo_image_path)}}" title="{{trans('ui.user_label_currentavatar')}}" width="200" height="200"/>
+                <div class="vendor-profile-img" id="imgCurrentAvatar" style="background: url({{url(config('app.vendor_storage') . '/' . $profile->logo_image_path)}}) #fff no-repeat; background-size: 80%; background-position: center center;">
+                    
+                </div>
+                
             @else
-                <img id="imgCurrentAvatar" src="{{url(config('app.avatar_none'))}}" title="{{trans('ui.user_label_noavatar')}}" width="200" height="200"/>
+                <div class="vendor-profile-img"id="imgCurrentAvatar" style="background: url({{url(config('app.avatar_none'))}}) #fff no-repeat; background-size: cover; background-position: center center;" ></div>
+                
             @endif
             <h1 class="page-title">{{isset($profile) ? $profile->company_name : ''}}</h1>
         </div>
@@ -96,7 +100,7 @@
         <div class="col-xs-12 col-md-8">
             <div class="col-xs-12">
                 <h2 class="item-subhead">{{trans('ui.vendor_label_about_text')}}</h2>
-
+                <a href="" class="edit"><button class="btn-primary ">Edit</button></a>
                 <div class="col-xs-12 well">
                     <h3>{{isset($profile) ? $profile->intro_text : ''}}</h3>
 
@@ -104,7 +108,7 @@
                     
                 </div>
 
-                @if($profile->brands && count($profile->brands) > 0))
+                @if($profile->brands && count($profile->brands) > 0)
                 <div class="row">
                     <div class="col-xs-12">
                         
@@ -122,9 +126,9 @@
                             </div>
 
                             <div class="custom-navigation">
-                              <a href="#" class="flex-prev">Prev</a>
+                              <a href="#" class="flex-prev"></a>
                               <div class="custom-controls-container"></div>
-                              <a href="#" class="flex-next">Next</a>
+                              <a href="#" class="flex-next"></a>
                             </div>
                                
                         </div>
@@ -150,7 +154,7 @@
             animation: "slide",
             animationLoop: false,
             controlNav: false,
-            itemWidth: 225,
+            itemWidth: 222,
             itemMargin: 10,
             customDirectionNav: $(".custom-navigation a")
         });
