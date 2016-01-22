@@ -20,9 +20,8 @@ fsh.search = (function ($, document)
     var $sortBy = $("#sortby");
     var $pageSize = $("#viewall");
 
-    var currentSort = "";
-    var currentPageSize = "";
     var currentQuery = "";
+    var currentSearchType = "";
     var productSearchQueryStringFormat = "?type=%s&sort=%s&pageSize=%s";
 
     var init = function(categoryUrl, productUrl, searchUrl, detailUrl, progressImage)
@@ -162,13 +161,7 @@ fsh.search = (function ($, document)
 
         if((e.which === 13 || e.type === "click") && $searchQueryTb.val() !== "")
         {
-            applyResultLoader();
-            var qry = _searchUrl + "/" + $searchQueryTb.val();
-            $.getJSON(qry, function(jsonresult)
-            {
-                $resultTable.html(jsonresult);
-                removeResultLoader();
-            });
+            getProducts(_productUrl + "/" + $searchQueryTb.val() + sprintf(productSearchQueryStringFormat, "ft", $sortBy.val(), $pageSize.val()));
         }
     };
 
@@ -179,7 +172,9 @@ fsh.search = (function ($, document)
         {
             //console.log(jsonresult);
             currentQuery = jsonresult.query;
+            currentSearchType = jsonresult.type;
             $resultTable.html(jsonresult.view);
+
             removeResultLoader();
         });
     };
@@ -192,7 +187,8 @@ fsh.search = (function ($, document)
         }
         else
         {
-            var url = _productUrl + (currentQuery ? "/" + currentQuery : "") + sprintf(productSearchQueryStringFormat, "fc", $sortBy.val(), $pageSize.val());
+            var url = _productUrl + (currentQuery ? "/" + currentQuery : "") + sprintf(productSearchQueryStringFormat, currentSearchType, $sortBy.val(), $pageSize.val());
+            //console.log(url);
             getProducts(url);
         }
     };
