@@ -145,7 +145,6 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\ProductImportProvider::class,
-        App\Providers\SearchIndexerProvider::class,
         App\Providers\MailServiceProvider::class,
 
         Zizaco\Entrust\EntrustServiceProvider::class,
@@ -230,7 +229,8 @@ return [
     'vendor_background_image_width' => 200,
     'vendor_background_image_height' => 200,
     'session_key_vendor' => 'vendor_id',
-    'search_default_page_size' => 25,
+    'search_default_page_size' => 10,
+    'search_default_sort' => 'name',
     'cache_expiry_time_products' => 10, // Minutes
     'cache_expiry_time_countries' => 10, // Minutes
     'cache_expiry_time_stateprovinces' => 10, // Minutes

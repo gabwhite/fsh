@@ -5,7 +5,7 @@ var fsh = fsh || {};
 
 fsh.search = (function ($, document)
 {
-    var _categoryUrl, _productUrl, _searchUrl, _detailUrl, _progressImage;
+    var _categoryUrl, _productUrl, _detailUrl, _progressImage;
 
     var $categoryTree = $("#jstree_demo_div");
     var $resultTable = $("#product_list");
@@ -20,16 +20,26 @@ fsh.search = (function ($, document)
     var $sortBy = $("#sortby");
     var $pageSize = $("#viewall");
 
+    var currentQuery = "";
+    var currentSearchType = "";
+    var productSearchQueryStringFormat = "?type=%s&sort=%s&pageSize=%s";
 
-    var init = function(categoryUrl, productUrl, searchUrl, detailUrl, progressImage)
+    var init = function(categoryUrl, productUrl, detailUrl, existingQuery, progressImage)
     {
         _categoryUrl = categoryUrl;
         _productUrl = productUrl;
-        _searchUrl = searchUrl;
         _detailUrl = detailUrl;
         _progressImage = progressImage;
 
-        getProducts(productUrl);
+        if(existingQuery !== "")
+        {
+            getProducts(_productUrl + "/" + existingQuery + sprintf(productSearchQueryStringFormat, "ft", $sortBy.val(), $pageSize.val()));
+            $searchQueryTb.val(existingQuery);
+        }
+        else
+        {
+            getProducts(productUrl + sprintf(productSearchQueryStringFormat, "fc", $sortBy.val(), $pageSize.val()));
+        }
 
         initTree();
 
@@ -51,7 +61,7 @@ fsh.search = (function ($, document)
             else if($subCategoryDdlb.val() !== "") { categoryId = $subCategoryDdlb.val(); }
             else if($categoryDdlb.val() !== "") { categoryId = $categoryDdlb.val(); }
 
-            if(categoryId !== "") { getProducts(productUrl + "/" + categoryId); }
+            if(categoryId !== "") { getProducts(productUrl + "/" + categoryId + sprintf(productSearchQueryStringFormat, "fc", $sortBy.val(), $pageSize.val())); }
 
             e.preventDefault();
         });
@@ -60,6 +70,12 @@ fsh.search = (function ($, document)
         {
             e.preventDefault();
             resortResults();
+        });
+
+        $("#hlToggleSearchTips").on("click", function(e)
+        {
+            e.preventDefault();
+            $("#divSearchTips").slideToggle();
         });
 
     };
@@ -96,7 +112,7 @@ fsh.search = (function ($, document)
 
         $categoryTree.off("changed.jstree").on("changed.jstree", function(e, data)
         {
-            getProducts(_productUrl + "/" + data.node.id);
+            getProducts(_productUrl + "/" + data.node.id + sprintf(productSearchQueryStringFormat, "fc", $sortBy.val(), $pageSize.val()));
         });
     };
 
@@ -158,33 +174,36 @@ fsh.search = (function ($, document)
 
         if((e.which === 13 || e.type === "click") && $searchQueryTb.val() !== "")
         {
-            applyResultLoader();
-            var qry = _searchUrl + "/" + $searchQueryTb.val();
-            $.getJSON(qry, function(jsonresult)
-            {
-                $resultTable.html(jsonresult);
-                removeResultLoader();
-            });
+            getProducts(_productUrl + "/" + $searchQueryTb.val() + sprintf(productSearchQueryStringFormat, "ft", $sortBy.val(), $pageSize.val()));
         }
     };
 
-    var getProducts = function(node)
+    var getProducts = function(url)
     {
-        //var qry = _productUrl + (node ? "/" + node : "");
-        //{'sort': $sortBy.val(), 'pagesize': $pageSize.val() },
-
         applyResultLoader();
-        $.getJSON(node, function(jsonresult)
+        $.getJSON(url, function(jsonresult)
         {
             //console.log(jsonresult);
-            $resultTable.html(jsonresult);
+            currentQuery = jsonresult.query;
+            currentSearchType = jsonresult.type;
+            $resultTable.html(jsonresult.view);
+
             removeResultLoader();
         });
     };
 
     var resortResults = function()
     {
-        alert("TODO");
+        if($sortBy.val() === "vendors")
+        {
+            alert("TODO vendors sorting");
+        }
+        else
+        {
+            var url = _productUrl + (currentQuery ? "/" + currentQuery : "") + sprintf(productSearchQueryStringFormat, currentSearchType, $sortBy.val(), $pageSize.val());
+            //console.log(url);
+            getProducts(url);
+        }
     };
 
     var applyResultLoader = function()

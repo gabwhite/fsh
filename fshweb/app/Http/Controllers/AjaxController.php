@@ -27,17 +27,6 @@ class AjaxController extends Controller
         $this->lookupManager = $lookupManager;
     }
 
-    public function getProductFullTextSearch($query)
-    {
-        $results = $this->dataAccess->getProductsByFullText($query, ['id', 'name', 'brand', 'pack', 'uom', 'mpc', 'calc_size', 'description'], 'name', true, 10);
-
-        $view = \View::make('product.productresults', ['products' => $results, 'sort' => 'name', 'pageSize' => 10]);
-
-        return response()->json($view->render());
-
-        //return response()->json($results);
-    }
-
     public function getFoodCategoriesForParent($format, $parentId = null)
     {
         $categories = $this->lookupManager->getFoodCategoriesForParent($parentId);
@@ -64,20 +53,36 @@ class AjaxController extends Controller
         }
     }
 
-    public function getProducts($categoryId = null)
+    public function getProducts(Request $request, $query = null)
     {
-        if(isset($categoryId))
+        $sort = $request->input('sort') ? $request->input('sort') : config('app.search_default_sort');
+        $pageSize = $request->input('pageSize') ? $request->input('pageSize') : config('app.search_default_page_size');
+        $searchType = $request->input('type') ? $request->input('type') : 'fc';
+
+        $fields = ['id', 'name', 'brand', 'pack', 'uom', 'mpc', 'calc_size', 'description'];
+
+        if($searchType === 'fc')
         {
-            $products = $this->dataAccess->getProductsByCategory($categoryId, true, 10);
+            if(isset($query))
+            {
+                $products = $this->dataAccess->getProductsByCategory($query, true, $pageSize);
+            }
+            else
+            {
+                $products = $this->dataAccess->getAllProducts($fields, null, false, $sort, true, $pageSize);
+            }
         }
-        else
+        else if($searchType === 'ft')
         {
-            $products = $this->dataAccess->getAllProducts(['id', 'name', 'brand', 'pack', 'calc_size', 'uom', 'mpc'], null, false, 'name', true, 10);
+            $products = $this->dataAccess->getProductsByFullText($query, $fields, $sort, true, $pageSize);
         }
 
-        $view = \View::make('product.productresults', ['products' => $products, 'sort' => 'name', 'pageSize' => '10']);
+        $view = \View::make('product.productresults', ['products' => $products, 'sort' => $sort, 'pageSize' => $pageSize, 'type' => $searchType]);
 
-        return response()->json($view->render());
+        $returnData = ['sort' => $sort, 'type' => $searchType, 'pageSize' => $pageSize, 'query' => $query, 'view' => $view->render()];
+
+        return response()->json($returnData);
+        //return response()->json($view->render());
         //return response()->json($products);
     }
 

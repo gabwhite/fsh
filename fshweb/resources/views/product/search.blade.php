@@ -51,7 +51,7 @@
                                 <option value="name">Product Name</option>
                                 <option value="brand">Brand</option>
                                 <option value="pack">Pack</option>
-                                <option value="units">Units</option>
+                                <option value="uom">Units</option>
                                 <option value="vendors">Vendors</option>
                             </select>
 
@@ -72,14 +72,22 @@
                             <div class="row keyword-search">
                                 <div class="colxs-12 col-sm-8">
                                     <input type="text" name="tbSearchQuery" id="tbSearchQuery" autocomplete="off" placeholder="{{trans('ui.search_placeholder')}}" value="{{$query or ''}}" class="form-control"/>
+                                    <a id="hlToggleSearchTips" href="#">Search Tips</a>
+                                    <div id="divSearchTips" class="row" style="display:none;">
+                                        <div class="colxs-12">
+                                            <p>"+" : Two or more terms or phrases must be in the result.</p>
+                                            <p><i>+swiss +cheese</i></p>
+                                            <p>"-" : A term or phrase specified is excluded from the search</p>
+                                            <p><i>milk -coconut</i></p>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="col-xs-12 col-sm-4">
                                     <a href="#" id="hlSearchButton"><button class="btn">{{trans('ui.button_search')}}</button></a>
                                 </div>
                             </div>
 
-                        <div id="product_list">
-                        </div>
+                            <div id="product_list"></div>
 
                     </div>
                 </div>
@@ -95,6 +103,7 @@
 
 @section('scripts')
     <script type="text/javascript" src="{{url('js/vendor/jstree/jstree.min.js')}}"></script>
+    <script type="text/javascript" src="{{url('js/vendor/sprintf/sprintf.min.js')}}"></script>
     <script type="text/javascript" src="{{url('js/fsh.search.js')}}"></script>
     <script type="text/javascript">
 
@@ -102,8 +111,8 @@
         {
             fsh.search.init("{{url('ajax/getfoodcategories/')}}",
                             "{{url('ajax/getproducts')}}",
-                            "{{url('ajax/productsearch')}}",
                             "{{url('product/detail')}}",
+                            "{{\Session::get('searchquery')}}",
                             "{{url('img/spinner.gif')}}"
                             );
         });
