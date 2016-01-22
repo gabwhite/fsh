@@ -156,7 +156,7 @@ fsh.search = (function ($, document)
     {
         if(e.type === "click") { e.preventDefault(); }
 
-        if(e.which === 13 || e.type === "click")
+        if((e.which === 13 || e.type === "click") && $searchQueryTb.val() !== "")
         {
             applyResultLoader();
             var qry = _searchUrl + "/" + $searchQueryTb.val();
