@@ -8488,7 +8488,8 @@ h1.page-title {
   text-transform: none;
 }
 
-h1.item-title {
+h1.item-title,
+h1.username {
   color: #de5328;
   font-weight: 600;
   width: auto;
@@ -8497,8 +8498,21 @@ h1.item-title {
 }
 
 @media (min-width: 768px) {
-  h1.item-title {
+  h1.item-title,
+  h1.username {
     margin-top: 30px;
+  }
+}
+
+h1.username {
+  text-align: center;
+  display: block;
+}
+
+@media (min-width: 991px) {
+  h1.username {
+    text-align: left;
+    display: inline-block;
   }
 }
 
@@ -9167,6 +9181,17 @@ select#sortby {
   line-height: 0;
 }
 
+/*----------  Special type buttons  ----------*/
+
+a.edit .btn-primary,
+a.edit .btn-sm,
+a.edit .btn-group-sm > .btn {
+  margin: 0;
+  position: absolute;
+  top: -15px;
+  right: 15px;
+}
+
 /*----------  Icons + Link style buttons  ----------*/
 
 .delete-avatar {
@@ -9252,11 +9277,13 @@ ul.nav {
   padding: 0;
   border-bottom: 0;
   margin-top: 0;
+  width: 100%;
 }
 
 .navbar-form .form-control,
 .navbar-form .form-group {
   width: 100%;
+  position: relative;
 }
 
 .navbar-form input {
@@ -9265,6 +9292,7 @@ ul.nav {
 
 @media (min-width: 768px) {
   .navbar-form {
+    width: 40%;
     margin-top: 10px;
   }
 }
@@ -9278,8 +9306,8 @@ a.search {
 
 @media (min-width: 768px) {
   a.search {
-    top: 20px;
-    right: 10%;
+    top: 12px;
+    right: 3%;
   }
 }
 
@@ -9289,6 +9317,49 @@ a.search {
   font-weight: 600;
   color: #4b4a4a;
   font-size: 16px;
+}
+
+/*----------  Dropdown Nav menu  ----------*/
+
+ul.dropdown-menu {
+  width: 100%;
+}
+
+li.menu-item {
+  display: block;
+}
+
+li.menu-item img {
+  width: 25px;
+  margin-right: 10px;
+}
+
+ul.dropdown-menu li a {
+  color: #de5328;
+  font-weight: 600;
+  font-size: 16px;
+  padding: 10px 15px;
+}
+
+ul.dropdown-menu li a:hover,
+ul.dropdown-menu li a:active,
+ul.dropdown-menu li a:focus {
+  background: #de5328;
+  color: white;
+}
+
+img.menu-img {
+  border: 1px solid #de5328;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+img.drop-arrow {
+  width: 15px;
+  height: 15px;
+  margin-left: 5px;
 }
 
 /*----------  Individual page headers  ----------*/
@@ -9339,9 +9410,16 @@ a.search {
 #imgCurrentAvatar {
   border-radius: 50%;
   max-width: 140px;
-  height: auto;
+  height: 140px;
   display: block;
-  margin: 0 auto;
+  border: 2px solid #c2c2c2;
+  margin: 10px auto 30px auto;
+}
+
+@media (min-width: 768px) {
+  #imgCurrentAvatar {
+    margin: 0 auto;
+  }
 }
 
 .profile-head {
@@ -9425,12 +9503,7 @@ a.deletebrand img {
 
 /*----------  View The slider  ----------*/
 
-ul.slides {
-  margin-left: -5%;
-}
-
 .slides li {
-  border: 1px solid #c2c2c2;
   height: 120px;
 }
 
@@ -9440,27 +9513,26 @@ ul.slides {
   padding: 10px 0;
 }
 
-.flex-direction-nav {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
-  *height: 0;
+.slides:first-child {
+  margin-left: -42px;
 }
 
-.flex-direction-nav a {
-  text-decoration: none;
-  display: block;
-  width: 40px;
-  height: 40px;
-  margin: -20px 0 0;
+.custom-navigation .flex-prev {
+  background: url(../../public/img/icons/chevron-left.svg) no-repeat;
   position: absolute;
   top: 50%;
-  z-index: 10;
-  overflow: hidden;
-  opacity: 0;
-  cursor: pointer;
-  color: rgba(0, 0, 0, 0.8);
-  text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.3);
+  height: 30px;
+  width: 30px;
+  left: 10px;
+}
+
+.custom-navigation .flex-next {
+  background: url(../../public/img/icons/chevron-right.svg) no-repeat;
+  position: absolute;
+  top: 50%;
+  height: 30px;
+  width: 30px;
+  right: -5px;
 }
 
 /*=====  End of Bootstrap Carousel Styling  ======*/

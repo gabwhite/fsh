@@ -4,8 +4,6 @@
 
 /*----------  Upload new Brand  ----------*/
 
-
-
 #brandUploader.dropzone {
     min-height: 150px;
     border: 1px solid $border !important;
@@ -48,12 +46,9 @@ a.deletebrand {
 
 /*----------  View The slider  ----------*/
 
-ul.slides {
-	margin-left: -5%;
-}
+
 
 .slides li {
-	border: 1px solid $border;
 	height: 120px;
 
 	img {
@@ -63,27 +58,26 @@ ul.slides {
 	}
 }
 
-.flex-direction-nav {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	*height: 0;
+.slides:first-child {
+	margin-left: -42px;
+}
 
-	a {
-		text-decoration: none;
-		display: block;
-		width: 40px;
-		height: 40px;
-		margin: -20px 0 0;
-		position: absolute;
-		top: 50%;
-		z-index: 10;
-		overflow: hidden;
-		opacity: 0;
-		cursor: pointer;
-		color: rgba(0, 0, 0, 0.8);
-		text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.3);
-	}
+.custom-navigation .flex-prev {
+	background: url(../../public/img/icons/chevron-left.svg) no-repeat;
+	position: absolute;
+	top: 50%;
+	height: 30px;
+	width: 30px;
+	left: 10px;
+}
+
+.custom-navigation .flex-next {
+	background: url(../../public/img/icons/chevron-right.svg) no-repeat;
+	position: absolute;
+	top: 50%;
+	height: 30px;
+	width: 30px;
+	right: -5px;
 }
 
 /*=====  End of Bootstrap Carousel Styling  ======*/

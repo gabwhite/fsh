@@ -19,7 +19,7 @@
 
         <div class="col-xs-12 col-md-8">  
             
-            <h1 class="item-title">
+            <h1 class="username">
                 {{$user->name}}
             </h1>
 
@@ -64,41 +64,40 @@
     </div>
 
     <div class="col-xs-12 col-md-8">
-        <div class="row">
-            <div class="col-xs-12">
-                
-                <h2 class="item-subhead">{{trans('ui.user_label_bio')}}</h2>
+        <div class="col-xs-12">
+            
+            <h2 class="item-subhead">{{trans('ui.user_label_bio')}}</h2>
 
-                <div class="col-xs-12 well">
-                    <p>{{$bio or trans('messages.profile_no_bio')}}</p>
-                </div>
-
+            <div class="col-xs-12 well">
+                <p>{{$bio or trans('messages.profile_no_bio')}}</p>
             </div>
+
         </div>
         
         @if($user->hasRole('vendor'))
             @if($vendorOwner)
-            <div class="row">
-                <div class="col-xs-12">
-                    <h2 class="item-subhead">{{trans('ui.vendor_label_my_products')}}</h2>
-                    <div class="col-xs-12 well">
-                        
-                        <p>{{trans('ui.vendor_label_my_products_instruction')}}</p>
-                        
-                        <div class="row btn-row">
-                            <div class="col-xs-12">
-                                
-                                <a href="{{url('product/vendor')}}"><button class="btn-primary">{{trans('ui.navigation_link_myproducts')}}</button></a>
-                                
+            
+            <div class="col-xs-12">
+                
+                <h2 class="item-subhead">{{trans('ui.vendor_label_my_products')}}</h2>
+                <div class="col-xs-12 well">
+                    
+                    <p>{{trans('ui.vendor_label_my_products_instruction')}}</p>
+                    
+                    <div class="row btn-row">
+                        <div class="col-xs-12">
+                            
+                            <a href="{{url('product/vendor')}}"><button class="btn-primary">{{trans('ui.navigation_link_myproducts')}}</button></a>
+                            
 
-                                <a href="{{url('product/edit')}}"><button class="btn-primary">{{trans('ui.navigation_link_addnewproduct')}}</button></a>
+                            <a href="{{url('product/edit')}}"><button class="btn-primary">{{trans('ui.navigation_link_addnewproduct')}}</button></a>
 
-                            </div>
                         </div>
-                       
                     </div>
+                   
                 </div>
-            </div>   
+            </div>
+              
             @endif
         @endif
 

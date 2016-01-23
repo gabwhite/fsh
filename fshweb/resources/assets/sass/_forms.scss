@@ -135,6 +135,15 @@ select#sortby {
 	line-height: 0;
 }
 
+/*----------  Special type buttons  ----------*/
+
+a.edit .btn-primary {
+	margin: 0;
+	position: absolute;
+	top: -15px;
+	right: 15px;
+}
+
 /*----------  Icons + Link style buttons  ----------*/
 
 .delete-avatar {
