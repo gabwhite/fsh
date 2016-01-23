@@ -123,7 +123,7 @@ class ProductController extends Controller
 
                 return redirect('product/detail/' . $product->id)->with('successMessage', trans('messages.product_update_success'));
             }
-            catch(Exception $ex)
+            catch(\Exception $ex)
             {
                 // Clean up uploaded image if needed
                 if(isset($data['product_image'])) { $uploader->removeProductAsset($newFilename); }

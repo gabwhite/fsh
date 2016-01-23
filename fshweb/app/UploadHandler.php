@@ -36,7 +36,7 @@ class UploadHandler
                     \Storage::disk('imports')->put($directory . '/' . $filename, fopen($file->getRealPath(), 'r'));
                 }
             }
-            catch(Exception $ex)
+            catch(\Exception $ex)
             {
                 throw $ex;
             }
@@ -71,7 +71,7 @@ class UploadHandler
         {
             Storage::disk('avatars')->delete($file);
         }
-        catch(Exception $ex)
+        catch(\Exception $ex)
         {
             throw $ex;
         }
@@ -104,7 +104,7 @@ class UploadHandler
         {
             Storage::disk('vendors')->delete($file);
         }
-        catch(Exception $ex)
+        catch(\Exception $ex)
         {
             throw $ex;
         }
@@ -137,7 +137,7 @@ class UploadHandler
         {
             Storage::disk('products')->delete($file);
         }
-        catch(Exception $ex)
+        catch(\Exception $ex)
         {
             throw $ex;
         }
@@ -161,7 +161,7 @@ class UploadHandler
                 $file->move($path, $fileName);
             }
         }
-        catch(Exception $ex)
+        catch(\Exception $ex)
         {
             throw $ex;
         }

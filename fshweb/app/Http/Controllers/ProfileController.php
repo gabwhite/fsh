@@ -144,7 +144,7 @@ class ProfileController extends Controller
                     }
                 }
             }
-            catch(Exception $ex)
+            catch(\Exception $ex)
             {
                 return response()->json([
                     'error' => true,

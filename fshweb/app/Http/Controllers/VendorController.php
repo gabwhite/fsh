@@ -126,7 +126,7 @@ class VendorController extends Controller
                     ], 500);
                 }
             }
-            catch(Exception $ex)
+            catch(\Exception $ex)
             {
                 return response()->json([
                     'error' => true,
@@ -170,7 +170,7 @@ class VendorController extends Controller
                 ], 200);
             }
         }
-        catch(Exception $ex)
+        catch(\Exception $ex)
         {
             return response()->json([
                 'error' => true,
@@ -240,7 +240,7 @@ class VendorController extends Controller
                     }
                 }
             }
-            catch(Exception $ex)
+            catch(\Exception $ex)
             {
                 return response()->json([
                     'error' => true,
@@ -280,7 +280,7 @@ class VendorController extends Controller
             ], 200);
 
         }
-        catch(Exception $ex)
+        catch(\Exception $ex)
         {
             return response()->json([
                 'error' => true,
