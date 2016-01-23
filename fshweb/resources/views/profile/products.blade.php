@@ -27,13 +27,19 @@
                         </tr>
                     </thead>
                     <tbody>
-                    @foreach($products as $p)
+                    @forelse($products as $p)
                         <tr>
                             <td>
                                 <a href="{{url('/product/detail', $p->id)}}">{{$p->name}}</a>
                             </td>
                         </tr>
-                    @endforeach
+                    @empty
+                        <tr>
+                            <td>
+                                {{trans('ui.vendor_label_no_products')}}. <a href="{{url('product/edit')}}">{{trans('ui.button_add')}}</a>
+                            </td>
+                        </tr>
+                    @endforelse
                     </tbody>
                     <tfoot>
                         <tr>
