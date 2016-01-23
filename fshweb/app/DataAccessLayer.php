@@ -407,13 +407,21 @@ class DataAccessLayer
 
     }
 
-    public function getProductsByCategory($categoryId, $paginate = false, $pageSize = 25, $sortBy = 'products.name')
+    public function getProductsByCategory($categoryId, $fields, $publishedOnly = true, $sortBy = 'name', $paginate = false, $pageSize = 25)
     {
-        $query = \DB::table('products')
-            ->join('product_categories', 'products.id', '=', 'product_categories.product_id')
-            ->where('product_categories.category_id', '=', $categoryId)
-            //->where('products.published', '=', true)
-            ->select('products.id', 'products.name', 'products.brand', 'products.uom', 'products.description', 'products.pack', 'products.calc_size', 'products.mpc')->orderBy($sortBy);
+
+        //$query = Product::select(['id', 'name'])->whereHas('categories', function($query) use($categoryId)
+        //{
+        //    $query->where('category_id', '=', $categoryId);
+        //})->get();
+
+        $query = \DB::table('products')->join('product_categories', 'products.id', '=', 'product_categories.product_id')
+            ->where('product_categories.category_id', '=', $categoryId);
+
+        if($publishedOnly) { $query = $query->where('products.published', '=', true); }
+        if($fields) { $query =  $query->select($fields); }
+
+        $query = $query->orderBy('products.' . $sortBy);
 
         if($paginate)
         {
@@ -425,6 +433,7 @@ class DataAccessLayer
         }
 
         return $products;
+
     }
 
     private function prepareFullTextSearchQuery($rawQuery)

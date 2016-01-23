@@ -59,13 +59,13 @@ class AjaxController extends Controller
         $pageSize = $request->input('pageSize') ? $request->input('pageSize') : config('app.search_default_page_size');
         $searchType = $request->input('type') ? $request->input('type') : 'fc';
 
-        $fields = ['id', 'name', 'brand', 'pack', 'uom', 'mpc', 'calc_size', 'description'];
+        $fields = ['products.id', 'products.name', 'products.brand', 'products.pack', 'products.uom', 'products.mpc', 'products.calc_size', 'products.description'];
 
         if($searchType === 'fc')
         {
             if(isset($query))
             {
-                $products = $this->dataAccess->getProductsByCategory($query, true, $pageSize);
+                $products = $this->dataAccess->getProductsByCategory($query, $fields, false, $sort, true, $pageSize);
             }
             else
             {
@@ -82,8 +82,6 @@ class AjaxController extends Controller
         $returnData = ['sort' => $sort, 'type' => $searchType, 'pageSize' => $pageSize, 'query' => $query, 'view' => $view->render()];
 
         return response()->json($returnData);
-        //return response()->json($view->render());
-        //return response()->json($products);
     }
 
     public function getCountries()
