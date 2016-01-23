@@ -9,7 +9,7 @@
 @section('sectionheader')
     <section class='clearfix container-wrap profile-head'>
         <div class="container">
-            <h1 class="item-title">My Products</h1>
+            <h1 class="item-title">{{trans('ui.vendor_label_my_products')}}</h1>
         </div>
     </section>
 @endsection
@@ -23,7 +23,7 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Product Name</th>
+                            <th>{{trans('ui.vendor_label_name')}}</th>
                         </tr>
                     </thead>
                     <tbody>
