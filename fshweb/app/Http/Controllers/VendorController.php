@@ -32,8 +32,9 @@ class VendorController extends Controller
 
     public function detail($id)
     {
-        $cacheKey = 'vendor-'.$id;
+        $canEdit = false;
 
+        $cacheKey = 'vendor-'.$id;
         $vendor = $this->cacheManager->getItem(env('CACHE_DRIVER'), $cacheKey);
         if(is_null($vendor) || !isset($vendor))
         {
@@ -41,7 +42,15 @@ class VendorController extends Controller
             $this->cacheManager->setItem(env('CACHE_DRIVER'), $cacheKey, $vendor, config('app.cache_expiry_time_vendors'));
         }
 
-        return view('vendor.view')->with('profile', $vendor);
+        if(\Session::has(config('app.session_key_vendor')))
+        {
+            if(\Session::get(config('app.session_key_vendor')) === $vendor->id)
+            {
+                $canEdit = true;
+            }
+        }
+
+        return view('vendor.view')->with(['profile' => $vendor, 'canEdit' => $canEdit]);
     }
 
     public function edit()
