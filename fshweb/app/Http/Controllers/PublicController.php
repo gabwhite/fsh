@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\DataAccessLayer;
 use App\iMailer;
-use App\ProductSearcher;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
