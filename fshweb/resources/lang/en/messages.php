@@ -19,6 +19,9 @@ return [
 
     'profile_update_success' => 'Profile successfully updated',
     'profile_no_bio' => 'Edit your profile to add a Bio',
+    'profile_delete_avatar' => 'Remove current avatar?',
+    'profile_error_crop_avatar' => 'Error cropping avatar',
+    'profile_error_delete_avatar' => 'Error deleting avatar',
 
     'vendor_update_success' => 'Vendor successfully updated',
     'vendor_background_image_notice' => 'For best results, crop your photo to 930px x 275px',

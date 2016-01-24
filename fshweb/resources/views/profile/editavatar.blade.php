@@ -86,12 +86,14 @@
     <script type="text/javascript" src="{{url('js/fsh.search.js')}}"></script>
     <script type="text/javascript">
 
+        var csrf = "{{ csrf_token() }}";
+
         $(document).ready(function()
         {
-            var csrf = "{{ csrf_token() }}";
             var $uncroppedImage = $("#uncroppedImage");
             var $cropArea = $("#divCropArea");
             var $currentAvatar = $("#imgCurrentAvatar");
+            var $noAvatarImage = "{{url(config('app.avatar_none'))}}";
 
             $("#uncroppedImage").cropper({
 
@@ -162,7 +164,7 @@
                     },
                     function()
                     {
-                        alert("Error cropping image");
+                        alert("{{trans('messages.profile_error_crop_avatar')}}");
                     }
                 );
             });
@@ -171,7 +173,7 @@
             {
                 e.preventDefault();
 
-                if(confirm("Remove current avatar?"))
+                if(confirm("{{trans('messages.profile_delete_avatar')}}"))
                 {
                     deleteAvatar();
                 }
@@ -193,10 +195,11 @@
                 function(result)
                 {
                     alert("deleted");
+                    $currentAvatar.attr("src", $noAvatarImage);
                 },
                 function()
                 {
-                    alert("Error deleting image");
+                    alert("{{trans('messages.profile_error_delete_avatar')}}}");
                 }
             );
         }
