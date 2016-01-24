@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\CacheManager;
 use App\DataAccessLayer;
-use App\DbCategoryFinder;
 use App\LookupManager;
 use Illuminate\Http\Request;
-use Cache;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -31,11 +28,7 @@ class AjaxController extends Controller
     {
         $categories = $this->lookupManager->getFoodCategoriesForParent($parentId);
 
-        if($format == 'JSON')
-        {
-            return $categories->toJson();
-        }
-        else if($format == 'TREEJSON')
+        if($format == 'TREEJSON')
         {
             // Build custom JSON object for JSTREE javascript plugin
             $json = [];
@@ -49,8 +42,11 @@ class AjaxController extends Controller
                 array_push($json, $oneObj);
             }
 
-            return response()->json($json);
+            $categories = $json;
         }
+
+        //return $categories->toJson();
+        return response()->json($categories);
     }
 
     public function getProducts(Request $request, $query = null)
@@ -61,6 +57,7 @@ class AjaxController extends Controller
 
         $fields = ['products.id', 'products.name', 'products.brand', 'products.pack', 'products.uom', 'products.mpc', 'products.calc_size', 'products.description'];
 
+        $products = null;
         if($searchType === 'fc')
         {
             if(isset($query))
