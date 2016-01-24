@@ -112,8 +112,8 @@ Route::get('datacleanup', function()
     $products = \App\Models\Product::all();
     foreach($products as $p)
     {
-        $p->name = ucfirst(strtolower($p->name));
-        $p->brand = ucfirst(strtolower($p->brand));
+        $p->name = ucfirst(mb_strtolower($p->name));
+        $p->brand = ucfirst(mb_strtolower($p->brand));
 
         $p->save();
     }
@@ -121,7 +121,7 @@ Route::get('datacleanup', function()
     $categories = \App\Models\Category::all();
     foreach($categories as $c)
     {
-        $c->name = ucfirst(strtolower($c->name));
+        $c->name = ucfirst(mb_strtolower($c->name));
         $c->save();
     }
 

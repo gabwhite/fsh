@@ -446,7 +446,7 @@ class DataAccessLayer
             {
                 $w = '"'.$w.'"';
             }
-            else if(!starts_with($w, '"') && strlen($w) > 2)
+            else if(!starts_with($w, '"') && mb_strlen($w) > 2)
             {
                 $w = $w . '*';
             }

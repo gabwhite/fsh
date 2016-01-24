@@ -265,11 +265,11 @@ class CsvProductImporter implements iProductImporter
         if($parentCategoryName == null)
         {
             // Top level category
-            $existing = \App\Models\Category::where('name', '=', strtoupper($categoryName))->first();
+            $existing = \App\Models\Category::where('name', '=', mb_strtoupper($categoryName))->first();
             if($existing == null)
             {
                 $newCat = new \App\Models\Category();
-                $newCat->name = strtoupper($categoryName);
+                $newCat->name = mb_strtoupper($categoryName);
                 $newCat->save();
 
                 $categoryId = $newCat->id;
@@ -282,14 +282,14 @@ class CsvProductImporter implements iProductImporter
         else
         {
             // Sub level category
-            $existingParent = \App\Models\Category::where('name', '=', strtoupper($parentCategoryName))->first();
+            $existingParent = \App\Models\Category::where('name', '=', mb_strtoupper($parentCategoryName))->first();
             if($existingParent != null)
             {
                 $existing = \App\Models\Category::where('name', '=', $categoryName)->where('parent_id', '=', $existingParent->id)->first();
                 if($existing == null)
                 {
                     $newCat = new \App\Models\Category();
-                    $newCat->name = strtoupper($categoryName);
+                    $newCat->name = mb_strtoupper($categoryName);
                     $newCat->parent_id = $existingParent->id;
                     $newCat->save();
 
