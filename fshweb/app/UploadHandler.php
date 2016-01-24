@@ -67,17 +67,7 @@ class UploadHandler
 
     public function removeAvatar($file)
     {
-        try
-        {
-            if(Storage::disk('avatars')->has($file))
-            {
-                Storage::disk('avatars')->delete($file);
-            }
-        }
-        catch(\Exception $ex)
-        {
-            throw $ex;
-        }
+        $this->removeFile('avatars', $file);
     }
 
     public function cropAvatar($fileName, $cropData)
@@ -103,17 +93,7 @@ class UploadHandler
 
     public function removeVendorAsset($file)
     {
-        try
-        {
-            if(Storage::disk('vendors')->has($file))
-            {
-                Storage::disk('vendors')->delete($file);
-            }
-        }
-        catch(\Exception $ex)
-        {
-            throw $ex;
-        }
+        $this->removeFile('vendors', $file);
     }
 
     public function resizeVendorAsset($fileName, $width, $height)
@@ -139,17 +119,7 @@ class UploadHandler
 
     public function removeProductAsset($file)
     {
-        try
-        {
-            if(Storage::disk('products')->has($file))
-            {
-                Storage::disk('products')->delete($file);
-            }
-        }
-        catch(\Exception $ex)
-        {
-            throw $ex;
-        }
+        $this->removeFile('products', $file);
     }
 
     //===================================================================
@@ -245,5 +215,20 @@ class UploadHandler
         }
 
         return $oldFile;
+    }
+
+    public function removeFile($disk, $filename)
+    {
+        try
+        {
+            if(Storage::disk($disk)->has($filename))
+            {
+                Storage::disk($disk)->delete($filename);
+            }
+        }
+        catch(\Exception $ex)
+        {
+            throw $ex;
+        }
     }
 }
