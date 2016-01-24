@@ -207,6 +207,17 @@ class VendorController extends Controller
                     if(!is_null($vendor[$dbField]) && $vendor[$dbField] != '')
                     {
                         $filename = $vendor[$dbField];
+
+                        $changedFilename = $uploader->getNewImageExtension($file->getClientOriginalName(), $filename);
+                        if($changedFilename !== $filename)
+                        {
+                            $vendor[$dbField] = $changedFilename;
+                            $vendor->save();
+
+                            $uploader->removeVendorAsset($filename);
+
+                            $filename = $changedFilename;
+                        }
                     }
 
                     if($uploader->isImage($file))
