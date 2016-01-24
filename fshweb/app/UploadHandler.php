@@ -69,7 +69,10 @@ class UploadHandler
     {
         try
         {
-            Storage::disk('avatars')->delete($file);
+            if(Storage::disk('avatars')->has($file))
+            {
+                Storage::disk('avatars')->delete($file);
+            }
         }
         catch(\Exception $ex)
         {
@@ -102,7 +105,10 @@ class UploadHandler
     {
         try
         {
-            Storage::disk('vendors')->delete($file);
+            if(Storage::disk('vendors')->has($file))
+            {
+                Storage::disk('vendors')->delete($file);
+            }
         }
         catch(\Exception $ex)
         {
@@ -135,7 +141,10 @@ class UploadHandler
     {
         try
         {
-            Storage::disk('products')->delete($file);
+            if(Storage::disk('products')->has($file))
+            {
+                Storage::disk('products')->delete($file);
+            }
         }
         catch(\Exception $ex)
         {
