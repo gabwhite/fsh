@@ -9,7 +9,6 @@
 namespace App;
 
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\File;
 use Ramsey\Uuid\Uuid;
 use Intervention\Image\ImageManagerStatic as Image;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
