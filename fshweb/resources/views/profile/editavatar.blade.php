@@ -38,7 +38,7 @@
                         
                     @if(isset($profile) && isset($profile->avatar_image_path))
                         <div class="col-xs-12 bg-info">
-                            <p>Delete your existing avatar?</p>
+                            <p>{{trans('messages.profile_delete_avatar')}}</p>
                         
                             <div class="delete-avatar">
                                 <img src="{{url('/img/icons/trash.svg')}}" alt="">
@@ -63,7 +63,7 @@
                     </div>
 
                     <div class="bg-info col-xs-12">
-                        <p>Select a new avatar for your profile.</p>
+                        <p>{{trans('messages.profile_select_avatar')}}</p>
                         <div id="avatarUploader" class="dropzone"></div>
                     </div>
 
