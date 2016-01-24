@@ -92,6 +92,21 @@ class ProfileController extends Controller
                             if (!is_null($up) && isset($up->avatar_image_path))
                             {
                                 $avatarFilename = $up->avatar_image_path;
+
+                                // If the extension has changed from the last upload
+                                // get the new filename and save it back to the DB
+                                // also delete the old file off the filesystem
+
+                                $changedFilename = $uploader->getNewImageExtension($request->file('avatar_image_path')->getClientOriginalName(), $avatarFilename);
+                                if($changedFilename !== $avatarFilename)
+                                {
+                                    $up->avatar_image_path = $changedFilename;
+                                    $up->save();
+
+                                    $uploader->removeAvatar($avatarFilename);
+
+                                    $avatarFilename = $changedFilename;
+                                }
                             }
 
                             $newFilename = $uploader->uploadAvatar($request->file('avatar_image_path'), $avatarFilename);
@@ -149,6 +164,7 @@ class ProfileController extends Controller
                 return response()->json([
                     'error' => true,
                     'message' => 'Server error while uploading/saving/deleting',
+                    'exception' => $ex->getMessage(),
                     'code' => 500
                 ], 500);
             }
