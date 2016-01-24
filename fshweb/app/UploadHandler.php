@@ -224,4 +224,17 @@ class UploadHandler
 
         return $success;
     }
+
+    public function getNewImageExtension($newFile, $oldFile)
+    {
+        $newPathInfo = pathinfo($newFile);
+        $oldPathInfo = pathinfo($oldFile);
+
+        if($newPathInfo['extension'] !== $oldPathInfo['extension'])
+        {
+            return $oldPathInfo['filename'] . '.' . $newPathInfo['extension'];
+        }
+
+        return $oldFile;
+    }
 }
