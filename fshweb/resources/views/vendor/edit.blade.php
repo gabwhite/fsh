@@ -12,7 +12,8 @@
         <div id="bgImage" class="col-xs-12 vendor-profile" style="background-image: url('{{ ($vendor->background_image_path) ? url(config('app.vendor_storage') . '/' . $vendor->background_image_path) : '' }}')">
 
             @if($vendor->logo_image_path)
-                <img id="imgCurrentAvatar" src="{{url(config('app.vendor_storage') . '/' . $vendor->logo_image_path)}}" title="{{trans('ui.user_label_currentavatar')}}"/>
+                <div class="vendor-profile-img" id="imgCurrentAvatar" style="background: url({{url(config('app.vendor_storage') . '/' . $vendor->logo_image_path)}}) #fff no-repeat; background-size: 80%; background-position: center center;"></div>
+               
             @else
                 <img id="imgCurrentAvatar" src="{{url(config('app.avatar_none'))}}" title="{{trans('ui.user_label_noavatar')}}" width="200" height="200"/>
             @endif
@@ -98,6 +99,7 @@
                             <label for="about_text">{{trans('ui.vendor_label_about_text')}}</label>
                         
                             <textarea name="about_text" class="form-control" placeholder="" cols="80" rows="3">{{isset($vendor) ? $vendor->about_text : ''}}</textarea>
+
                         </div>
 
                         <div class="row">
@@ -112,7 +114,7 @@
                                 
                                         <div class="divBrand" style="background: url('{{url(config('app.vendor_storage'))}}/{{$b->logo_image_path}}') no-repeat; background-size:100px; background-position: center center;">
                                         
-                                            <a href="#" class="deletebrand" data-brandid="{{$b->id}}" data-imagename="{{$b->logo_image_path}}"><span><img src="../../public/img/icons/trash.svg" alt=""></span>{{trans('ui.button_delete')}}</a>
+                                            <a href="#" class="deletebrand" data-brandid="{{$b->id}}" data-imagename="{{$b->logo_image_path}}"><span><img src="{{url('/img/icons/trash.svg')}}" alt=""></span>{{trans('ui.button_delete')}}</a>
                                         </div>
                                                 
                                        
@@ -120,9 +122,7 @@
                                             <p id="nobrands" style="display:none;">{{trans('ui.vendor_label_no_brands')}}</p>
                                     </div>
                                     
-                                    
-                                <a href="#"><button class="btn-primary">{{trans('ui.vendor_label_add_brand')}}</button></a>
-                                    </div>
+                                </div>
                                 <div class="col-xs-12">
                                     
                                     <div class="row btn-row">

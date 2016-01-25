@@ -101,6 +101,18 @@ h4.modal-title {
     font-size: 24px;
 }
 
+a {
+    color: $primary;
+
+    &:hover, &:active, &:focus {
+        color: $primary-dark;
+    }
+}
+
+span.italic {
+    font-style: italic;
+}
+
 /*----------  Link Related styling  ----------*/
 
 .login-links {
@@ -453,6 +465,14 @@ ul.pagination li a {
     color: $primary;
     border: 0;
     font-size: 16px;
+}
+
+
+/*----------  My Products  ----------*/
+
+tr td a {
+    font-weight: 600;
+    color: $body;
 }
 
 /*=====  End of Typography for the entire site  ======*/

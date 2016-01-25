@@ -8572,6 +8572,20 @@ h4.modal-title {
   font-size: 24px;
 }
 
+a {
+  color: #de5328;
+}
+
+a:hover,
+a:active,
+a:focus {
+  color: #a13919;
+}
+
+span.italic {
+  font-style: italic;
+}
+
 /*----------  Link Related styling  ----------*/
 
 .login-links {
@@ -8942,6 +8956,13 @@ ul.pagination li a:focus {
   font-size: 16px;
 }
 
+/*----------  My Products  ----------*/
+
+tr td a {
+  font-weight: 600;
+  color: #4b4a4a;
+}
+
 /*=====  End of Typography for the entire site  ======*/
 
 /*=========================================
@@ -9276,7 +9297,7 @@ ul.nav {
 .navbar-form {
   padding: 0;
   border-bottom: 0;
-  margin-top: 0;
+  margin: 0;
   width: 100%;
 }
 
@@ -9292,8 +9313,7 @@ ul.nav {
 
 @media (min-width: 768px) {
   .navbar-form {
-    width: 40%;
-    margin-top: 10px;
+    margin: 10px -15px 0 -15px;
   }
 }
 
@@ -9311,18 +9331,68 @@ a.search {
   }
 }
 
-.navbar-default .navbar-nav > li > a {
+li.menu-item a,
+.navbar-nav li a {
   text-transform: none;
   font-family: "Open Sans";
   font-weight: 600;
   color: #4b4a4a;
-  font-size: 16px;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  li.menu-item a,
+  .navbar-nav li a {
+    font-size: 16px;
+  }
+}
+
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
+.navbar-default .navbar-nav > .open > a:focus {
+  background: none;
+}
+
+li.menu-item .btn-primary,
+li.menu-item .btn-sm,
+li.menu-item .btn-group-sm > .btn {
+  margin: 10px 20px 10px 0;
+  height: 35px;
+  padding: 5px 10px;
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  li.menu-item .btn-primary,
+  li.menu-item .btn-sm,
+  li.menu-item .btn-group-sm > .btn {
+    margin: 10px;
+    height: 50px;
+    padding: 10px 30px;
+  }
+}
+
+li.menu-item.sign-in {
+  margin-top: 17px;
+  margin-right: 10px;
+}
+
+@media (min-width: 768px) {
+  li.menu-item.sign-in {
+    margin-top: 25px;
+  }
 }
 
 /*----------  Dropdown Nav menu  ----------*/
 
+a.dropdown-toggle {
+  text-align: right;
+}
+
 ul.dropdown-menu {
   width: 100%;
+  padding: 0;
 }
 
 li.menu-item {
@@ -9334,32 +9404,97 @@ li.menu-item img {
   margin-right: 10px;
 }
 
-ul.dropdown-menu li a {
+.navbar-nav .open ul.dropdown-menu > li > a {
   color: #de5328;
+  width: 320px;
+  padding: 15px 15px 15px 50px;
+  border-bottom: 1px solid #c2c2c2;
   font-weight: 600;
   font-size: 16px;
-  padding: 10px 15px;
+  transition: all ease 0.5s;
+  -webkit-transition: all ease 0.5s;
+  -moz-transition: all ease 0.5s;
+  -ms-transition: all ease 0.5s;
+  -o-transition: all ease 0.5s;
 }
 
-ul.dropdown-menu li a:hover,
-ul.dropdown-menu li a:active,
-ul.dropdown-menu li a:focus {
+@media (min-width: 768px) {
+  .navbar-nav .open ul.dropdown-menu > li > a {
+    width: auto;
+    text-align: left;
+    padding: 10px 15px 15px 50px;
+    border-bottom: 0;
+  }
+}
+
+.navbar-nav .open ul.dropdown-menu > li > a:hover,
+.navbar-nav .open ul.dropdown-menu > li > a:active,
+.navbar-nav .open ul.dropdown-menu > li > a:focus {
   background: #de5328;
   color: white;
 }
 
+.navbar-nav .open ul.dropdown-menu li a.product-search {
+  background: url(../../public/img/icons/search.svg) no-repeat;
+  background-position: 15px 10px;
+}
+
+.navbar-nav .open ul.dropdown-menu li a.product-search:hover,
+.navbar-nav .open ul.dropdown-menu li a.product-search:active,
+.navbar-nav .open ul.dropdown-menu li a.product-search:focus {
+  background: url(../../public/img/icons/search-white.svg) no-repeat #de5328;
+  padding-left: 50px;
+  background-position: 15px 10px;
+}
+
+.navbar-nav .open ul.dropdown-menu li a.user {
+  background: url(../../public/img/icons/user-02.svg) no-repeat;
+  background-position: 15px 10px;
+}
+
+.navbar-nav .open ul.dropdown-menu li a.user:hover,
+.navbar-nav .open ul.dropdown-menu li a.user:active,
+.navbar-nav .open ul.dropdown-menu li a.user:focus {
+  background: url(../../public/img/icons/user-white.svg) no-repeat #de5328;
+  background-position: 15px 10px;
+}
+
+.navbar-nav .open ul.dropdown-menu li a.logout {
+  background: url(../../public/img/icons/logout.svg) no-repeat;
+  background-position: 15px 13px;
+}
+
+.navbar-nav .open ul.dropdown-menu li a.logout:hover,
+.navbar-nav .open ul.dropdown-menu li a.logout:active,
+.navbar-nav .open ul.dropdown-menu li a.logout:focus {
+  background: url(../../public/img/icons/logout-white.svg) no-repeat #de5328;
+  background-position: 15px 13px;
+}
+
 img.menu-img {
   border: 1px solid #de5328;
-  width: 30px;
-  height: 30px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   margin-right: 5px;
+}
+
+@media (min-width: 768px) {
+  img.menu-img {
+    width: 30px;
+    height: 30px;
+  }
 }
 
 img.drop-arrow {
   width: 15px;
   height: 15px;
-  margin-left: 5px;
+}
+
+@media (min-width: 768px) {
+  img.drop-arrow {
+    margin-left: 5px;
+  }
 }
 
 /*----------  Individual page headers  ----------*/
@@ -9604,6 +9739,10 @@ a.deletebrand img {
   margin-top: 0;
 }
 
+img.check {
+  margin-bottom: 20px;
+}
+
 /*=====  End of Modal Styling  ======*/
 
 /*======================================
@@ -9743,13 +9882,39 @@ a.deletebrand img {
 
 .keyword-search {
   border-bottom: 1px solid #c2c2c2;
+  padding-bottom: 15px;
+}
+
+.keyword-search .form-control {
+  margin-bottom: 15px;
 }
 
 .keyword-search .btn {
   margin-top: 0;
 }
 
+a.search-tips {
+  font-weight: 600;
+  background: url(../../public/img/icons/search-tip.svg) no-repeat;
+  padding: 2px 0;
+  padding-left: 30px;
+  background-size: 20px;
+  display: block;
+  margin-bottom: 10px;
+}
+
 /*=====  End of Search Results  ======*/
+
+/*===================================
+=            Detail Page            =
+===================================*/
+
+.product-img {
+  width: 300px;
+  height: 300px;
+}
+
+/*=====  End of Detail Page  ======*/
 
 /*======================================
 =            Rating Styings            =

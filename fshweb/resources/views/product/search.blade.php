@@ -69,21 +69,25 @@
 
                     <div id="rootResultContainer" class="col-xs-12 well">
 
-                            <div class="row keyword-search">
-                                <div class="colxs-12 col-sm-8">
+                            <div class="col-xs-12 keyword-search">
+                                <div class="col-xs-12 col-sm-8 reset-left">
                                     <input type="text" name="tbSearchQuery" id="tbSearchQuery" autocomplete="off" placeholder="{{trans('ui.search_placeholder')}}" value="{{$query or ''}}" class="form-control"/>
-                                    <a id="hlToggleSearchTips" href="#">Search Tips</a>
-                                    <div id="divSearchTips" class="row" style="display:none;">
-                                        <div class="colxs-12">
+                                    <a class="search-tips" id="hlToggleSearchTips" href="#">Search Tips</a>
+                                </div>
+                                <div class="col-xs-12 col-sm-4 reset-right">
+                                    <a href="#" id="hlSearchButton"><button class="btn">{{trans('ui.button_search')}}</button></a>
+                                </div>
+                                <div id="divSearchTips" class="row" style="display:none;">
+                                    <div class="col-xs-12">
+                                        <div class="bg-info">
                                             <p>"+" : Two or more terms or phrases must be in the result.</p>
-                                            <p><i>+swiss +cheese</i></p>
+                                            <p>Example: <span class="italic">+swiss +cheese</span></p>
+                                        </div>
+                                        <div class="bg-info">
                                             <p>"-" : A term or phrase specified is excluded from the search</p>
-                                            <p><i>milk -coconut</i></p>
+                                            <p><span class="italic">milk -coconut</span></p>
                                         </div>
                                     </div>
-                                </div>
-                                <div class="col-xs-12 col-sm-4">
-                                    <a href="#" id="hlSearchButton"><button class="btn">{{trans('ui.button_search')}}</button></a>
                                 </div>
                             </div>
 

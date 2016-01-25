@@ -18,6 +18,8 @@
         <div class="col-xs-12 col-md-6 col-md-offset-3">
         <div class="col-xs-12 well">
             <h2 class="subhead">Create Your Account</h2>
+            <p class="text-center">Are you a product vendor?</p>
+            <p class="text-center"> See our <a title="{{trans('ui.navigation_vendorreg')}}" href="{{url('auth/vendorregister')}}">{{trans('ui.navigation_vendorreg')}}</a> to sign up</p>
             <div class="col-xs-12 col-md-10 col-md-offset-1">
                 <form id="form1" name="form1" method="POST" action="{{url('/auth/register')}}">
                     {!! csrf_field() !!}
