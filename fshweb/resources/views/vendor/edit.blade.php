@@ -127,7 +127,7 @@
                                     
                                     <div class="row btn-row">
                                         <input type="submit" value="{{trans('ui.button_update')}}" class="btn-primary"/>
-                                        <a href="{{url('/profile/')}}"><button class="btn">{{trans('ui.button_cancel')}}</button></a>
+                                        <a href="{{url('/profile/')}}"><button type="button" class="btn">{{trans('ui.button_cancel')}}</button></a>
                                     </div>
                                 </div>
                             </div>

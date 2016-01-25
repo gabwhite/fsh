@@ -9,7 +9,6 @@
 namespace App;
 
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\File;
 use Ramsey\Uuid\Uuid;
 use Intervention\Image\ImageManagerStatic as Image;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
@@ -36,7 +35,7 @@ class UploadHandler
                     \Storage::disk('imports')->put($directory . '/' . $filename, fopen($file->getRealPath(), 'r'));
                 }
             }
-            catch(Exception $ex)
+            catch(\Exception $ex)
             {
                 throw $ex;
             }
@@ -67,14 +66,7 @@ class UploadHandler
 
     public function removeAvatar($file)
     {
-        try
-        {
-            Storage::disk('avatars')->delete($file);
-        }
-        catch(Exception $ex)
-        {
-            throw $ex;
-        }
+        $this->removeFile('avatars', $file);
     }
 
     public function cropAvatar($fileName, $cropData)
@@ -100,14 +92,7 @@ class UploadHandler
 
     public function removeVendorAsset($file)
     {
-        try
-        {
-            Storage::disk('vendors')->delete($file);
-        }
-        catch(Exception $ex)
-        {
-            throw $ex;
-        }
+        $this->removeFile('vendors', $file);
     }
 
     public function resizeVendorAsset($fileName, $width, $height)
@@ -133,14 +118,7 @@ class UploadHandler
 
     public function removeProductAsset($file)
     {
-        try
-        {
-            Storage::disk('products')->delete($file);
-        }
-        catch(Exception $ex)
-        {
-            throw $ex;
-        }
+        $this->removeFile('products', $file);
     }
 
     //===================================================================
@@ -161,7 +139,7 @@ class UploadHandler
                 $file->move($path, $fileName);
             }
         }
-        catch(Exception $ex)
+        catch(\Exception $ex)
         {
             throw $ex;
         }
@@ -223,5 +201,33 @@ class UploadHandler
         }
 
         return $success;
+    }
+
+    public function getNewImageExtension($newFile, $oldFile)
+    {
+        $newPathInfo = pathinfo($newFile);
+        $oldPathInfo = pathinfo($oldFile);
+
+        if($newPathInfo['extension'] !== $oldPathInfo['extension'])
+        {
+            return $oldPathInfo['filename'] . '.' . $newPathInfo['extension'];
+        }
+
+        return $oldFile;
+    }
+
+    public function removeFile($disk, $filename)
+    {
+        try
+        {
+            if(Storage::disk($disk)->has($filename))
+            {
+                Storage::disk($disk)->delete($filename);
+            }
+        }
+        catch(\Exception $ex)
+        {
+            throw $ex;
+        }
     }
 }

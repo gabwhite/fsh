@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\CacheManager;
 use App\DataAccessLayer;
-use App\DbCategoryFinder;
 use App\LookupManager;
 use Illuminate\Http\Request;
-use Cache;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -31,11 +28,7 @@ class AjaxController extends Controller
     {
         $categories = $this->lookupManager->getFoodCategoriesForParent($parentId);
 
-        if($format == 'JSON')
-        {
-            return $categories->toJson();
-        }
-        else if($format == 'TREEJSON')
+        if($format == 'TREEJSON')
         {
             // Build custom JSON object for JSTREE javascript plugin
             $json = [];
@@ -49,8 +42,11 @@ class AjaxController extends Controller
                 array_push($json, $oneObj);
             }
 
-            return response()->json($json);
+            $categories = $json;
         }
+
+        //return $categories->toJson();
+        return response()->json($categories);
     }
 
     public function getProducts(Request $request, $query = null)
@@ -59,13 +55,14 @@ class AjaxController extends Controller
         $pageSize = $request->input('pageSize') ? $request->input('pageSize') : config('app.search_default_page_size');
         $searchType = $request->input('type') ? $request->input('type') : 'fc';
 
-        $fields = ['id', 'name', 'brand', 'pack', 'uom', 'mpc', 'calc_size', 'description'];
+        $fields = ['products.id', 'products.name', 'products.brand', 'products.pack', 'products.uom', 'products.mpc', 'products.calc_size', 'products.description'];
 
+        $products = null;
         if($searchType === 'fc')
         {
             if(isset($query))
             {
-                $products = $this->dataAccess->getProductsByCategory($query, true, $pageSize);
+                $products = $this->dataAccess->getProductsByCategory($query, $fields, false, $sort, true, $pageSize);
             }
             else
             {
@@ -82,8 +79,6 @@ class AjaxController extends Controller
         $returnData = ['sort' => $sort, 'type' => $searchType, 'pageSize' => $pageSize, 'query' => $query, 'view' => $view->render()];
 
         return response()->json($returnData);
-        //return response()->json($view->render());
-        //return response()->json($products);
     }
 
     public function getCountries()

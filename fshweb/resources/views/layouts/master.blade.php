@@ -83,8 +83,8 @@
                                         <img class="menu-img" src="{{url(config('app.avatar_none'))}}" title="{{trans('ui.user_label_noavatar')}}" />
                                     @endif
 
-                                    {{$user->name}}
-                                    <img class="drop-arrow" src="{{url('img/icons/chevron-down.svg')}}" alt="drop-down">
+                                    {{Auth::user()->name}}
+                                    <img class="drop-arrow" src="{{url('/img/icons/chevron-down.svg')}}" alt="drop-down">
 
                                 </a>
 
