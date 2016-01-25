@@ -40,8 +40,6 @@ class AdminController extends Controller
     public function showImport()
     {
         // Get all vendors in the system
-
-        //$users = $this->dataAccess->getUsersForRole(config('app.role_vendor'));
         $vendors = $this->dataAccess->getVendors(['id', 'company_name']);
 
         return view('admin.import')->with('vendors', $vendors);
@@ -52,10 +50,10 @@ class AdminController extends Controller
         /*===============================================================================*/
         // Adjust these upload  / script execution time settings just for CSV uploads
         /*===============================================================================*/
-        ini_set('upload_max_filesize', '10M'); // 10 megs
-        ini_set('post_max_size', '10M'); // 10 megs
-        ini_set('max_input_time', 300); // 5 minutes
-        ini_set('max_execution_time', 300); // 5 minutes;
+        ini_set('upload_max_filesize', config('app.product_import_upload_max_filesize'));
+        ini_set('post_max_size', config('app.product_import_post_max_size'));
+        ini_set('max_input_time', config('app.product_import_max_input_time'));
+        ini_set('max_execution_time', config('app.product_import_max_execution_time'));
 
         if($request->hasFile('importfile'))
         {
