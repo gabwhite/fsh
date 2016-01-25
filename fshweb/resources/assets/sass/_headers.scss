@@ -14,6 +14,7 @@
 
 nav.navbar {
 	margin-bottom: 0;
+	border-radius: 0;
 }
 
 .navbar-nav {
@@ -26,7 +27,8 @@ nav.navbar {
 
 .navbar-default{
 	background: white;
-	border: 1px solid $border;
+	border: 0;
+	border-bottom: 1px solid $border;
 }
 
 #logo_img {
@@ -60,21 +62,28 @@ ul.nav {
 .navbar-form {
 	padding: 0;
 	border-bottom: 0;
-	margin-top: 0;
+	margin: 0;
 	width: 100%;
+
+	input {
+		margin-bottom: 0;
+	}
 
 	.form-control, 
 	.form-group {
 		width: 100%;
 		position: relative;
 	}
-	input {
-		margin-bottom: 0;
-	}
 
-	@include breakpoint(tablet){
-		width: 40%;
-		margin-top: 10px;
+	@include breakpoint(laptop){
+		margin: 10px -15px 0 -15px;
+	}
+}
+
+.navbar-form .form-group {
+	margin-bottom: 10px;
+	@include breakpoint(sm-mobile){
+		margin-bottom: 0;
 	}
 }
 
@@ -90,18 +99,54 @@ a.search {
     }
 }
 
-.navbar-default .navbar-nav > li > a {
+li.menu-item a, 
+.navbar-nav li a{
 	text-transform: none;
 	font-family: $body-font;
 	font-weight: 600;
 	color: $body;
-	font-size: 16px;
+	text-decoration: none;
+	font-size: 14px;
+	@include breakpoint(tablet){
+		font-size: 16px;
+	}
 }
+
+.navbar-default .navbar-nav > .open > a, 
+.navbar-default .navbar-nav > .open > a:hover, 
+.navbar-default .navbar-nav > .open > a:focus {
+	background: none;
+}
+
+// Logged Out Menu
+
+li.menu-item .btn-primary {
+	margin: 10px 20px 10px 0 ;
+	height: 35px;
+	padding: 5px 10px;
+	font-size: 14px;
+	@include breakpoint(tablet){
+		margin: 10px;
+		height: 50px;
+		padding: 10px 30px;
+		font-size: 16px;
+	}
+}
+
+li.menu-item.sign-in {
+	margin-top: 17px;
+	margin-right: 10px;
+	@include breakpoint(tablet){
+		margin-top: 25px;
+	}
+}
+
 
 /*----------  Dropdown Nav menu  ----------*/
 
 ul.dropdown-menu {
 	width: 100%;
+	padding: 0;
 }
 
 li.menu-item {
@@ -113,33 +158,81 @@ li.menu-item {
 	}
 }
 
-
-ul.dropdown-menu li a {
+.navbar-nav .open ul.dropdown-menu > li > a {
 	color: $primary;
+	width: 320px;
+	padding: 15px 15px 15px 50px;
+	border-bottom: 1px solid $border;
 	font-weight: 600;
 	font-size: 16px;
-	padding: 10px 15px;
-
-
+	@include transition;
+	@include breakpoint(tablet){
+		width: auto;
+		text-align: left;
+		padding: 10px 15px 15px 50px;
+		border-bottom: 0;
+	}
 	&:hover, &:active, &:focus {
 		background: $primary;
 		color: white;
 	}
 }
 
+
+.navbar-nav .open ul.dropdown-menu li a.product-search {
+	background: url(../../public/img/icons/search.svg) no-repeat;
+	background-position: 15px 10px;
+
+	&:hover, &:active, &:focus {
+		background: url(../../public/img/icons/search-white.svg) no-repeat $primary;
+		padding-left: 50px;
+		background-position: 15px 10px;
+	}
+}
+
+.navbar-nav .open ul.dropdown-menu li a.user {
+	background: url(../../public/img/icons/user-02.svg) no-repeat;
+	background-position: 15px 10px;
+
+	&:hover, &:active, &:focus {
+		background: url(../../public/img/icons/user-white.svg) no-repeat $primary;
+		background-position: 15px 10px;
+	}
+}
+
+.navbar-nav .open ul.dropdown-menu li a.logout {
+	background: url(../../public/img/icons/logout.svg) no-repeat;
+	background-position: 15px 13px;
+
+	&:hover, &:active, &:focus {
+		background: url(../../public/img/icons/logout-white.svg) no-repeat $primary;
+		background-position: 15px 13px;
+	}
+}
+
 img.menu-img {
 	border: 1px solid $primary;
-	width: 30px;
-	height: 30px;
 	border-radius: 50%;
 	margin-right: 5px;
+	width: 30px;
+	height: 30px;
 }
 
 img.drop-arrow {
 	width: 15px;
 	height: 15px;
-	margin-left: 5px;
+	@include breakpoint(tablet){
+		margin-left: 5px;
+	}
 }
+
+span.username {
+	display: none;
+	@include breakpoint(tablet){
+		display: inline;
+	}
+}
+
 
 /*----------  Individual page headers  ----------*/
 

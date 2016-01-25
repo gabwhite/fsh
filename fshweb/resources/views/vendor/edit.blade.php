@@ -12,7 +12,8 @@
         <div id="bgImage" class="col-xs-12 vendor-profile" style="background-image: url('{{ ($vendor->background_image_path) ? url(config('app.vendor_storage') . '/' . $vendor->background_image_path) : '' }}')">
 
             @if($vendor->logo_image_path)
-                <img id="imgCurrentAvatar" src="{{url(config('app.vendor_storage') . '/' . $vendor->logo_image_path)}}" title="{{trans('ui.user_label_currentavatar')}}"/>
+                <div class="vendor-profile-img" id="imgCurrentAvatar" style="background: url({{url(config('app.vendor_storage') . '/' . $vendor->logo_image_path)}}) #fff no-repeat; background-size: 80%; background-position: center center;"></div>
+               
             @else
                 <img id="imgCurrentAvatar" src="{{url(config('app.avatar_none'))}}" title="{{trans('ui.user_label_noavatar')}}" width="200" height="200"/>
             @endif
@@ -98,6 +99,7 @@
                             <label for="about_text">{{trans('ui.vendor_label_about_text')}}</label>
                         
                             <textarea name="about_text" class="form-control" placeholder="" cols="80" rows="3">{{isset($vendor) ? $vendor->about_text : ''}}</textarea>
+
                         </div>
 
                         <div class="row">
@@ -112,7 +114,7 @@
                                 
                                         <div class="divBrand" style="background: url('{{url(config('app.vendor_storage'))}}/{{$b->logo_image_path}}') no-repeat; background-size:100px; background-position: center center;">
                                         
-                                            <a href="#" class="deletebrand" data-brandid="{{$b->id}}" data-imagename="{{$b->logo_image_path}}"><span><img src="../../public/img/icons/trash.svg" alt=""></span>{{trans('ui.button_delete')}}</a>
+                                            <a href="#" class="deletebrand" data-brandid="{{$b->id}}" data-imagename="{{$b->logo_image_path}}"><span><img src="{{url('/img/icons/trash.svg')}}" alt=""></span>{{trans('ui.button_delete')}}</a>
                                         </div>
                                                 
                                        
@@ -120,14 +122,13 @@
                                             <p id="nobrands" style="display:none;">{{trans('ui.vendor_label_no_brands')}}</p>
                                     </div>
                                     
-                                    
-                                <a href="#"><button class="btn-primary">{{trans('ui.vendor_label_add_brand')}}</button></a>
-                                    </div>
+                                </div>
                                 <div class="col-xs-12">
                                     
                                     <div class="row btn-row">
-                                        <input type="submit" value="{{trans('ui.button_update')}}" class="btn-primary"/>
                                         <a href="{{url('/profile/')}}"><button type="button" class="btn">{{trans('ui.button_cancel')}}</button></a>
+                                        <input type="submit" value="{{trans('ui.button_update')}}" class="btn-primary"/>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -150,13 +151,13 @@
                             <div class="logo-zone clearfix">
                                 <label for="logo">{{trans('ui.vendor_label_logo_image')}}</label>
                                 
-                                <div class="vendor-logo">
                                     @if($vendor->logo_image_path)
-                                        <img id="logoImageModal" src="{{url('img/vendors', $vendor->logo_image_path)}}" width="200" height="200"/>
+                                    <div class="vendor-logo" id="logoImageModal" style="background: url({{url('img/vendors', $vendor->logo_image_path)}}) no-repeat; background-size: contain; background-position: center;">
+                                       
+                                    </div>
                                     @else
-                                        <img id="logoImageModal" src="{{url(config('app.avatar_none'))}}" width="200" height="200"/>
+                                    <div id="logoImageModal" class="vendor-logo" style="background: url({{url(config('app.avatar_none'))}}) no-repeat; background-size: contain; background-position: center;"></div>
                                     @endif
-                                </div>
                                 
                                 <div id="logoUploader" class="logo-upload dropzone">
                                 </div>
@@ -165,11 +166,10 @@
                             <div class="logo-zone clearfix">
                                 <label for="background_image">{{trans('ui.vendor_label_background_image')}}</label>
                                 <p>{{trans('messages.vendor_background_image_notice')}}</p>
-                                <div class="vendor-background">
-                                    @if($vendor->background_image_path)
-                                        <img id="backgroundImageModal" src="{{url('img/vendors', $vendor->background_image_path)}}" width="200" height="200"/>
+                                
+                                @if($vendor->background_image_path)
+                                    <div id="backgroundImageModal" class="vendor-background" style="background: url('{{url('img/vendors', $vendor->background_image_path)}}') no-repeat; background-size: cover; background-position: center;"></div>
                                     @endif
-                                </div>
                                 <div id="backgroundUploader" class="logo-upload dropzone"></div>
                             </div>
                           </div>

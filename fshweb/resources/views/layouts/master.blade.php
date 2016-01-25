@@ -44,34 +44,33 @@
 
 <body>
 
-    <div id="header" class="row">
+    <div id="header" class="row" style="margin-right: 0;">
 
-        <nav class="navbar navbar-default col-xs-12" role="navigation">
+        <nav class="navbar navbar-default" role="navigation">
 
             <div class="container clearfix">
                 <!-- Brand and toggle get grouped for better mobile display -->
-                <div class=">col-xs-6 col-md-3">
+                <div class="col-xs-5 col-md-3">
                     <div class="navbar-header">
-                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                       <!--  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                             <span class="sr-only">Toggle navigation</span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
-                        </button>
+                        </button> -->
 
                         <a href="{{url('/')}}" class="navbar-brand"> 
                             <img id="logo_img" title="FoodserviceHound.com" src="{{url('/img/horizontallogoFoodServiceHound.png')}}" alt="FoodserviceHound.com">
                         </a>
                     </div>
                 </div>
-                
-                <div class="col-xs-12 col-md-9">    
+            
+
+                <div class="col-xs-7 col-md-4 pull-right">    
 
                     <!-- Collect the nav links, forms, and other content for toggling -->
-                     
-                    <div class="collapse navbar-collapse nav-collapse  pull-right" id="bs-example-navbar-collapse-1">
                     
-                    @if (Auth::check())
+                        @if (Auth::check())
                         
                         <ul class="nav navbar-nav">
                             
@@ -83,7 +82,7 @@
                                         <img class="menu-img" src="{{url(config('app.avatar_none'))}}" title="{{trans('ui.user_label_noavatar')}}" />
                                     @endif
 
-                                    {{Auth::user()->name}}
+                                    <span class="username">{{Auth::user()->name}}</span>
                                     <img class="drop-arrow" src="{{url('/img/icons/chevron-down.svg')}}" alt="drop-down">
 
                                 </a>
@@ -91,53 +90,56 @@
                                 <ul class="dropdown-menu">
                                     
                                     <li class="menu-item">
-                                        <a title="{{trans('ui.navigation_productsearch')}}" href="{{url('/product/search')}}"><img src="{{url('img/icons/search.svg')}}" alt="search">{{trans('ui.navigation_productsearch')}}</a>
+                                        <a class="product-search" title="{{trans('ui.navigation_productsearch')}}" href="{{url('/product/search')}}">{{trans('ui.navigation_productsearch')}}</a>
                                     </li>
                                     
                                     <li class="menu-item">
-                                        <a title="{{trans('ui.navigation_profile')}}" href="{{url('profile/')}}"><img class="pull-left" src="{{url('img/icons/user.svg')}}" alt="">{{trans('ui.navigation_profile')}}</a>
+                                        <a class="user" title="{{trans('ui.navigation_profile')}}" href="{{url('profile/')}}">{{trans('ui.navigation_profile')}}</a>
                                     </li>
 
                                     <li class="menu-item menu-item-type-post_type menu-item-object-page menu-item-723">
-                                        <a title="{{trans('ui.navigation_logout')}}" href="{{url('auth/logout')}}"><img src="{{url('img/icons/logout.svg')}}" alt="logout">{{trans('ui.navigation_logout')}}</a>
+                                        <a class="logout" title="{{trans('ui.navigation_logout')}}" href="{{url('auth/logout')}}">{{trans('ui.navigation_logout')}}</a>
                                     </li>
                                 </ul>
                             </li> <!-- end of dropdown menu -->
-                        </ul>
-                    @else 
+                            
+                        @else 
+                            
 
-                    <ul class="nav navbar-nav">
-                        <li class="menu-item">
-                            <a title="{{trans('ui.navigation_vendorreg')}}" href="{{url('auth/vendorregister')}}">{{trans('ui.navigation_vendorreg')}}</a>
-                        </li>
+                            <!-- <li class="menu-item">
+                                <a title="{{trans('ui.navigation_vendorreg')}}" href="{{url('auth/vendorregister')}}">{{trans('ui.navigation_vendorreg')}}</a>
+                            </li> -->
 
-                        <li class="menu-item">
-                            <a title="{{trans('ui.navigation_login')}}" href="{{url('auth/login')}}">{{trans('ui.navigation_login')}}</a>
-                        </li>
+                            <li class="menu-item pull-left">
+                                <a title="{{trans('ui.navigation_vendorreg')}}" href="{{url('auth/register')}}"><button class="btn-primary">{{trans('ui.navigation_userreg')}}</button></a>
+                            </li>
+
+                            <li class="menu-item pull-left sign-in">
+                                <a title="{{trans('ui.navigation_login')}}" href="{{url('auth/login')}}">{{trans('ui.navigation_login')}}</a>
+                            </li>
                         
-                        <!-- Hidden menu item -->
-                        <li class="hide menu-item">
-                            <a title="{{trans('ui.navigation_industryforums')}}" href="{{url('industryforums')}}">{{trans('ui.navigation_industryforums')}}</a>
-                        </li>
-                        <!-- hidden menu item -->
-                        <li class="hide menu-item">
-                            <a title="{{trans('ui.navigation_tools')}}" href="{{url('toolsresources')}}">{{trans('ui.navigation_tools')}}</a>
-                        </li>
-                    </ul>
-                                    
-                    @endif
-                    
+                            <!-- Hidden menu item -->
+                            <li class="hide menu-item">
+                                <a title="{{trans('ui.navigation_industryforums')}}" href="{{url('industryforums')}}">{{trans('ui.navigation_industryforums')}}</a>
+                            </li>
+                            <!-- hidden menu item -->
+                            <li class="hide menu-item">
+                                <a title="{{trans('ui.navigation_tools')}}" href="{{url('toolsresources')}}">{{trans('ui.navigation_tools')}}</a>
+                            </li>
+                        </ul>
+                    @endif                       
                 </div>
+                
+                <div class="col-xs-12 col-md-5">
                     
-                <form class="navbar-form pull-right" id="frmNavigationSearch" method="post" action="{{url('product/navsearch')}}">
-                    <div class="form-group">
-                        <input type="text" name="searchquery" autocomplete="off" placeholder="{{trans('ui.search_placeholder')}}" value="{{$query or ''}}" class="form-control"/>
-                        <a href="#" class="search"><img src="{{url('img/icons/search.svg')}}" alt=""></a>
-                    </div>
-                    {!! csrf_field() !!}
-                </form>
+                    <form class="navbar-form pull-right" id="frmNavigationSearch" method="post" action="{{url('product/navsearch')}}">
+                        <div class="form-group">
+                            <input type="text" name="searchquery" autocomplete="off" placeholder="{{trans('ui.search_placeholder')}}" value="{{$query or ''}}" class="form-control"/>
+                            <a href="#" class="search"><img src="{{url('img/icons/search.svg')}}" alt=""></a>
+                        </div>
+                        {!! csrf_field() !!}
+                    </form>
                 </div>
-
             </div><!--end container-->
 
         </nav>
