@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DataAccessLayer;
+use App\iProductImporter;
 use Illuminate\Http\Request;
 use Storage;
 use Validator;
@@ -22,14 +23,16 @@ class AdminController extends Controller
 {
 
     protected $dataAccess;
+    protected $productImporter;
 
     /**
      * AdminController constructor.
      * @param $dataAccess
      */
-    public function __construct(DataAccessLayer $dataAccess)
+    public function __construct(DataAccessLayer $dataAccess, iProductImporter $productImporter)
     {
         $this->dataAccess = $dataAccess;
+        $this->productImporter = $productImporter;
     }
 
     public function index()
@@ -62,7 +65,6 @@ class AdminController extends Controller
 
             $uploader = new UploadHandler();
             $result = $uploader->uploadCsv($request->file('importfile'), $directory, $filename);
-
             if($result)
             {
                 $importInfo = new ProductImportOptions();
@@ -78,11 +80,24 @@ class AdminController extends Controller
                 $importInfo->setResizeImageWidth($request->input('imagewidth'));
                 $importInfo->setResizeImageHeight($request->input('imageheight'));
 
-                $this->dispatch(new ParseProductImport($importInfo));
+                $action = $request->input('action');
+
+                if($action === 'PROCESS')
+                {
+                    if($result)
+                    {
+                        $this->dispatch(new ParseProductImport($importInfo));
+
+                        echo "Done!";
+                    }
+                }
+                else if($action === 'PREVIEW')
+                {
+                    $previewData = $this->productImporter->doPreview($importInfo);
+                    return view('admin.importpreview')->with('previewData', $previewData);
+                }
             }
         }
-
-        echo "Done!";
     }
 
     public function showUsers()

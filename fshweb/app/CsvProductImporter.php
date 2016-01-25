@@ -228,14 +228,40 @@ class CsvProductImporter implements iProductImporter
         });
 
         // Create a record of the import in the database
-        $productImport = new \App\Models\ProductImport();
-        $productImport->user_id = $pio->getVendorId();
-        $productImport->uuid = $pio->getUuid();
-        $productImport->filename = $pio->getFileName();
+        //$productImport = new \App\Models\ProductImport();
+        //$productImport->user_id = $pio->getVendorId();
+        //$productImport->uuid = $pio->getUuid();
+        //$productImport->filename = $pio->getFileName();
         //$productImport->save();
 
         echo sprintf('Import complete, %s records added, %s records updated, %s records failed %s', $recordsAdded, $recordsUpdated, $recordsFailed, ($pio->isSimulate() ? '(Simulated)' : '' ));
 
+    }
+
+    public function doPreview(ProductImportOptions $pio)
+    {
+        $data = [];
+
+        $path = $pio->getUuid() . '/' .  $pio->getFileName();
+
+        $fileContents = \Storage::disk('imports')->get($path);
+
+
+        $csv = Reader::createFromString($fileContents);
+        $csv->setDelimiter(',');
+
+        if($pio->isIncludeHeaders())
+        {
+            $headers = $csv->fetchOne();
+            $data['headers'] = $headers;
+
+            $csv->setOffset(1);
+        }
+
+        $previewRows = $csv->setLimit(25)->fetchAll();
+        $data['rows'] = $previewRows;
+
+        return $data;
     }
 
     private function createProductAllergen($allergenId, $productId)

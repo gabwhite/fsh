@@ -12,4 +12,6 @@ namespace App;
 interface iProductImporter
 {
     public function doImport(ProductImportOptions $data);
+
+    public function doPreview(ProductImportOptions $data);
 }
