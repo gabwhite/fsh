@@ -32,8 +32,9 @@ class VendorController extends Controller
 
     public function detail($id)
     {
-        $cacheKey = 'vendor-'.$id;
+        $canEdit = false;
 
+        $cacheKey = 'vendor-'.$id;
         $vendor = $this->cacheManager->getItem(env('CACHE_DRIVER'), $cacheKey);
         if(is_null($vendor) || !isset($vendor))
         {
@@ -41,7 +42,15 @@ class VendorController extends Controller
             $this->cacheManager->setItem(env('CACHE_DRIVER'), $cacheKey, $vendor, config('app.cache_expiry_time_vendors'));
         }
 
-        return view('vendor.view')->with('profile', $vendor);
+        if(\Session::has(config('app.session_key_vendor')))
+        {
+            if(\Session::get(config('app.session_key_vendor')) === $vendor->id)
+            {
+                $canEdit = true;
+            }
+        }
+
+        return view('vendor.view')->with(['profile' => $vendor, 'canEdit' => $canEdit]);
     }
 
     public function edit()
@@ -117,7 +126,7 @@ class VendorController extends Controller
                     ], 500);
                 }
             }
-            catch(Exception $ex)
+            catch(\Exception $ex)
             {
                 return response()->json([
                     'error' => true,
@@ -161,7 +170,7 @@ class VendorController extends Controller
                 ], 200);
             }
         }
-        catch(Exception $ex)
+        catch(\Exception $ex)
         {
             return response()->json([
                 'error' => true,
@@ -198,6 +207,17 @@ class VendorController extends Controller
                     if(!is_null($vendor[$dbField]) && $vendor[$dbField] != '')
                     {
                         $filename = $vendor[$dbField];
+
+                        $changedFilename = $uploader->getNewImageExtension($file->getClientOriginalName(), $filename);
+                        if($changedFilename !== $filename)
+                        {
+                            $vendor[$dbField] = $changedFilename;
+                            $vendor->save();
+
+                            $uploader->removeVendorAsset($filename);
+
+                            $filename = $changedFilename;
+                        }
                     }
 
                     if($uploader->isImage($file))
@@ -231,7 +251,7 @@ class VendorController extends Controller
                     }
                 }
             }
-            catch(Exception $ex)
+            catch(\Exception $ex)
             {
                 return response()->json([
                     'error' => true,
@@ -271,7 +291,7 @@ class VendorController extends Controller
             ], 200);
 
         }
-        catch(Exception $ex)
+        catch(\Exception $ex)
         {
             return response()->json([
                 'error' => true,

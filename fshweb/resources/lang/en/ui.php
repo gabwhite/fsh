@@ -15,8 +15,9 @@ return [
     'navigation_industryforums' => 'Industry Forums',
     'navigation_tools' => 'Tools &#038; Resources',
     'navigation_vendorreg' => 'Vendor Registration',
+    'navigation_userreg' => 'Sign Up',
     'navigation_profile' => 'Profile',
-    'navigation_login' => 'Login/Register',
+    'navigation_login' => 'Sign In',
     'navigation_logout' => 'Logout',
     'navigation_contactus' => 'Contact Us',
     'navigation_register' => 'Sign Up for A Free Account',
@@ -46,6 +47,7 @@ return [
     'button_submit_rating' => 'Submit Rating',
     'button_addupdate' => 'Add / Update',
     'button_edit' => 'Edit',
+    'button_add' => 'Add',
     'button_edit_header' =>  'Edit Header',
     'button_back' => 'Back',
     'button_save' => 'Save Changes',
@@ -101,6 +103,7 @@ return [
     'vendor_label_edit_profile_header' => 'Edit Profile Header',
     'vendor_label_choose_country' => 'Please choose a country first',
     'vendor_label_my_products' => 'My Products',
+    'vendor_label_no_products' => 'You currently have no products',
     'vendor_label_my_products_instruction' => 'Edit existing products or upload new products.',
 
 

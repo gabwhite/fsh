@@ -4,7 +4,8 @@
 
 /*----------  Upload new Brand  ----------*/
 
-#brandUploader.dropzone {
+#brandUploader.dropzone,
+.logo-upload.dropzone {
     min-height: 150px;
     border: 1px solid $border !important;
     background: white;

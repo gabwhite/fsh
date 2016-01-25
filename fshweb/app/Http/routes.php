@@ -60,24 +60,28 @@ Route::group(['middleware' => 'auth'], function()
     });
 
 
+    // Routes that require admin role
+    Route::group(['middleware' => ['role:admin']], function()
+    {
+        // Admin routes
+        Route::get('admin/', 'AdminController@index');
+        Route::get('admin/users', 'AdminController@showUsers');
+        Route::get('admin/adduser', 'AdminController@showUserAdd');
+        Route::post('admin/adduser', 'AdminController@addUser');
+        Route::get('admin/userview/{id}', 'AdminController@viewUser');
+        Route::post('admin/edituser', 'AdminController@editUser');
+        Route::get('admin/import', 'AdminController@showImport');
+        Route::post('admin/import', 'AdminController@doImport');
+        Route::get('admin/roles', 'AdminController@showRoles');
+        Route::post('admin/roles', 'AdminController@editRoles');
+        Route::get('admin/permissions/{id?}', 'AdminController@showPermissions');
+        Route::post('admin/permissions', 'AdminController@editPermissions');
+        Route::get('admin/searchindexes', 'AdminController@showSearchIndexes');
+        Route::post('admin/createsearchindex', 'AdminController@createSearchIndex');
+        Route::post('admin/managesearchindex', 'AdminController@manageSearchIndex');
 
+    });
 
-    // Admin routes
-    Route::get('admin/', 'AdminController@index');
-    Route::get('admin/users', 'AdminController@showUsers');
-    Route::get('admin/adduser', 'AdminController@showUserAdd');
-    Route::post('admin/adduser', 'AdminController@addUser');
-    Route::get('admin/userview/{id}', 'AdminController@viewUser');
-    Route::post('admin/edituser', 'AdminController@editUser');
-    Route::get('admin/import', 'AdminController@showImport');
-    Route::post('admin/import', 'AdminController@doImport');
-    Route::get('admin/roles', 'AdminController@showRoles');
-    Route::post('admin/roles', 'AdminController@editRoles');
-    Route::get('admin/permissions/{id?}', 'AdminController@showPermissions');
-    Route::post('admin/permissions', 'AdminController@editPermissions');
-    Route::get('admin/searchindexes', 'AdminController@showSearchIndexes');
-    Route::post('admin/createsearchindex', 'AdminController@createSearchIndex');
-    Route::post('admin/managesearchindex', 'AdminController@manageSearchIndex');
 });
 
 
@@ -112,8 +116,8 @@ Route::get('datacleanup', function()
     $products = \App\Models\Product::all();
     foreach($products as $p)
     {
-        $p->name = ucfirst(strtolower($p->name));
-        $p->brand = ucfirst(strtolower($p->brand));
+        $p->name = ucfirst(mb_strtolower($p->name));
+        $p->brand = ucfirst(mb_strtolower($p->brand));
 
         $p->save();
     }
@@ -121,7 +125,7 @@ Route::get('datacleanup', function()
     $categories = \App\Models\Category::all();
     foreach($categories as $c)
     {
-        $c->name = ucfirst(strtolower($c->name));
+        $c->name = ucfirst(mb_strtolower($c->name));
         $c->save();
     }
 

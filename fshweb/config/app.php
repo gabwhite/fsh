@@ -240,5 +240,9 @@ return [
     'contact_email_view' => 'emails.contact',
     'contact_email_view_admin' => 'emails.contactadmin',
     'contact_email_to' => 'breen@foodservicehound.com',
+    'product_import_upload_max_filesize' => '10M', // 10 megs
+    'product_import_post_max_size' => '10M', // 10 megs
+    'product_import_max_input_time' => 300, // 5 minutes
+    'product_import_max_execution_time' => 300, // 5 minutes
 
 ];

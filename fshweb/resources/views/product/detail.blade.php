@@ -17,7 +17,7 @@
                 </div>
             </div>
             <div class="btn-row">
-                <a href="javascript:alert('Coming Soon');"><button class="btn-primary">{{trans('ui.product_label_add_to_my_products')}}</button></a>
+                <button data-target="#add-product" data-toggle="modal" class="btn-primary">{{trans('ui.product_label_add_to_my_products')}}</button>
            
                 <a href="{{url('vendor/detail', $product->vendor_id)}}"><button class="btn-primary">{{trans('ui.product_label_goto_vendor_profile')}}</button></a>
            
@@ -49,12 +49,13 @@
 
                 @if($product->product_image)
                     @if(strpos($product->product_image, 'http') !== false)
-                        <img src="{{$product->product_image}}" alt="" />
+                       <div class="product-img" style="background: url({{$product->product_image}}) no-repeat; background-size: contain; background-position: center;"></div> 
                     @else
-                        <img src="{{url(config('app.product_storage') . '/' . $product->product_image)}}" alt="" />
+                        <div class="product-img" style="background: url({{url(config('app.product_storage') . '/' . $product->product_image)}}) no-repeat; background-size: contain; background-position: center;"></div>
+                        
                     @endif
                 @else
-                    <img src="{{url('/img/no-photo-avail.svg')}}" alt="item not pictured" />
+                    <div class="product-img" style="background: url({{url('/img/no-photo-avail.svg')}}) no-repeat; background-size: contain; background-position: center;"></div>
                 @endif
                 
                 <div class="detail-brand">
@@ -388,6 +389,28 @@
           
               <div class="modal-footer col-xs-12">
                 <a href="#" id="hlSaveHeader"><button type="button" class="btn-primary">{{trans('ui.button_submit')}}</button></a>
+              </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <!-- ADD TO PRODUCTS MODAL -->
+
+    <div class="modal fade centered" id="add-product" tabindex="-1" role="dialog">
+      <div class="modal-dialog">
+        <div class="modal-content col-xs-12">
+             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <div class="modal-header">
+                <img src="{{url('/img/icons/check.svg')}}" alt="" class="center-block check">
+                <h4 class="modal-title">Added to My Products</h4>
+              </div>
+          
+              <div class="modal-body text-center col-xs-12">
+                <p>This item will be saved to your profile.</p>
+              </div>
+          
+              <div class="modal-footer col-xs-12">
+                <a href="#" id="hlSaveHeader"><button type="button" class="btn-primary">{{trans('ui.button_submit_rating')}}</button></a>
               </div>
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->

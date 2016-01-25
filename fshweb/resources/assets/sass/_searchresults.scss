@@ -127,10 +127,37 @@
 
 .keyword-search{
 	border-bottom: 1px solid $border;
+	padding-bottom: 15px;
+
+	.form-control {
+		margin-bottom: 15px;
+	}
 	
 	.btn {
 		margin-top: 0;
 	}
 } 
 
+
+a.search-tips {
+	font-weight: 600;
+	background: url(../../public/img/icons/search-tip.svg) no-repeat;
+	padding: 2px 0;
+	padding-left: 30px;
+	background-size: 20px;
+	display: block;
+	margin-bottom: 10px;
+}
+
 /*=====  End of Search Results  ======*/
+
+/*===================================
+=            Detail Page            =
+===================================*/
+
+.product-img {
+	width: 300px;
+	height: 300px;
+}
+
+/*=====  End of Detail Page  ======*/
