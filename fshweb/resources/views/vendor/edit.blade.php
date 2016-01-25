@@ -126,8 +126,9 @@
                                 <div class="col-xs-12">
                                     
                                     <div class="row btn-row">
-                                        <input type="submit" value="{{trans('ui.button_update')}}" class="btn-primary"/>
                                         <a href="{{url('/profile/')}}"><button type="button" class="btn">{{trans('ui.button_cancel')}}</button></a>
+                                        <input type="submit" value="{{trans('ui.button_update')}}" class="btn-primary"/>
+                                        
                                     </div>
                                 </div>
                             </div>
@@ -150,13 +151,13 @@
                             <div class="logo-zone clearfix">
                                 <label for="logo">{{trans('ui.vendor_label_logo_image')}}</label>
                                 
-                                <div class="vendor-logo">
                                     @if($vendor->logo_image_path)
-                                        <img id="logoImageModal" src="{{url('img/vendors', $vendor->logo_image_path)}}" width="200" height="200"/>
+                                    <div class="vendor-logo" id="logoImageModal" style="background: url({{url('img/vendors', $vendor->logo_image_path)}}) no-repeat; background-size: contain; background-position: center;">
+                                       
+                                    </div>
                                     @else
-                                        <img id="logoImageModal" src="{{url(config('app.avatar_none'))}}" width="200" height="200"/>
+                                    <div id="logoImageModal" class="vendor-logo" style="background: url({{url(config('app.avatar_none'))}}) no-repeat; background-size: contain; background-position: center;"></div>
                                     @endif
-                                </div>
                                 
                                 <div id="logoUploader" class="logo-upload dropzone">
                                 </div>
@@ -165,11 +166,10 @@
                             <div class="logo-zone clearfix">
                                 <label for="background_image">{{trans('ui.vendor_label_background_image')}}</label>
                                 <p>{{trans('messages.vendor_background_image_notice')}}</p>
-                                <div class="vendor-background">
-                                    @if($vendor->background_image_path)
-                                        <img id="backgroundImageModal" src="{{url('img/vendors', $vendor->background_image_path)}}" width="200" height="200"/>
+                                
+                                @if($vendor->background_image_path)
+                                    <div id="backgroundImageModal" class="vendor-background" style="background: url('{{url('img/vendors', $vendor->background_image_path)}}') no-repeat; background-size: cover; background-position: center;"></div>
                                     @endif
-                                </div>
                                 <div id="backgroundUploader" class="logo-upload dropzone"></div>
                             </div>
                           </div>

@@ -120,7 +120,7 @@
                             <div class="flexslider">
                               <ul class="slides">
                               @foreach($profile->brands as $b)
-                                  <li style="background: url('{{url(config('app.vendor_storage'))}}/{{$b->logo_image_path}}'); background-repeat: no-repeat; background-position: center center; background-size: contain;">
+                                  <li style="background: url('{{url(config('app.vendor_storage'))}}/{{$b->logo_image_path}}'); background-repeat: no-repeat; background-position: center center; background-size: 70%;">
                                   </li>
                               @endforeach
                                 <!-- items mirrored twice, total of 12 -->

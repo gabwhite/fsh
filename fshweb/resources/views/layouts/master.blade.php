@@ -44,13 +44,13 @@
 
 <body>
 
-    <div id="header" class="row">
+    <div id="header" class="row" style="margin-right: 0;">
 
-        <nav class="navbar navbar-default col-xs-12" role="navigation">
+        <nav class="navbar navbar-default" role="navigation">
 
             <div class="container clearfix">
                 <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="col-xs-5 col-md-3 drop-padding">
+                <div class="col-xs-5 col-md-3">
                     <div class="navbar-header">
                        <!--  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                             <span class="sr-only">Toggle navigation</span>
@@ -66,11 +66,9 @@
                 </div>
             
 
-                <div class="col-xs-7 col-md-4 pull-right drop-padding">    
+                <div class="col-xs-7 col-md-4 pull-right">    
 
                     <!-- Collect the nav links, forms, and other content for toggling -->
-                     
-                    <div class="pull-right" >
                     
                         @if (Auth::check())
                         
@@ -84,7 +82,7 @@
                                         <img class="menu-img" src="{{url(config('app.avatar_none'))}}" title="{{trans('ui.user_label_noavatar')}}" />
                                     @endif
 
-                                    {{Auth::user()->name}}
+                                    <span class="username">{{Auth::user()->name}}</span>
                                     <img class="drop-arrow" src="{{url('/img/icons/chevron-down.svg')}}" alt="drop-down">
 
                                 </a>
@@ -130,8 +128,6 @@
                             </li>
                         </ul>
                     @endif                       
-                    
-                    </div>
                 </div>
                 
                 <div class="col-xs-12 col-md-5">
