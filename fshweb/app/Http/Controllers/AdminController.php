@@ -248,35 +248,8 @@ class AdminController extends Controller
 
     }
 
-    public function showSearchIndexes()
+    public function showCacheManager()
     {
-        $indexes = Storage::directories('lucene/');
-
-        return view('admin.lucenesearch')->with('indexes', $indexes);
+        return view('admin.cache');
     }
-
-    public function createSearchIndex(Request $request)
-    {
-        $indexInfo = array('index_name' => $request->input('newindex'), 'action' => 'CREATE');
-
-        // Build index on creation
-        $this->dispatch(new RebuildSearchIndex($indexInfo));
-
-        return redirect('admin/searchindexes');
-    }
-
-    public function manageSearchIndex(Request $request)
-    {
-        $action = $request->input('indexaction');
-        $indexName = $request->input('indexname');
-
-        if($action == "REBUILD")
-        {
-            $indexInfo = array('index_name' => $indexName, 'action' => $action);
-            $this->dispatch(new RebuildSearchIndex($indexInfo));
-        }
-
-        return redirect('admin/searchindexes');
-    }
-
 }

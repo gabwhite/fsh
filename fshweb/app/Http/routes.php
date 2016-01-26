@@ -77,9 +77,7 @@ Route::group(['middleware' => 'auth'], function()
         Route::post('admin/roles', 'AdminController@editRoles');
         Route::get('admin/permissions/{id?}', 'AdminController@showPermissions');
         Route::post('admin/permissions', 'AdminController@editPermissions');
-        Route::get('admin/searchindexes', 'AdminController@showSearchIndexes');
-        Route::post('admin/createsearchindex', 'AdminController@createSearchIndex');
-        Route::post('admin/managesearchindex', 'AdminController@manageSearchIndex');
+        Route::get('admin/cache', 'AdminController@showCacheManager');
 
     });
 

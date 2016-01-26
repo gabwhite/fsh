@@ -52,6 +52,12 @@
                 <li><a href="{{url('admin/roles')}}">Roles</a></li>
                 <li><a href="{{url('admin/permissions')}}">Permissions</a></li>
                 <li><a href="{{url('admin/import')}}">Product Import</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">System <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{url('admin/cache')}}">Cache Control</a></li>
+                    </ul>
+                </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li><a href="{{url('/')}}" target="_blank">Public Site</a></li>
