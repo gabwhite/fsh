@@ -16,11 +16,17 @@ class PostLogout
     public function handle($request, Closure $next)
     {
         $vendorSessionKey = config('app.session_key_vendor');
+        $avatarSessionKey = config('app.session_key_avatar');
 
         // Clear session vars
-        if(\Session::has($vendorSessionKey))
+        if($request->session()->has($vendorSessionKey))
         {
-            \Session::forget($vendorSessionKey);
+            $request->session()->forget($vendorSessionKey);
+        }
+
+        if($request->session()->has($avatarSessionKey))
+        {
+            $request->session()->forget($avatarSessionKey);
         }
 
         return $next($request);

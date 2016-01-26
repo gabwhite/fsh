@@ -76,8 +76,8 @@
                             
                             <li role="presentation" class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                                    @if(isset($avatarFilename))
-                                        <img class="menu-img" src="{{url(config('app.avatar_storage') . '/' . $avatarFilename)}}" title="{{trans('ui.user_label_currentavatar')}}"/>
+                                    @if(\Session::has(config('app.session_key_avatar')))
+                                        <img class="menu-img" src="{{url(config('app.avatar_storage') . '/' . \Session::get(config('app.session_key_avatar')))}}" title="{{trans('ui.user_label_currentavatar')}}"/>
                                     @else
                                         <img class="menu-img" src="{{url(config('app.avatar_none'))}}" title="{{trans('ui.user_label_noavatar')}}" />
                                     @endif

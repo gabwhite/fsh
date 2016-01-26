@@ -30,13 +30,24 @@ class PostLogin
         $response = $next($request);
 
         $vendorSessionKey = config('app.session_key_vendor');
+        $avatarSessionKey = config('app.session_key_avatar');
 
         // Clear any existing session vars
-        if(\Session::has($vendorSessionKey)) { \Session::forget($vendorSessionKey); }
+        if($request->session()->has($vendorSessionKey)) { $request->session()->forget($vendorSessionKey); }
+        if($request->session()->has($avatarSessionKey)) { $request->session()->forget($avatarSessionKey); }
 
         $user = $request->user();
         if ($user)
         {
+            // Set avatar path for user
+            if($user->userProfile
+                && !is_null($user->userProfile->avatar_image_path)
+                    && $user->avatar_image_path !== '')
+            {
+                $request->session()->put($avatarSessionKey, $user->userProfile->avatar_image_path);
+            }
+
+
             if($user->hasRole('admin'))
             {
                 return redirect('admin');
@@ -48,7 +59,7 @@ class PostLogin
                 $vendors = $this->dataAccess->getVendorsForUser($currentUser->id, ['id']);
 
                 // TODO: We're only supporting one vendor owner per person for now.
-                if(count($vendors) > 0) { \Session::put($vendorSessionKey, $vendors[0]->id); }
+                if(count($vendors) > 0) { $request->session()->put($vendorSessionKey, $vendors[0]->id); }
 
             }
 

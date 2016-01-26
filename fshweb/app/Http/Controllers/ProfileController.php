@@ -123,6 +123,9 @@ class ProfileController extends Controller
                                 $user->userProfile()->create($input);
                             }
 
+                            $request->session()->put(config('app.session_key_avatar'), $newFilename);
+
+
                             return response()->json([
                                 'error' => false,
                                 'code'  => 200,
@@ -140,6 +143,8 @@ class ProfileController extends Controller
                             $up->avatar_image_path = null;
                             $up->save();
                         }
+
+                        $request->session()->forget(config('app.session_key_avatar'));
 
                         return response()->json([
                             'error' => false,
