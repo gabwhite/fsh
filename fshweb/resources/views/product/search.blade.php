@@ -28,7 +28,7 @@
 
     <div class="row">
 
-        <div class="col-xs-12 col-md-12">
+        <div class="col-xs-12 col-md-12 drop-padding">
 
             <div class="row">
 
@@ -42,30 +42,27 @@
                 </div>
 
                 <div class="col-xs-12 col-md-8">
-                    
-                    <div class="container">
-                        
-                        <div class="col-xs-12 sort-menu">
-                            <h2 class="sort-title">Sort by:</h2>
-                            <select name="sortby" id="sortby" class="drop-sm">
-                                <option value="name">Product Name</option>
-                                <option value="brand">Brand</option>
-                                <option value="pack">Pack</option>
-                                <option value="uom">Units</option>
-                                <option value="vendors">Vendors</option>
-                            </select>
+                     
+                    <div class="col-xs-12 sort-menu">
+                        <h2 class="sort-title">Sort by:</h2>
+                        <select name="sortby" id="sortby" class="drop-sm">
+                            <option value="name">Product Name</option>
+                            <option value="brand">Brand</option>
+                            <option value="pack">Pack</option>
+                            <option value="uom">Units</option>
+                            <option value="vendors">Vendors</option>
+                        </select>
 
-                            <select name="viewall" id="viewall" class="drop-sm">
-                                <option value="10">View 10</option>
-                                <option value="25">View 25</option>
-                                <option value="50">View 50</option>
-                                <option value="100">View 100</option>
-                            </select>
+                        <select name="viewall" id="viewall" class="drop-sm">
+                            <option value="10">View 10</option>
+                            <option value="25">View 25</option>
+                            <option value="50">View 50</option>
+                            <option value="100">View 100</option>
+                        </select>
 
-                            <a id="hlSort" href="#"><button class="btn btn-sm">Sort Results</button></a>
-                        </div>
-
+                        <a id="hlSort" href="#"><button class="btn btn-sm">Sort Results</button></a>
                     </div>
+
 
                     <div id="rootResultContainer" class="col-xs-12 well">
 

@@ -9,7 +9,7 @@
 @section('sectionheader')
 <section class='clearfix container-wrap profile-head'>
     <div class="container">
-        <div class="col-xs-12 col-md-4">
+        <div class="col-xs-12 col-md-4 drop-padding">
             @if(isset($avatarFilename))
                 <img id="imgCurrentAvatar" src="{{url(config('app.avatar_storage') . '/' . $avatarFilename)}}" title="{{trans('ui.user_label_currentavatar')}}" width="200" height="200"/>
             @else
@@ -17,9 +17,9 @@
             @endif
         </div>
 
-        <div class="col-xs-12 col-md-8">  
+        <div class="col-xs-12 col-md-8 drop-padding">  
             
-            <h1 class="username">
+            <h1 class="edit-profile">
                 {{$user->name}}
             </h1>
 
@@ -50,7 +50,7 @@
 
 <div class="row">
 
-    <div class="col-xs-12 col-md-4">
+    <div class="col-xs-12 col-md-4 drop-padding">
         <div class="col-xs-12 col-md-11">
             
             <h2 class="item-subhead">{{trans('ui.user_label_contact')}}</h2>
@@ -63,7 +63,7 @@
         </div>
     </div>
 
-    <div class="col-xs-12 col-md-8">
+    <div class="col-xs-12 col-md-8 drop-padding">
         <div class="col-xs-12">
             
             <h2 class="item-subhead">{{trans('ui.user_label_bio')}}</h2>
@@ -77,7 +77,7 @@
         @if($user->hasRole('vendor'))
             @if($vendorOwner)
             
-            <div class="col-xs-12">
+            <div class="col-xs-12 ">
                 
                 <h2 class="item-subhead">{{trans('ui.vendor_label_my_products')}}</h2>
                 <div class="col-xs-12 well">
@@ -85,7 +85,7 @@
                     <p>{{trans('ui.vendor_label_my_products_instruction')}}</p>
                     
                     <div class="row btn-row">
-                        <div class="col-xs-12">
+                        <div class="col-xs-12 drop-padding">
                             
                             <a href="{{url('product/vendor')}}"><button class="btn-primary">{{trans('ui.navigation_link_myproducts')}}</button></a>
                             

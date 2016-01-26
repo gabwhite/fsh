@@ -10,7 +10,7 @@
 <section class='clearfix container-wrap item-header'>
     <div class='container'>
         <div class="col-xs-12">
-            <h1 class="item-title">{{$product->name}}</h1>
+            <h1 class="item-title">Edit Product: {{$product->name}}</h1>
         </div>
         <div class="col-xs-12 reset-right">
             <div class="{{($product->published) ? 'bg-success' : 'bg-danger'}}">
@@ -26,14 +26,16 @@
     <div class="container">
         
         <form id="form1" name="form1" method="post" action="{{url('product/edit')}}" enctype="multipart/form-data">
+            <div class="col-xs-12">
+                
+                <div class="col-xs-12 well">
+                    <h4>{{trans('ui.product_label_name')}}</h4>
+                    <input type="text" name="name" class="form-control input-lg" maxlength="500" placeholder="{{trans('ui.product_label_name_placeholder')}}" value="{{$product->name}}"/>
 
-            <div class="col-xs-12 well">
-                <h4>{{trans('ui.product_label_name')}}</h4>
-                <input type="text" name="name" class="form-control input-lg" maxlength="500" placeholder="{{trans('ui.product_label_name_placeholder')}}" value="{{$product->name}}"/>
-
-                <h4>{{trans('ui.product_label_description')}}</h4>
-                <textarea title="description" name="description" class="form-control" cols="80" rows="3">{{$product->description}}</textarea>
-            
+                    <h4>{{trans('ui.product_label_description')}}</h4>
+                    <textarea title="description" name="description" class="form-control" cols="80" rows="3">{{$product->description}}</textarea>
+                
+                </div>
             </div>
 
             <div class="row">
@@ -43,17 +45,17 @@
                         
                         <h4>{{trans('ui.product_label_nutrition_facts')}}</h4>
 
-                        <div class="nutrition-meta serving-size">
+                        <div class="col-xs-12 nutrition-meta serving-size">
                             <span class="nutrition-value">{{trans('ui.product_label_serving_size')}}&nbsp;<input type="text" name="serving_size" class="form-control input-sm" maxlength="10" value="{{$product->serving_size}}"/></span>
                         </div>
 
-                        <div class="nutrition-meta amount-per-serving">
+                        <div class="col-xs-12 nutrition-meta amount-per-serving">
                             
                             <label>{{trans('ui.product_label_amount_per_serving')}}</label>
                         
                         </div>
 
-                        <div class="nutrition-meta calories">
+                        <div class="col-xs-12 nutrition-meta calories">
                             
                             <div class="col-xs-6 calories-left">
                                 <label>{{trans('ui.product_label_calories')}}&nbsp;</label><span class="nutrition-value"><input type="text" name="calories" class="form-control input-sm" maxlength="10" value="{{$product->calories}}"/></span>
@@ -67,35 +69,35 @@
 
                         </div>
                                 
-                        <div class="nutrition-meta total-fat">  
+                        <div class="col-xs-12 nutrition-meta total-fat">  
                             <label>{{trans('ui.product_label_total_fat')}}&nbsp;</label><span class="nutrition-value"><input type="text" name="total_fat" class="form-control input-sm" maxlength="10" value="{{$product->total_fat}}"/></span>
                         </div>
                         
-                        <div class="nutrition-meta">
+                        <div class="col-xs-12 nutrition-meta">
                             <label class="nutrition-value">{{trans('ui.product_label_saturated_fat')}}&nbsp;</label><input type="text" name="saturated_fats" class="form-control input-sm" maxlength="10" value="{{$product->saturated_fats}}"/>
                         </div>
                                 
-                        <div class="nutrition-meta cholesteral">
+                        <div class="col-xs-12 nutrition-meta cholesteral">
                             <label>{{trans('ui.product_label_cholesterol')}}&nbsp;</label><input type="text" name="saturated_fats" class="form-control input-sm" maxlength="10" value="{{$product->cholesteral}}"/>
                         </div>
                                 
-                        <div class="nutrition-meta sodium">
+                        <div class="col-xs-12 nutrition-meta sodium">
                             <label>{{trans('ui.product_label_sodium')}}&nbsp;</label><span class="nutrition-value"><input type="text" name="sodium" class="form-control input-sm" maxlength="10" value="{{$product->sodium}}"/></span>
                         </div>
 
-                        <div class="nutrition-meta carbohydrates">
+                        <div class="col-xs-12 nutrition-meta carbohydrates">
                             <label>{{trans('ui.product_label_total_carbs')}}&nbsp;</label><span class="nutrition-value"><input type="text" name="carbs" class="form-control input-sm" maxlength="10" value="{{$product->carbs}}"/></span>
                         </div>
                         
-                        <div class="nutrition-meta">
+                        <div class="col-xs-12 nutrition-meta">
                             <label class="nutrition-value">{{trans('ui.product_label_dietary_fibre')}}&nbsp;</label><input type="text" name="fibre" class="form-control input-sm" maxlength="10" value="{{$product->fibre}}"/>
                         </div>
                         
-                        <div class="nutrition-meta">
+                        <div class="col-xs-12 nutrition-meta">
                             <label class="nutrition-value">{{trans('ui.product_label_sugars')}}&nbsp;</label><input type="text" name="sugar" class="form-control input-sm" maxlength="10" value="{{$product->sugar}}"/>
                         </div>
                         
-                        <div class="nutrition-meta protein">
+                        <div class="col-xs-12 nutrition-meta protein">
                             <label>{{trans('ui.product_label_protein')}}&nbsp;</label><span class="nutrition-value"><input type="text" name="protein" class="form-control input-sm" maxlength="10" value="{{$product->protein}}"/></span>
                         </div>
                     
@@ -103,7 +105,7 @@
                                
                     <!-- beginning of nutrition info -->
                     <div class="row">
-                        <div class="col-xs-12 col-md-10">
+                        <div class="col-xs-12 col-md-10 drop-padding">
                             <h2 class="item-subhead">{{trans('ui.product_label_dietary_info')}}</h2>
 
                             <div class="col-xs-12 well">
@@ -136,7 +138,7 @@
                     
                     <!-- Allergy Info -->
                     <div class="row">
-                        <div class="col-xs-12 col-md-10">
+                        <div class="col-xs-12 col-md-10 drop-padding">
                             <h2 class="item-subhead">{{trans('ui.product_label_allergy_info')}}</h2>
                             
                             <div class="well col-xs-12">
@@ -181,7 +183,7 @@
 
                     <div class="row">
                         
-                      <div class="col-xs-12">
+                      <div class="col-xs-12 drop-padding">
                           
                         <h2 class="item-subhead">{{trans('ui.product_label_packaging_weights')}}</h2>
                         
@@ -237,11 +239,11 @@
 
                         <input type="file" name="product_image"/>
                     </div>
-
-                    <div class="btn-row row">
-                        <div class="col-xs-12">
-                            <input type="submit" class="btn-primary" value="{{trans('ui.button_addupdate')}}"/>
+                    
+                    <div class="col-xs-12 drop-padding">    
+                        <div class="btn-row row pull-right">
                             <a href="{{($product->id) ? url('product/detail', $product->id) : url('profile/')}}"><button type="button" class="btn">{{trans('ui.button_cancel')}}</button></a>
+                            <input type="submit" class="btn-primary" value="{{trans('ui.button_addupdate')}}"/>
                         </div>
                     </div>
                 </div>

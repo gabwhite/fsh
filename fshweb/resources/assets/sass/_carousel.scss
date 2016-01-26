@@ -22,11 +22,14 @@
 }
 
 .divBrand {
-	width: 32.9%;
 	height: 150px;
 	border: 1px solid $border;
 	display: inline-block;
 	position: relative;
+	width: 100%;
+	@include breakpoint(tablet){
+		width: 32.9%;
+	}
 }
 
 a.deletebrand {

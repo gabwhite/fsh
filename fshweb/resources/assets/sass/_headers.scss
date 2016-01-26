@@ -118,6 +118,14 @@ li.menu-item a,
 	background: none;
 }
 
+.navbar-nav > li > a.dropdown-toggle {
+	padding-top: 0;
+	text-align: right;
+	@include breakpoint(tablet){
+		padding-top: 10px;
+	}
+}
+
 // Logged Out Menu
 
 li.menu-item .btn-primary {
@@ -135,9 +143,9 @@ li.menu-item .btn-primary {
 
 li.menu-item.sign-in {
 	margin-top: 17px;
-	margin-right: 10px;
+	margin-right: 0;
 	@include breakpoint(tablet){
-		margin-top: 25px;
+		margin: 25px 10px 0 10px;
 	}
 }
 
