@@ -9,7 +9,7 @@
 @section('sectionheader')
 <section class='clearfix container-wrap profile-head'>
     <div class="container">
-        <div class="col-xs-12 col-md-4">
+        <div class="col-xs-12 col-md-4 drop-padding">
           @if($profile && $profile->avatar_image_path)
               <img id="imgCurrentAvatar" src="{{url(config('app.avatar_storage') . '/' . $profile->avatar_image_path)}}" title="{{trans('ui.user_label_currentavatar')}}" width="200" height="200"/>
           @else
@@ -78,11 +78,11 @@
 
 
             </div>
-            <div class="row btn-row">
-                <div class="col-xs-12">
-                    <a href="{{url('/profile')}}"><button type="button" class="btn">{{trans('ui.button_cancel')}}</button></a>
-                    <input type="submit" value="{{trans('ui.button_update')}}" class="btn-primary"/>
-                </div>
+            <div class="row btn-row pull-right">
+                
+                <a href="{{url('/profile')}}"><button type="button" class="btn">{{trans('ui.button_cancel')}}</button></a>
+                <input type="submit" value="{{trans('ui.button_update')}}" class="btn-primary"/>
+                   
             </div>
 
             {!! csrf_field() !!}

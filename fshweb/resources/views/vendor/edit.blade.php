@@ -9,7 +9,7 @@
 @section('sectionheader')
 <section class='clearfix container-wrap main-title'>
     <div class="container">
-        <div id="bgImage" class="col-xs-12 vendor-profile" style="background-image: url('{{ ($vendor->background_image_path) ? url(config('app.vendor_storage') . '/' . $vendor->background_image_path) : '' }}')">
+        <div id="bgImage" class="col-xs-12 vendor-profile" style="background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),  url('{{ ($vendor->background_image_path) ? url(config('app.vendor_storage') . '/' . $vendor->background_image_path) : '' }}') no-repeat; background-size: cover; background-position: center center;">
 
             @if($vendor->logo_image_path)
                 <div class="vendor-profile-img" id="imgCurrentAvatar" style="background: url({{url(config('app.vendor_storage') . '/' . $vendor->logo_image_path)}}) #fff no-repeat; background-size: 80%; background-position: center center;"></div>
@@ -23,7 +23,7 @@
                 <h1 id="h1CompanyName" class="page-title"> {{isset($vendor) ? $vendor->company_name : ''}}</h1>
             </div>
 
-            <button class="btn-primary pull-right" data-toggle="modal" data-target="#headerModal">{{trans('ui.vendor_label_edit_header')}}</button>
+            <button class="btn-primary pull-right edit-header" data-toggle="modal" data-target="#headerModal">{{trans('ui.vendor_label_edit_header')}}</button>
         </div>
     </div>
 </section>
@@ -37,9 +37,9 @@
 
             <form id="form1" name="form1" method="post" enctype="multipart/form-data" action="{{url('vendor/edit')}}">
                 <div class="row">
-                    <div class="col-xs-12 col-md-4">
+                    <div class="col-xs-12 col-md-4 drop-padding">
                         
-                        <div class="col-xs-12 col-md-11">
+                        <div class="col-xs-12 col-md-11 drop-padding">
                                 
                             <h2 class="item-subhead">Contact</h2>
 
@@ -63,8 +63,7 @@
                                     <option value=""></option>
                                     <option value="">{{trans('ui.vendor_label_choose_country')}}</option>
                                 </select>
-                                
-                               
+                            
                                 
                                 <label for="zip_postal">{{trans('ui.vendor_label_zip_postal')}}</label>
 
@@ -86,7 +85,7 @@
                         </div>
                     </div>
                 
-                    <div class="col-xs-12 col-md-8">
+                    <div class="col-xs-12 col-md-8 drop-padding">
                         <h2 class="item-subhead">{{trans('ui.vendor_label_about_text')}}</h2>
 
                         <div class="col-xs-12 well">
@@ -103,7 +102,7 @@
                         </div>
 
                         <div class="row">
-                            <div class="col-xs-12">
+                            <div class="col-xs-12 drop-padding">
                                 <h2 class="item-subhead">{{trans('ui.vendor_label_brands')}}</h2>
                                 
                                 <div class="col-xs-12 well">
@@ -123,9 +122,9 @@
                                     </div>
                                     
                                 </div>
-                                <div class="col-xs-12">
+                                <div class="col-xs-12 drop-padding">
                                     
-                                    <div class="row btn-row">
+                                    <div class="row btn-row pull-right">
                                         <a href="{{url('/profile/')}}"><button type="button" class="btn">{{trans('ui.button_cancel')}}</button></a>
                                         <input type="submit" value="{{trans('ui.button_update')}}" class="btn-primary"/>
                                         
@@ -174,7 +173,7 @@
                             </div>
                           </div>
                       
-                          <div class="modal-footer">
+                          <div class="modal-footer btn-row drop-padding">
                             <button type="button" class="btn" data-dismiss="modal">{{trans('ui.button_close')}}</button>
                             <a href="#" id="hlSaveHeader"><button type="button" class="btn-primary">{{trans('ui.button_save')}}</button></a>
                           </div>

@@ -110,12 +110,12 @@
                                 <a title="{{trans('ui.navigation_vendorreg')}}" href="{{url('auth/vendorregister')}}">{{trans('ui.navigation_vendorreg')}}</a>
                             </li> -->
 
-                            <li class="menu-item pull-left">
-                                <a title="{{trans('ui.navigation_vendorreg')}}" href="{{url('auth/register')}}"><button class="btn-primary">{{trans('ui.navigation_userreg')}}</button></a>
+                            <li class="menu-item pull-right sign-in">
+                                <a title="{{trans('ui.navigation_login')}}" href="{{url('auth/login')}}">{{trans('ui.navigation_login')}}</a>
                             </li>
 
-                            <li class="menu-item pull-left sign-in">
-                                <a title="{{trans('ui.navigation_login')}}" href="{{url('auth/login')}}">{{trans('ui.navigation_login')}}</a>
+                            <li class="menu-item pull-right">
+                                <a title="{{trans('ui.navigation_vendorreg')}}" href="{{url('auth/register')}}"><button class=" btn-primary">{{trans('ui.navigation_userreg')}}</button></a>
                             </li>
                         
                             <!-- Hidden menu item -->

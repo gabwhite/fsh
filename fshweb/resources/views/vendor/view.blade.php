@@ -11,7 +11,7 @@
 @section('sectionheader')
 <section class='clearfix container-wrap main-title'>
     <div class="container">
-        <div class="col-xs-12 vendor-profile" style="background: url('{{ ($profile->background_image_path) ? url(config('app.vendor_storage') . '/' . $profile->background_image_path) : '' }}') no-repeat; background-size: cover; background-position: center center;">
+        <div class="col-xs-12 vendor-profile" style="background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('{{ ($profile->background_image_path) ? url(config('app.vendor_storage') . '/' . $profile->background_image_path) : '' }}') no-repeat; background-size: cover; background-position: center center;">
             @if($profile->logo_image_path)
                 <div class="vendor-profile-img" id="imgCurrentAvatar" style="background: url({{url(config('app.vendor_storage') . '/' . $profile->logo_image_path)}}) #fff no-repeat; background-size: 80%; background-position: center center;">
                     
@@ -32,7 +32,7 @@
 
     <div class="row">
 
-        <div class="col-xs-12 col-md-4">
+        <div class="col-xs-12 col-md-4 drop-padding">
 
             <div class="col-xs-12 col-md-11">
                 <h2 class="item-subhead">Contact</h2>
@@ -97,7 +97,7 @@
 
         </div> <!-- end of sidebar -->
 
-        <div class="col-xs-12 col-md-8">
+        <div class="col-xs-12 col-md-8 drop-padding">
             <div class="col-xs-12">
                 <h2 class="item-subhead">{{trans('ui.vendor_label_about_text')}}</h2>
                 @if($canEdit)
@@ -112,7 +112,7 @@
 
                 @if($profile->brands && count($profile->brands) > 0)
                 <div class="row">
-                    <div class="col-xs-12">
+                    <div class="col-xs-12 drop-padding">
                         
                         <h2 class="item-subhead">Our Brands</h2>
 

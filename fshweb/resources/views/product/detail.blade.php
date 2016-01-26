@@ -10,13 +10,13 @@
 <section class='clearfix container-wrap item-header'>
     <div class='container'>
         <div class="col-xs-12">
-            <div class="title-wrap">
+            <div class="col-xs-12 title-wrap">
                 <h1 class="item-title">{{$product->name}}</h1>
                 <div class="star-detail">
                     <img src="../../img/icons/star.svg" alt="star-rating">
                 </div>
             </div>
-            <div class="btn-row">
+            <div class="col-xs-12 btn-row">
                 <button data-target="#add-product" data-toggle="modal" class="btn-primary">{{trans('ui.product_label_add_to_my_products')}}</button>
            
                 <a href="{{url('vendor/detail', $product->vendor_id)}}"><button class="btn-primary">{{trans('ui.product_label_goto_vendor_profile')}}</button></a>
@@ -44,36 +44,39 @@
 
 @section('content')
     <div class="container">
-        <div class="col-xs-12 well">  
-            <div class="col-xs-12 col-md-4 text-center reset-left">
+        <div class="col-xs-12"> 
+        
+            <div class="col-xs-12 well">  
+                <div class="col-xs-12 col-md-4 text-center ">
 
-                @if($product->product_image)
-                    @if(strpos($product->product_image, 'http') !== false)
-                       <div class="product-img" style="background: url({{$product->product_image}}) no-repeat; background-size: contain; background-position: center;"></div> 
+                    @if($product->product_image)
+                        @if(strpos($product->product_image, 'http') !== false)
+                           <div class="product-img" style="background: url({{$product->product_image}}) no-repeat; background-size: contain; background-position: center;"></div> 
+                        @else
+                            <div class="product-img" style="background: url({{url(config('app.product_storage') . '/' . $product->product_image)}}) no-repeat; background-size: contain; background-position: center;"></div>
+                            
+                        @endif
                     @else
-                        <div class="product-img" style="background: url({{url(config('app.product_storage') . '/' . $product->product_image)}}) no-repeat; background-size: contain; background-position: center;"></div>
-                        
+                        <div class="product-img" style="background: url({{url('/img/no-photo-avail.svg')}}) no-repeat; background-size: contain; background-position: center;"></div>
                     @endif
-                @else
-                    <div class="product-img" style="background: url({{url('/img/no-photo-avail.svg')}}) no-repeat; background-size: contain; background-position: center;"></div>
-                @endif
-                
-                <div class="detail-brand">
-                    <img src="../../img/slider/ROLAND-LOGO-BANNER-SIZE.png" alt="brand-logo">
+                    
+                    <div class="detail-brand">
+                        <img src="../../img/slider/ROLAND-LOGO-BANNER-SIZE.png" alt="brand-logo">
+                    </div>
                 </div>
-            </div>
 
-            <div class="col-xs-12 col-md-8">
-                <h3>{{$product->description}}</h3>
+                <div class="col-xs-12 col-md-8">
+                    <h3>{{$product->description}}</h3>
 
-                <button data-target="#rate-product" data-toggle="modal" class="btn">{{trans('ui.product_label_rate_product')}}</button>
+                    <button data-target="#rate-product" data-toggle="modal" class="btn">{{trans('ui.product_label_rate_product')}}</button>
+                </div>
             </div>
         </div>
     </div>
 
     <div class="container">
         
-        <div class="col-xs-12 col-md-4 reset-padding">
+        <div class="col-xs-12 col-md-4 drop-padding">
             <div class="row">
                 <div class="col-xs-12 col-md-10">
                     <div class="nutrition">
@@ -185,7 +188,7 @@
 
         </div>
 
-        <div class="col-xs-12 col-md-8 reset-padding">
+        <div class="col-xs-12 col-md-8">
             <h2 class="item-subhead">{{trans('ui.navigation_product_detail')}}</h2>
             
             <div class="well col-xs-12">
@@ -221,7 +224,7 @@
             </div>
             
             <div class="row">
-                <div class="col-xs-12">
+                <div class="col-xs-12 drop-padding">
                     
                     <h2 class="item-subhead">{{trans('ui.product_label_packaging_weights')}}</h2>
                 
@@ -410,7 +413,7 @@
               </div>
           
               <div class="modal-footer col-xs-12">
-                <a href="#" id="hlSaveHeader"><button type="button" class="btn-primary">{{trans('ui.button_submit_rating')}}</button></a>
+                <a href="#" id="hlSaveHeader"><button type="button" class="btn-primary">Done</button></a>
               </div>
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
