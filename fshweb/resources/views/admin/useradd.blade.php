@@ -2,11 +2,6 @@
 
 @section('title', 'Add User')
 
-@section('sidebar')
-    @parent
-
-    <p>This is appended to the admin master sidebar.</p>
-@endsection
 
 @section('content')
 

@@ -1,15 +1,8 @@
 @extends('layouts.admin')
 
-@section('title', 'Admin H ome')
-
-@section('sidebar')
-    @parent
-
-    <p>This is appended to the admin master sidebar.</p>
-@endsection
+@section('title', 'Admin Home')
 
 @section('content')
-    <p>This is my admin body content.</p>
-
+    <p>This is my admin home content.</p>
 
 @endsection

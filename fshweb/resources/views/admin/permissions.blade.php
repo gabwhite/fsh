@@ -2,13 +2,8 @@
 
 @section('title', 'Manage Roles')
 
-@section('sidebar')
-    @parent
-
-@endsection
 
 @section('content')
-    <p>This is my admin body content.</p>
 
     <form id="form1" name="form1" method="post" action="{{url('admin/permissions')}}">
         {!! csrf_field() !!}
