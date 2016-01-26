@@ -47,17 +47,18 @@
                          </div>
                     @endif
 
-                    <div id="divCropArea" class="bg-info col-xs-12" style="display:none">
+                    <div id="divCropArea" style="display:none">
 
                         <div class="row">
                             <div class="col-xs-12">
                                 <img id="uncroppedImage" src=""/>
+                                <a href="#" id="hlCropAvatar" class="btn-primary">Crop</a>
                             </div>
                         </div>
 
                         <div class="row">
                             <div class="btn-row">
-                                <a href="#" id="hlCropAvatar" class="btn-primary">Crop</a>
+
                             </div>
                         </div>
                     </div>

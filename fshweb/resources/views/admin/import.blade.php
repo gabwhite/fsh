@@ -73,7 +73,9 @@
 
         <input type="submit" name="submit" value="Upload" class="btn btn-primary"/>
 
-        <input type="button" name="btnPreview" value="Preview Rows" class="btn"/>
+        <input type="submit" id="btnPreview" name="btnPreview" class="btn" value="Preview Rows"/>
+
+        <input type="hidden" id="action" name="action" value="PROCESS"/>
 
     </form>
 
@@ -91,7 +93,11 @@
 
             $("#btnPreview").on("click", function(e)
             {
-                e.preventDefault();
+
+
+                $("#action").val("PREVIEW");
+                $("#form1").submit();
+
             });
 
             $("#form1").validate({

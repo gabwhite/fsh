@@ -69,7 +69,7 @@ select#sortby {
 }
 
 .sort-menu select.drop-sm {
-	width: 36%;
+	width: 35%;
 
 	@include breakpoint(tablet){
 		width: auto;
@@ -122,10 +122,15 @@ select#sortby {
 	display: inline-block;
 	margin-bottom: 30px;
 	
-	button, 
-	input[type="submit"] {
-		margin: 10px 15px 10px 0;
-		float: left;
+	input[type="submit"]{
+		margin: 10px 0;
+	}
+
+	button {
+		margin: 10px auto;
+		@include breakpoint(tablet){
+		margin: 25px 10px 25px 0;
+		}
 	}
 }
 
@@ -133,15 +138,27 @@ select#sortby {
 	@extend .btn-primary;
 	height: 35px;
 	line-height: 0;
+	margin: 10px 0;
+	@include breakpoint(tablet){
+		margin: 25px auto
+	}
 }
 
 /*----------  Special type buttons  ----------*/
+
+//Edit Vendor Profile Button
 
 a.edit .btn-primary {
 	margin: 0;
 	position: absolute;
 	top: -15px;
 	right: 15px;
+}
+
+// Edit Header button in Vendor Profile
+
+.edit-header.btn-primary {
+	margin-bottom: 0;
 }
 
 /*----------  Icons + Link style buttons  ----------*/

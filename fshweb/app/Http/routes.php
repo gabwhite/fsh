@@ -14,7 +14,8 @@
 // Home route
 Route::get('/', function ()
 {
-    return view('welcome');
+    return redirect()->action('ProductController@search');
+    //return view('welcome');
 });
 
 //=================================

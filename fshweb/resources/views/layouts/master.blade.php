@@ -76,8 +76,8 @@
                             
                             <li role="presentation" class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
-                                    @if(isset($avatarFilename))
-                                        <img class="menu-img" src="{{url(config('app.avatar_storage') . '/' . $avatarFilename)}}" title="{{trans('ui.user_label_currentavatar')}}"/>
+                                    @if(\Session::has(config('app.session_key_avatar')))
+                                        <img class="menu-img" src="{{url(config('app.avatar_storage') . '/' . \Session::get(config('app.session_key_avatar')))}}" title="{{trans('ui.user_label_currentavatar')}}"/>
                                     @else
                                         <img class="menu-img" src="{{url(config('app.avatar_none'))}}" title="{{trans('ui.user_label_noavatar')}}" />
                                     @endif
@@ -110,12 +110,12 @@
                                 <a title="{{trans('ui.navigation_vendorreg')}}" href="{{url('auth/vendorregister')}}">{{trans('ui.navigation_vendorreg')}}</a>
                             </li> -->
 
-                            <li class="menu-item pull-left">
-                                <a title="{{trans('ui.navigation_vendorreg')}}" href="{{url('auth/register')}}"><button class="btn-primary">{{trans('ui.navigation_userreg')}}</button></a>
+                            <li class="menu-item pull-right sign-in">
+                                <a title="{{trans('ui.navigation_login')}}" href="{{url('auth/login')}}">{{trans('ui.navigation_login')}}</a>
                             </li>
 
-                            <li class="menu-item pull-left sign-in">
-                                <a title="{{trans('ui.navigation_login')}}" href="{{url('auth/login')}}">{{trans('ui.navigation_login')}}</a>
+                            <li class="menu-item pull-right">
+                                <a title="{{trans('ui.navigation_vendorreg')}}" href="{{url('auth/register')}}"><button class=" btn-primary">{{trans('ui.navigation_userreg')}}</button></a>
                             </li>
                         
                             <!-- Hidden menu item -->
