@@ -78,6 +78,7 @@ Route::group(['middleware' => 'auth'], function()
         Route::get('admin/permissions/{id?}', 'AdminController@showPermissions');
         Route::post('admin/permissions', 'AdminController@editPermissions');
         Route::get('admin/cache', 'AdminController@showCacheManager');
+        Route::post('admin/cache', 'AdminController@editCache');
 
     });
 

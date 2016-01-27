@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CacheManager;
 use App\DataAccessLayer;
 use App\iProductImporter;
 use Illuminate\Http\Request;
@@ -24,15 +25,17 @@ class AdminController extends Controller
 
     protected $dataAccess;
     protected $productImporter;
+    protected $cacheManager;
 
     /**
      * AdminController constructor.
      * @param $dataAccess
      */
-    public function __construct(DataAccessLayer $dataAccess, iProductImporter $productImporter)
+    public function __construct(DataAccessLayer $dataAccess, iProductImporter $productImporter, CacheManager $cacheManager)
     {
         $this->dataAccess = $dataAccess;
         $this->productImporter = $productImporter;
+        $this->cacheManager = $cacheManager;
     }
 
     public function index()
@@ -251,5 +254,20 @@ class AdminController extends Controller
     public function showCacheManager()
     {
         return view('admin.cache');
+    }
+
+    public function editCache(Request $request)
+    {
+        $action = $request->input('action');
+        if($action === 'key')
+        {
+            $this->cacheManager->deleteItem(env('CACHE_DRIVER'), $request->input('cachekey'));
+        }
+        else if($action === 'flush')
+        {
+            $this->cacheManager->flushCache(env('CACHE_DRIVER'));
+        }
+
+        return redirect('admin/cache');
     }
 }
