@@ -88,7 +88,7 @@
                         </div>
 
                         <div>
-                            <label for="contact_name">{{trans('ui.vendor_label_contact_title')}}</label>
+                            <label for="contact_title">{{trans('ui.vendor_label_contact_title')}}</label>
                             <input type="text" name="contact_title" placeholder="" maxlength="200" class="form-control"/>
                         </div>
 
