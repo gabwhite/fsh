@@ -124,8 +124,8 @@ class AuthController extends Controller
             'contact_url' => $data['contact_url'],
             'intro_text' => $data['intro_text'],
             'about_text' => $data['about_text'],
-            'logo_image_path' => $data['logo_image_path'],
-            'background_image_path' => $data['background_image_path'],
+            'logo_image_path' => isset($data['logo_image_path']) ? $data['logo_image_path'] : null,
+            'background_image_path' => isset($data['background_image_path']) ? $data['background_image_path'] : null,
         ]);
     }
 
