@@ -63,6 +63,12 @@ class DataAccessLayer
         return User::where('id', '=', $userId)->first();
     }
 
+    public function deleteUser($userId)
+    {
+        $user = $this->getUser($userId);
+        $user->delete();
+    }
+
     public function getAllRoles($relationships = null)
     {
         if(isset($relationships))
