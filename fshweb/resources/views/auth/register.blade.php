@@ -66,10 +66,21 @@
                 errorClass: "validationError",
                 rules:
                 {
-                    name: { required: true, maxlength: 25 },
-                    email: { required: true, email: true, maxlength: 100 },
+                    name: { required: true, maxlength: 25, remote: "{{url('ajax/checkusername')}}" },
+                    email: { required: true, email: true, maxlength: 100, remote: "{{url('ajax/checkemail')}}" },
                     password: { required: true, maxlength: 25 },
                     password_confirmation: { equalTo: "#password", maxlength: 25 }
+                },
+                messages:
+                {
+                    name:
+                    {
+                        remote: "Name is in use, please choose another"
+                    },
+                    email:
+                    {
+                        remote: "Email is in use, please choose another"
+                    }
                 }
             });
 

@@ -193,8 +193,8 @@
                 errorClass: "validationError",
                 rules:
                 {
-                    name: { required: true, maxlength: 25 },
-                    email: { required: true, email: true, maxlength: 100 },
+                    name: { required: true, maxlength: 25, remote: "{{url('ajax/checkusername')}}" },
+                    email: { required: true, email: true, maxlength: 100, remote: "{{url('ajax/checkemail')}}" },
                     password: { required: true, maxlength: 25, minlength: 6 },
                     password_confirmation: { equalTo: "#password", maxlength: 25, minlength: 6 },
                     company_name: { required: true, maxlength: 200 },
@@ -210,6 +210,11 @@
                     contact_url: { maxlength: 200 },
                     intro_text: { maxlength: 2000 },
                     about_text: { maxlength: 2000 }
+                },
+                messages:
+                {
+                    name: { remote: "Name is in use, please choose another" },
+                    email: { remote: "Email is in use, please choose another" }
                 }
             });
 

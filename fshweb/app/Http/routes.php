@@ -110,6 +110,8 @@ Route::get('ajax/getfoodcategories/{format}/{parentId?}', 'AjaxController@getFoo
 Route::get('ajax/getproducts/{categoryId?}', 'AjaxController@getProducts');
 Route::get('ajax/getcountries', 'AjaxController@getCountries');
 Route::get('ajax/getstateprovincesforcountry/{countryId}', 'AjaxController@getStateProvincesForCountry');
+Route::get('ajax/checkusername', 'AjaxController@checkUsername');
+Route::get('ajax/checkemail', 'AjaxController@checkEmail');
 
 Route::get('datacleanup', function()
 {

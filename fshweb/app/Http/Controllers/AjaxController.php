@@ -95,4 +95,18 @@ class AjaxController extends Controller
         return response()->json($stateProvinces);
     }
 
+    public function checkUsername(Request $request)
+    {
+        $inUse = $this->dataAccess->isUsernameInUse($request->input('name'));
+
+        return response()->json(!$inUse);
+    }
+
+    public function checkEmail(Request $request)
+    {
+        $inUse = $this->dataAccess->isEmailInUse($request->input('email'));
+
+        return response()->json(!$inUse);
+    }
+
 }

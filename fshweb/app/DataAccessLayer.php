@@ -21,6 +21,28 @@ use \Illuminate\Support\Facades\DB;
 class DataAccessLayer
 {
 
+    public function isUsernameInUse($username)
+    {
+        $user = User::where('name', '=', $username)->select('id')->first();
+        if(isset($user))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function isEmailInUse($email)
+    {
+        $user = User::where('email', '=', $email)->select('id')->first();
+        if(isset($user))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     public function getUsersForRole($roleId)
     {
         return Role::find($roleId)->users()->get();
