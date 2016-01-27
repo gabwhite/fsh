@@ -143,6 +143,43 @@ class AdminController extends Controller
         return redirect('admin/users');
     }
 
+    public function showVendorAdd()
+    {
+        return view('admin.vendoradd');
+    }
+
+    public function addVendor(Request $request)
+    {
+        $data = $request->all();
+
+        $user = User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+        ]);
+
+        \App\Models\Vendor::create([
+            'user_id' => $user->id,
+            'company_name' => $data['company_name'],
+            'address1' => $data['address1'],
+            'address2' => $data['address2'],
+            'city' => $data['city'],
+            'state_province_id' => $data['state_province_id'],
+            'country_id' => $data['country_id'],
+            'zip_postal' => $data['zip_postal'],
+            'contact_name' => $data['contact_name'],
+            'contact_title' => $data['contact_title'],
+            'contact_phone' => $data['contact_phone'],
+            'contact_url' => $data['contact_url'],
+            'intro_text' => $data['intro_text'],
+            'about_text' => $data['about_text'],
+            'logo_image_path' => isset($data['logo_image_path']) ? $data['logo_image_path'] : null,
+            'background_image_path' => isset($data['background_image_path']) ? $data['background_image_path'] : null,
+        ]);
+
+        return redirect('admin/users');
+    }
+
     public function viewUser($id)
     {
         $user = $this->dataAccess->getUser($id, 'roles');

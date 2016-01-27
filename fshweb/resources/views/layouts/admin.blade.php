@@ -46,7 +46,8 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Users <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                         <li><a href="{{url('admin/users')}}">View</a></li>
-                        <li><a href="{{url('admin/adduser')}}">Add New</a></li>
+                        <li><a href="{{url('admin/adduser')}}">Add New User</a></li>
+                        <li><a href="{{url('admin/addvendor')}}">Add New Vendor</a></li>
                     </ul>
                 </li>
                 <li><a href="{{url('admin/roles')}}">Roles</a></li>
@@ -76,7 +77,7 @@
 
 <script src="{{url('js/vendor/jquery-1.11.3.min.js')}}"></script>
 <script src="{{url('js/vendor/bootstrap/bootstrap.min.js')}}"></script>
-
+<script src="{{url('js/fsh.common.js')}}"></script>
 @yield('scripts')
 
 </body>

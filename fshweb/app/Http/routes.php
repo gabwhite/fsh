@@ -69,6 +69,8 @@ Route::group(['middleware' => 'auth'], function()
         Route::get('admin/users', 'AdminController@showUsers');
         Route::get('admin/adduser', 'AdminController@showUserAdd');
         Route::post('admin/adduser', 'AdminController@addUser');
+        Route::get('admin/addvendor', 'AdminController@showVendorAdd');
+        Route::post('admin/addvendor', 'AdminController@addVendor');
         Route::get('admin/userview/{id}', 'AdminController@viewUser');
         Route::post('admin/edituser', 'AdminController@editUser');
         Route::get('admin/import', 'AdminController@showImport');
