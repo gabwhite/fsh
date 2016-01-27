@@ -38,7 +38,9 @@ class CsvProductImporter implements iProductImporter
         $recordsFailed = 0;
         $recordCount = 0;
 
-        $csv->each(function ($row) use(&$pio, &$recordsAdded, &$recordsUpdated, &$recordsFailed, &$recordCount)
+        $uploader = new UploadHandler();
+
+        $csv->each(function ($row) use(&$pio, &$recordsAdded, &$recordsUpdated, &$recordsFailed, &$recordCount, &$uploader)
         {
 
             /* Row Structure
@@ -110,10 +112,10 @@ class CsvProductImporter implements iProductImporter
                     if($isExisting && !$pio->isSimulate() && !$pio->isIgnoreExisting())
                     {
                         // Clear any existing categories
-                        \DB::table('product_categories')->where('product_id', '=', $product->id)->delete();
+                        //\DB::table('product_categories')->where('product_id', '=', $product->id)->delete();
 
                         // Clear any existing allergens
-                        \DB::table('product_allergens')->where('product_id', '=', $product->id)->delete();
+                        //\DB::table('product_allergens')->where('product_id', '=', $product->id)->delete();
                     }
                     else
                     {
@@ -131,9 +133,9 @@ class CsvProductImporter implements iProductImporter
                     $product->mpc =                 $row[8];
                     $product->broker_contact =      $row[9];
                     $product->gtin =                $row[10];
-                    $product->is_halal =            ($row[11] == 'Yes') ? 1 : 0;
-                    $product->is_organic =          ($row[12] == 'Yes') ? 1 : 0;
-                    $product->is_kosher =           ($row[13] == 'Yes') ? 1 : 0;
+                    $product->is_halal =            $this->normalizeTrueFalseField($row[11]);
+                    $product->is_organic =          $this->normalizeTrueFalseField($row[12]);
+                    $product->is_kosher =           $this->normalizeTrueFalseField($row[13]);
                     $product->calc_size =           $row[14];
                     $product->calculation_size_uom = $row[15];
                     $product->calories =            $row[16];
@@ -148,25 +150,24 @@ class CsvProductImporter implements iProductImporter
 
                     //rows 25, 26, 27, 28, 29, 30, 31, 32, 33 are allergens
 
-                    if($pio->isDownloadImages())
+                    // Product Image
+                    if($row[34] !== '')
                     {
-                        try
+                        if($pio->isDownloadImages())
                         {
-                            $uploader = new UploadHandler();
-                            $newFilename = $uploader->getRemoteFile($row[34], null, public_path(config('app.product_storage')), null, null);
-                            $product->vendor_logo = $newFilename;
+                            try
+                            {
+                                $newFilename = $uploader->getRemoteFile($row[34], null, public_path(config('app.product_storage')));
+                                $product->product_image = $newFilename;
+                            }
+                            catch(Exception $ex) { /* If the image can't be downloaded, just don't set the field */ }
                         }
-                        catch(Exception $ex)
+                        else
                         {
-                            // If the image can't be downloaded, just don't set the field
+                            $product->product_image = $row[34];
                         }
-                    }
-                    else
-                    {
-                        $product->product_image = $row[34];
                     }
 
-                    //$product->product_image =       $row[34];
                     $product->description =         $row[35];
                     $product->preparation =         $row[36];
                     $product->ingredient_deck =     $row[37];
@@ -348,5 +349,20 @@ class CsvProductImporter implements iProductImporter
         }
 
         return $categoryId;
+    }
+
+    private function normalizeTrueFalseField($val)
+    {
+        $result = 0;
+
+        if($val != '')
+        {
+            if($val == 'Yes' || $val == 'Y')
+            {
+                $result = 1;
+            }
+        }
+
+        return $result;
     }
 }
