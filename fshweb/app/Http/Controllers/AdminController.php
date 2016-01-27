@@ -259,7 +259,7 @@ class AdminController extends Controller
     public function editCache(Request $request)
     {
         $action = $request->input('action');
-        if($action === 'key')
+        if($action === 'key' && $request->input('cachekey') !== '')
         {
             $this->cacheManager->deleteItem(env('CACHE_DRIVER'), $request->input('cachekey'));
         }
