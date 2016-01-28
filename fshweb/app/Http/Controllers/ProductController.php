@@ -72,14 +72,15 @@ class ProductController extends Controller
 
     public function showEditProduct($id = null)
     {
-        //$user = \Auth::user();
+        $user = \Auth::user();
         $product = new \App\Models\Product();
 
         // This is an edit, see if the user can edit product
         if($id != null)
         {
             $product = $this->dataAccess->getProduct($id, 'allergens');
-            if(!isset($product) || \Session::get(config('app.session_key_vendor')) != $product->vendor_id)
+
+            if(!isset($product) || (\Session::get(config('app.session_key_vendor')) != $product->vendor_id && $user->hasRole('vendor')))
             {
                 // Product came back null or doesn't belong to this vendor, see product to new
                 $product = new \App\Models\Product();
