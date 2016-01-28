@@ -60,11 +60,9 @@
                         <div class="product-img" style="background: url({{url('/img/no-photo-avail.svg')}}) no-repeat; background-size: contain; background-position: center;"></div>
                     @endif
                     
-                    <div class="detail-brand">
-                        @if(isset($brandHack))
-                            <img src="{{url(config('app.vendor_storage'), $brandHack)}}" alt="brand-logo">
-                        @endif
-                    </div>
+                    @if(isset($brandHack))
+                        <div class="detail-brand" style="background:url({{url(config('app.vendor_storage'), $brandHack)}}) no-repeat; background-position: center; background-size: contain;"></div>
+                    @endif
                 </div>
 
                 <div class="col-xs-12 col-md-8">
