@@ -88,13 +88,18 @@
                         </div>
 
                         <div>
-                            <label for="contact_name">{{trans('ui.vendor_label_contact_title')}}</label>
+                            <label for="contact_title">{{trans('ui.vendor_label_contact_title')}}</label>
                             <input type="text" name="contact_title" placeholder="" maxlength="200" class="form-control"/>
                         </div>
 
                         <div>
                             <label for="contact_phone">{{trans('ui.vendor_label_contact_phone')}}</label>
                             <input type="text" name="contact_phone" placeholder="" maxlength="200" class="form-control"/>
+                        </div>
+
+                        <div>
+                            <label for="contact_email">{{trans('ui.vendor_label_contact_email')}}</label>
+                            <input type="text" name="contact_email" placeholder="" maxlength="200" class="form-control"/>
                         </div>
 
                         <div>
@@ -193,23 +198,29 @@
                 errorClass: "validationError",
                 rules:
                 {
-                    name: { required: true, maxlength: 25 },
-                    email: { required: true, email: true, maxlength: 100 },
+                    name: { required: true, maxlength: 25, remote: "{{url('ajax/checkusername')}}" },
+                    email: { required: true, email: true, maxlength: 100, remote: "{{url('ajax/checkemail')}}" },
                     password: { required: true, maxlength: 25, minlength: 6 },
                     password_confirmation: { equalTo: "#password", maxlength: 25, minlength: 6 },
                     company_name: { required: true, maxlength: 200 },
                     country_id: { required: true },
                     state_province_id: { required: true },
-                    address1: { required: true, maxlength: 200 },
-                    address2: { required: true, maxlength: 200 },
-                    city: { required: true, maxlength: 200 },
-                    zip_postal: { required: true, maxlength: 50 },
-                    contact_name: { required: true, maxlength: 200 },
+                    address1: { maxlength: 200 },
+                    address2: { maxlength: 200 },
+                    city: { maxlength: 200 },
+                    zip_postal: { maxlength: 50 },
+                    contact_name: { maxlength: 200 },
                     contact_title: { maxlength: 200 },
                     contact_phone: { maxlength: 200 },
+                    contact_email: { email: true, maxlength: 200 },
                     contact_url: { maxlength: 200 },
                     intro_text: { maxlength: 2000 },
                     about_text: { maxlength: 2000 }
+                },
+                messages:
+                {
+                    name: { remote: "Name is in use, please choose another" },
+                    email: { remote: "Email is in use, please choose another" }
                 }
             });
 

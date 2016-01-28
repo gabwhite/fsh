@@ -55,7 +55,7 @@ class AjaxController extends Controller
         $pageSize = $request->input('pageSize') ? $request->input('pageSize') : config('app.search_default_page_size');
         $searchType = $request->input('type') ? $request->input('type') : 'fc';
 
-        $fields = ['products.id', 'products.name', 'products.brand', 'products.pack', 'products.uom', 'products.mpc', 'products.calc_size', 'products.description'];
+        $fields = ['products.id', 'products.name', 'products.brand', 'products.pack', 'products.uom', 'products.mpc', 'products.calc_size', 'products.description', 'products.product_image'];
 
         $products = null;
         if($searchType === 'fc')
@@ -93,6 +93,20 @@ class AjaxController extends Controller
         $stateProvinces = $this->lookupManager->getStateProvincesForCountry($countryId);
 
         return response()->json($stateProvinces);
+    }
+
+    public function checkUsername(Request $request)
+    {
+        $inUse = $this->dataAccess->isUsernameInUse($request->input('name'));
+
+        return response()->json(!$inUse);
+    }
+
+    public function checkEmail(Request $request)
+    {
+        $inUse = $this->dataAccess->isEmailInUse($request->input('email'));
+
+        return response()->json(!$inUse);
     }
 
 }

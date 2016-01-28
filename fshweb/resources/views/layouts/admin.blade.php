@@ -26,45 +26,58 @@
 
 <body>
 
-<div class="row">
-    <div class="col-md-12">
-        <h1><a href="{{url('/admin')}}">Administration</a></h1>
-    </div>
-</div>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#fsh-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="{{url('/admin')}}">FSH Admin</a>
+        </div>
 
-<div class="row">
-
-    <div class="col-md-2">
-        @section('sidebar')
-            <ul>
-                <li>
-                    <a href="{{url('admin/users')}}">Users</a>
-                    <ul>
-                        <li><a href="{{url('admin/adduser')}}">Add User</a></li>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="fsh-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Users <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{url('admin/users')}}">View</a></li>
+                        <li><a href="{{url('admin/adduser')}}">Add New User</a></li>
+                        <li><a href="{{url('admin/addvendor')}}">Add New Vendor</a></li>
                     </ul>
                 </li>
                 <li><a href="{{url('admin/roles')}}">Roles</a></li>
                 <li><a href="{{url('admin/permissions')}}">Permissions</a></li>
                 <li><a href="{{url('admin/import')}}">Product Import</a></li>
-                <!--
-                <li><a href="{{url('admin/searchindexes')}}">Search Indexes</a></li>
-                -->
-                <li><a href="{{url('/')}}" target="_blank">Public Site</a></li>
-                <li><a href="{{url('/auth/logout')}}">Logout</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">System <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{url('admin/cache')}}">Cache Control</a></li>
+                    </ul>
+                </li>
             </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="{{url('/')}}" target="_blank">Public Site</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
 
-        @show
-    </div>
-
-    <div class="col-md-10">
-        @yield('content')
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            @yield('content')
+        </div>
     </div>
 </div>
 
-
 <script src="{{url('js/vendor/jquery-1.11.3.min.js')}}"></script>
 <script src="{{url('js/vendor/bootstrap/bootstrap.min.js')}}"></script>
-
+<script src="{{url('js/fsh.common.js')}}"></script>
 @yield('scripts')
 
 </body>

@@ -9463,6 +9463,7 @@ li.menu-item.sign-in {
 
 ul.dropdown-menu {
   width: 100%;
+  min-width: 185px;
   padding: 0;
 }
 

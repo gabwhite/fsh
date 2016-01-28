@@ -197,9 +197,9 @@
 
                                 {{trans('ui.product_label_calculation_size')}}:<input type="text" name="calc_size" title="calc_size" class="form-control" maxlength="10" value="{{$product->calc_size}}"/>
 
-                                {{trans('ui.product_label_product_code')}}:<input type="text" name="mpc" title="mpc" class="form-control" maxlength="250" value="{{$product->mpc}}"/>
+                                {{trans('ui.product_label_product_code')}}:<input type="text" id="mpc" name="mpc" title="mpc" class="form-control" maxlength="250" value="{{$product->mpc}}"/>
                                 
-                                {{trans('ui.product_label_gtin')}}:<input type="text" name="gtin" title="gtin" class="form-control" maxlength="250" value="{{$product->gtin}}"/>
+                                {{trans('ui.product_label_gtin')}}:<input type="text" id="gtin" name="gtin" title="gtin" class="form-control" maxlength="250" value="{{$product->gtin}}"/>
                                 
                                 {{trans('ui.product_label_net_weight')}}:<input type="text" name="net_weight" title="net_weight" class="form-control" maxlength="9" value="{{$product->net_weight}}"/>
                             
@@ -287,8 +287,8 @@
                     pack: { digits: true },
                     size: { number: true },
                     calc_size: { digits: true },
-                    mpc: { required: true },
-                    gtin: { required: true },
+                    mpc: { required: "#gtin:blank" },
+                    gtin: { required: "#mpc:blank" },
                     net_weight: { number: true },
                     gross_weight: { number: true },
                     tare_weight: { number: true }

@@ -21,6 +21,28 @@ use \Illuminate\Support\Facades\DB;
 class DataAccessLayer
 {
 
+    public function isUsernameInUse($username)
+    {
+        $user = User::where('name', '=', $username)->select('id')->first();
+        if(isset($user))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function isEmailInUse($email)
+    {
+        $user = User::where('email', '=', $email)->select('id')->first();
+        if(isset($user))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     public function getUsersForRole($roleId)
     {
         return Role::find($roleId)->users()->get();
@@ -39,6 +61,12 @@ class DataAccessLayer
         }
 
         return User::where('id', '=', $userId)->first();
+    }
+
+    public function deleteUser($userId)
+    {
+        $user = $this->getUser($userId);
+        $user->delete();
     }
 
     public function getAllRoles($relationships = null)
@@ -177,6 +205,28 @@ class DataAccessLayer
         $product->save();
 
         return $product;
+
+    }
+
+    public function deleteProduct($productId, $userId = null)
+    {
+        $rowsAffected = 0;
+
+        if(isset($userId))
+        {
+            $product = $this->getProductByIdVendor($productId, $userId);
+        }
+        else
+        {
+            $product = $this->getProduct($productId);
+        }
+
+        if(isset($product))
+        {
+            $rowsAffected = $product->delete();
+        }
+
+        return $rowsAffected;
 
     }
 
@@ -359,6 +409,7 @@ class DataAccessLayer
             if(isset($data['zip_postal'])) { $vendor->zip_postal = $data['zip_postal']; }
             if(isset($data['contact_name'])) { $vendor->contact_name = $data['contact_name']; }
             if(isset($data['contact_phone'])) { $vendor->contact_phone = $data['contact_phone']; }
+            if(isset($data['contact_email'])) { $vendor->contact_email = $data['contact_email']; }
             if(isset($data['contact_url'])) { $vendor->contact_url = $data['contact_url']; }
             if(isset($data['intro_text'])) { $vendor->intro_text = $data['intro_text']; }
             if(isset($data['about_text'])) { $vendor->about_text = $data['about_text']; }
@@ -370,6 +421,20 @@ class DataAccessLayer
 
         return null;
     }
+
+    public function deleteVendor($vendorId)
+    {
+        $rowsAffected = 0;
+
+        $vendor = $this->getVendor($vendorId, ['id']);
+        if(isset($vendor))
+        {
+            $rowsAffected = $vendor->delete();
+        }
+
+        return $rowsAffected;
+    }
+
 
     public function insertBrand($data)
     {

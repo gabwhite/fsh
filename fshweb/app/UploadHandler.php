@@ -178,29 +178,33 @@ class UploadHandler
         $img->save();
     }
 
-    public function getRemoteFile($url, $fileName, $path, $resizeWidth = null, $resizeHeight = null)
+    public function getRemoteFile($url, $fileName = null, $path, $resizeWidth = null, $resizeHeight = null)
     {
         $extension = pathinfo($url, PATHINFO_EXTENSION);
-        $fileName = $fileName . '.' . $extension;
+        if($fileName == null)
+        {
+            $fileName = $this->generateUniqueFilename($extension);
+        }
+        else
+        {
+            $fileName = $fileName . '.' . $extension;
+        }
+
         $savePath = $path . '/' . $fileName;
 
         $file = file_get_contents($url);
 
         $saved = file_put_contents($savePath, $file);
 
-        $success = false;
-
         if($saved)
         {
-            $success = true;
-
             if(isset($resizeWidth) && isset($resizeHeight))
             {
                 $this->resizeVendorAsset($fileName, $resizeWidth, $resizeHeight);
             }
         }
 
-        return $success;
+        return $fileName;
     }
 
     public function getNewImageExtension($newFile, $oldFile)

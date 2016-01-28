@@ -11,6 +11,7 @@ namespace App;
 use Ramsey\Uuid\Uuid;
 use League\Csv\Reader;
 use App\Models;
+use App\UploadHandler;
 
 class CsvProductImporter implements iProductImporter
 {
@@ -37,7 +38,9 @@ class CsvProductImporter implements iProductImporter
         $recordsFailed = 0;
         $recordCount = 0;
 
-        $csv->each(function ($row) use(&$pio, &$recordsAdded, &$recordsUpdated, &$recordsFailed, &$recordCount)
+        $uploader = new UploadHandler();
+
+        $csv->each(function ($row) use(&$pio, &$recordsAdded, &$recordsUpdated, &$recordsFailed, &$recordCount, &$uploader)
         {
 
             /* Row Structure
@@ -97,18 +100,22 @@ class CsvProductImporter implements iProductImporter
                 try
                 {
                     // Check to see if the record already exists (update) if not ignore existing items
-                    $product = \App\Models\Product::where('uniquekey', '=', $row[8])
-                                    ->orWhere('uniquekey', '=', $row[11])->first();
+                    //$product = \App\Models\Product::where('uniquekey', '=', $row[8])
+                    //                ->orWhere('uniquekey', '=', $row[11])->first();
 
-                    $isExisting = ($product) ? true : false;
+                    $isExisting = false;
+                    //if(!is_null($product) && isset($product))
+                    //{
+                        //$isExisting = true;
+                    //}
 
                     if($isExisting && !$pio->isSimulate() && !$pio->isIgnoreExisting())
                     {
                         // Clear any existing categories
-                        \DB::table('product_categories')->where('product_id', '=', $product->id)->delete();
+                        //\DB::table('product_categories')->where('product_id', '=', $product->id)->delete();
 
                         // Clear any existing allergens
-                        \DB::table('product_allergens')->where('product_id', '=', $product->id)->delete();
+                        //\DB::table('product_allergens')->where('product_id', '=', $product->id)->delete();
                     }
                     else
                     {
@@ -126,9 +133,9 @@ class CsvProductImporter implements iProductImporter
                     $product->mpc =                 $row[8];
                     $product->broker_contact =      $row[9];
                     $product->gtin =                $row[10];
-                    $product->is_halal =            ($row[11] == 'Yes') ? 1 : 0;
-                    $product->is_organic =          ($row[12] == 'Yes') ? 1 : 0;
-                    $product->is_kosher =           ($row[13] == 'Yes') ? 1 : 0;
+                    $product->is_halal =            $this->normalizeTrueFalseField($row[11]);
+                    $product->is_organic =          $this->normalizeTrueFalseField($row[12]);
+                    $product->is_kosher =           $this->normalizeTrueFalseField($row[13]);
                     $product->calc_size =           $row[14];
                     $product->calculation_size_uom = $row[15];
                     $product->calories =            $row[16];
@@ -143,7 +150,24 @@ class CsvProductImporter implements iProductImporter
 
                     //rows 25, 26, 27, 28, 29, 30, 31, 32, 33 are allergens
 
-                    $product->product_image =       $row[34];
+                    // Product Image
+                    if($row[34] !== '')
+                    {
+                        if($pio->isDownloadImages())
+                        {
+                            try
+                            {
+                                $newFilename = $uploader->getRemoteFile($row[34], null, public_path(config('app.product_storage')));
+                                $product->product_image = $newFilename;
+                            }
+                            catch(Exception $ex) { /* If the image can't be downloaded, just don't set the field */ }
+                        }
+                        else
+                        {
+                            $product->product_image = $row[34];
+                        }
+                    }
+
                     $product->description =         $row[35];
                     $product->preparation =         $row[36];
                     $product->ingredient_deck =     $row[37];
@@ -154,16 +178,6 @@ class CsvProductImporter implements iProductImporter
                     $product->gross_weight =        0;
                     $product->tare_weight =         0;
                     $product->serving_size =        0;
-
-                    if($pio->isDownloadImages())
-                    {
-                        $product->vendor_logo = '';
-                    }
-                    else
-                    {
-                        $product->vendor_logo = '';
-                    }
-
                     $product->vendor_logo =         '';
                     $product->pos_pdf =             '';
 
@@ -291,12 +305,14 @@ class CsvProductImporter implements iProductImporter
         if($parentCategoryName == null)
         {
             // Top level category
-            $existing = \App\Models\Category::where('name', '=', mb_strtoupper($categoryName))->first();
+            //$existing = \App\Models\Category::where('name', '=', mb_strtoupper($categoryName))->first();
+            //$existing = \DB::select('SELECT id FROM food_categories WHERE LOWER(name) = ' . mb_strtolower($categoryName));
+            $existing = \DB::table('food_categories')->whereRaw('LOWER(name) = "'. mb_strtolower($categoryName) . '"')->first();
             if($existing == null)
             {
                 $newCat = new \App\Models\Category();
-                $newCat->name = mb_strtoupper($categoryName);
-                $newCat->save();
+                $newCat->name = ucfirst(mb_strtolower($categoryName));
+                //$newCat->save();
 
                 $categoryId = $newCat->id;
             }
@@ -308,14 +324,18 @@ class CsvProductImporter implements iProductImporter
         else
         {
             // Sub level category
-            $existingParent = \App\Models\Category::where('name', '=', mb_strtoupper($parentCategoryName))->first();
+            //$existingParent = \App\Models\Category::where('name', '=', mb_strtoupper($parentCategoryName))->first();
+            //$existingParent = \DB::select('SELECT id FROM food_categories WHERE LOWER(name) = ' . mb_strtolower($parentCategoryName));
+            $existingParent = \DB::table('food_categories')->whereRaw('LOWER(name) = "'. mb_strtolower($parentCategoryName) . '"')->first();
             if($existingParent != null)
             {
-                $existing = \App\Models\Category::where('name', '=', $categoryName)->where('parent_id', '=', $existingParent->id)->first();
+                //$existing = \App\Models\Category::where('name', '=', $categoryName)->where('parent_id', '=', $existingParent->id)->first();
+                //$existing = \DB::select('SELECT id FROM food_categories parent_id = ' . $existingParent->id . ' WHERE LOWER(name) = ' . mb_strtolower($parentCategoryName));
+                $existing = \DB::table('food_categories')->where('parent_id', '=', $existingParent->id)->whereRaw('LOWER(name) = "'. mb_strtolower($categoryName) . '"')->first();
                 if($existing == null)
                 {
                     $newCat = new \App\Models\Category();
-                    $newCat->name = mb_strtoupper($categoryName);
+                    $newCat->name = ucfirst(mb_strtolower($categoryName));
                     $newCat->parent_id = $existingParent->id;
                     $newCat->save();
 
@@ -329,5 +349,20 @@ class CsvProductImporter implements iProductImporter
         }
 
         return $categoryId;
+    }
+
+    private function normalizeTrueFalseField($val)
+    {
+        $result = 0;
+
+        if($val != '')
+        {
+            if($val == 'Yes' || $val == 'Y')
+            {
+                $result = 1;
+            }
+        }
+
+        return $result;
     }
 }

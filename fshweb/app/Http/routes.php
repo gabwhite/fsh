@@ -69,6 +69,8 @@ Route::group(['middleware' => 'auth'], function()
         Route::get('admin/users', 'AdminController@showUsers');
         Route::get('admin/adduser', 'AdminController@showUserAdd');
         Route::post('admin/adduser', 'AdminController@addUser');
+        Route::get('admin/addvendor', 'AdminController@showVendorAdd');
+        Route::post('admin/addvendor', 'AdminController@addVendor');
         Route::get('admin/userview/{id}', 'AdminController@viewUser');
         Route::post('admin/edituser', 'AdminController@editUser');
         Route::get('admin/import', 'AdminController@showImport');
@@ -77,9 +79,8 @@ Route::group(['middleware' => 'auth'], function()
         Route::post('admin/roles', 'AdminController@editRoles');
         Route::get('admin/permissions/{id?}', 'AdminController@showPermissions');
         Route::post('admin/permissions', 'AdminController@editPermissions');
-        Route::get('admin/searchindexes', 'AdminController@showSearchIndexes');
-        Route::post('admin/createsearchindex', 'AdminController@createSearchIndex');
-        Route::post('admin/managesearchindex', 'AdminController@manageSearchIndex');
+        Route::get('admin/cache', 'AdminController@showCacheManager');
+        Route::post('admin/cache', 'AdminController@editCache');
 
     });
 
@@ -111,6 +112,8 @@ Route::get('ajax/getfoodcategories/{format}/{parentId?}', 'AjaxController@getFoo
 Route::get('ajax/getproducts/{categoryId?}', 'AjaxController@getProducts');
 Route::get('ajax/getcountries', 'AjaxController@getCountries');
 Route::get('ajax/getstateprovincesforcountry/{countryId}', 'AjaxController@getStateProvincesForCountry');
+Route::get('ajax/checkusername', 'AjaxController@checkUsername');
+Route::get('ajax/checkemail', 'AjaxController@checkEmail');
 
 Route::get('datacleanup', function()
 {

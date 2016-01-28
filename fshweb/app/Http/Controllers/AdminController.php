@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CacheManager;
 use App\DataAccessLayer;
 use App\iProductImporter;
 use Illuminate\Http\Request;
@@ -24,15 +25,17 @@ class AdminController extends Controller
 
     protected $dataAccess;
     protected $productImporter;
+    protected $cacheManager;
 
     /**
      * AdminController constructor.
      * @param $dataAccess
      */
-    public function __construct(DataAccessLayer $dataAccess, iProductImporter $productImporter)
+    public function __construct(DataAccessLayer $dataAccess, iProductImporter $productImporter, CacheManager $cacheManager)
     {
         $this->dataAccess = $dataAccess;
         $this->productImporter = $productImporter;
+        $this->cacheManager = $cacheManager;
     }
 
     public function index()
@@ -136,6 +139,43 @@ class AdminController extends Controller
                 $user->attachRole($request['role']);
             }
         }
+
+        return redirect('admin/users');
+    }
+
+    public function showVendorAdd()
+    {
+        return view('admin.vendoradd');
+    }
+
+    public function addVendor(Request $request)
+    {
+        $data = $request->all();
+
+        $user = User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => bcrypt($data['password']),
+        ]);
+
+        \App\Models\Vendor::create([
+            'user_id' => $user->id,
+            'company_name' => $data['company_name'],
+            'address1' => $data['address1'],
+            'address2' => $data['address2'],
+            'city' => $data['city'],
+            'state_province_id' => $data['state_province_id'],
+            'country_id' => $data['country_id'],
+            'zip_postal' => $data['zip_postal'],
+            'contact_name' => $data['contact_name'],
+            'contact_title' => $data['contact_title'],
+            'contact_phone' => $data['contact_phone'],
+            'contact_url' => $data['contact_url'],
+            'intro_text' => $data['intro_text'],
+            'about_text' => $data['about_text'],
+            'logo_image_path' => isset($data['logo_image_path']) ? $data['logo_image_path'] : null,
+            'background_image_path' => isset($data['background_image_path']) ? $data['background_image_path'] : null,
+        ]);
 
         return redirect('admin/users');
     }
@@ -248,35 +288,23 @@ class AdminController extends Controller
 
     }
 
-    public function showSearchIndexes()
+    public function showCacheManager()
     {
-        $indexes = Storage::directories('lucene/');
-
-        return view('admin.lucenesearch')->with('indexes', $indexes);
+        return view('admin.cache');
     }
 
-    public function createSearchIndex(Request $request)
+    public function editCache(Request $request)
     {
-        $indexInfo = array('index_name' => $request->input('newindex'), 'action' => 'CREATE');
-
-        // Build index on creation
-        $this->dispatch(new RebuildSearchIndex($indexInfo));
-
-        return redirect('admin/searchindexes');
-    }
-
-    public function manageSearchIndex(Request $request)
-    {
-        $action = $request->input('indexaction');
-        $indexName = $request->input('indexname');
-
-        if($action == "REBUILD")
+        $action = $request->input('action');
+        if($action === 'key' && $request->input('cachekey') !== '')
         {
-            $indexInfo = array('index_name' => $indexName, 'action' => $action);
-            $this->dispatch(new RebuildSearchIndex($indexInfo));
+            $this->cacheManager->deleteItem(env('CACHE_DRIVER'), $request->input('cachekey'));
+        }
+        else if($action === 'flush')
+        {
+            $this->cacheManager->flushCache(env('CACHE_DRIVER'));
         }
 
-        return redirect('admin/searchindexes');
+        return redirect('admin/cache');
     }
-
 }
