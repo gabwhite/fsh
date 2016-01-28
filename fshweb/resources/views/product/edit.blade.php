@@ -211,7 +211,7 @@
 
                                 {{trans('ui.product_label_tare_weight')}}:<input type="text" name="tare_weight" title="tare_weight" class="form-control" maxlength="9" value="{{$product->tare_weight}}"/>
                                 
-                                {{trans('ui.product_label_brand')}}: <input type="text" name="brand" title="brand" class="form-control" maxlength="20" value="{{$product->brand}}">
+                                {{trans('ui.product_label_brand')}}: <input type="text" name="brand" title="brand" class="form-control" maxlength="250" value="{{$product->brand}}">
 
                                 {{trans('ui.product_label_calories')}}: <input type="text" name="calories" title="calories" class="form-control" maxlength="9" value="{{$product->calories}}">
                                 
@@ -244,6 +244,7 @@
                         <div class="btn-row row pull-right">
                             <a href="{{($product->id) ? url('product/detail', $product->id) : url('profile/')}}"><button type="button" class="btn">{{trans('ui.button_cancel')}}</button></a>
                             <input type="submit" class="btn-primary" value="{{trans('ui.button_addupdate')}}"/>
+                            <a id="hlDeleteProduct" href="#"><button type="button" class="btn">{{trans('ui.button_delete')}}</button></a>
                         </div>
                     </div>
                 </div>
@@ -252,7 +253,7 @@
             </div> <!-- end of container -->
 
             <input type="hidden" name="id" value="{{$product->id}}"/>
-
+            <input type="hidden" id="action" name="action" value=""/>
             {!! csrf_field() !!}
 
         </form>
@@ -268,7 +269,9 @@
     <script type="text/javascript">
         $(document).ready(function()
         {
-            $("#form1").validate({
+            var theForm = $("#form1");
+
+            theForm.validate({
                 errorClass: "validationError",
                 rules:
                 {
@@ -287,13 +290,26 @@
                     pack: { digits: true },
                     size: { number: true },
                     calc_size: { digits: true },
-                    mpc: { required: "#gtin:blank" },
-                    gtin: { required: "#mpc:blank" },
+                    mpc: { required: "#gtin:blank", maxlength: 250 },
+                    gtin: { required: "#mpc:blank", maxlength: 250 },
                     net_weight: { number: true },
                     gross_weight: { number: true },
-                    tare_weight: { number: true }
+                    tare_weight: { number: true },
+                    brand: { maxlength: 250 },
+                    uom: { maxlength: 250 }
                 }
             });
+
+            $("#hlDeleteProduct").on("click", function(e)
+            {
+                e.preventDefault();
+                if(confirm("{{trans('messages.product_delete_confirm')}}}"))
+                {
+                    theForm.validate().cancelSubmit = true;
+                    $("#action").val("DELETE");
+                    theForm.submit();
+                }
+            })
 
         });
     </script>

@@ -52,7 +52,7 @@
                         <div class="row">
                             <div class="col-xs-12">
                                 <img id="uncroppedImage" src=""/>
-                                <a href="#" id="hlCropAvatar" class="btn-primary">Crop</a>
+                                <a href="#" id="hlCropAvatar"><button class="btn-primary">Crop</button></a>
                             </div>
                         </div>
 

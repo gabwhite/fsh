@@ -125,9 +125,20 @@ class DataAccessLayer
         return Product::where('id', '=', $productId)->first();
     }
 
-    public function getProductByIdVendor($productId, $vendorId)
+    public function getProductByIdVendor($productId, $vendorId, $fields = null, $relationships = null)
     {
-        return Product::where(['id' => $productId, 'vendor_id' => $vendorId])->first();
+        $query = Product::where(['id' => $productId, 'vendor_id' => $vendorId]);
+        if(isset($fields))
+        {
+            $query->select($fields);
+        }
+
+        if(isset($relationships))
+        {
+            return $query->with($relationships);
+        }
+
+        return $query->first();
     }
 
     public function getProductsByVendor($vendorId, $fields = null, $paginate = false, $itemsPerPage = 20)

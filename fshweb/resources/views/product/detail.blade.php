@@ -53,16 +53,16 @@
                         @if(strpos($product->product_image, 'http') !== false)
                            <div class="product-img" style="background: url({{$product->product_image}}) no-repeat; background-size: contain; background-position: center;"></div> 
                         @else
-                            <div class="product-img" style="background: url({{url(config('app.product_storage') . '/' . $product->product_image)}}) no-repeat; background-size: contain; background-position: center;"></div>
+                            <div class="product-img" style="background: url('{{url(config('app.product_storage') . '/' . $product->product_image)}}') no-repeat; background-size: contain; background-position: center;"></div>
                             
                         @endif
                     @else
                         <div class="product-img" style="background: url({{url('/img/no-photo-avail.svg')}}) no-repeat; background-size: contain; background-position: center;"></div>
                     @endif
                     
-                    <div class="detail-brand">
-                        <img src="../../img/slider/ROLAND-LOGO-BANNER-SIZE.png" alt="brand-logo">
-                    </div>
+                    @if(isset($brandHack))
+                        <div class="detail-brand" style="background:url({{url(config('app.vendor_storage'), $brandHack)}}) no-repeat; background-position: center; background-size: contain;"></div>
+                    @endif
                 </div>
 
                 <div class="col-xs-12 col-md-8">
