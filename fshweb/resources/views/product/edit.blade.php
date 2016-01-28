@@ -211,7 +211,7 @@
 
                                 {{trans('ui.product_label_tare_weight')}}:<input type="text" name="tare_weight" title="tare_weight" class="form-control" maxlength="9" value="{{$product->tare_weight}}"/>
                                 
-                                {{trans('ui.product_label_brand')}}: <input type="text" name="brand" title="brand" class="form-control" maxlength="20" value="{{$product->brand}}">
+                                {{trans('ui.product_label_brand')}}: <input type="text" name="brand" title="brand" class="form-control" maxlength="250" value="{{$product->brand}}">
 
                                 {{trans('ui.product_label_calories')}}: <input type="text" name="calories" title="calories" class="form-control" maxlength="9" value="{{$product->calories}}">
                                 
