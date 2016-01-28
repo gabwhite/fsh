@@ -37,6 +37,12 @@
                             </td>
                             <td>
                                 <a href="{{url('/product/detail', $p->id)}}">{{$p->name}}</a>
+                                <p style="font-size: smaller;">
+                                    {{($p->pack) ? 'Pack: ' . $p->pack : ''}};
+                                    {{($p->size) ? 'Size: ' . $p->size : ''}};
+                                    {{($p->gtin) ? 'GTIN: ' . $p->gtin : ''}};
+                                    {{($p->mpc) ? 'MPC: ' . $p->mpc : ''}}
+                                </p>
                                 @if($p->published)
                                     <span class="badge">Published</span>
                                 @endif

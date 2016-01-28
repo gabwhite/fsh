@@ -157,7 +157,7 @@ class ProductController extends Controller
         $products = array();
         if(\Session::has(config('app.session_key_vendor')))
         {
-            $products = $this->dataAccess->getProductsByVendor(\Session::get(config('app.session_key_vendor')), ['id', 'published', 'name'], true, 20);
+            $products = $this->dataAccess->getProductsByVendor(\Session::get(config('app.session_key_vendor')), ['id', 'published', 'name', 'pack', 'size', 'gtin', 'mpc'], true, 20);
         }
 
         return view('profile.products')->with('products', $products);
