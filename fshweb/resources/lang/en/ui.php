@@ -18,7 +18,7 @@ return [
     'navigation_userreg' => 'Sign Up',
     'navigation_profile' => 'Profile',
     'navigation_login' => 'Sign In',
-    'navigation_logout' => 'Logout',
+    'navigation_logout' => 'Sign Out',
     'navigation_contactus' => 'Contact Us',
     'navigation_register' => 'Sign Up for A Free Account',
     'navigation_forgotpassword' => 'Lost Password',

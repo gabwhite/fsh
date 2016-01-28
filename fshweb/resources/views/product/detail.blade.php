@@ -148,17 +148,17 @@
                     <h2 class="item-subhead">{{trans('ui.product_label_dietary_info')}}</h2>
                     
                     <div class="col-xs-12 well"> 
-                        <div class="table-row">
+                        <div class="table-row clearfix">
                             <p>{{trans('ui.product_label_halal')}}:</p>
                             <p>{{($product->is_halal) ? trans('ui.general_label_yes') : trans('ui.general_label_no')}}</p>
                         </div>
 
-                        <div class="table-row">
+                        <div class="table-row clearfix">
                             <p>{{trans('ui.product_label_organic')}}:</p>
                             <p>{{($product->is_organic) ? trans('ui.general_label_yes') : trans('ui.general_label_no')}}</p>
                         </div>
 
-                        <div class="table-row">
+                        <div class="table-row clearfix">
                             <p>{{trans('ui.product_label_kosher')}}:</p>
                             <p>{{($product->is_kosher) ? trans('ui.general_label_yes') : trans('ui.general_label_no')}}</p>
                         </div>

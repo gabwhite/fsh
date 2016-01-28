@@ -5,7 +5,7 @@
 
             @if($p->product_image)
                 @if(strpos($p->product_image, 'http') !== false)
-                    <div class="item-thumb" style="background: url('{{$p->product_image}}') no-repeat; background-size: cover; background-position: center center;"></div>
+                    <div class="item-thumb" style="background: url('{{$p->product_image}}') no-repeat; background-size: 50%; background-position: center center;"></div>
                 @else
                     <div class="item-thumb" style="background: url('{{url(config('app.product_storage') . '/' . $p->product_image)}}') no-repeat; background-size: cover; background-position: center center;"></div>
                 @endif

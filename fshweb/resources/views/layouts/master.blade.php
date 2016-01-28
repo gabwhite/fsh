@@ -52,12 +52,6 @@
                 <!-- Brand and toggle get grouped for better mobile display -->
                 <div class="col-xs-5 col-md-3">
                     <div class="navbar-header">
-                       <!--  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                            <span class="sr-only">Toggle navigation</span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button> -->
 
                         <a href="{{url('/')}}" class="navbar-brand"> 
                             <img id="logo_img" title="FoodserviceHound.com" src="{{url('/img/horizontallogoFoodServiceHound.png')}}" alt="FoodserviceHound.com">
