@@ -21,12 +21,14 @@
             <div class="col-xs-12 well">
 
                 <table class="table" id="tblProducts">
+                    @if(isset($products) && count($products) > 0)
                     <thead>
                         <tr>
-                            <th><input id="cbToggleAll" type="checkbox"/></th>
+                            <th width="5%"><input id="cbToggleAll" type="checkbox"/></th>
                             <th>{{trans('ui.vendor_label_name')}}</th>
                         </tr>
                     </thead>
+                    @endif
                     <tbody>
                     @forelse($products as $p)
                         <tr>
@@ -50,19 +52,21 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <td>
+                            <td colspan="2">
                                 {!! $products->render() !!}
                             </td>
                         </tr>
                     </tfoot>
                 </table>
 
-                With selected:
-                <a href="#" id="btnDelete" class="">{{trans('ui.button_delete')}}</a>
-                |
-                <a href="#" id="btnPublish" class="">{{trans('ui.product_label_publish')}}</a>
-                |
-                <a href="#" id="btnUnpublish" class="">{{trans('ui.product_label_unpublish')}}</a>
+                @if(isset($products) && count($products) > 0)
+                    With selected:
+                    <a href="#" id="btnDelete" class="">{{trans('ui.button_delete')}}</a>
+                    |
+                    <a href="#" id="btnPublish" class="">{{trans('ui.product_label_publish')}}</a>
+                    |
+                    <a href="#" id="btnUnpublish" class="">{{trans('ui.product_label_unpublish')}}</a>
+                @endif
             </div>
         </div>
     </div>
@@ -88,7 +92,6 @@
                 else
                 {
                     tbl.find("tbody tr td input:checkbox").prop("checked", false);
-
                 }
             });
 
@@ -120,7 +123,6 @@
                     $("#action").val(action);
                     $("#form1").submit();
                 }
-
             });
         });
 
