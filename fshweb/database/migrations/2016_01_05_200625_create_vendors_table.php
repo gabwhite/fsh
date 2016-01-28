@@ -30,8 +30,8 @@ class CreateVendorsTable extends Migration
             $table->string('contact_title', 200)->nullable();
             $table->string('contact_phone', 200)->nullable();
             $table->string('contact_url', 200)->nullable();
-            $table->string('intro_text', 1000)->nullable();
-            $table->string('about_text', 1000)->nullable();
+            $table->string('intro_text', 2000)->nullable();
+            $table->string('about_text', 2000)->nullable();
             $table->string('logo_image_path', 200)->nullable();
             $table->string('background_image_path', 200)->nullable();
 
