@@ -174,7 +174,7 @@
                     <div class="col-xs-12 well">
 
                         @forelse($product->allergens as $a)
-                            <div class="table-row">
+                            <div class="table-row clearfix">
                                 <p>{{$a->name}}</p>
                                 <p>&nbsp;</p>
                             </div>
@@ -231,32 +231,32 @@
                     <div class="well col-xs-12">
                         <div class="col-xs-12 col-sm-6 drop-padding">
                             
-                            <div class="table-row">
+                            <div class="table-row clearfix">
                                 <p>{{trans('ui.product_label_pack')}}:</p>
                                 <p>{{$product->pack}}</p>
                             </div>
                             
-                            <div class="table-row">
+                            <div class="table-row clearfix">
                                 <p>{{trans('ui.product_label_size')}}:</p>
                                 <p>{{$product->size}}</p>
                             </div>
 
-                            <div class="table-row">
+                            <div class="table-row clearfix">
                                 <p>{{trans('ui.product_label_calculation_size')}}:</p>
                                 <p>{{$product->calc_size}}</p>
                             </div>
 
-                            <div class="table-row">
+                            <div class="table-row clearfix">
                                 <p>{{trans('ui.product_label_product_code')}}:</p>
                                 <p>{{$product->mpc}}</p>
                             </div>
 
-                            <div class="table-row">
+                            <div class="table-row clearfix">
                                 <p>{{trans('ui.product_label_gtin')}}:</p>
                                 <p>{{$product->gtin}}</p>
                             </div>
                             
-                            <div class="table-row">
+                            <div class="table-row clearfix">
                                 <p>{{trans('ui.product_label_net_weight')}}:</p>
                                 <p>{{$product->net_weight}}</p>
                             </div>
@@ -264,27 +264,27 @@
                         
                         <div class="col-xs-12 col-sm-6 drop-padding">
                             
-                            <div class="table-row">
+                            <div class="table-row clearfix">
                                 <p>{{trans('ui.product_label_gross_weight')}}:</p>
                                 <p>{{$product->gross_weight}}</p>
                             </div>
 
-                            <div class="table-row">
+                            <div class="table-row clearfix">
                                 <p>{{trans('ui.product_label_tare_weight')}}:</p>
                                 <p>{{$product->tare_weight}}</p>
                             </div>
                             
-                            <div class="table-row">    
+                            <div class="table-row clearfix">    
                                 <p>{{trans('ui.product_label_brand')}}:</p>
                                 <p>{{$product->brand}}</p>
                             </div>
                             
-                            <div class="table-row">    
+                            <div class="table-row clearfix">    
                                 <p>{{trans('ui.product_label_calories')}}:</p>
                                 <p>{{$product->calories}}</p>
                             </div>
                             
-                            <div class="table-row">   
+                            <div class="table-row clearfix">   
                                 <p>{{trans('ui.product_label_uom')}}:</p>
                                 <p>{{$product->uom}}</p>
                             </div>
