@@ -81,7 +81,7 @@
 
                                 </a>
 
-                                <ul class="dropdown-menu">
+                                <ul class="dropdown-menu pull-right">
                                     
                                     <li class="menu-item">
                                         <a class="product-search" title="{{trans('ui.navigation_productsearch')}}" href="{{url('/product/search')}}">{{trans('ui.navigation_productsearch')}}</a>

@@ -176,9 +176,13 @@
                             </div>
                           </div>
                       
-                          <div class="modal-footer btn-row drop-padding">
-                            <button type="button" class="btn" data-dismiss="modal">{{trans('ui.button_close')}}</button>
-                            <a href="#" id="hlSaveHeader"><button type="button" class="btn-primary">{{trans('ui.button_save')}}</button></a>
+                          <div class="modal-footer clearfix">
+                            <div class="btn-row drop-padding pull-right">
+                                
+                                <button type="button" class="btn" data-dismiss="modal">{{trans('ui.button_close')}}</button>
+                                
+                                <a href="#" id="hlSaveHeader"><button type="button" class="btn-primary">{{trans('ui.button_save')}}</button></a>
+                            </div>
                           </div>
                     </div><!-- /.modal-content -->
                   </div><!-- /.modal-dialog -->

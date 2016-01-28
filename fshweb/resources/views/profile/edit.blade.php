@@ -79,10 +79,13 @@
 
             </div>
             <div class="row btn-row pull-right">
+                <div class="col-xs-12 drop-padding">
+                    
+                    <a href="{{url('/profile')}}"><button type="button" class="btn">{{trans('ui.button_cancel')}}</button></a>
                 
-                <a href="{{url('/profile')}}"><button type="button" class="btn">{{trans('ui.button_cancel')}}</button></a>
-                <input type="submit" value="{{trans('ui.button_update')}}" class="btn-primary"/>
+                    <input type="submit" value="{{trans('ui.button_update')}}" class="btn-primary"/>
                    
+                </div>
             </div>
 
             {!! csrf_field() !!}
