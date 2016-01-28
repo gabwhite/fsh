@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', trans('ui.navigation_product_detail'))
+@section('title', trans('ui.navigation_product_detail', ['name' => $product->name]))
 
 @section('css')
 
@@ -189,7 +189,7 @@
         </div>
 
         <div class="col-xs-12 col-md-8">
-            <h2 class="item-subhead">{{trans('ui.navigation_product_detail')}}</h2>
+            <h2 class="item-subhead">{{trans('ui.product_label_product_details')}}</h2>
             
             <div class="well col-xs-12">
 

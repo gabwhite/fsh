@@ -23,7 +23,8 @@ return [
     'navigation_register' => 'Sign Up for A Free Account',
     'navigation_forgotpassword' => 'Lost Password',
     'navigation_editavatar' => 'Edit Avatar',
-    'navigation_product_detail' => 'Product Detail',
+    'navigation_product_detail' => 'Product Detail - :name',
+    'navigation_product_edit' => 'Edit Product - :name',
 
     'navigation_link_editprofile' => 'Edit Profile',
     'navigation_link_changeavatar' => 'Change Avatar',

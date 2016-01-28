@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Page Title')
+@section('title', (isset($vendor) ? $vendor->company_name : ''))
 
 @section('css')
 <link type="text/css" rel="stylesheet" href="{{url('css/dropzone/dropzone.min.css')}}"/>

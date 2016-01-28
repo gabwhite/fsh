@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Page Title')
+@section('title', trans('ui.navigation_productsearch'))
 
 @section('css')
 

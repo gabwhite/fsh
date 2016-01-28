@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
 
-    <title>App Name - @yield('title')</title>
+    <title>Food Service Hound - @yield('title')</title>
 
     <!-- Fav and touch icons -->
     <link rel="shortcut icon" href="{{url('/img/favicon.png')}}">

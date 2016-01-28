@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Page Title')
+@section('title', trans('ui.vendor_label_my_products'))
 
 @section('css')
 
