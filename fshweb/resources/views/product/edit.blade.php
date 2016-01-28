@@ -290,11 +290,13 @@
                     pack: { digits: true },
                     size: { number: true },
                     calc_size: { digits: true },
-                    mpc: { required: "#gtin:blank" },
-                    gtin: { required: "#mpc:blank" },
+                    mpc: { required: "#gtin:blank", maxlength: 250 },
+                    gtin: { required: "#mpc:blank", maxlength: 250 },
                     net_weight: { number: true },
                     gross_weight: { number: true },
-                    tare_weight: { number: true }
+                    tare_weight: { number: true },
+                    brand: { maxlength: 250 },
+                    uom: { maxlength: 250 }
                 }
             });
 
