@@ -9219,16 +9219,14 @@ select#sortby {
   margin-bottom: 30px;
 }
 
+.btn-row button,
 .btn-row input[type="submit"] {
-  margin: 10px 0;
-}
-
-.btn-row button {
   margin: 10px auto;
 }
 
 @media (min-width: 768px) {
-  .btn-row button {
+  .btn-row button,
+  .btn-row input[type="submit"] {
     margin: 25px 10px 25px 0;
   }
 }

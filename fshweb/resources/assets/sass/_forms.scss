@@ -122,11 +122,11 @@ select#sortby {
 	display: inline-block;
 	margin-bottom: 30px;
 	
-	input[type="submit"]{
-		margin: 10px 0;
-	}
+	// input[type="submit"]{
+	// 	margin: 10px 0;
+	// }
 
-	button {
+	button, input[type="submit"] {
 		margin: 10px auto;
 		@include breakpoint(tablet){
 		margin: 25px 10px 25px 0;
