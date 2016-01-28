@@ -102,9 +102,11 @@
         @endif
 
         @if($user->hasRole('admin'))
-            <p class="bg-danger">
-            You have <a href="{{url('/admin')}}">administrative</a> access
-            </p>
+            <div class="col-xs-12">
+                <div class="bg-danger">
+                    <p>You have <a href="{{url('/admin')}}">administrative</a> access</p>
+                </div>
+            </div>
         @endif
 
     </div>
