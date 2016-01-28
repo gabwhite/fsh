@@ -208,6 +208,28 @@ class DataAccessLayer
 
     }
 
+    public function deleteProduct($productId, $userId = null)
+    {
+        $rowsAffected = 0;
+
+        if(isset($userId))
+        {
+            $product = $this->getProductByIdVendor($productId, $userId);
+        }
+        else
+        {
+            $product = $this->getProduct($productId);
+        }
+
+        if(isset($product))
+        {
+            $rowsAffected = $product->delete();
+        }
+
+        return $rowsAffected;
+
+    }
+
     public function getFoodCategoriesForParent($activeOnly = true, $parentId = null, $fields = null)
     {
         $query = Category::where('parent_id', '=', $parentId);
@@ -398,6 +420,20 @@ class DataAccessLayer
 
         return null;
     }
+
+    public function deleteVendor($vendorId)
+    {
+        $rowsAffected = 0;
+
+        $vendor = $this->getVendor($vendorId, ['id']);
+        if(isset($vendor))
+        {
+            $rowsAffected = $vendor->delete();
+        }
+
+        return $rowsAffected;
+    }
+
 
     public function insertBrand($data)
     {
