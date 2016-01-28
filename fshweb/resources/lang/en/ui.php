@@ -87,6 +87,7 @@ return [
     'vendor_label_zip_postal' => 'Zip / Postal',
     'vendor_label_contact_name' => 'Contact Name',
     'vendor_label_contact_title' => 'Contact Title',
+    'vendor_label_contact_email' => 'Contact Email',
     'vendor_label_contact_phone' => 'Contact Phone',
     'vendor_label_contact_url' => 'Website URL',
     'vendor_label_logo_image' => 'Logo Image',

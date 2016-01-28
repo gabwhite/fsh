@@ -73,6 +73,7 @@ class AuthController extends Controller
             'contact_title' => 'max:200',
             'contact_url' => 'max:200',
             'contact_phone' => 'max:200',
+            'contact_email' => 'email|max:200',
             //'logo_image_path' => 'max:200',
             //'background_image_path' => 'max:200',
         ]);
@@ -121,6 +122,7 @@ class AuthController extends Controller
             'contact_name' => $data['contact_name'],
             'contact_title' => $data['contact_title'],
             'contact_phone' => $data['contact_phone'],
+            'contact_email' => $data['contact_email'],
             'contact_url' => $data['contact_url'],
             'intro_text' => $data['intro_text'],
             'about_text' => $data['about_text'],

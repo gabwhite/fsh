@@ -79,6 +79,9 @@
                                 <label for="contact_phone">{{trans('ui.vendor_label_contact_phone')}}</label>
                                 <input type="text" name="contact_phone" placeholder="" maxlength="200" class="form-control" value="{{isset($vendor) ? $vendor->contact_phone : ''}}"/>
 
+                                <label for="contact_email">{{trans('ui.vendor_label_contact_email')}}</label>
+                                <input type="text" name="contact_email" placeholder="" maxlength="200" class="form-control" value="{{isset($vendor) ? $vendor->contact_email : ''}}"/>
+
                                 <label for="contact_url">{{trans('ui.vendor_label_contact_url')}}</label>
                                 <input type="text" name="contact_url" placeholder="" maxlength="200" class="form-control" value="{{isset($vendor) ? $vendor->contact_url : ''}}"/>
                             </div>
@@ -381,6 +384,7 @@
                     contact_name: { maxlength: 200 },
                     contact_title: { maxlength: 200 },
                     contact_phone: { maxlength: 200 },
+                    contact_email: { email: true, maxlength: 200 },
                     contact_url: { maxlength: 200 },
                     intro_text: { maxlength: 2000 },
                     about_text: { maxlength: 2000 }

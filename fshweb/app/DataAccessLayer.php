@@ -409,6 +409,7 @@ class DataAccessLayer
             if(isset($data['zip_postal'])) { $vendor->zip_postal = $data['zip_postal']; }
             if(isset($data['contact_name'])) { $vendor->contact_name = $data['contact_name']; }
             if(isset($data['contact_phone'])) { $vendor->contact_phone = $data['contact_phone']; }
+            if(isset($data['contact_email'])) { $vendor->contact_email = $data['contact_email']; }
             if(isset($data['contact_url'])) { $vendor->contact_url = $data['contact_url']; }
             if(isset($data['intro_text'])) { $vendor->intro_text = $data['intro_text']; }
             if(isset($data['about_text'])) { $vendor->about_text = $data['about_text']; }
