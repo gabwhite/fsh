@@ -103,7 +103,7 @@
                 switch(e.target.id)
                 {
                     case "btnDelete":
-                        msg = "{{trans('messages.product_delete_multiple_confirm')}}}";
+                        msg = "{{trans('messages.product_delete_multiple_confirm')}}";
                         action = "DELETE";
                         break;
 
