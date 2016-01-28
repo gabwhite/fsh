@@ -19,14 +19,21 @@ class BrandResolver
     {
     }
 
-    public static function Resolve($brandName)
+    public static function resolve($brandName)
     {
-        $brandImage = '';
-        if(stripos($brandName, 'lantic'))
+        $brandImage = null;
+        if(stripos($brandName, 'lantic') !== false)
         {
-
+            $brandImage = 'lantic.jpg';
         }
-        else if(stripos($brandName, 'Roland')) {}
+        else if(stripos($brandName, 'rogers') !== false)
+        {
+            $brandImage = 'rogers.jpg';
+        }
+        else if(stripos($brandName, 'roland') !== false)
+        {
+            $brandImage = 'roland.png';
+        }
 
         return $brandImage;
     }

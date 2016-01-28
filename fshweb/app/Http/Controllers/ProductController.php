@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers;
 
+use App\BrandResolver;
 use App\CacheManager;
 use App\DataAccessLayer;
 use App\LookupManager;
@@ -44,6 +45,9 @@ class ProductController extends Controller
             $this->cacheManager->setItem(env('CACHE_DRIVER'), $cacheKey, $product, config('app.cache_expiry_time_products'));
         }
 
+        $brandResolver = new BrandResolver();
+        $brandImage = $brandResolver->resolve($product->brand);
+
         $canEdit = false;
 
         if(\Auth::check())
@@ -57,7 +61,7 @@ class ProductController extends Controller
             }
         }
 
-        return view('product.detail')->with(['product' => $product, 'canEdit' => $canEdit]);
+        return view('product.detail')->with(['product' => $product, 'canEdit' => $canEdit, 'brandHack' => $brandImage]);
     }
 
     public function search()
