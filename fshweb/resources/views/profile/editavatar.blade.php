@@ -88,13 +88,13 @@
     <script type="text/javascript">
 
         var csrf = "{{ csrf_token() }}";
+        var $uncroppedImage = $("#uncroppedImage");
+        var $cropArea = $("#divCropArea");
+        var $currentAvatar = $("#imgCurrentAvatar");
+        var $noAvatarImage = "{{url(config('app.avatar_none'))}}";
 
         $(document).ready(function()
         {
-            var $uncroppedImage = $("#uncroppedImage");
-            var $cropArea = $("#divCropArea");
-            var $currentAvatar = $("#imgCurrentAvatar");
-            var $noAvatarImage = "{{url(config('app.avatar_none'))}}";
 
             $("#uncroppedImage").cropper({
 
@@ -103,21 +103,7 @@
                 zoomable: false,
                 movable: false,
                 viewMode: 0,
-                aspectRatio: 1 / 1,
-                crop: function(e)
-                {
-                    //console.log(e.x);
-                    //console.log(e.y);
-                    //console.log(e.width);
-                    //console.log(e.height);
-                    //console.log(e.rotate);
-                    //console.log(e.scaleX);
-                    //console.log(e.scaleY);
-
-                    //var cropData = e.width + ";" + e.height + ";" + e.x + ";" + e.y + ";" + e.rotate + ";" + e.scaleX + ";" + e.scaleY;
-                    //console.log(cropData);
-                    //$("#cropdata").val(cropData);
-                }
+                aspectRatio: 1 / 1
             });
 
             Dropzone.options.avatarUploader =
@@ -160,8 +146,9 @@
                     function(result)
                     {
                         $cropArea.hide();
+                        var d = new Date();
                         var imgSrc = "{{url('img/avatars/')}}/" + result.filename;
-                        $currentAvatar.attr("src", imgSrc);
+                        $currentAvatar.attr("src", imgSrc + "?" + d.getTime());
                     },
                     function()
                     {
@@ -195,8 +182,8 @@
             fsh.common.doAjax("{{url('/profile/avatar')}}", {}, "POST", true, headers,
                 function(result)
                 {
-                    alert("deleted");
-                    $currentAvatar.attr("src", $noAvatarImage);
+                    var d = new Date();
+                    $currentAvatar.attr("src", $noAvatarImage + "?" + d.getTime());
                 },
                 function()
                 {
