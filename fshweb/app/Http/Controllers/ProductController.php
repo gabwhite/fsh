@@ -80,7 +80,7 @@ class ProductController extends Controller
         {
             $product = $this->dataAccess->getProduct($id, 'allergens');
 
-            if(!isset($product) || (\Session::get(config('app.session_key_vendor')) != $product->vendor_id && $user->hasRole('vendor')))
+            if(!isset($product) || (\Session::get(config('app.session_key_vendor')) != $product->vendor_id && $user->hasRole(config('app.role_vendor_name'))))
             {
                 // Product came back null or doesn't belong to this vendor, see product to new
                 $product = new \App\Models\Product();
