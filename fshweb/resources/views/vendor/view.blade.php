@@ -83,8 +83,13 @@
                     @endif
 
                     @if($profile->contact_phone)
-                    <label for="Phone">{{trans('ui.vendor_label_contact_phone')}}</label>
-                    <p> {{$profile->contact_phone}}</p>
+                        <label for="Phone">{{trans('ui.vendor_label_contact_phone')}}</label>
+                        <p> {{$profile->contact_phone}}</p>
+                    @endif
+
+                    @if($profile->contact_email)
+                        <label for="contact-email">{{trans('ui.vendor_label_contact_email')}}</label>
+                        <p><a href="mailto:{{$profile->contact_email}}">{{$profile->contact_email}}</a></p>
                     @endif
 
                     @if($profile->contact_url)

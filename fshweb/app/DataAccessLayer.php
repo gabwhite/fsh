@@ -208,6 +208,28 @@ class DataAccessLayer
 
     }
 
+    public function deleteProduct($productId, $userId = null)
+    {
+        $rowsAffected = 0;
+
+        if(isset($userId))
+        {
+            $product = $this->getProductByIdVendor($productId, $userId);
+        }
+        else
+        {
+            $product = $this->getProduct($productId);
+        }
+
+        if(isset($product))
+        {
+            $rowsAffected = $product->delete();
+        }
+
+        return $rowsAffected;
+
+    }
+
     public function getFoodCategoriesForParent($activeOnly = true, $parentId = null, $fields = null)
     {
         $query = Category::where('parent_id', '=', $parentId);
@@ -387,6 +409,7 @@ class DataAccessLayer
             if(isset($data['zip_postal'])) { $vendor->zip_postal = $data['zip_postal']; }
             if(isset($data['contact_name'])) { $vendor->contact_name = $data['contact_name']; }
             if(isset($data['contact_phone'])) { $vendor->contact_phone = $data['contact_phone']; }
+            if(isset($data['contact_email'])) { $vendor->contact_email = $data['contact_email']; }
             if(isset($data['contact_url'])) { $vendor->contact_url = $data['contact_url']; }
             if(isset($data['intro_text'])) { $vendor->intro_text = $data['intro_text']; }
             if(isset($data['about_text'])) { $vendor->about_text = $data['about_text']; }
@@ -398,6 +421,20 @@ class DataAccessLayer
 
         return null;
     }
+
+    public function deleteVendor($vendorId)
+    {
+        $rowsAffected = 0;
+
+        $vendor = $this->getVendor($vendorId, ['id']);
+        if(isset($vendor))
+        {
+            $rowsAffected = $vendor->delete();
+        }
+
+        return $rowsAffected;
+    }
+
 
     public function insertBrand($data)
     {
