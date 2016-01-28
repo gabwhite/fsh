@@ -42,7 +42,14 @@ class ProductController extends Controller
         if(is_null($product) || !isset($product))
         {
             $product = $this->dataAccess->getProduct($id, ['allergens']);
-            $this->cacheManager->setItem(env('CACHE_DRIVER'), $cacheKey, $product, config('app.cache_expiry_time_products'));
+            if(isset($product))
+            {
+                $this->cacheManager->setItem(env('CACHE_DRIVER'), $cacheKey, $product, config('app.cache_expiry_time_products'));
+            }
+            else
+            {
+                return redirect('/');
+            }
         }
 
         $brandResolver = new BrandResolver();
