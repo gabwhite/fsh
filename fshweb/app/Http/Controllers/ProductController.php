@@ -157,7 +157,7 @@ class ProductController extends Controller
         $products = array();
         if(\Session::has(config('app.session_key_vendor')))
         {
-            $products = $this->dataAccess->getProductsByVendor(\Session::get(config('app.session_key_vendor')), ['id', 'name'], true, 20);
+            $products = $this->dataAccess->getProductsByVendor(\Session::get(config('app.session_key_vendor')), ['id', 'published', 'name'], true, 20);
         }
 
         return view('profile.products')->with('products', $products);
@@ -168,6 +168,10 @@ class ProductController extends Controller
         return Validator::make($data, [
             'name' => 'required|max:500',
             'description' => 'required',
+            'brand' => 'max:250',
+            'mpc' => 'max:250',
+            'gtin' => 'max:250',
+            'uom' => 'max:250',
         ]);
     }
 
