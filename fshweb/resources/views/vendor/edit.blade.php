@@ -389,7 +389,7 @@
                     contact_title: { maxlength: 200 },
                     contact_phone: { maxlength: 200 },
                     contact_email: { email: true, maxlength: 200 },
-                    contact_url: { maxlength: 200 },
+                    contact_url: { url: true, maxlength: 200 },
                     intro_text: { maxlength: 2000 },
                     about_text: { maxlength: 2000 }
                 }

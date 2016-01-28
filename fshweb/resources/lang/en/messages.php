@@ -28,6 +28,7 @@ return [
     'vendor_background_image_notice' => 'For best results, crop your photo to 930px x 275px',
 
     'product_update_success' => 'Product successfully updated',
+    'product_delete_confirm' => 'Delete this product?',
 
     'product_administrator_notice' => 'You are an administrator for this product',
 ];

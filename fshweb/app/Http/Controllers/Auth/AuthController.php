@@ -71,7 +71,7 @@ class AuthController extends Controller
             'zip_postal' => 'max:50',
             'contact_name' => 'max:200',
             'contact_title' => 'max:200',
-            'contact_url' => 'max:200',
+            'contact_url' => 'url|max:200',
             'contact_phone' => 'max:200',
             'contact_email' => 'email|max:200',
             //'logo_image_path' => 'max:200',

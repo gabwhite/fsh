@@ -20,7 +20,7 @@ class Vendor extends Model
         [
             'user_id',
             'company_name', 'address1', 'address2', 'city', 'state_province_id', 'country_id', 'zip_postal',
-            'contact_name', 'contact_title', 'contact_phone', 'contact_url',
+            'contact_name', 'contact_title', 'contact_phone', 'contact_email', 'contact_url',
             'intro_text', 'about_text', 'logo_image_path', 'background_image_path'
         ];
 

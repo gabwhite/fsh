@@ -8,6 +8,7 @@
 
 namespace App\Http\Controllers;
 
+use App\BrandResolver;
 use App\CacheManager;
 use App\DataAccessLayer;
 use App\LookupManager;
@@ -44,6 +45,9 @@ class ProductController extends Controller
             $this->cacheManager->setItem(env('CACHE_DRIVER'), $cacheKey, $product, config('app.cache_expiry_time_products'));
         }
 
+        $brandResolver = new BrandResolver();
+        $brandImage = $brandResolver->resolve($product->brand);
+
         $canEdit = false;
 
         if(\Auth::check())
@@ -57,7 +61,7 @@ class ProductController extends Controller
             }
         }
 
-        return view('product.detail')->with(['product' => $product, 'canEdit' => $canEdit]);
+        return view('product.detail')->with(['product' => $product, 'canEdit' => $canEdit, 'brandHack' => $brandImage]);
     }
 
     public function search()
@@ -72,14 +76,15 @@ class ProductController extends Controller
 
     public function showEditProduct($id = null)
     {
-        //$user = \Auth::user();
+        $user = \Auth::user();
         $product = new \App\Models\Product();
 
         // This is an edit, see if the user can edit product
         if($id != null)
         {
             $product = $this->dataAccess->getProduct($id, 'allergens');
-            if(!isset($product) || \Session::get(config('app.session_key_vendor')) != $product->vendor_id)
+
+            if(!isset($product) || (\Session::get(config('app.session_key_vendor')) != $product->vendor_id && $user->hasRole(config('app.role_vendor_name'))))
             {
                 // Product came back null or doesn't belong to this vendor, see product to new
                 $product = new \App\Models\Product();
@@ -95,42 +100,56 @@ class ProductController extends Controller
     {
         $productId = $request->input('id');
         $vendorId = \Session::get(config('app.session_key_vendor'));
-
+        $action = $request->input('action');
         if(isset($vendorId))
         {
-            // Now validate user product
-            $productValidator = $this->productValidator($request->all());
-            if ($productValidator->fails())
-            {
-                $this->throwValidationException($request, $productValidator);
-            }
+            $uploader = new UploadHandler();
 
-            $data = $request->all();
-            try
+            if($action === 'DELETE')
             {
-                // Upload product file if present
-                $uploader = new UploadHandler();
-                if ($request->hasFile('product_image') && $request->file('product_image')->isValid() && $uploader->isImage($request->file('product_image')))
+                $product = $this->dataAccess->getProductByIdVendor($productId, $vendorId, ['product_image']);
+                if(isset($product))
                 {
-                    $newFilename = $uploader->uploadProductAsset($request->file('product_image'));
-                    $data['product_image'] = $newFilename;
+                    $uploader->removeProductAsset($product->product_image);
+                    $rowsAffected = $this->dataAccess->deleteProduct($productId, $vendorId);
+                    return redirect('/product/vendor');
+                }
+            }
+            else
+            {
+                // Now validate user product
+                $productValidator = $this->productValidator($request->all());
+                if ($productValidator->fails())
+                {
+                    $this->throwValidationException($request, $productValidator);
                 }
 
-                $product = $this->dataAccess->upsertProduct($productId, $vendorId, $data);
+                $data = $request->all();
+                try
+                {
+                    // Upload product file if present
+                    if ($request->hasFile('product_image') && $request->file('product_image')->isValid() && $uploader->isImage($request->file('product_image')))
+                    {
+                        $newFilename = $uploader->uploadProductAsset($request->file('product_image'));
+                        $data['product_image'] = $newFilename;
+                    }
 
-                // Update cache entry
-                $this->updateProductCache($product, 'UPDATE');
+                    $product = $this->dataAccess->upsertProduct($productId, $vendorId, $data);
 
-                return redirect('product/detail/' . $product->id)->with('successMessage', trans('messages.product_update_success'));
-            }
-            catch(\Exception $ex)
-            {
-                // Clean up uploaded image if needed
-                if(isset($data['product_image'])) { $uploader->removeProductAsset($newFilename); }
+                    // Update cache entry
+                    $this->updateProductCache($product, 'UPDATE');
+
+                    return redirect('product/detail/' . $product->id)->with('successMessage', trans('messages.product_update_success'));
+                }
+                catch(\Exception $ex)
+                {
+                    // Clean up uploaded image if needed
+                    if(isset($data['product_image'])) { $uploader->removeProductAsset($newFilename); }
+                }
             }
         }
 
-        return redirect('product/detail/' . $productId);
+        return redirect('/');
     }
 
     public function vendorProducts()
@@ -154,11 +173,17 @@ class ProductController extends Controller
 
     private function updateProductCache($product, $action)
     {
-        if($action == 'UPDATE')
+        $cacheKey = 'product-'.$product->id;
+
+        if($action === 'UPDATE')
         {
             // Update cache entry
-            $cacheKey = 'product-'.$product->id;
             $this->cacheManager->setItem(env('CACHE_DRIVER'), $cacheKey, $product, config('app.cache_expiry_time_products'));
+        }
+        else if($action === 'REMOVE')
+        {
+            // Remove cache entry
+            $this->cacheManager->deleteItem(env('CACHE_DRIVER'), $cacheKey);
         }
     }
 }

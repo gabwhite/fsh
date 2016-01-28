@@ -244,6 +244,7 @@
                         <div class="btn-row row pull-right">
                             <a href="{{($product->id) ? url('product/detail', $product->id) : url('profile/')}}"><button type="button" class="btn">{{trans('ui.button_cancel')}}</button></a>
                             <input type="submit" class="btn-primary" value="{{trans('ui.button_addupdate')}}"/>
+                            <a id="hlDeleteProduct" href="#"><button type="button" class="btn">{{trans('ui.button_delete')}}</button></a>
                         </div>
                     </div>
                 </div>
@@ -252,7 +253,7 @@
             </div> <!-- end of container -->
 
             <input type="hidden" name="id" value="{{$product->id}}"/>
-
+            <input type="hidden" id="action" name="action" value=""/>
             {!! csrf_field() !!}
 
         </form>
@@ -268,7 +269,9 @@
     <script type="text/javascript">
         $(document).ready(function()
         {
-            $("#form1").validate({
+            var theForm = $("#form1");
+
+            theForm.validate({
                 errorClass: "validationError",
                 rules:
                 {
@@ -294,6 +297,17 @@
                     tare_weight: { number: true }
                 }
             });
+
+            $("#hlDeleteProduct").on("click", function(e)
+            {
+                e.preventDefault();
+                if(confirm("{{trans('messages.product_delete_confirm')}}}"))
+                {
+                    theForm.validate().cancelSubmit = true;
+                    $("#action").val("DELETE");
+                    theForm.submit();
+                }
+            })
 
         });
     </script>
