@@ -50,6 +50,7 @@ Route::group(['middleware' => 'auth'], function()
     Route::group(['middleware' => ['role:vendor|admin']], function()
     {
         Route::get('/product/vendor', 'ProductController@vendorProducts');
+        Route::post('/product/vendor', 'ProductController@vendorProductsAction');
         Route::get('/product/edit/{id?}', 'ProductController@showEditProduct');
         Route::post('/product/edit', 'ProductController@editProduct');
         Route::get('/vendor/edit', 'VendorController@edit');

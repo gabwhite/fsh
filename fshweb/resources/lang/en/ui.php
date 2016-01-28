@@ -158,6 +158,8 @@ return [
     'product_label_request_sample' => 'Request a Sample',
     'product_label_edit_product' => 'Edit Product',
     'product_label_rate_product' => 'Rate Product',
+    'product_label_publish' => 'Publish',
+    'product_label_unpublish' => 'Unpublish',
 
 
 

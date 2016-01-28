@@ -162,6 +162,19 @@ class DataAccessLayer
 
     }
 
+    public function updateProduct($productId, $userId, $data)
+    {
+        $product = $this->getProductByIdVendor($productId, $userId);
+        if($product)
+        {
+            $product->update($data);
+
+            $product->save();
+        }
+
+        return $product;
+    }
+
     public function upsertProduct($productId, $userId, $data)
     {
         $product = $this->getProductByIdVendor($productId, $userId);

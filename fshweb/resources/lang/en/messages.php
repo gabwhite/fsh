@@ -29,6 +29,9 @@ return [
 
     'product_update_success' => 'Product successfully updated',
     'product_delete_confirm' => 'Delete this product?',
+    'product_delete_multiple_confirm' => 'Delete selected product(s)?',
+    'product_publish_multiple_confirm' => 'Publish selected product(s)?',
+    'product_unpublish_multiple_confirm' => 'Unpublish selected product(s)?',
 
     'product_administrator_notice' => 'You are an administrator for this product',
 ];
