@@ -73,6 +73,7 @@ return [
     'user_label_currentavatar' => 'Current Avatar',
     'user_label_noavatar' => 'No Avatar',
     'user_label_contact' => 'Contact',
+    'user_label_product_favs' => 'My Favorite Products',
 
 
     'vendor_label_name' => 'Name',
