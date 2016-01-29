@@ -109,4 +109,20 @@ class AjaxController extends Controller
         return response()->json(!$inUse);
     }
 
+    public function addFavoriteProduct(Request $request)
+    {
+        $user = \Auth::user();
+
+        $favs = $user->favoriteProducts;
+
+        if(!$favs->contains($request->input('productId')))
+        {
+            $this->dataAccess->addProductFavorite($user->id, [$request->input('productId')]);
+        }
+
+        return response()->json($request->input('productId'));
+
+    }
+
+
 }

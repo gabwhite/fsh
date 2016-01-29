@@ -44,6 +44,8 @@ Route::group(['middleware' => 'auth'], function()
     Route::post('/profile/edit', 'ProfileController@profileUpdate');
     Route::get('/profile/avatar', 'ProfileController@profileAvatar');
     Route::post('/profile/avatar', 'ProfileController@profileAvatarUpdate');
+    Route::get('/profile/favorites', 'ProfileController@profileFavoriteProducts');
+    Route::post('/profile/favorites', 'ProfileController@deleteFavoriteProducts');
 
 
     // Routes that require either admin or vendor roles
@@ -115,6 +117,7 @@ Route::get('ajax/getcountries', 'AjaxController@getCountries');
 Route::get('ajax/getstateprovincesforcountry/{countryId}', 'AjaxController@getStateProvincesForCountry');
 Route::get('ajax/checkusername', 'AjaxController@checkUsername');
 Route::get('ajax/checkemail', 'AjaxController@checkEmail');
+Route::post('ajax/addproductfav', 'AjaxController@addFavoriteProduct');
 
 Route::get('datacleanup', function()
 {

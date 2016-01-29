@@ -25,6 +25,7 @@
 
             <div class="btn-row">
                 <a href="{{url('profile/edit')}}"><button class="btn-sm">{{trans('ui.navigation_link_editprofile')}}</button></a>
+                <a href="{{url('profile/favorites')}}"><button class="btn-sm">Favorite Products</button></a>
 
                 @if($user->hasRole('vendor'))
 
