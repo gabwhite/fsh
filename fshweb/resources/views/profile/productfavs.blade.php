@@ -15,7 +15,7 @@
 @endsection
 
 @section('content')
-    <form id="form1" name="form1" method="post" action="{{url('/profile/productfavs')}}">
+    <form id="form1" name="form1" method="post" action="{{url('/profile/favorites')}}">
         <div class="row">
             <div class="col-xs-12">
                 <div class="col-xs-12 well">
@@ -48,7 +48,7 @@
                         @empty
                             <tr>
                                 <td colspan="2">
-                                    {{trans('ui.vendor_label_no_products')}}. <a href="{{url('product/edit')}}">{{trans('ui.button_add')}}</a>
+                                    No Favorites</a>
                                 </td>
                             </tr>
                         @endforelse
@@ -56,7 +56,7 @@
                         <tfoot>
                         <tr>
                             <td colspan="2">
-                                {!! $products->render() !!}
+
                             </td>
                         </tr>
                         </tfoot>
@@ -65,10 +65,6 @@
                     @if(isset($products) && count($products) > 0)
                         With selected:
                         <a href="#" id="btnDelete" class="">{{trans('ui.button_delete')}}</a>
-                        |
-                        <a href="#" id="btnPublish" class="">{{trans('ui.product_label_publish')}}</a>
-                        |
-                        <a href="#" id="btnUnpublish" class="">{{trans('ui.product_label_unpublish')}}</a>
                     @endif
                 </div>
             </div>
@@ -98,32 +94,13 @@
                 }
             });
 
-            $("#btnDelete,#btnPublish,#btnUnpublish").on("click", function(e)
+            $("#btnDelete").on("click", function(e)
             {
                 e.preventDefault();
 
-                var msg = "", action = "";
-                switch(e.target.id)
-                {
-                    case "btnDelete":
-                        msg = "{{trans('messages.product_delete_multiple_confirm')}}";
-                        action = "DELETE";
-                        break;
-
-                    case "btnPublish":
-                        msg = "{{trans('messages.product_publish_multiple_confirm')}}}";
-                        action = "PUBLISH";
-                        break;
-
-                    case "btnUnpublish":
-                        msg = "{{trans('messages.product_unpublish_multiple_confirm')}}}";
-                        action = "UNPUBLISH";
-                        break;
-                }
-
+                var msg = "{{trans('messages.profile_product_favs_delete_multiple_confirm')}}";
                 if(confirm(msg))
                 {
-                    $("#action").val(action);
                     $("#form1").submit();
                 }
             });

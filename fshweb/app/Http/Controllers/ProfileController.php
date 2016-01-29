@@ -226,4 +226,17 @@ class ProfileController extends Controller
         return redirect('/');
     }
 
+    public function profileFavoriteProducts()
+    {
+        $user = \Auth::user();
+
+        return view('profile.productfavs')->with('products', $user->favoriteProducts);
+    }
+
+    public function deleteFavoriteProducts(Request $request)
+    {
+        $this->dataAccess->removeProductFavorite(\Auth::user()->id, $request->input('products'));
+        return redirect('/profile/favorites');
+    }
+
 }

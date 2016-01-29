@@ -17,7 +17,7 @@
                 </div>
             </div>
             <div class="col-xs-12 btn-row">
-                <button data-target="#add-product" data-toggle="modal" class="btn-primary">{{trans('ui.product_label_add_to_my_products')}}</button>
+                <button id="btnAddToFavs" class="btn-primary">{{trans('ui.product_label_add_to_my_products')}}</button>
            
                 <a href="{{url('vendor/detail', $product->vendor_id)}}"><button class="btn-primary">{{trans('ui.product_label_goto_vendor_profile')}}</button></a>
            
@@ -413,7 +413,7 @@
               </div>
           
               <div class="modal-footer col-xs-12">
-                <a href="#" id="hlSaveHeader"><button type="button" class="btn-primary">Done</button></a>
+                <a href="#" id="hlSaveHeader"><button type="button" data-dismiss="modal" class="btn-primary">Done</button></a>
               </div>
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
@@ -423,5 +423,25 @@
 
 @section('scripts')
 
+    <script type="text/javascript" src="{{url('js/fsh.common.js')}}"></script>
+    <script type="text/javascript">
+
+        $(document).ready(function()
+        {
+            $("#btnAddToFavs").on("click", function(e)
+            {
+                e.preventDefault();
+                fsh.common.doAjax("{{url('ajax/addproductfav')}}", {productId: "{{$product->id}}"}, "POST", true, { "X-CSRF-TOKEN": "{{ csrf_token() }}" }, function(result)
+                {
+                    $("#add-product").modal("show");
+                    //console.log(result);
+                },
+                function()
+                {
+                    alert("There was an error, please try again");
+                });
+            });
+        });
+    </script>
 
 @endsection

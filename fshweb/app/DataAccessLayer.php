@@ -69,6 +69,24 @@ class DataAccessLayer
         $user->delete();
     }
 
+    public function addProductFavorite($userId, $productIds)
+    {
+        $user = $this->getUser($userId);
+        if(isset($user))
+        {
+            $user->favoriteProducts()->attach($productIds);
+        }
+    }
+
+    public function removeProductFavorite($userId, $productIds)
+    {
+        $user = $this->getUser($userId);
+        if(isset($user))
+        {
+            $user->favoriteProducts()->detach($productIds);
+        }
+    }
+
     public function getAllRoles($relationships = null)
     {
         if(isset($relationships))

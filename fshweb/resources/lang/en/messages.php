@@ -23,6 +23,7 @@ return [
     'profile_error_crop_avatar' => 'Error cropping avatar',
     'profile_error_delete_avatar' => 'Error deleting avatar',
     'profile_select_avatar' => 'Select a new avatar for your profile.',
+    'profile_product_favs_delete_multiple_confirm' => 'Remove selected favorite product(s)?',
 
     'vendor_update_success' => 'Vendor successfully updated',
     'vendor_background_image_notice' => 'For best results, crop your photo to 930px x 275px',
