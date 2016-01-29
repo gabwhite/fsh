@@ -100,7 +100,7 @@
 
                             <label for="about_text">{{trans('ui.vendor_label_about_text')}}</label>
                         
-                            <textarea name="about_text" class="form-control" placeholder="" cols="80" rows="3">{{isset($vendor) ? $vendor->about_text : ''}}</textarea>
+                            <textarea name="about_text" class="form-control" placeholder="" cols="80" rows="15">{{isset($vendor) ? $vendor->about_text : ''}}</textarea>
 
                         </div>
 
