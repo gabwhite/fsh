@@ -17,8 +17,10 @@
                 </div>
             </div>
             <div class="col-xs-12 btn-row">
+                @if (Auth::check())
                 <button id="btnAddToFavs" class="btn-primary">{{trans('ui.product_label_add_to_my_products')}}</button>
-           
+                @endif
+
                 <a href="{{url('vendor/detail', $product->vendor_id)}}"><button class="btn-primary">{{trans('ui.product_label_goto_vendor_profile')}}</button></a>
            
                 <button data-target="#request-sample" data-toggle="modal" class="btn">{{trans('ui.product_label_request_sample')}}</button>
