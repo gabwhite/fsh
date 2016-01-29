@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AlterProductsTableAddUsersFk extends Migration
+class AlterProductsTableAddVendorsFk extends Migration
 {
     /**
      * Run the migrations.
