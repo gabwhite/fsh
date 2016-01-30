@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Validator;
 class PublicController extends Controller
 {
     protected $dataAccess;
-    protected $mailer;
 
     /**
      * PublicController constructor.
