@@ -191,19 +191,42 @@ class AdminController extends Controller
 
     public function editUser(Request $request)
     {
-        $user = $this->dataAccess->getUser($request->input('userid'), 'roles');
+        $action = $request->input('action');
+        $userId = $request->input('userid');
 
-        if($request->input('password') != '')
+        if($action === 'UPDATE')
         {
-            $user->password = bcrypt($request->input('password'));
-            $user->save();
+            $user = $this->dataAccess->getUser($userId, 'roles');
+
+            if($request->input('password') != '')
+            {
+                $user->password = bcrypt($request->input('password'));
+                $user->save();
+            }
+
+            $user->detachRoles($user->roles);
+
+            $user->attachRole($request->input('role'));
+
+            return redirect('admin/userview/' . $userId);
         }
+        else if ($action === 'DELETE')
+        {
+            $uploader = new UploadHandler();
 
-        $user->detachRoles($user->roles);
+            $user = $this->dataAccess->getUser($userId, 'roles');
+            $user->detachRoles($user->roles);
 
-        $user->attachRole($request->input('role'));
+            $up = $user->userProfile;
+            if (!is_null($up))
+            {
+                $uploader->removeAvatar($up->avatar_image_path);
+            }
 
-        return redirect('admin/userview/' . $request->input('userid'));
+            $this->dataAccess->deleteUser($userId);
+
+            return redirect('admin/users')->with('successMessage', 'User deleted');
+        }
     }
 
     public function showRoles()
