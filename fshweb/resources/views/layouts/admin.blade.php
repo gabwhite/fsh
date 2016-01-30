@@ -70,6 +70,29 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
+
+            <!-- START BOOTSTRAP ALERT AREA -->
+            @if(session('successMessage'))
+            <div class="row">
+                <div class="col-xs-12 ">
+                    <p class="bg-success">{{session('successMessage')}}</p>
+                </div>
+            </div>
+            @endif
+
+            @if($errors && count($errors) > 0)
+            <div class="row">
+                <div class="col-md-12">
+                    <p class="bg-danger">
+                        @foreach ($errors->all() as $error)
+                            {{ $error }}<br/>
+                        @endforeach
+                    </p>
+                </div>
+            </div>
+            @endif
+            <!-- END BOOTSTRAP ALERT AREA -->
+
             @yield('content')
         </div>
     </div>
