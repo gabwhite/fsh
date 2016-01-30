@@ -208,7 +208,7 @@ class AdminController extends Controller
 
             $user->attachRole($request->input('role'));
 
-            return redirect('admin/userview/' . $userId);
+            return redirect('admin/userview/' . $userId)->with('successMessage', 'User updated');
         }
         else if ($action === 'DELETE')
         {
