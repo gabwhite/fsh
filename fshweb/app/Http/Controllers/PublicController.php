@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DataAccessLayer;
-use App\iMailer;
+use App\Jobs\SendEmail;
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
@@ -20,10 +20,9 @@ class PublicController extends Controller
      * PublicController constructor.
      * @param $dataAccess
      */
-    public function __construct(DataAccessLayer $dataAccess, iMailer $mailer)
+    public function __construct(DataAccessLayer $dataAccess)
     {
         $this->dataAccess = $dataAccess;
-        $this->mailer = $mailer;
     }
 
     /**
@@ -58,24 +57,27 @@ class PublicController extends Controller
                     'contact_message' => $request->input('contact_message'),
                     ];
 
+        $mailData = [
+            'to' => config('app.contact_email_to'),
+            'from' => $request->input('contact_email'),
+            'subject' => trans('messages.contact_subject_to'),
+            'view' => config('app.contact_email_view_admin'),
+            'viewData' => $formData
+            ];
+
         // Send email to us
-        $this->mailer->sendMail(config('app.contact_email_to'),
-                                $request->input('contact_email'),
-                                trans('messages.contact_subject_to'),
-                                config('app.contact_email_view_admin'),
-                                $formData);
+        $this->dispatch(new SendEmail($mailData));
 
         // Send receipt of mail to user
-        $this->mailer->sendMail($request->input('contact_email'),
-                                config('app.contact_email_to'),
-                                trans('messages.contact_subject_from'),
-                                config('app.contact_email_view'),
-                                $formData);
+        $mailData['to'] = $request->input('contact_email');
+        $mailData['from'] = config('app.contact_email_to');
+        $mailData['subject'] = trans('messages.contact_subject_from');
+        $mailData['view'] = config('app.contact_email_view');
+        $this->dispatch(new SendEmail($mailData));
 
         $successMessage = trans('messages.contact_received_success');
 
         return view('contact')->with('successMessage', $successMessage);
-
     }
 
 }
