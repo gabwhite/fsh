@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Page Title')
+@section('title', trans('ui.navigation_product_edit', ['name' => $product->name]))
 
 @section('css')
 
@@ -11,7 +11,7 @@
     <div class='container'>
         <div class="col-xs-12">
             <div class="col-xs-12">
-                <h1 class="item-title">Edit Product: {{$product->name}}</h1>
+                <h1 class="item-title">{{trans('ui.navigation_product_edit', ['name' => $product->name])}}</h1>
             </div>
             <div class="col-xs-12">
                 <div class="{{($product->published) ? 'bg-success' : 'bg-danger'}}">

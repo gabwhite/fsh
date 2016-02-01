@@ -23,12 +23,16 @@ return [
     'profile_error_crop_avatar' => 'Error cropping avatar',
     'profile_error_delete_avatar' => 'Error deleting avatar',
     'profile_select_avatar' => 'Select a new avatar for your profile.',
+    'profile_product_favs_delete_multiple_confirm' => 'Remove selected favorite product(s)?',
 
     'vendor_update_success' => 'Vendor successfully updated',
     'vendor_background_image_notice' => 'For best results, crop your photo to 930px x 275px',
 
     'product_update_success' => 'Product successfully updated',
     'product_delete_confirm' => 'Delete this product?',
+    'product_delete_multiple_confirm' => 'Delete selected product(s)?',
+    'product_publish_multiple_confirm' => 'Publish selected product(s)?',
+    'product_unpublish_multiple_confirm' => 'Unpublish selected product(s)?',
 
     'product_administrator_notice' => 'You are an administrator for this product',
 ];

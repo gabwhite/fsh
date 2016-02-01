@@ -47,6 +47,10 @@
             </tbody>
         </table>
         <input type="hidden" name="userid" value="{{$user->id}}"/>
+        <input type="hidden" id="action" name="action" value="UPDATE"/>
+
+        <a href="{{url('admin/users')}}" class="btn btn-default">Back</a>
+        <a href="#" id="hlDelete" class="btn btn-danger">Delete</a>
         <input type="submit" name="save" class="btn btn-primary" value="Update"/>
 
     </form>
@@ -60,7 +64,21 @@
     <script type="text/javascript">
         $(document).ready(function()
         {
-            $("#form1").validate({
+            var theForm = $("#form1");
+
+            $("#hlDelete").on("click", function(e)
+            {
+                e.preventDefault();
+                if(confirm("Delete user?"))
+                {
+                    theForm.validate().cancelSubmit = true;
+                    $("#action").val("DELETE");
+                    $("#form1").submit();
+                }
+            });
+
+
+            theForm.validate({
                 errorClass: "validationError",
                 rules:
                 {

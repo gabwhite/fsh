@@ -53,4 +53,9 @@ class User extends Model implements AuthenticatableContract,
     {
         return $this->belongsToMany('\App\Models\Vendor');
     }
+
+    public function favoriteProducts()
+    {
+        return $this->belongsToMany('App\Models\Product', 'user_product_favorites', 'user_id', 'product_id');
+    }
 }

@@ -111,7 +111,7 @@
                 <div class="col-xs-12 well">
                     <h3>{{isset($profile) ? $profile->intro_text : ''}}</h3>
 
-                    <p>{{isset($profile) ? $profile->about_text : ''}}</p>
+                    <p>{!! isset($profile) ? nl2br(e($profile->about_text)) : '' !!}</p>
                     
                 </div>
 

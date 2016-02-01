@@ -42,7 +42,14 @@ class ProductController extends Controller
         if(is_null($product) || !isset($product))
         {
             $product = $this->dataAccess->getProduct($id, ['allergens']);
-            $this->cacheManager->setItem(env('CACHE_DRIVER'), $cacheKey, $product, config('app.cache_expiry_time_products'));
+            if(isset($product))
+            {
+                $this->cacheManager->setItem(env('CACHE_DRIVER'), $cacheKey, $product, config('app.cache_expiry_time_products'));
+            }
+            else
+            {
+                return redirect('/');
+            }
         }
 
         $brandResolver = new BrandResolver();
@@ -87,7 +94,7 @@ class ProductController extends Controller
             if(!isset($product) || (\Session::get(config('app.session_key_vendor')) != $product->vendor_id && $user->hasRole(config('app.role_vendor_name'))))
             {
                 // Product came back null or doesn't belong to this vendor, see product to new
-                $product = new \App\Models\Product();
+                return redirect('product/detail/' . $product->id);
             }
         }
 
@@ -157,10 +164,40 @@ class ProductController extends Controller
         $products = array();
         if(\Session::has(config('app.session_key_vendor')))
         {
-            $products = $this->dataAccess->getProductsByVendor(\Session::get(config('app.session_key_vendor')), ['id', 'published', 'name'], true, 20);
+            $products = $this->dataAccess->getProductsByVendor(\Session::get(config('app.session_key_vendor')), ['id', 'published', 'name', 'pack', 'size', 'gtin', 'mpc'], true, 20);
         }
 
         return view('profile.products')->with('products', $products);
+    }
+
+    public function vendorProductsAction(Request $request)
+    {
+        $action = $request->input('action');
+        $selectedProducts = $request->input('products');
+        $vendorId = \Session::get(config('app.session_key_vendor'));
+
+        if($action === 'DELETE')
+        {
+            $uploader = new UploadHandler();
+            foreach($selectedProducts as $productId)
+            {
+                $product = $this->dataAccess->getProductByIdVendor($productId, $vendorId, ['product_image']);
+                if(isset($product))
+                {
+                    $uploader->removeProductAsset($product->product_image);
+                    $this->dataAccess->deleteProduct($productId, $vendorId);
+                }
+            }
+        }
+        else if ($action === 'PUBLISH' || $action === 'UNPUBLISH')
+        {
+            foreach($selectedProducts as $productId)
+            {
+                $this->dataAccess->updateProduct($productId, $vendorId, ['published' => ($action === 'PUBLISH') ? 1 : 0]);
+            }
+        }
+
+        return redirect('product/vendor');
     }
 
     protected function productValidator(array $data)

@@ -71,6 +71,10 @@
                 <td><input type="text" name="contact_phone" placeholder="" maxlength="200" class="form-control"/></td>
             </tr>
             <tr>
+                <td>Contact Email</td>
+                <td><input type="text" name="contact_email" placeholder="" maxlength="200" class="form-control"/></td>
+            </tr>
+            <tr>
                 <td>Contact Url</td>
                 <td><input type="text" name="contact_url" placeholder="" maxlength="200" class="form-control"/></td>
             </tr>
@@ -163,6 +167,7 @@
                     contact_name: { maxlength: 200 },
                     contact_title: { maxlength: 200 },
                     contact_phone: { maxlength: 200 },
+                    contact_email: { email: true, maxlength: 200 },
                     contact_url: { maxlength: 200 },
                     intro_text: { maxlength: 2000 },
                     about_text: { maxlength: 2000 }

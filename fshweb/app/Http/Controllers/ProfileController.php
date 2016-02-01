@@ -203,18 +203,18 @@ class ProfileController extends Controller
             if (!is_null($up = $user->userProfile))
             {
                 // Update UserProfile
-                $up->firstname = $request->input('firstname') ? $request->input('firstname') : null ;
-                $up->lastname = $request->input('lastname') ? $request->input('lastname') : null;
-                $up->bio = $request->input('bio');
+                $up->firstname = trim($request->input('firstname')) ? $request->input('firstname') : null ;
+                $up->lastname = trim($request->input('lastname')) ? $request->input('lastname') : null;
+                $up->bio = trim($request->input('bio')) ? $request->input('bio') : null;
                 $up->save();
             }
             else
             {
                 // UserProfile doesn't exist, create a row
                 $vals = [
-                        'firstname' => $request->input('firstname') ? $request->input('firstname') : null,
-                        'lastname' => $request->input('lastname') ? $request->input('lastname') : null,
-                        'bio' => $request->input('bio') ? $request->input('bio') : null,
+                        'firstname' => trim($request->input('firstname')) ? $request->input('firstname') : null,
+                        'lastname' => trim($request->input('lastname')) ? $request->input('lastname') : null,
+                        'bio' => trim($request->input('bio')) ? $request->input('bio') : null
                         ];
 
                 $user->userProfile()->create($vals);
@@ -224,6 +224,19 @@ class ProfileController extends Controller
         }
 
         return redirect('/');
+    }
+
+    public function profileFavoriteProducts()
+    {
+        $user = \Auth::user();
+
+        return view('profile.productfavs')->with('products', $user->favoriteProducts);
+    }
+
+    public function deleteFavoriteProducts(Request $request)
+    {
+        $this->dataAccess->removeProductFavorite(\Auth::user()->id, $request->input('products'));
+        return redirect('/profile/favorites');
     }
 
 }

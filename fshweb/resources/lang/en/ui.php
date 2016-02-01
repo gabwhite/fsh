@@ -23,7 +23,8 @@ return [
     'navigation_register' => 'Sign Up for A Free Account',
     'navigation_forgotpassword' => 'Lost Password',
     'navigation_editavatar' => 'Edit Avatar',
-    'navigation_product_detail' => 'Product Detail',
+    'navigation_product_detail' => 'Product Detail - :name',
+    'navigation_product_edit' => 'Edit Product - :name',
 
     'navigation_link_editprofile' => 'Edit Profile',
     'navigation_link_changeavatar' => 'Change Avatar',
@@ -72,6 +73,7 @@ return [
     'user_label_currentavatar' => 'Current Avatar',
     'user_label_noavatar' => 'No Avatar',
     'user_label_contact' => 'Contact',
+    'user_label_product_favs' => 'My Favorite Products',
 
 
     'vendor_label_name' => 'Name',
@@ -158,6 +160,8 @@ return [
     'product_label_request_sample' => 'Request a Sample',
     'product_label_edit_product' => 'Edit Product',
     'product_label_rate_product' => 'Rate Product',
+    'product_label_publish' => 'Publish',
+    'product_label_unpublish' => 'Unpublish',
 
 
 

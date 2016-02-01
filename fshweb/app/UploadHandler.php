@@ -220,7 +220,7 @@ class UploadHandler
         return $oldFile;
     }
 
-    public function removeFile($disk, $filename)
+    public function removeFile($disk, $filename, $ignoreErrors = true)
     {
         try
         {
@@ -231,7 +231,10 @@ class UploadHandler
         }
         catch(\Exception $ex)
         {
-            throw $ex;
+            if(!$ignoreErrors)
+            {
+                throw $ex;
+            }
         }
     }
 }
