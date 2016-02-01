@@ -9144,7 +9144,7 @@ select#sortby {
   .btn-sm,
   .btn-group-sm > .btn {
     height: 50px;
-    padding: 10px 30px;
+    padding: 0 30px;
   }
 }
 
@@ -9198,7 +9198,7 @@ select#sortby {
 @media (min-width: 768px) {
   .btn {
     height: 50px;
-    padding: 10px 30px;
+    padding: 0 30px;
   }
 }
 
@@ -9219,6 +9219,10 @@ select#sortby {
   margin-bottom: 30px;
 }
 
+.btn-row a {
+  display: inline-block;
+}
+
 .btn-row button,
 .btn-row input[type="submit"] {
   margin: 10px auto;
@@ -9228,6 +9232,12 @@ select#sortby {
   .btn-row button,
   .btn-row input[type="submit"] {
     margin: 25px 10px 25px 0;
+  }
+}
+
+@media (min-width: 768px) {
+  .btn-row button.btn {
+    margin-top: 23px;
   }
 }
 

@@ -105,7 +105,7 @@ select#sortby {
 	@include btn;
 	background: $primary;
 	border: 2px solid $primary-dark;
-	color: white;	
+	color: white;
 
 	&:hover, &:focus, &:active {
 		background: $primary-dark;
@@ -119,17 +119,24 @@ select#sortby {
 }
 
 .btn-row {
+
 	display: inline-block;
 	margin-bottom: 30px;
 	
-	// input[type="submit"]{
-	// 	margin: 10px 0;
-	// }
+	a {
+		display: inline-block;
+	}
 
 	button, input[type="submit"] {
 		margin: 10px auto;
+			@include breakpoint(tablet){
+				margin: 25px 10px 25px 0;
+		}
+	}
+
+	button.btn {
 		@include breakpoint(tablet){
-		margin: 25px 10px 25px 0;
+			margin-top: 23px;
 		}
 	}
 }
