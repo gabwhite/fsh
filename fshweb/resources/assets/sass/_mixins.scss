@@ -62,7 +62,7 @@
 	@include transition;
 	@include breakpoint(tablet){
 		height: 50px;
-		padding: 10px 30px;
+		padding: 0 30px;
 	}
 }
 
