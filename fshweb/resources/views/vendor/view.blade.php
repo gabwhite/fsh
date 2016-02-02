@@ -112,7 +112,11 @@
                     <h3>{{isset($profile) ? $profile->intro_text : ''}}</h3>
 
                     <p>{!! isset($profile) ? nl2br(e($profile->about_text)) : '' !!}</p>
-                    
+
+                    @if(!$profile->about_text && !$profile->intro_text)
+                        <p>{{trans('messages.vendor_no_about_text')}}</p>
+                    @endif
+
                 </div>
 
                 @if($profile->brands && count($profile->brands) > 0)
