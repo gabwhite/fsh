@@ -44,7 +44,7 @@
                                     {{($p->mpc) ? 'MPC: ' . $p->mpc : ''}}
                                 </p>
                                 @if($p->published)
-                                    <span class="badge">Published</span>
+                                    <span class="badge">{{trans('ui.product_label_published')}}</span>
                                 @endif
                             </td>
                         </tr>
@@ -66,7 +66,7 @@
                 </table>
 
                 @if(isset($products) && count($products) > 0)
-                    With selected:
+                    {{trans('ui.general_label_with_selected')}}
                     <a href="#" id="btnDelete" class="">{{trans('ui.button_delete')}}</a>
                     |
                     <a href="#" id="btnPublish" class="">{{trans('ui.product_label_publish')}}</a>

@@ -57,6 +57,7 @@ return [
 
     'general_label_yes' => 'Yes',
     'general_label_no' => 'No',
+    'general_label_with_selected' => 'With selected:',
 
 
     'login_label_email' => 'Email',
@@ -74,6 +75,7 @@ return [
     'user_label_noavatar' => 'No Avatar',
     'user_label_contact' => 'Contact',
     'user_label_product_favs' => 'My Favorite Products',
+    'user_label_no_product_favs' => 'No Favorites',
 
 
     'vendor_label_name' => 'Name',
