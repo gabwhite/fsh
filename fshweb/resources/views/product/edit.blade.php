@@ -303,7 +303,7 @@
             $("#hlDeleteProduct").on("click", function(e)
             {
                 e.preventDefault();
-                if(confirm("{{trans('messages.product_delete_confirm')}}}"))
+                if(confirm("{{trans('messages.product_delete_confirm')}}"))
                 {
                     theForm.validate().cancelSubmit = true;
                     $("#action").val("DELETE");
