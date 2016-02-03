@@ -24,7 +24,7 @@
 /*----------  Spinning Load  ----------*/
 
 .loadProgress{
-    background: rgba(242,242,242,0.5) url('../../public/img/spinner.gif') no-repeat;
+    background: rgba(242,242,242,0.5) url('/img/spinner.gif') no-repeat;
     z-index: 999;
     background-size: 45px;
     background-position: center 120px;
@@ -86,7 +86,7 @@
 
 	a.goto-item {
 		color: $primary-button;
-		background: url('../../public/img/icons/go-icon.svg') no-repeat;
+		background: url('/img/icons/go-icon.svg') no-repeat;
 		font-size: 14px;
 		background-position: right;
 		background-size: contain;
@@ -141,7 +141,7 @@
 
 a.search-tips {
 	font-weight: 600;
-	background: url(../../public/img/icons/search-tip.svg) no-repeat;
+	background: url('/img/icons/search-tip.svg') no-repeat;
 	padding: 2px 0;
 	padding-left: 30px;
 	background-size: 20px;
