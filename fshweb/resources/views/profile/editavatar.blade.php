@@ -50,7 +50,7 @@
                     <div id="divCropArea" style="display:none">
 
                         <div class="row">
-                            <div class="col-xs-12">
+                            <div class="col-xs-12 drop-padding">
                                 <img id="uncroppedImage" src=""/>
                                 <a href="#" id="hlCropAvatar"><button class="btn-primary">Crop</button></a>
                             </div>

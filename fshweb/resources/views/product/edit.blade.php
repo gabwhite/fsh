@@ -13,6 +13,10 @@
             <div class="col-xs-12">
                 <h1 class="item-title">{{trans('ui.navigation_product_edit', ['name' => $product->name])}}</h1>
             </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="container">
             <div class="col-xs-12">
                 <div class="{{($product->published) ? 'bg-success' : 'bg-danger'}}">
                     <input type="checkbox" id="published" name="published" {{($product->published) ? 'checked="checked"' : ''}}/> <label for="published">{{trans('ui.product_label_published')}}</label>
@@ -303,7 +307,7 @@
             $("#hlDeleteProduct").on("click", function(e)
             {
                 e.preventDefault();
-                if(confirm("{{trans('messages.product_delete_confirm')}}}"))
+                if(confirm("{{trans('messages.product_delete_confirm')}}"))
                 {
                     theForm.validate().cancelSubmit = true;
                     $("#action").val("DELETE");

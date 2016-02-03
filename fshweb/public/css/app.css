@@ -316,8 +316,8 @@ th {
 
 @font-face {
   font-family: 'Glyphicons Halflings';
-  src: url("../fonts/bootstrap/glyphicons-halflings-regular.eot");
-  src: url("../fonts/bootstrap/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("../fonts/bootstrap/glyphicons-halflings-regular.woff2") format("woff2"), url("../fonts/bootstrap/glyphicons-halflings-regular.woff") format("woff"), url("../fonts/bootstrap/glyphicons-halflings-regular.ttf") format("truetype"), url("../fonts/bootstrap/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg");
+  src: url("/fonts/glyphicons-halflings-regular.eot");
+  src: url("/fonts/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("/fonts/glyphicons-halflings-regular.woff2") format("woff2"), url("/fonts/glyphicons-halflings-regular.woff") format("woff"), url("/fonts/glyphicons-halflings-regular.ttf") format("truetype"), url("/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg");
 }
 
 .glyphicon {
@@ -8722,17 +8722,8 @@ span.italic {
   border-left: 5px solid #ffce0e;
   padding: 10px 20px;
   margin-bottom: 30px;
-  margin-left: 5px;
-  margin-right: 5px;
-}
-
-@media (min-width: 768px) {
-  .bg-info,
-  .bg-danger,
-  .bg-success {
-    margin-left: 0;
-    margin-right: 0;
-  }
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .bg-info p,
@@ -8798,7 +8789,7 @@ span.italic {
 }
 
 .jstree-default .jstree-node {
-  background: url(../../public/img/icons/plus.svg) no-repeat;
+  background: url("/img/icons/plus.svg") no-repeat;
 }
 
 .jstree-default .jstree-icon,
@@ -9225,19 +9216,19 @@ select#sortby {
 
 .btn-row button,
 .btn-row input[type="submit"] {
-  margin: 10px auto;
+  margin: 10px 5px;
 }
 
 @media (min-width: 768px) {
   .btn-row button,
   .btn-row input[type="submit"] {
-    margin: 25px 10px 25px 0;
+    margin: 25px 10px 5px 0;
   }
 }
 
 @media (min-width: 768px) {
   .btn-row button.btn {
-    margin-top: 23px;
+    margin-top: 2px;
   }
 }
 
@@ -9531,39 +9522,39 @@ li.menu-item img {
 }
 
 .navbar-nav .open ul.dropdown-menu li a.product-search {
-  background: url(../../public/img/icons/search.svg) no-repeat;
+  background: url("/img/icons/search.svg") no-repeat;
   background-position: 15px 10px;
 }
 
 .navbar-nav .open ul.dropdown-menu li a.product-search:hover,
 .navbar-nav .open ul.dropdown-menu li a.product-search:active,
 .navbar-nav .open ul.dropdown-menu li a.product-search:focus {
-  background: url(../../public/img/icons/search-white.svg) no-repeat #de5328;
+  background: url("/img/icons/search-white.svg") no-repeat #de5328;
   padding-left: 50px;
   background-position: 15px 10px;
 }
 
 .navbar-nav .open ul.dropdown-menu li a.user {
-  background: url(../../public/img/icons/user-02.svg) no-repeat;
+  background: url("/img/icons/user-02.svg") no-repeat;
   background-position: 15px 10px;
 }
 
 .navbar-nav .open ul.dropdown-menu li a.user:hover,
 .navbar-nav .open ul.dropdown-menu li a.user:active,
 .navbar-nav .open ul.dropdown-menu li a.user:focus {
-  background: url(../../public/img/icons/user-white.svg) no-repeat #de5328;
+  background: url("/img/icons/user-white.svg") no-repeat #de5328;
   background-position: 15px 10px;
 }
 
 .navbar-nav .open ul.dropdown-menu li a.logout {
-  background: url(../../public/img/icons/logout.svg) no-repeat;
+  background: url("/img/icons/logout.svg") no-repeat;
   background-position: 15px 13px;
 }
 
 .navbar-nav .open ul.dropdown-menu li a.logout:hover,
 .navbar-nav .open ul.dropdown-menu li a.logout:active,
 .navbar-nav .open ul.dropdown-menu li a.logout:focus {
-  background: url(../../public/img/icons/logout-white.svg) no-repeat #de5328;
+  background: url("/img/icons/logout-white.svg") no-repeat #de5328;
   background-position: 15px 13px;
 }
 
@@ -9599,7 +9590,7 @@ span.username {
 /*----------  Individual page headers  ----------*/
 
 .search-header {
-  background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74, 75, 75, 0.5)), url(../../public/img/headers/search-bg.jpg) no-repeat;
+  background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74, 75, 75, 0.5)), url("/img/headers/search-bg.jpg") no-repeat;
   background-position: center center;
   background-size: cover;
   background-attachment: fixed;
@@ -9607,21 +9598,21 @@ span.username {
 }
 
 .login-header {
-  background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74, 75, 75, 0.5)), url(../../public/img/headers/login-bg.jpg) no-repeat;
+  background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74, 75, 75, 0.5)), url("/img/headers/login-bg.jpg") no-repeat;
   background-position: center center;
   background-size: cover;
   background-attachment: fixed;
 }
 
 .register-header {
-  background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74, 75, 75, 0.5)), url(../../public/img/headers/signup-bg.jpg) no-repeat;
+  background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74, 75, 75, 0.5)), url("/img/headers/signup-bg.jpg") no-repeat;
   background-position: center center;
   background-size: cover;
   background-attachment: fixed;
 }
 
 .contact-header {
-  background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74, 75, 75, 0.5)), url(../../public/img/headers/contact-bg.jpg) no-repeat;
+  background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74, 75, 75, 0.5)), url("/img/headers/contact-bg.jpg") no-repeat;
   background-position: center center;
   background-size: cover;
   background-attachment: fixed;
@@ -9680,7 +9671,7 @@ span.username {
 }
 
 a.contact {
-  background: url(../../public/img/icons/envelope.svg) no-repeat;
+  background: url("/img/icons/envelope.svg") no-repeat;
   background-size: 25px;
   color: white;
   padding-left: 35px;
@@ -9703,7 +9694,7 @@ a.contact {
   background: white;
   padding: 20px 20px;
   margin-bottom: 30px;
-  background: url(../../public/img/icons/upload-image.svg) no-repeat;
+  background: url("/img/icons/upload-image.svg") no-repeat;
   background-size: 60px;
   background-position: center 30px;
   position: relative;
@@ -9762,7 +9753,7 @@ a.deletebrand img {
 }
 
 .custom-navigation .flex-prev {
-  background: url(../../public/img/icons/chevron-left.svg) no-repeat;
+  background: url("/img/icons/chevron-left.svg") no-repeat;
   position: absolute;
   top: 50%;
   height: 30px;
@@ -9771,7 +9762,7 @@ a.deletebrand img {
 }
 
 .custom-navigation .flex-next {
-  background: url(../../public/img/icons/chevron-right.svg) no-repeat;
+  background: url("/img/icons/chevron-right.svg") no-repeat;
   position: absolute;
   top: 50%;
   height: 30px;
@@ -9852,6 +9843,12 @@ img.check {
   margin-bottom: 20px;
 }
 
+/*----------  Photo Cropper  ----------*/
+
+.cropper-container.cropper-bg {
+  width: 100% !important;
+}
+
 /*=====  End of Modal Styling  ======*/
 
 /*======================================
@@ -9885,7 +9882,7 @@ img.check {
 /*----------  Spinning Load  ----------*/
 
 .loadProgress {
-  background: rgba(242, 242, 242, 0.5) url("../../public/img/spinner.gif") no-repeat;
+  background: rgba(242, 242, 242, 0.5) url("/img/spinner.gif") no-repeat;
   z-index: 999;
   background-size: 45px;
   background-position: center 120px;
@@ -9952,7 +9949,7 @@ img.check {
 
 .search-row a.goto-item {
   color: #4dd371;
-  background: url("../../public/img/icons/go-icon.svg") no-repeat;
+  background: url("/img/icons/go-icon.svg") no-repeat;
   font-size: 14px;
   background-position: right;
   background-size: contain;
@@ -9969,6 +9966,7 @@ img.check {
   font-weight: 600;
   float: left;
   margin-right: 10px;
+  margin-bottom: 2px;
 }
 
 /*----------  Sort By  ----------*/
@@ -10004,7 +10002,7 @@ img.check {
 
 a.search-tips {
   font-weight: 600;
-  background: url(../../public/img/icons/search-tip.svg) no-repeat;
+  background: url("/img/icons/search-tip.svg") no-repeat;
   padding: 2px 0;
   padding-left: 30px;
   background-size: 20px;
@@ -10077,7 +10075,7 @@ a.search-tips {
 }
 
 .rate-this .each-star {
-  background: url(../../public/img/icons/stars-unrated.svg) no-repeat;
+  background: url("/img/icons/stars-unrated.svg") no-repeat;
   background-size: cover;
   display: inline-block;
   margin: 0 2px;

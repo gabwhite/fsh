@@ -37,15 +37,18 @@
                             </td>
                             <td>
                                 <a href="{{url('/product/detail', $p->id)}}">{{$p->name}}</a>
-                                <p style="font-size: smaller;">
+                                
+                                <p style="font-size: 14px;">
                                     {{($p->pack) ? 'Pack: ' . $p->pack : ''}};
                                     {{($p->size) ? 'Size: ' . $p->size : ''}};
                                     {{($p->gtin) ? 'GTIN: ' . $p->gtin : ''}};
                                     {{($p->mpc) ? 'MPC: ' . $p->mpc : ''}}
                                 </p>
+
                                 @if($p->published)
-                                    <span class="badge">Published</span>
+                                    <span class="badge">{{trans('ui.product_label_published')}}</span>
                                 @endif
+
                             </td>
                         </tr>
                     @empty
@@ -66,7 +69,7 @@
                 </table>
 
                 @if(isset($products) && count($products) > 0)
-                    With selected:
+                    {{trans('ui.general_label_with_selected')}}
                     <a href="#" id="btnDelete" class="">{{trans('ui.button_delete')}}</a>
                     |
                     <a href="#" id="btnPublish" class="">{{trans('ui.product_label_publish')}}</a>

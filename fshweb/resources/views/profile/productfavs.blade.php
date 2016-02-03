@@ -48,7 +48,7 @@
                         @empty
                             <tr>
                                 <td colspan="2">
-                                    No Favorites</a>
+                                    {{trans('ui.user_label_no_product_favs')}}
                                 </td>
                             </tr>
                         @endforelse
@@ -63,7 +63,7 @@
                     </table>
 
                     @if(isset($products) && count($products) > 0)
-                        With selected:
+                        {{trans('ui.general_label_with_selected')}}
                         <a href="#" id="btnDelete" class="">{{trans('ui.button_delete')}}</a>
                     @endif
                 </div>

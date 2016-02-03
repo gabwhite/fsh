@@ -232,12 +232,8 @@ span.italic {
 	border-left: 5px solid $rating;
 	padding: 10px 20px;
     margin-bottom: 30px;
-    margin-left: 5px;
-    margin-right: 5px;
-    @include breakpoint(tablet){
-        margin-left: 0;
-        margin-right: 0;
-    }
+    margin-left: 0;
+    margin-right: 0;
 
     p {
         margin-bottom: 0;
@@ -292,7 +288,7 @@ span.italic {
 }
 
 .jstree-default .jstree-node {
-    background: url(../../public/img/icons/plus.svg) no-repeat;
+    background: url('/img/icons/plus.svg') no-repeat;
 }
 
 .jstree-default .jstree-icon,

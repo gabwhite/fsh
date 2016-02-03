@@ -39,6 +39,11 @@ class VendorController extends Controller
         if(is_null($vendor) || !isset($vendor))
         {
             $vendor = $this->dataAccess->getVendor($id, null, ['country', 'stateProvince', 'brands']);
+            if(is_null($vendor) || !isset($vendor))
+            {
+                // Invalid vendor, redirect
+                return redirect('/');
+            }
             $this->cacheManager->setItem(env('CACHE_DRIVER'), $cacheKey, $vendor, config('app.cache_expiry_time_vendors'));
         }
 

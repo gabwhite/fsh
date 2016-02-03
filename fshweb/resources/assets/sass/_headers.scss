@@ -206,32 +206,32 @@ li.menu-item {
 
 
 .navbar-nav .open ul.dropdown-menu li a.product-search {
-	background: url(../../public/img/icons/search.svg) no-repeat;
+	background: url("/img/icons/search.svg") no-repeat;
 	background-position: 15px 10px;
 
 	&:hover, &:active, &:focus {
-		background: url(../../public/img/icons/search-white.svg) no-repeat $primary;
+		background: url("/img/icons/search-white.svg") no-repeat $primary;
 		padding-left: 50px;
 		background-position: 15px 10px;
 	}
 }
 
 .navbar-nav .open ul.dropdown-menu li a.user {
-	background: url(../../public/img/icons/user-02.svg) no-repeat;
+	background: url("/img/icons/user-02.svg") no-repeat;
 	background-position: 15px 10px;
 
 	&:hover, &:active, &:focus {
-		background: url(../../public/img/icons/user-white.svg) no-repeat $primary;
+		background: url("/img/icons/user-white.svg") no-repeat $primary;
 		background-position: 15px 10px;
 	}
 }
 
 .navbar-nav .open ul.dropdown-menu li a.logout {
-	background: url(../../public/img/icons/logout.svg) no-repeat;
+	background: url("/img/icons/logout.svg") no-repeat;
 	background-position: 15px 13px;
 
 	&:hover, &:active, &:focus {
-		background: url(../../public/img/icons/logout-white.svg) no-repeat $primary;
+		background: url("/img/icons/logout-white.svg") no-repeat $primary;
 		background-position: 15px 13px;
 	}
 }
@@ -266,7 +266,7 @@ span.username {
 // Search page
 
 .search-header {
-	background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74, 75, 75, 0.5)), url(../../public/img/headers/search-bg.jpg) no-repeat;
+	background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74, 75, 75, 0.5)), url("/img/headers/search-bg.jpg") no-repeat;
 	@include background;
 	background-position: center 60%;
 }
@@ -274,21 +274,21 @@ span.username {
 // Login Page
 
 .login-header {
-	background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74,75, 75, 0.5 )), url(../../public/img/headers/login-bg.jpg) no-repeat;
+	background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74,75, 75, 0.5 )), url("/img/headers/login-bg.jpg") no-repeat;
 	@include background;
 }
 
 // Register Header
 
 .register-header {
-	background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74,75, 75, 0.5 )), url(../../public/img/headers/signup-bg.jpg) no-repeat;
+	background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74,75, 75, 0.5 )), url("/img/headers/signup-bg.jpg") no-repeat;
 	@include background;
 }
 
 // contact header 
 
 .contact-header {
-	background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74, 75, 75, 0.5)), url(../../public/img/headers/contact-bg.jpg) no-repeat;
+	background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74, 75, 75, 0.5)), url("/img/headers/contact-bg.jpg") no-repeat;
 	@include background;
 }
 

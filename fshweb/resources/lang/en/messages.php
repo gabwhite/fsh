@@ -27,6 +27,7 @@ return [
 
     'vendor_update_success' => 'Vendor successfully updated',
     'vendor_background_image_notice' => 'For best results, crop your photo to 930px x 275px',
+    'vendor_no_about_text' => 'This vendor has not yet entered their bio',
 
     'product_update_success' => 'Product successfully updated',
     'product_delete_confirm' => 'Delete this product?',
