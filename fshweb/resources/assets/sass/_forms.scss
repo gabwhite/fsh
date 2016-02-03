@@ -128,15 +128,15 @@ select#sortby {
 	}
 
 	button, input[type="submit"] {
-		margin: 10px auto;
+		margin: 10px 5px;
 			@include breakpoint(tablet){
-				margin: 25px 10px 25px 0;
+				margin: 25px 10px 5px 0;
 		}
 	}
 
 	button.btn {
 		@include breakpoint(tablet){
-			margin-top: 23px;
+			margin-top: 2px;
 		}
 	}
 }

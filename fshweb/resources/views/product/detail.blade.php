@@ -27,14 +27,16 @@
             </div>
         </div>
 
-        <div class="col-xs-12 auth-check">
+        <div class="container auth-check ">
             @if ($canEdit)
+                <div class="col-xs-12">
+                    
+                    <div class="bg-info clearfix">
+                        <p class="pull-left">{{trans('messages.product_administrator_notice')}}</p>
+                        
+                        <a href="{{url('product/edit', $product->id)}}"><button class="btn-sm pull-right">{{trans('ui.product_label_edit_product')}}</button></a>
+                    </div>
 
-                <div class="bg-info clearfix">
-                    <p class="pull-left">{{trans('messages.product_administrator_notice')}}</p>
-                    
-                    <a href="{{url('product/edit', $product->id)}}"><button class="btn-sm pull-right">{{trans('ui.product_label_edit_product')}}</button></a>
-                    
                 </div>
 
             @endif
