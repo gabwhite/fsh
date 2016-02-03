@@ -13,7 +13,7 @@
             <div class="col-xs-12 title-wrap">
                 <h1 class="item-title">{{$product->name}}</h1>
                 <div class="star-detail">
-                    <img src="../../img/icons/star.svg" alt="star-rating">
+                    <img src="{{url('/img/icons/star.svg')}}" alt="star-rating">
                 </div>
             </div>
             <div class="col-xs-12 btn-row">
@@ -199,7 +199,11 @@
 
                 <div class="detail-row">  
                     <h4>{{trans('ui.product_label_ingredients')}}</h4>
-                    <p>{{$product->ingredient_deck}}</p>
+                    @if($product->ingredient_deck != '')
+                        <p>{{$product->ingredient_deck}}</p>
+                    @else
+                        <p>{{trans('ui.product_label_no_information')}}</p>
+                    @endif
                 </div>
 
                 <div class="detail-row">
@@ -222,7 +226,11 @@
                 
                 <div class="detail-row">
                     <h4>{{trans('ui.product_label_preparation')}}</h4>
-                    <p>{{$product->preparation}}</p>
+                    @if($product->preparation != '')
+                        <p> {{$product->preparation}}</p>
+                    @else
+                        <p>{{trans('ui.product_label_no_information')}}</p>
+                    @endif
                 </div>
 
             </div>
