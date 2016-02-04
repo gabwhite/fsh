@@ -75,10 +75,12 @@ class AjaxController extends Controller
         }
 
         //$view = \View::make('product.productresults', ['products' => $products, 'sort' => $sort, 'pageSize' => $pageSize, 'type' => $searchType]);
+        $view = \View::make('product.productresultsnav', ['products' => $products, 'sort' => $sort, 'pageSize' => $pageSize, 'type' => $searchType]);
 
-        $returnData = ['sort' => $sort, 'type' => $searchType, 'pageSize' => $pageSize, 'query' => $query, 'products' => $products ];
+        $returnData = json_encode(['sort' => $sort, 'type' => $searchType, 'pageSize' => $pageSize,
+            'query' => $query, 'data' => $products->toArray()['data'], 'nav' => $view->render()]);
 
-        return response()->json($products);
+        return response($returnData);
     }
 
     public function getCountries()

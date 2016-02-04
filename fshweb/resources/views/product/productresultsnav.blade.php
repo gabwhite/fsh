@@ -1,0 +1,1 @@
+{!!$products->appends(['sort' => $sort, 'type' => $type, 'pageSize' => $pageSize])->render() !!}
