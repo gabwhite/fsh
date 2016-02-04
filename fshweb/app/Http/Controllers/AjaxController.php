@@ -74,11 +74,11 @@ class AjaxController extends Controller
             $products = $this->dataAccess->getProductsByFullText($query, $fields, $sort, true, $pageSize);
         }
 
-        $view = \View::make('product.productresults', ['products' => $products, 'sort' => $sort, 'pageSize' => $pageSize, 'type' => $searchType]);
+        //$view = \View::make('product.productresults', ['products' => $products, 'sort' => $sort, 'pageSize' => $pageSize, 'type' => $searchType]);
 
-        $returnData = ['sort' => $sort, 'type' => $searchType, 'pageSize' => $pageSize, 'query' => $query, 'view' => $view->render()];
+        $returnData = ['sort' => $sort, 'type' => $searchType, 'pageSize' => $pageSize, 'query' => $query, 'products' => $products ];
 
-        return response()->json($returnData);
+        return response()->json($products);
     }
 
     public function getCountries()

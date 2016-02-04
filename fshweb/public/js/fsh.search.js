@@ -24,8 +24,18 @@ fsh.search = (function ($, document)
     var currentSearchType = "";
     var productSearchQueryStringFormat = "?type=%s&sort=%s&pageSize=%s";
 
+    var vue;
+    var resultsObject = {};
+
     var init = function(categoryUrl, productUrl, detailUrl, existingQuery, progressImage)
     {
+        vue = new Vue({
+            el: "#searchview",
+            data: {
+                results: resultsObject
+            }
+        });
+
         _categoryUrl = categoryUrl;
         _productUrl = productUrl;
         _detailUrl = detailUrl;
@@ -180,13 +190,17 @@ fsh.search = (function ($, document)
 
     var getProducts = function(url)
     {
+        console.log("Retrieving url:[" + url + "]");
         applyResultLoader();
         $.getJSON(url, function(jsonresult)
         {
-            //console.log(jsonresult);
-            currentQuery = jsonresult.query;
-            currentSearchType = jsonresult.type;
-            $resultTable.html(jsonresult.view);
+            console.log(jsonresult);
+            //currentQuery = jsonresult.query;
+            //currentSearchType = jsonresult.type;
+            //$resultTable.html(jsonresult.view);
+
+            if($.isEmptyObject(resultsObject)) { vue.$set("results", jsonresult); }
+            else { resultsObject = jsonresult; }
 
             removeResultLoader();
         });
@@ -200,7 +214,7 @@ fsh.search = (function ($, document)
         }
         else
         {
-            var url = _productUrl + (currentQuery ? "/" + currentQuery : "") + sprintf(productSearchQueryStringFormat, currentSearchType, $sortBy.val(), $pageSize.val());
+            var url = _productUrl + (currentQuery ? "/" + currentQuery : "") + sprintf(productSearchQueryStringFormat, "fc", $sortBy.val(), $pageSize.val());
             //console.log(url);
             getProducts(url);
         }
