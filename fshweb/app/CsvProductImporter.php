@@ -312,7 +312,7 @@ class CsvProductImporter implements iProductImporter
             {
                 $newCat = new \App\Models\Category();
                 $newCat->name = ucfirst(mb_strtolower($categoryName));
-                //$newCat->save();
+                $newCat->save();
 
                 $categoryId = $newCat->id;
             }
