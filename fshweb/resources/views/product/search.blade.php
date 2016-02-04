@@ -102,8 +102,7 @@
 
                                     <div class="col-xs-3 col-md-2 drop-padding">
 
-
-                                            <div class="item-thumb" style="background: url('{{url('img/no-photo-avail.svg')}}') no-repeat; background-size: cover; background-position: center center;"></div>
+                                        <div class="item-thumb" v-bind:style="{ backgroundImage: productImage }" style="background-repeat: no-repeat; background-size: cover; background-position: center center;"></div>
 
                                         <div class="star-rating">
                                             <img src="{{url('/img/icons/star.svg')}}">
@@ -159,6 +158,9 @@
     <script type="text/javascript" src="{{url('js/vendor/sprintf/sprintf.min.js')}}"></script>
     <script type="text/javascript" src="{{url('js/fsh.search.js')}}"></script>
     <script type="text/javascript">
+
+        //url('') no-repeat;
+        var noProductImage = "{{url('img/no-photo-avail.svg')}}";
 
         $(document).ready(function()
         {

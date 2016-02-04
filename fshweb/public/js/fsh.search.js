@@ -40,6 +40,14 @@ fsh.search = (function ($, document)
             el: "#searchview",
             data: {
                 results: resultsObject
+            },
+            computed:
+            {
+                productImage: function()
+                {
+                    console.log(this.results.data.index);
+                    return sprintf("url('%s')", noProductImage);
+                }
             }
         });
 
