@@ -102,7 +102,7 @@
 
                                     <div class="col-xs-3 col-md-2 drop-padding">
 
-                                        <div class="item-thumb" v-bind:style="{ backgroundImage: productImage }" style="background-repeat: no-repeat; background-size: cover; background-position: center center;"></div>
+                                        <div class="item-thumb" v-bind:style="{ backgroundImage: getProductImage(p.product_image) }" style="background-repeat: no-repeat; background-size: cover; background-position: center center;"></div>
 
                                         <div class="star-rating">
                                             <img src="{{url('/img/icons/star.svg')}}">
@@ -154,12 +154,11 @@
 
 @section('scripts')
     <script type="text/javascript" src="{{url('js/vendor/jstree/jstree.min.js')}}"></script>
-    <script type="text/javascript" src="{{url('js/vendor/vuejs/vue.js')}}"></script>
+    <script type="text/javascript" src="{{url('js/vendor/vuejs/vue.min.js')}}"></script>
     <script type="text/javascript" src="{{url('js/vendor/sprintf/sprintf.min.js')}}"></script>
     <script type="text/javascript" src="{{url('js/fsh.search.js')}}"></script>
     <script type="text/javascript">
 
-        //url('') no-repeat;
         var noProductImage = "{{url('img/no-photo-avail.svg')}}";
 
         $(document).ready(function()
@@ -168,7 +167,8 @@
                             "{{url('ajax/getproducts')}}",
                             "{{url('product/detail')}}",
                             "{{\Session::get('searchquery')}}",
-                            "{{url('img/spinner.gif')}}"
+                            "{{url('img/spinner.gif')}}",
+                            "{{url(config('app.product_storage'))}}"
                             );
         });
 

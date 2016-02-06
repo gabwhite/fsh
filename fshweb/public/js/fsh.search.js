@@ -5,7 +5,7 @@ var fsh = fsh || {};
 
 fsh.search = (function ($, document)
 {
-    var _categoryUrl, _productUrl, _detailUrl, _progressImage;
+    var _categoryUrl, _productUrl, _detailUrl, _progressImage, _productImagePath;
 
     var $categoryTree = $("#jstree_demo_div");
     var $resultTable = $("#product_list");
@@ -34,19 +34,32 @@ fsh.search = (function ($, document)
 
     var resultsObject = {};
 
-    var init = function(categoryUrl, productUrl, detailUrl, existingQuery, progressImage)
+    var init = function(categoryUrl, productUrl, detailUrl, existingQuery, progressImage, productImagePath)
     {
+        _categoryUrl = categoryUrl;
+        _productUrl = productUrl;
+        _detailUrl = detailUrl;
+        _progressImage = progressImage;
+        _productImagePath = productImagePath;
+
         searchVue = new Vue({
             el: "#searchview",
             data: {
                 results: resultsObject
             },
-            computed:
+            methods:
             {
-                productImage: function()
+                getProductImage: function (img)
                 {
-                    console.log(this.results.data.index);
-                    return sprintf("url('%s')", noProductImage);
+                    console.log(img);
+                    if(img === "")
+                    {
+                        return sprintf("url('%s')", noProductImage);
+                    }
+
+                    return sprintf("url('%s/%s')", productImagePath, img);
+
+
                 }
             }
         });
@@ -59,11 +72,6 @@ fsh.search = (function ($, document)
                 productTypes: [ productTypesDefault ]
             }
         });
-
-        _categoryUrl = categoryUrl;
-        _productUrl = productUrl;
-        _detailUrl = detailUrl;
-        _progressImage = progressImage;
 
         if(existingQuery !== "")
         {
