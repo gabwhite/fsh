@@ -5,7 +5,7 @@ var fsh = fsh || {};
 
 fsh.search = (function ($, document)
 {
-    var _categoryUrl, _productUrl, _detailUrl, _progressImage;
+    var _categoryUrl, _productUrl, _detailUrl, _progressImage, _productImagePath;
 
     var $categoryTree = $("#jstree_demo_div");
     var $resultTable = $("#product_list");
@@ -16,6 +16,7 @@ fsh.search = (function ($, document)
 
     var $searchQueryTb = $("#tbSearchQuery");
     var $searchButton = $("#hlSearchButton");
+    var $rootResultContainer = $("#rootResultContainer");
 
     var $sortBy = $("#sortby");
     var $pageSize = $("#viewall");
@@ -24,12 +25,53 @@ fsh.search = (function ($, document)
     var currentSearchType = "";
     var productSearchQueryStringFormat = "?type=%s&sort=%s&pageSize=%s";
 
-    var init = function(categoryUrl, productUrl, detailUrl, existingQuery, progressImage)
+    var searchVue;
+    var categoryDdlbVue;
+
+    var categoriesDefault = { id: "", name: "Select Category", parent_id: null };
+    var subCategoriesDefault = { id: "", name: "Select Sub Category", parent_id: null };
+    var productTypesDefault = { id: "", name: "Select Product Type", parent_id: null };
+
+    var resultsObject = {};
+
+    var init = function(categoryUrl, productUrl, detailUrl, existingQuery, progressImage, productImagePath)
     {
         _categoryUrl = categoryUrl;
         _productUrl = productUrl;
         _detailUrl = detailUrl;
         _progressImage = progressImage;
+        _productImagePath = productImagePath;
+
+        searchVue = new Vue({
+            el: "#searchview",
+            data: {
+                results: resultsObject
+            },
+            methods:
+            {
+                getProductImage: function (img)
+                {
+                    console.log(img);
+                    if(img === "")
+                    {
+                        return sprintf("url('%s')", noProductImage);
+                    }
+
+                    return sprintf("url('%s/%s')", productImagePath, img);
+
+
+                }
+            }
+        });
+
+        categoryDdlbVue = new Vue({
+            el: "#divCategoryDropdowns",
+            data: {
+                categories: [ categoriesDefault ],
+                subCategories: [ subCategoriesDefault ],
+                productTypes: [ productTypesDefault ]
+            }
+        });
 
         if(existingQuery !== "")
         {
@@ -44,6 +86,7 @@ fsh.search = (function ($, document)
         initTree();
 
         initCategoryDropdowns();
+        $categoryDdlb.trigger("change");
 
         $searchQueryTb.on("keydown", doSearch);
         $searchButton.on("click", doSearch);
@@ -61,7 +104,7 @@ fsh.search = (function ($, document)
             else if($subCategoryDdlb.val() !== "") { categoryId = $subCategoryDdlb.val(); }
             else if($categoryDdlb.val() !== "") { categoryId = $categoryDdlb.val(); }
 
-            if(categoryId !== "") { getProducts(productUrl + "/" + categoryId + sprintf(productSearchQueryStringFormat, "fc", $sortBy.val(), $pageSize.val())); }
+            if(categoryId !== "") { getProducts(productUrl + "/" + categoryId + sprintf(productSearchQueryStringFormat, currentSearchType, $sortBy.val(), $pageSize.val())); }
 
             e.preventDefault();
         });
@@ -77,7 +120,6 @@ fsh.search = (function ($, document)
             e.preventDefault();
             $("#divSearchTips").slideToggle();
         });
-
     };
 
     var initTree = function()
@@ -112,7 +154,7 @@ fsh.search = (function ($, document)
 
         $categoryTree.off("changed.jstree").on("changed.jstree", function(e, data)
         {
-            getProducts(_productUrl + "/" + data.node.id + sprintf(productSearchQueryStringFormat, "fc", $sortBy.val(), $pageSize.val()));
+            getProducts(_productUrl + "/" + data.node.id + sprintf(productSearchQueryStringFormat, currentSearchType, $sortBy.val(), $pageSize.val()));
         });
     };
 
@@ -120,52 +162,48 @@ fsh.search = (function ($, document)
     {
         $categoryDdlb.on("change", function(e)
         {
-            var placeHolder = "Select Category";
+            var placeHolder = categoriesDefault;
             var fillSelf = true;
+
             var qry = _categoryUrl + "/JSON";
             if($categoryDdlb.val() !== "")
             {
                 fillSelf = false;
                 qry += "/" + $categoryDdlb.val();
-                placeHolder = "Select Sub Category";
+                placeHolder = subCategoriesDefault;
             }
 
             $.getJSON(qry, function(jsonresult)
             {
                 //console.log(jsonresult);
-                var options = "<option value=''>" + placeHolder + "</option>";
-                $.each(jsonresult, function(idx, val)
+                jsonresult.splice(0, 0, placeHolder);
+                if(fillSelf)
                 {
-                    options += "<option value='" + val.id + "'>" + val.name + "</option>";
-                });
-
-                if(fillSelf) { $categoryDdlb.html(options); }
-                else { $subCategoryDdlb.html(options); }
+                    categoryDdlbVue.categories = jsonresult;
+                    categoryDdlbVue.subCategories = [subCategoriesDefault];
+                    categoryDdlbVue.productTypes = [productTypesDefault];
+                }
+                else { categoryDdlbVue.subCategories = jsonresult; }
             });
         });
 
         $subCategoryDdlb.on("change", function(e)
         {
-            var placeHolder = "Select Product Type";
-            var qry = _categoryUrl + "/JSON/" + $subCategoryDdlb.val();
             if($subCategoryDdlb.val() !== "")
             {
-            }
-
-            $.getJSON(qry, function(jsonresult)
-            {
-                //console.log(jsonresult);
-                var options = "<option value=''>" + placeHolder + "</option>";
-                $.each(jsonresult, function(idx, val)
+                var qry = _categoryUrl + "/JSON/" + $subCategoryDdlb.val();
+                $.getJSON(qry, function(jsonresult)
                 {
-                    options += "<option value='" + val.id + "'>" + val.name + "</option>";
+                    //console.log(jsonresult);
+                    jsonresult.splice(0, 0, productTypesDefault);
+                    categoryDdlbVue.productTypes = jsonresult;
                 });
-
-                $productTypeDdlb.html(options);
-            });
+            }
+            else
+            {
+                categoryDdlbVue.productTypes = [productTypesDefault];
+            }
         });
-
-        $categoryDdlb.trigger("change");
     };
 
     var doSearch = function(e)
@@ -174,21 +212,26 @@ fsh.search = (function ($, document)
 
         if((e.which === 13 || e.type === "click") && $searchQueryTb.val() !== "")
         {
-            getProducts(_productUrl + "/" + $searchQueryTb.val() + sprintf(productSearchQueryStringFormat, "ft", $sortBy.val(), $pageSize.val()));
+            getProducts(_productUrl + "/" + $searchQueryTb.val() + sprintf(productSearchQueryStringFormat, currentSearchType, $sortBy.val(), $pageSize.val()));
         }
     };
 
     var getProducts = function(url)
     {
-        applyResultLoader();
+        console.log("Retrieving url:[" + url + "]");
+
+        $rootResultContainer.addClass("loadProgress");
         $.getJSON(url, function(jsonresult)
         {
-            //console.log(jsonresult);
+            console.log(jsonresult);
+
             currentQuery = jsonresult.query;
             currentSearchType = jsonresult.type;
-            $resultTable.html(jsonresult.view);
 
-            removeResultLoader();
+            if($.isEmptyObject(resultsObject)) { searchVue.$set("results", jsonresult); }
+            else { resultsObject = jsonresult; }
+
+            $rootResultContainer.removeClass("loadProgress");
         });
     };
 
@@ -200,22 +243,10 @@ fsh.search = (function ($, document)
         }
         else
         {
-            var url = _productUrl + (currentQuery ? "/" + currentQuery : "") + sprintf(productSearchQueryStringFormat, currentSearchType, $sortBy.val(), $pageSize.val());
-            //console.log(url);
+            var url = _productUrl + (currentQuery ? "/" + currentQuery : "") + sprintf(productSearchQueryStringFormat, "fc", $sortBy.val(), $pageSize.val());
             getProducts(url);
         }
     };
-
-    var applyResultLoader = function()
-    {
-        $("#rootResultContainer").addClass("loadProgress");
-    };
-
-    var removeResultLoader = function()
-    {
-        $("#rootResultContainer").removeClass("loadProgress");
-    };
-
 
     var pub =
     {
