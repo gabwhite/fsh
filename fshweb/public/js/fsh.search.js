@@ -51,7 +51,7 @@ fsh.search = (function ($, document)
             {
                 getProductImage: function (img)
                 {
-                    console.log(img);
+                    //console.log(img);
                     if(img === "")
                     {
                         return sprintf("url('%s')", noProductImage);
