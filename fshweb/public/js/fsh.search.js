@@ -210,6 +210,8 @@ fsh.search = (function ($, document)
     {
         if(e.type === "click") { e.preventDefault(); }
 
+        currentSearchType = "ft";
+
         if((e.which === 13 || e.type === "click") && $searchQueryTb.val() !== "")
         {
             getProducts(_productUrl + "/" + $searchQueryTb.val() + sprintf(productSearchQueryStringFormat, currentSearchType, $sortBy.val(), $pageSize.val()));
@@ -223,7 +225,7 @@ fsh.search = (function ($, document)
         $rootResultContainer.addClass("loadProgress");
         $.getJSON(url, function(jsonresult)
         {
-            console.log(jsonresult);
+            //console.log(jsonresult);
 
             currentQuery = jsonresult.query;
             currentSearchType = jsonresult.type;
