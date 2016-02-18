@@ -56,10 +56,14 @@ fsh.search = (function ($, document)
                     {
                         return sprintf("url('%s')", noProductImage);
                     }
-
-                    return sprintf("url('%s/%s')", productImagePath, img);
-
-
+                    else if(img.lastIndexOf('http', 0) === 0)
+                    {
+                        return sprintf("url('%s')", img);
+                    }
+                    else
+                    {
+                        return sprintf("url('%s/%s')", productImagePath, img);
+                    }
                 }
             }
         });
