@@ -11,7 +11,10 @@
     <div class='container'>
         <div class="col-xs-12">
             <div class="col-xs-12 title-wrap">
-                <h1 class="item-title">{{$product->name}}</h1>
+                <h1 class="item-title">
+                    {{$product->name}}
+                    ({{trans('ui.product_label_pack')}}: {{$product->pack}} {{trans('ui.product_label_size')}}: {{$product->size}} {{$product->uom}} )
+                </h1>
                 <div class="star-detail">
                     <img src="{{url('/img/icons/star.svg')}}" alt="star-rating">
                 </div>
@@ -90,7 +93,7 @@
                             <h4>{{trans('ui.product_label_nutrition_facts')}}</h4>
 
                             <div class="nutrition-meta serving-size">
-                                <span class="nutrition-value">{{trans('ui.product_label_serving_size')}}&nbsp;{{$product->serving_size}}</span>
+                                <span class="nutrition-value">{{trans('ui.product_label_serving_size')}}&nbsp;{{$product->calc_size}}</span>
                             </div>
 
                             <div class="col-xs-12 nutrition-meta amount-per-serving">
@@ -242,21 +245,6 @@
                 
                     <div class="well col-xs-12">
                         <div class="col-xs-12 col-sm-6 drop-padding">
-                            
-                            <div class="table-row clearfix">
-                                <p>{{trans('ui.product_label_pack')}}:</p>
-                                <p>{{$product->pack}}</p>
-                            </div>
-                            
-                            <div class="table-row clearfix">
-                                <p>{{trans('ui.product_label_size')}}:</p>
-                                <p>{{$product->size}}</p>
-                            </div>
-
-                            <div class="table-row clearfix">
-                                <p>{{trans('ui.product_label_calculation_size')}}:</p>
-                                <p>{{$product->calc_size}}</p>
-                            </div>
 
                             <div class="table-row clearfix">
                                 <p>{{trans('ui.product_label_product_code')}}:</p>
@@ -267,15 +255,16 @@
                                 <p>{{trans('ui.product_label_gtin')}}:</p>
                                 <p>{{$product->gtin}}</p>
                             </div>
-                            
+
+                        </div>
+                        
+                        <div class="col-xs-12 col-sm-6 drop-padding">
+
                             <div class="table-row clearfix">
                                 <p>{{trans('ui.product_label_net_weight')}}:</p>
                                 <p>{{$product->net_weight}}</p>
                             </div>
-                        </div>
-                        
-                        <div class="col-xs-12 col-sm-6 drop-padding">
-                            
+
                             <div class="table-row clearfix">
                                 <p>{{trans('ui.product_label_gross_weight')}}:</p>
                                 <p>{{$product->gross_weight}}</p>
@@ -285,21 +274,7 @@
                                 <p>{{trans('ui.product_label_tare_weight')}}:</p>
                                 <p>{{$product->tare_weight}}</p>
                             </div>
-                            
-                            <div class="table-row clearfix">    
-                                <p>{{trans('ui.product_label_brand')}}:</p>
-                                <p>{{$product->brand}}</p>
-                            </div>
-                            
-                            <div class="table-row clearfix">    
-                                <p>{{trans('ui.product_label_calories')}}:</p>
-                                <p>{{$product->calories}}</p>
-                            </div>
-                            
-                            <div class="table-row clearfix">   
-                                <p>{{trans('ui.product_label_uom')}}:</p>
-                                <p>{{$product->uom}}</p>
-                            </div>
+
                         </div>
                     </div>
                 </div>   
