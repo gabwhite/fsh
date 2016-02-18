@@ -55,7 +55,7 @@ class AjaxController extends Controller
         $pageSize = $request->input('pageSize') ? $request->input('pageSize') : config('app.search_default_page_size');
         $searchType = $request->input('type') ? $request->input('type') : 'fc';
 
-        $fields = ['products.id', 'products.name', 'products.brand', 'products.pack', 'products.uom', 'products.mpc', 'products.calc_size', 'products.description', 'products.product_image'];
+        $fields = ['products.id', 'products.name', 'products.brand', 'products.pack', 'products.uom', 'products.mpc', 'products.size', 'products.description', 'products.product_image'];
 
         $products = null;
         if($searchType === 'fc')

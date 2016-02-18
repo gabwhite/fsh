@@ -122,9 +122,7 @@
                                         <div class="col-xs-12 search-details">
                                             <p>Pack: @{{p.pack}}</p>
 
-                                            <p>Size: @{{p.calc_size}}</p>
-
-                                            <p>Unit of Measure: @{{p.uom}}</p>
+                                            <p>Size: @{{p.size}} @{{p.uom}}</p>
 
                                             <p>Product Code: @{{p.mpc}}</p>
                                         </div>
