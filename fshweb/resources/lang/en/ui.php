@@ -110,6 +110,7 @@ return [
     'vendor_label_my_products' => 'My Products',
     'vendor_label_no_products' => 'You currently have no products',
     'vendor_label_my_products_instruction' => 'Edit existing products or upload new products.',
+    'vendor_label_contact_header' => 'Contact',
 
 
 

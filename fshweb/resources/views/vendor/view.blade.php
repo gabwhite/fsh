@@ -39,61 +39,50 @@
 
                 <div class="col-xs-12 well">
                     
-                    <label for="company name">{{trans('ui.vendor_label_company')}}</label>
-                    <p>{{isset($profile) ? $profile->company_name : ''}}</p>
+                    <label for="company name">{{isset($profile) ? $profile->company_name : ''}}</label>
 
                     @if($profile->address1)
-                    <label for="vendor address">{{trans('ui.vendor_label_address1')}}</label>
                     <p>{{$profile->address1}}</p>
                     @endif
 
                     @if($profile->address2)
-                    <label for="address two">{{trans('ui.vendor_label_address2')}}</label>
                     <p>{{$profile->address2}}</p>
                     @endif
 
                     @if($profile->city)
-                    <label for="city">{{trans('ui.vendor_label_city')}}</label>
                     <p>{{$profile->city}}</p>
                     @endif
 
                     @if($profile->state_province_id)
-                    <label for="state/province">{{trans('ui.vendor_label_state_province')}}</label>
                     <p>{{$profile->stateProvince->name}}</p>
                     @endif
 
                     @if($profile->country_id)
-                    <label for="country">{{trans('ui.vendor_label_country')}}</label>
                     <p>{{$profile->country->name}}</p>
                     @endif
 
                     @if($profile->zip_postal)
-                    <label for="postal-code">{{trans('ui.vendor_label_zip_postal')}}</label>
                     <p>{{$profile->zip_postal}}</p>
                     @endif
 
                     @if($profile->contact_name)
-                    <label for="contact">{{trans('ui.vendor_label_contact_name')}}</label>
+                    <label for="contact">{{trans('ui.vendor_label_contact_header')}}</label>
                     <p>{{$profile->contact_name}}</p>
                     @endif
 
                     @if($profile->contact_title)
-                    <label for="contact-title">{{trans('ui.vendor_label_contact_title')}}</label>
                     <p>{{$profile->contact_title}}</p>
                     @endif
 
                     @if($profile->contact_phone)
-                        <label for="Phone">{{trans('ui.vendor_label_contact_phone')}}</label>
                         <p> {{$profile->contact_phone}}</p>
                     @endif
 
                     @if($profile->contact_email)
-                        <label for="contact-email">{{trans('ui.vendor_label_contact_email')}}</label>
                         <p><a href="mailto:{{$profile->contact_email}}">{{$profile->contact_email}}</a></p>
                     @endif
 
                     @if($profile->contact_url)
-                    <label for="website">{{trans('ui.vendor_label_contact_url')}}</label>
                     <p><a href="{{$profile->contact_url}}" target="_blank">{{isset($profile) ? $profile->contact_url : ''}}</a></p>
                     @endif
                 </div>
