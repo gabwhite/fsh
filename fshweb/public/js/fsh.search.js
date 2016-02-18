@@ -77,14 +77,22 @@ fsh.search = (function ($, document)
             }
         });
 
+        var lastSearchQuery = retrieveSearchQuery();
+
         if(existingQuery !== "")
         {
-            getProducts(_productUrl + "/" + existingQuery + sprintf(productSearchQueryStringFormat, "ft", $sortBy.val(), $pageSize.val()));
+            getProducts(buildSearchUrl(existingQuery, "ft", $sortBy.val(), $pageSize.val()));
             $searchQueryTb.val(existingQuery);
+        }
+        else if(lastSearchQuery !== null)
+        {
+            getProducts(buildSearchUrl(lastSearchQuery.query, lastSearchQuery.searchType, lastSearchQuery.sort, lastSearchQuery.pageSize));
+            restoreUi(lastSearchQuery);
         }
         else
         {
-            getProducts(productUrl + sprintf(productSearchQueryStringFormat, "fc", $sortBy.val(), $pageSize.val()));
+            getProducts(buildSearchUrl("", "fc", $sortBy.val(), $pageSize.val()));
+            //getProducts(productUrl + sprintf(productSearchQueryStringFormat, "fc", $sortBy.val(), $pageSize.val()));
         }
 
         initTree();
@@ -108,7 +116,11 @@ fsh.search = (function ($, document)
             else if($subCategoryDdlb.val() !== "") { categoryId = $subCategoryDdlb.val(); }
             else if($categoryDdlb.val() !== "") { categoryId = $categoryDdlb.val(); }
 
-            if(categoryId !== "") { getProducts(productUrl + "/" + categoryId + sprintf(productSearchQueryStringFormat, currentSearchType, $sortBy.val(), $pageSize.val())); }
+            if(categoryId !== "")
+            {
+                getProducts(buildSearchUrl(categoryId, currentSearchType, $sortBy.val(), $pageSize.val()));
+                //getProducts(productUrl + "/" + categoryId + sprintf(productSearchQueryStringFormat, currentSearchType, $sortBy.val(), $pageSize.val()));
+            }
 
             e.preventDefault();
         });
@@ -158,7 +170,8 @@ fsh.search = (function ($, document)
 
         $categoryTree.off("changed.jstree").on("changed.jstree", function(e, data)
         {
-            getProducts(_productUrl + "/" + data.node.id + sprintf(productSearchQueryStringFormat, currentSearchType, $sortBy.val(), $pageSize.val()));
+            getProducts(buildSearchUrl(data.node.id, currentSearchType, $sortBy.val(), $pageSize.val()));
+            //getProducts(_productUrl + "/" + data.node.id + sprintf(productSearchQueryStringFormat, currentSearchType, $sortBy.val(), $pageSize.val()));
         });
     };
 
@@ -218,7 +231,7 @@ fsh.search = (function ($, document)
 
         if((e.which === 13 || e.type === "click") && $searchQueryTb.val() !== "")
         {
-            getProducts(_productUrl + "/" + $searchQueryTb.val() + sprintf(productSearchQueryStringFormat, currentSearchType, $sortBy.val(), $pageSize.val()));
+            getProducts(buildSearchUrl($searchQueryTb.val(), currentSearchType, $sortBy.val(), $pageSize.val()));
         }
     };
 
@@ -238,6 +251,8 @@ fsh.search = (function ($, document)
             else { resultsObject = jsonresult; }
 
             $rootResultContainer.removeClass("loadProgress");
+
+            storeSearchQuery();
         });
     };
 
@@ -249,9 +264,42 @@ fsh.search = (function ($, document)
         }
         else
         {
-            var url = _productUrl + (currentQuery ? "/" + currentQuery : "") + sprintf(productSearchQueryStringFormat, "fc", $sortBy.val(), $pageSize.val());
-            getProducts(url);
+            getProducts(buildSearchUrl(currentQuery, "fc", $sortBy.val(), $pageSize.val()));
         }
+    };
+
+    var buildSearchUrl = function(query, sType, sort, pageSize)
+    {
+        var url = _productUrl + (query ? "/" + query : "") + sprintf(productSearchQueryStringFormat, sType, sort, pageSize);
+
+        return url;
+    };
+
+    var restoreUi = function(searchQuery)
+    {
+        $pageSize.val(searchQuery.pageSize);
+        $sortBy.val(searchQuery.sort);
+
+        if(searchQuery.searchType === "ft")
+        {
+            $searchQueryTb.val(searchQuery.query);
+        }
+        else
+        {
+
+        }
+    };
+
+    var storeSearchQuery = function()
+    {
+        var obj = { query: currentQuery, searchType: currentSearchType, sort: $sortBy.val(), pageSize: $pageSize.val() };
+
+        Lockr.set("lastSearchQuery", obj);
+    };
+
+    var retrieveSearchQuery = function()
+    {
+        return Lockr.get("lastSearchQuery");
     };
 
     var pub =

@@ -153,6 +153,7 @@
 @section('scripts')
     <script type="text/javascript" src="{{url('js/vendor/jstree/jstree.min.js')}}"></script>
     <script type="text/javascript" src="{{url('js/vendor/vuejs/vue.min.js')}}"></script>
+    <script type="text/javascript" src="{{url('js/vendor/lockr/lockr.min.js')}}"></script>
     <script type="text/javascript" src="{{url('js/vendor/sprintf/sprintf.min.js')}}"></script>
     <script type="text/javascript" src="{{url('js/fsh.search.js')}}"></script>
     <script type="text/javascript">
