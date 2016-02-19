@@ -77,6 +77,9 @@ fsh.search = (function ($, document)
             }
         });
 
+        initTree();
+
+
         var lastSearchQuery = retrieveSearchQuery();
 
         if(existingQuery !== "")
@@ -84,7 +87,7 @@ fsh.search = (function ($, document)
             getProducts(buildSearchUrl(existingQuery, "ft", $sortBy.val(), $pageSize.val()));
             $searchQueryTb.val(existingQuery);
         }
-        else if(lastSearchQuery !== null)
+        else if(lastSearchQuery !== null && lastSearchQuery !== undefined)
         {
             getProducts(buildSearchUrl(lastSearchQuery.query, lastSearchQuery.searchType, lastSearchQuery.sort, lastSearchQuery.pageSize));
             restoreUi(lastSearchQuery);
@@ -95,7 +98,6 @@ fsh.search = (function ($, document)
             //getProducts(productUrl + sprintf(productSearchQueryStringFormat, "fc", $sortBy.val(), $pageSize.val()));
         }
 
-        initTree();
 
         initCategoryDropdowns();
         $categoryDdlb.trigger("change");
