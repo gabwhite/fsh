@@ -7,6 +7,8 @@ fsh.search = (function ($, document)
 {
     var _categoryUrl, _productUrl, _detailUrl, _progressImage, _productImagePath;
 
+    var objTree;
+    var treeState = [];
     var $categoryTree = $("#jstree_demo_div");
     var $resultTable = $("#product_list");
 
@@ -79,7 +81,6 @@ fsh.search = (function ($, document)
 
         initTree();
 
-
         var lastSearchQuery = retrieveSearchQuery();
 
         if(existingQuery !== "")
@@ -89,6 +90,7 @@ fsh.search = (function ($, document)
         }
         else if(lastSearchQuery !== null && lastSearchQuery !== undefined)
         {
+            alert("here");
             getProducts(buildSearchUrl(lastSearchQuery.query, lastSearchQuery.searchType, lastSearchQuery.sort, lastSearchQuery.pageSize));
             restoreUi(lastSearchQuery);
         }
@@ -166,15 +168,23 @@ fsh.search = (function ($, document)
                     {
                         //console.log(node);
                     }
-                }
+                },
+                "plugins": [ "state" ]
             }
         });
 
+        // Get tree instance
+        objTree = $categoryTree.jstree(true);
+
         $categoryTree.off("changed.jstree").on("changed.jstree", function(e, data)
         {
+            saveTreeState(data.node);
+
             getProducts(buildSearchUrl(data.node.id, currentSearchType, $sortBy.val(), $pageSize.val()));
             //getProducts(_productUrl + "/" + data.node.id + sprintf(productSearchQueryStringFormat, currentSearchType, $sortBy.val(), $pageSize.val()));
         });
+
+
     };
 
     var initCategoryDropdowns = function()
@@ -288,13 +298,25 @@ fsh.search = (function ($, document)
         }
         else
         {
+            //console.log(searchQuery.treeState[2].parents);
+            //objTree.open_node(searchQuery.treeState[2]);
 
+
+            if(searchQuery.treeState)
+            {
+                for(var i = 0; i < searchQuery.treeState.length; i++)
+                {
+                    var btest = objTree.get_node(searchQuery.treeState[i]);
+                    console.log(btest);
+
+                }
+            }
         }
     };
 
     var storeSearchQuery = function()
     {
-        var obj = { query: currentQuery, searchType: currentSearchType, sort: $sortBy.val(), pageSize: $pageSize.val() };
+        var obj = { query: currentQuery, searchType: currentSearchType, sort: $sortBy.val(), pageSize: $pageSize.val(), treeState: treeState };
 
         Lockr.set("lastSearchQuery", obj);
     };
@@ -302,6 +324,23 @@ fsh.search = (function ($, document)
     var retrieveSearchQuery = function()
     {
         return Lockr.get("lastSearchQuery");
+    };
+
+    var saveTreeState= function(nodeChosen)
+    {
+        treeState = [];
+
+        // Walk up the tree saving node id's
+        treeState.unshift(nodeChosen.id);
+        var parentNode = objTree.get_parent(nodeChosen);
+        //console.log(parentNode);
+        while(parentNode !== "#")
+        {
+            treeState.unshift(parentNode);
+            parentNode = objTree.get_parent(parentNode);
+        }
+
+        //console.log(treeState);
     };
 
     var pub =
