@@ -106,7 +106,7 @@ class AjaxController extends Controller
 
     public function checkEmail(Request $request)
     {
-        $inUse = $this->dataAccess->isEmailInUse($request->input('email'));
+        $inUse = $this->dataAccess->isEmailInUse($request->input('email'), $request->input('old_email'));
 
         return response()->json(!$inUse);
     }

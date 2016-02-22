@@ -200,6 +200,13 @@ class ProfileController extends Controller
 
         if(!is_null($user))
         {
+            if($user->email !== $request->input('email')
+                && !$this->dataAccess->isEmailInUse($request->input('email')))
+            {
+                $user->email = $request->input('email');
+                $user->save();
+            }
+
             if (!is_null($up = $user->userProfile))
             {
                 // Update UserProfile

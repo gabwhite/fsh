@@ -32,9 +32,15 @@ class DataAccessLayer
         return false;
     }
 
-    public function isEmailInUse($email)
+    public function isEmailInUse($email, $old_email = null)
     {
-        $user = User::where('email', '=', $email)->select('id')->first();
+        $query = User::where('email', '=', $email);
+        if(isset($old_email))
+        {
+            $query->where('email', '!=', $old_email);
+        }
+
+        $user = $query->select('id')->first();
         if(isset($user))
         {
             return true;

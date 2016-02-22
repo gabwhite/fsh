@@ -42,7 +42,7 @@
 
                     <div class="detail-row">
                         <label for="email">{{trans('ui.user_label_email')}}</label>
-                        <input type="text" name="email" placeholder="" class="form-control" value="{{Auth::user()->email}}" maxlength="100"/>  
+                        <input type="text" id="email" name="email" placeholder="" class="form-control" value="{{Auth::user()->email}}" maxlength="100"/>
                     </div>
 
                     <div class="detail-row">
@@ -87,7 +87,7 @@
                    
                 </div>
             </div>
-
+            <input type="hidden" name="old_email" id="old_email" value="{{Auth::user()->email}}"/>
             {!! csrf_field() !!}
         </div>
 
@@ -107,12 +107,21 @@
                 errorClass: "validationError",
                 rules:
                 {
-                    email: { required: true, email: true, maxlength: 100 },
+                    email: { required: true, email: true, maxlength: 100,
+                        remote:
+                        {
+                            url: "{{url('ajax/checkemail')}}",
+                            data: { old_email: function() { return $("#old_email").val(); } }
+                        }
+                    },
                     password: { maxlength: 25 },
                     password_confirmation: { equalTo: "#password", maxlength: 25 }
+                },
+                messages:
+                {
+                    email: { remote: "Email is in use, please choose another" }
                 }
             });
-
         });
     </script>
 @endsection
