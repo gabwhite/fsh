@@ -23,6 +23,7 @@ fsh.search = (function ($, document)
     var $sortBy = $("#sortby");
     var $pageSize = $("#viewall");
 
+    var lastSearchQuery = null;
     var currentQuery = "";
     var currentSearchType = "";
     var productSearchQueryStringFormat = "?type=%s&sort=%s&pageSize=%s";
@@ -81,7 +82,7 @@ fsh.search = (function ($, document)
 
         initTree();
 
-        var lastSearchQuery = retrieveSearchQuery();
+        lastSearchQuery = retrieveSearchQuery();
 
         if(existingQuery !== "")
         {
@@ -90,7 +91,6 @@ fsh.search = (function ($, document)
         }
         else if(lastSearchQuery !== null && lastSearchQuery !== undefined)
         {
-            alert("here");
             getProducts(buildSearchUrl(lastSearchQuery.query, lastSearchQuery.searchType, lastSearchQuery.sort, lastSearchQuery.pageSize));
             restoreUi(lastSearchQuery);
         }
@@ -176,6 +176,30 @@ fsh.search = (function ($, document)
         // Get tree instance
         objTree = $categoryTree.jstree(true);
 
+        $categoryTree.off("loaded.jstree").on("loaded.jstree", function(e, data)
+        {
+            if(lastSearchQuery !== null && lastSearchQuery !== undefined && lastSearchQuery.searchType === "fc")
+            {
+                var nodeCount = lastSearchQuery.treeState.length;
+                if(lastSearchQuery.treeState && nodeCount > 0)
+                {
+                    var nodeId = lastSearchQuery.treeState[0];
+                    var node = objTree.get_node(nodeId);
+                    objTree.open_node(node, function(e, data)
+                    {
+                        if(nodeCount > 2)
+                        {
+                            nodeId = lastSearchQuery.treeState[1];
+                            node = objTree.get_node(nodeId);
+                            objTree.open_node(node, function(e, data)
+                            {
+                            });
+                        }
+                    });
+                }
+            }
+        });
+
         $categoryTree.off("changed.jstree").on("changed.jstree", function(e, data)
         {
             saveTreeState(data.node);
@@ -183,9 +207,8 @@ fsh.search = (function ($, document)
             getProducts(buildSearchUrl(data.node.id, currentSearchType, $sortBy.val(), $pageSize.val()));
             //getProducts(_productUrl + "/" + data.node.id + sprintf(productSearchQueryStringFormat, currentSearchType, $sortBy.val(), $pageSize.val()));
         });
-
-
     };
+
 
     var initCategoryDropdowns = function()
     {
@@ -296,27 +319,11 @@ fsh.search = (function ($, document)
         {
             $searchQueryTb.val(searchQuery.query);
         }
-        else
-        {
-            //console.log(searchQuery.treeState[2].parents);
-            //objTree.open_node(searchQuery.treeState[2]);
-
-
-            if(searchQuery.treeState)
-            {
-                for(var i = 0; i < searchQuery.treeState.length; i++)
-                {
-                    var btest = objTree.get_node(searchQuery.treeState[i]);
-                    console.log(btest);
-
-                }
-            }
-        }
     };
 
     var storeSearchQuery = function()
     {
-        var obj = { query: currentQuery, searchType: currentSearchType, sort: $sortBy.val(), pageSize: $pageSize.val(), treeState: treeState };
+        var obj = { query: currentQuery, searchType: currentSearchType, sort: $sortBy.val(), pageSize: $pageSize.val(), treeState: treeState, saved: new Date().getTime() };
 
         Lockr.set("lastSearchQuery", obj);
     };
@@ -326,7 +333,7 @@ fsh.search = (function ($, document)
         return Lockr.get("lastSearchQuery");
     };
 
-    var saveTreeState= function(nodeChosen)
+    var saveTreeState = function(nodeChosen)
     {
         treeState = [];
 
