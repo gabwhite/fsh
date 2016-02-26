@@ -81,4 +81,17 @@ class LookupManager
         return $categories;
     }
 
+    public function getUserTypes()
+    {
+        $userTypes = $this->cacheManager->getItem(env('CACHE_DRIVER'), 'usertypes');
+
+        if($userTypes == null)
+        {
+            $userTypes = $this->dataAccess->getAllUserTypes();
+            $this->cacheManager->setItem(env('CACHE_DRIVER'), 'usertypes', $userTypes, config('app.cache_expiry_time_usertypes'));
+        }
+
+        return $userTypes;
+    }
+
 }

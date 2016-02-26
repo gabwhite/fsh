@@ -315,6 +315,16 @@ class DataAccessLayer
 
     }
 
+    public function getAllUserTypes($activeOnly = true)
+    {
+        if($activeOnly)
+        {
+            return DB::table('user_types')->where('active', '=', '1')->orderBy('name', 'desc')->get();
+        }
+
+        return DB::table('user_types')->orderBy('name', 'desc')->get();
+    }
+
     public function getStateProvincesForCountry($countryId)
     {
         return DB::table('stateprovinces')->where('country_id', '=', $countryId)->get();

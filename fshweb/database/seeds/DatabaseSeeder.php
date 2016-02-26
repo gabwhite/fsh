@@ -23,6 +23,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call(VendorTableSeeder::class);
 
+        $this->call(UserTypeTableSeeder::class);
+
         Model::reguard();
     }
 }

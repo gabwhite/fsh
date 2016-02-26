@@ -19,11 +19,16 @@ class UserProfile extends Model
     protected $fillable =
     [
         'user_id',
-        'firstname', 'lastname', 'bio', 'avatar_image_path'
+        'firstname', 'lastname', 'bio', 'user_type_id', 'avatar_image_path'
     ];
 
     public function user()
     {
         return $this->belongsTo('\App\Model\User', 'id');
+    }
+
+    public function userType()
+    {
+        return $this->hasOne('\App\Model\UserType');
     }
 }

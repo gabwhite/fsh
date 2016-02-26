@@ -70,6 +70,18 @@
                         <input type="text" name="lastname" placeholder="" class="form-control" maxlength="100" value="{{isset($profile) ? $profile->lastname : ''}}"/>
                     </div>
 
+
+                    <div class="detail-row">
+                        <label for="user_type_id">{{trans('ui.user_label_usertype')}}</label>
+
+                        <select name="user_type_id">
+                            <option value=""></option>
+
+                        </select>
+
+                    </div>
+
+
                     <div class="detail-row">
                         <label for="bio">{{trans('ui.user_label_bio')}}</label>
                         

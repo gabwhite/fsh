@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\DataAccessLayer;
+use App\LookupManager;
 use App\UploadHandler;
 use Illuminate\Http\Request;
 use Validator;
@@ -15,14 +16,16 @@ class ProfileController extends Controller
 {
 
     protected $dataAccess;
+    protected $lookupManager;
 
     /**
      * ProfileController constructor.
      * @param $dataAccess
      */
-    public function __construct(DataAccessLayer $dataAccess)
+    public function __construct(DataAccessLayer $dataAccess, LookupManager $lookupManager)
     {
         $this->dataAccess = $dataAccess;
+        $this->lookupManager = $lookupManager;
     }
 
 
@@ -190,7 +193,9 @@ class ProfileController extends Controller
             $up = \Auth::user()->userProfile;
         }
 
-        return view('profile.edit')->with('profile', $up);
+        $userTypes = $this->lookupManager->getUserTypes();
+
+        return view('profile.edit')->with('profile', $up)->with('userTypes', $userTypes);
 
     }
 

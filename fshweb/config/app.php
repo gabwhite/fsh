@@ -238,6 +238,7 @@ return [
     'cache_expiry_time_allergens' => 10, // Minutes
     'cache_expiry_time_vendors' => 10, // Minutes
     'cache_expiry_time_categories' => 10, // Minutes
+    'cache_expiry_time_usertypes' => 10, // Minutes
     'contact_email_view' => 'emails.contact',
     'contact_email_view_admin' => 'emails.contactadmin',
     'contact_email_to' => 'breen@foodservicehound.com',
