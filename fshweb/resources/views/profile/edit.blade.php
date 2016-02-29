@@ -74,9 +74,17 @@
                     <div class="detail-row">
                         <label for="user_type_id">{{trans('ui.user_label_usertype')}}</label>
 
-                        <select name="user_type_id">
+                        <select name="user_type_id" class="form-control">
                             <option value=""></option>
+                            @foreach ($userTypes as $ut)
 
+                                @if (!is_null($profile) && $profile->user_type_id == $ut->id)
+                                    <option value="{{$ut->id}}" selected="selected">{{$ut->name}}</option>
+                                @else
+                                    <option value="{{$ut->id}}">{{$ut->name}}</option>
+                                @endif
+
+                            @endforeach
                         </select>
 
                     </div>

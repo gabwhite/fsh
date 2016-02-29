@@ -218,6 +218,7 @@ class ProfileController extends Controller
                 $up->firstname = trim($request->input('firstname')) ? $request->input('firstname') : null ;
                 $up->lastname = trim($request->input('lastname')) ? $request->input('lastname') : null;
                 $up->bio = trim($request->input('bio')) ? $request->input('bio') : null;
+                $up->user_type_id = $request->input('user_type_id') ? $request->input('user_type_id') : null;
                 $up->save();
             }
             else
@@ -226,7 +227,8 @@ class ProfileController extends Controller
                 $vals = [
                         'firstname' => trim($request->input('firstname')) ? $request->input('firstname') : null,
                         'lastname' => trim($request->input('lastname')) ? $request->input('lastname') : null,
-                        'bio' => trim($request->input('bio')) ? $request->input('bio') : null
+                        'bio' => trim($request->input('bio')) ? $request->input('bio') : null,
+                        'user_type_id' => $request->input('user_type_id') ? $request->input('user_type_id') : null
                         ];
 
                 $user->userProfile()->create($vals);

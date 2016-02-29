@@ -6,7 +6,7 @@ use App\Models\User;
 use App\Models\UserProfile;
 use App\Http\Controllers\Controller;
 use App\UploadHandler;
-
+use App\LookupManager;
 use Validator;
 
 use Illuminate\Support\Facades\DB;
@@ -31,16 +31,18 @@ class AuthController extends Controller
 
     protected $redirectPath = '/product/search';
     protected $redirectAfterLogout = '/auth/login';
+    protected $lookupManager;
 
     /**
      * Create a new authentication controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(LookupManager $lookupManager)
     {
-
         $this->middleware('guest', ['except' => 'getLogout']);
+
+        $this->lookupManager = $lookupManager;
     }
 
     /**
@@ -79,6 +81,13 @@ class AuthController extends Controller
         ]);
     }
 
+    public function getUserRegister()
+    {
+        $userTypes = $this->lookupManager->getUserTypes();
+
+        return view('auth.register')->with('userTypes', $userTypes);
+    }
+
     /**
      * Create a new user instance after a valid registration.
      *
@@ -96,14 +105,23 @@ class AuthController extends Controller
         if(!is_null($role))
         {
             // Add to 'user' role
-            $user->attachRole($role);
+            //$user->attachRole($role);
         }
         else
         {
             // Add to 'user' role
-            $user->attachRole(config('app.role_user'));
+            //$user->attachRole(config('app.role_user'));
         }
 
+        // Create user profile is they chose a value in User Type DDLB
+        if($data['user_type_id'] && $data['user_type_id'] != '')
+        {
+            $vals = [
+                'user_type_id' => $data['user_type_id']
+            ];
+
+            $user->userProfile()->create($vals);
+        }
 
         return $user;
     }

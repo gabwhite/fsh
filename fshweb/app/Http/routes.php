@@ -105,7 +105,9 @@ Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('password/reset', 'Auth\PasswordController@postReset');
 
 // Registration routes...
-Route::get('auth/register', 'Auth\AuthController@getRegister');
+//Route::get('auth/register', 'Auth\AuthController@getRegister');
+Route::get('auth/register', 'Auth\AuthController@getUserRegister');
+
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 Route::get('auth/vendorregister', 'Auth\AuthController@getVendorRegister');
 Route::post('auth/vendorregister', ['middleware' => 'postlogin', 'uses' => 'Auth\AuthController@postVendorRegister']);

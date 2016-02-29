@@ -44,9 +44,20 @@
                         <input type="password" name="password_confirmation" maxlength="25" class="form-control">
                     </div>
 
+                    <div>
+                        <label for="user_type_id">{{trans('ui.user_label_usertype')}}</label>
+                        <select name="user_type_id" class="form-control">
+                            <option value="">Please Select a Role</option>
+                            @foreach ($userTypes as $ut)
+                                <option value="{{$ut->id}}">{{$ut->name}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
                     <div class="text-center">
                         <button type="submit" class="btn-primary">{{trans('ui.button_register')}}</button>
                     </div>
+
                 </form>
             </div>
         </div> <!-- end row/well -->
