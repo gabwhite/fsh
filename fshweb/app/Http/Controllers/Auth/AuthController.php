@@ -7,6 +7,8 @@ use App\Models\UserProfile;
 use App\Http\Controllers\Controller;
 use App\UploadHandler;
 use App\LookupManager;
+use App\Jobs\SendEmail;
+
 use Validator;
 
 use Illuminate\Support\Facades\DB;
@@ -114,7 +116,7 @@ class AuthController extends Controller
         }
 
         // Create user profile is they chose a value in User Type DDLB
-        if($data['user_type_id'] && $data['user_type_id'] != '')
+        if(isset($data['user_type_id']) && $data['user_type_id'] != '')
         {
             $vals = [
                 'user_type_id' => $data['user_type_id']
@@ -211,6 +213,24 @@ class AuthController extends Controller
             DB::rollBack();
             throw $ex;
 
+        }
+
+        // Send an email to us to notify of new vendor registration
+        try
+        {
+            $mailData = [
+                'to' => config('app.vendor_registration_notify_email'),
+                'from' => $user->email,
+                'subject' => 'Vendor ' . $user->email . ' has registered',
+                'body' => 'Vendor sign up: Email:' . $user->email . ', Company Name: ' . $vendor->company_name,
+                'sendRaw' => true
+            ];
+
+            $this->dispatch(new SendEmail($mailData));
+        }
+        catch(\Exception $ex)
+        {
+            // If email fails do not stop registration from happening
         }
 
         return redirect($this->redirectPath());

@@ -32,8 +32,15 @@ class SendEmail extends Job implements SelfHandling, ShouldQueue
      */
     public function handle(iMailer $mailer)
     {
-        $mailer->sendMail($this->data['to'], $this->data['from'],
-            $this->data['subject'], $this->data['view'], $this->data['viewData']);
+        if(isset($this->data['sendRaw']) && $this->data['sendRaw'] == true)
+        {
+            $mailer->sendMailRaw($this->data['to'], $this->data['from'], $this->data['subject'], $this->data['body']);
+        }
+        else
+        {
+            $mailer->sendMail($this->data['to'], $this->data['from'],
+                $this->data['subject'], $this->data['view'], $this->data['viewData']);
+        }
 
     }
 }

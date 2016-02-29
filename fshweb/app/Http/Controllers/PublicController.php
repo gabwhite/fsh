@@ -61,7 +61,8 @@ class PublicController extends Controller
             'from' => $request->input('contact_email'),
             'subject' => trans('messages.contact_subject_to'),
             'view' => config('app.contact_email_view_admin'),
-            'viewData' => $formData
+            'viewData' => $formData,
+            'sendRaw' => false
             ];
 
         // Send email to us
