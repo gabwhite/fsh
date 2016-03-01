@@ -63,10 +63,11 @@
                 <div class="col-xs-7 col-md-4 pull-right">    
 
                     <!-- Collect the nav links, forms, and other content for toggling -->
-                    
+
+                    <ul class="nav navbar-nav">
                         @if (Auth::check())
                         
-                        <ul class="nav navbar-nav">
+
                             
                             <li role="presentation" class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
@@ -97,8 +98,7 @@
                                 </ul>
                             </li> <!-- end of dropdown menu -->
                             
-                        @else 
-                            
+                        @else
 
                             <!-- <li class="menu-item">
                                 <a title="{{trans('ui.navigation_vendorreg')}}" href="{{url('auth/vendorregister')}}">{{trans('ui.navigation_vendorreg')}}</a>
@@ -120,8 +120,8 @@
                             <li class="hide menu-item">
                                 <a title="{{trans('ui.navigation_tools')}}" href="{{url('toolsresources')}}">{{trans('ui.navigation_tools')}}</a>
                             </li>
-                        </ul>
-                    @endif                       
+                    @endif
+                    </ul>
                 </div>
                 
                 <div class="col-xs-12 col-md-5">
