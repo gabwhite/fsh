@@ -7,6 +7,7 @@
 @endsection
 
 @section('sectionheader')
+
 <section class='clearfix container-wrap item-header'>
     <div class='container'>
         <div class="col-xs-12">
@@ -19,7 +20,7 @@
         <div class="container">
             <div class="col-xs-12">
                 <div class="{{($product->published) ? 'bg-success' : 'bg-danger'}}">
-                    <input type="checkbox" id="published" name="published" {{($product->published) ? 'checked="checked"' : ''}}/> <label for="published">{{trans('ui.product_label_published')}}</label>
+                    <input type="checkbox" id="cbPublished" name="cbPublished" {!! ($product->published == 1) ? 'checked="checked"' : ''!!}/> <label for="cbPublished">{{trans('ui.product_label_published')}}</label>
                 </div>
             </div>
         </div>
@@ -30,8 +31,28 @@
 @section('content')
 
     <div class="container">
-        
+
         <form id="form1" name="form1" method="post" action="{{url('product/edit')}}" enctype="multipart/form-data">
+
+            <div id="divCategoryDropdowns" class="col-xs-12 col-md-12">
+                <div class="col-xs-12 well">
+                    <h4>Category</h4>
+
+                    <select id="ddlbCategory" class="search-dropdown">
+                        <option v-for="c in categories" v-bind:value="c.id">@{{ c.name }}</option>
+                    </select>
+                    <select id="ddlbSubCategory" class="search-dropdown">
+                        <option v-for="s in subCategories" v-bind:value="s.id">@{{ s.name }}</option>
+                    </select>
+                    <select id="ddlbProductType" class="search-dropdown">
+                        <option v-for="p in productTypes" v-bind:value="p.id">@{{ p.name }}</option>
+                    </select>
+
+
+                </div>
+            </div>
+
+
             <div class="col-xs-12 col-md-12">
                 
                 <div class="col-xs-12 well">
@@ -258,6 +279,7 @@
 
             <input type="hidden" name="id" value="{{$product->id}}"/>
             <input type="hidden" id="action" name="action" value=""/>
+            <input type="hidden" id="published" name="published" value="{{$product->published}}"/>
             {!! csrf_field() !!}
 
         </form>
@@ -268,11 +290,24 @@
 
 @section('scripts')
 
+    <script src="{{url('js/vendor/vuejs/vue.min.js')}}"></script>
     <script src="{{url('js/vendor/validation/jquery.validate.min.js')}}"></script>
     <script src="{{url('js/vendor/validation/additional-methods.min.js')}}"></script>
+    <script src="{{url('js/fsh.product.edit.js')}}"></script>
     <script type="text/javascript">
+
+        var productCategories = [];
+        @foreach ($product->categories as $c)
+            productCategories.push({id: {{$c->id}}, parent_id: {{$c->parent_id or 'null'}}});
+        @endforeach
+
         $(document).ready(function()
         {
+
+            fsh.productedit.init("{{url('ajax/getfoodcategories/')}}",
+                    productCategories
+            );
+
             var theForm = $("#form1");
 
             theForm.validate({
@@ -313,7 +348,13 @@
                     $("#action").val("DELETE");
                     theForm.submit();
                 }
-            })
+            });
+
+            $("#cbPublished").on("click", function(e)
+            {
+                console.log("here");
+                (this.checked) ? $("#published").val("1") : $("#published").val("0");
+            });
 
         });
     </script>

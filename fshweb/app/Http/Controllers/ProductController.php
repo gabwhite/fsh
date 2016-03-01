@@ -89,12 +89,20 @@ class ProductController extends Controller
         // This is an edit, see if the user can edit product
         if($id != null)
         {
-            $product = $this->dataAccess->getProduct($id, 'allergens');
+            $product = $this->dataAccess->getProduct($id, ['allergens', 'categories']);
 
-            if(!isset($product) || (\Session::get(config('app.session_key_vendor')) != $product->vendor_id && $user->hasRole(config('app.role_vendor_name'))))
+            if(!isset($product))
             {
-                // Product came back null or doesn't belong to this vendor, see product to new
-                return redirect('product/detail/' . $product->id);
+                // Product came back null
+                return redirect('/');
+            }
+            else if($user->hasRole(config('app.role_vendor_name')))
+            {
+                if(\Session::get(config('app.session_key_vendor')) != $product->vendor_id)
+                {
+                    // Product doesn't belong to this vendor
+                    return redirect('/');
+                }
             }
         }
 

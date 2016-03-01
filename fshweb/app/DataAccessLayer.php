@@ -248,7 +248,9 @@ class DataAccessLayer
         if(isset($data['serving_size'])) { $product->serving_size = $data['serving_size']; }
         if(isset($data['vendor_logo'])) { $product->vendor_logo = $data['vendor_logo']; }
         if(isset($data['pos_pdf'])) { $product->pos_pdf = $data['pos_pdf']; }
-        $product->published = (isset($data['published']) ? 1 : 0);
+
+        //$product->published = (isset($data['published']) ? 1 : 0);
+        $product->published = $data['published'];
 
         $product->save();
 
