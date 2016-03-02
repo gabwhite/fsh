@@ -258,6 +258,13 @@ class DataAccessLayer
             $product->allergens()->sync($data['allergens']);
         }
 
+        // Sync categories
+        if(isset($data['categories']))
+        {
+            $product->categories()->sync($data['categories']);
+        }
+
+
 
         $product->save();
 

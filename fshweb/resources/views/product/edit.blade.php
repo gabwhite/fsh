@@ -38,19 +38,19 @@
                 <div class="col-xs-12 well">
                     <h4>Category</h4>
 
-                    <select id="ddlbCategory" name="category1" class="search-dropdown">
+                    <select id="ddlbCategory" name="categories[]" class="search-dropdown">
                         <template v-for="c in categories">
                             <option v-bind:value="c.id" v-if="c.id == selectedCategoryId" selected="selected">@{{ c.name }}</option>
                             <option v-bind:value="c.id" v-else>@{{ c.name }}</option>
                         </template>
                     </select>
-                    <select id="ddlbSubCategory" name="category2" class="search-dropdown">
+                    <select id="ddlbSubCategory" name="categories[]" class="search-dropdown">
                         <template v-for="s in subCategories">
                             <option v-bind:value="s.id" v-if="s.id == selectedSubCategoryId" selected="selected">@{{ s.name }}</option>
                             <option v-bind:value="s.id" v-else>@{{ s.name }}</option>
                         </template>
                     </select>
-                    <select id="ddlbProductType" name="category3" class="search-dropdown">
+                    <select id="ddlbProductType" name="categories[]" class="search-dropdown">
 
                         <template v-for="p in productTypes">
                             <option  v-bind:value="p.id" v-if="p.id == selectedProductTypeId" selected="selected">@{{ p.name }}</option>
@@ -180,16 +180,11 @@
                             <div class="checkbox">
                                 <label>
 
-                                    @foreach($product->allergens as $pa)
-
-                                        @if($a->id == $pa->id)
-                                            <input type="checkbox" name="allergens[]" value="{{$a->id}}" checked="checked">{{$a->name}}
-                                        @else
-                                            <input type="checkbox" name="allergens[]" value="{{$a->id}}">{{$a->name}}
-                                        @endif
-
-                                    @endforeach
-
+                                @if($product->allergens->contains('id', $a->id))
+                                    <input type="checkbox" name="allergens[]" value="{{$a->id}}" checked="checked">{{$a->name}}
+                                @else
+                                    <input type="checkbox" name="allergens[]" value="{{$a->id}}">{{$a->name}}
+                                @endif
 
                                 </label>
                             </div>
