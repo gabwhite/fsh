@@ -162,6 +162,7 @@ return [
     'product_label_add_to_my_products' => 'Add to My Products',
     'product_label_goto_vendor_profile' => 'Go to Vendor Profile',
     'product_label_request_sample' => 'Request a Sample',
+    'product_label_add_product' => 'Add Product',
     'product_label_edit_product' => 'Edit Product',
     'product_label_rate_product' => 'Rate Product',
     'product_label_publish' => 'Publish',

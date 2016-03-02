@@ -12,7 +12,11 @@
     <div class='container'>
         <div class="col-xs-12">
             <div class="col-xs-12">
+                @if($isEdit)
                 <h1 class="item-title">{{trans('ui.navigation_product_edit', ['name' => $product->name])}}</h1>
+                @else
+                <h1 class="item-title">{{trans('ui.product_label_add_product')}}</h1>
+                @endif
             </div>
         </div>
     </div>
@@ -326,6 +330,12 @@
                     productCategories
             );
 
+            $.validator.methods.categories = function()
+            {
+
+            }
+
+
             var theForm = $("#form1");
 
             theForm.validate({
@@ -354,9 +364,11 @@
                     tare_weight: { number: true },
                     brand: { maxlength: 250 },
                     uom: { maxlength: 250 },
-                    category1: { required: true },
-                    category2: { required: true },
-                    category3: { required: true }
+                    "categories[]": { required: true }
+                },
+                messages:
+                {
+                    "categories[]": "These fields are required"
                 }
             });
 
