@@ -53,6 +53,13 @@
                 <li><a href="{{url('admin/roles')}}">Roles</a></li>
                 <li><a href="{{url('admin/permissions')}}">Permissions</a></li>
                 <li><a href="{{url('admin/import')}}">Product Import</a></li>
+                <li>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Categories <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{{url('admin/categories')}}">View</a></li>
+                        <li><a href="{{url('admin/category/add')}}">Add</a></li>
+                    </ul>
+                </li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">System <span class="caret"></span></a>
                     <ul class="dropdown-menu">

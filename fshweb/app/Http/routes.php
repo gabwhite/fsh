@@ -84,6 +84,11 @@ Route::group(['middleware' => 'auth'], function()
         Route::post('admin/permissions', 'AdminController@editPermissions');
         Route::get('admin/cache', 'AdminController@showCacheManager');
         Route::post('admin/cache', 'AdminController@editCache');
+        Route::get('admin/categories', 'AdminController@showCategories');
+        Route::get('admin/category/edit/{id}', 'AdminController@showEditCategory');
+        Route::post('admin/category/edit/{id}', 'AdminController@updateCategory');
+        Route::get('admin/category/add', 'AdminController@showAddCategory');
+        Route::post('admin/category/add', 'AdminController@addCategory');
 
     });
 

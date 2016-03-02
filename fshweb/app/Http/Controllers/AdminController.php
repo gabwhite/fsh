@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Storage;
 use Validator;
 use Ramsey\Uuid\Uuid;
+use DB;
 
 use App\Jobs\RebuildSearchIndex;
 use App\ProductImportOptions;
@@ -19,6 +20,7 @@ use App\Http\Requests;
 use App\Jobs\ParseProductImport;
 use App\Models\Role;
 use App\Models\Permission;
+use App\Models\Category;
 
 class AdminController extends Controller
 {
@@ -329,5 +331,89 @@ class AdminController extends Controller
         }
 
         return redirect('admin/cache');
+    }
+
+    public function showCategories()
+    {
+
+        $categories = Category::whereNull('parent_id')->with(['children' => function($query)
+        {
+            $query->with(['children'])->orderBy('name', 'asc');
+
+        }])->orderBy('name', 'asc')->get();
+
+
+        /*
+        $categories = Category::whereNull('parent_id')->with(['children' => function($query)
+        {
+            $query->with(['children' => function($query2)
+            {
+                $query2->orderBy('name', 'asc')->get();
+
+            }])->orderBy('name', 'asc');
+
+        }])->orderBy('name', 'asc')->get();
+        */
+
+//dd($categories);
+
+        //DB::select('SELECT id, name, parent_id FROM food_categories ')
+
+        return view('admin.categories')->with(['categories' => $categories]);
+    }
+
+    public function showEditCategory($id)
+    {
+        $category = Category::where('id', $id)->first();
+        $categories = Category::orderBy('name', 'asc')->get();
+
+        return view('admin.categoryedit')->with(['category' => $category, 'categories' => $categories]);
+    }
+
+    public function updateCategory(Request $request, $id)
+    {
+        $category = Category::find($id);
+        if(isset($category))
+        {
+            $category->name = $request->input('name');
+            //$category->parent_id = $request->input('parent_id');
+            $category->save();
+        }
+
+        return redirect('admin/categories');
+    }
+
+    public function showAddCategory()
+    {
+        //$categories = Category::orderBy('name', 'asc')->get();
+
+        /*
+         * SELECT c1.id AS level1,
+  c2.id AS level2,
+  c2.parent_id AS level2parent,
+  CONCAT(c1.name,' > ',c2.name) as hierarchy
+FROM food_categories AS c1
+LEFT JOIN food_categories as c2 ON c2.parent_id = c1.id
+WHERE c2.parent_id = c1.id AND c1.parent_id IS NULL
+ORDER BY c1.id, c2.name
+         */
+
+        $leafCategories = DB::select('SELECT c1.id AS level1,c2.id AS level2,c3.id as level3, CONCAT(c1.name,\' > \',c2.name, \' > \', c3.name) as hierarchy FROM food_categories AS c1 LEFT JOIN food_categories as c2 ON c2.parent_id = c1.id LEFT JOIN food_categories as c3 ON c3.parent_id = c2.id WHERE c1.id IS NOT NULL AND c2.id IS NOT NULL AND c3.id IS NOT NULL ORDER BY c1.id, c2.parent_id, c3.parent_id, c3.name');
+
+        return view('admin.categoryadd')->with(['categories' => $leafCategories]);
+    }
+
+    public function addCategory(Request $request)
+    {
+        // WIP
+
+        $category = new Category();
+        $category->name = $request->input('name');
+        //$category->parent_id = $request->input('parent_id');
+        $category->active = 1;
+
+        //$category->save();
+
+        return redirect('admin/categories');
     }
 }
