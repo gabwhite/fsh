@@ -125,24 +125,3 @@ Route::get('ajax/getstateprovincesforcountry/{countryId}', 'AjaxController@getSt
 Route::get('ajax/checkusername', 'AjaxController@checkUsername');
 Route::get('ajax/checkemail', 'AjaxController@checkEmail');
 Route::post('ajax/addproductfav', 'AjaxController@addFavoriteProduct');
-
-Route::get('datacleanup', function()
-{
-    $products = \App\Models\Product::all();
-    foreach($products as $p)
-    {
-        $p->name = ucfirst(mb_strtolower($p->name));
-        $p->brand = ucfirst(mb_strtolower($p->brand));
-
-        $p->save();
-    }
-
-    $categories = \App\Models\Category::all();
-    foreach($categories as $c)
-    {
-        $c->name = ucfirst(mb_strtolower($c->name));
-        $c->save();
-    }
-
-    echo "Done cleanup";
-});
