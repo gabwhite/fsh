@@ -283,7 +283,9 @@
                     <div class="col-xs-12 drop-padding">    
                         <div class="btn-row row pull-right">
                             <a href="{{($product->id) ? url('product/detail', $product->id) : url('profile/')}}"><button type="button" class="btn">{{trans('ui.button_cancel')}}</button></a>
+                            @if($isEdit)
                             <a id="hlDeleteProduct" href="#"><button type="button" class="btn">{{trans('ui.button_delete')}}</button></a>
+                            @endif
                             <input type="submit" class="btn-primary" value="{{trans('ui.button_addupdate')}}"/>
                         </div>
                     </div>

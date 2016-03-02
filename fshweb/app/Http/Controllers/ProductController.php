@@ -85,6 +85,7 @@ class ProductController extends Controller
     {
         $user = \Auth::user();
         $product = new \App\Models\Product();
+        $isEdit = false;
 
         // This is an edit, see if the user can edit product
         if($id != null)
@@ -104,11 +105,13 @@ class ProductController extends Controller
                     return redirect('/');
                 }
             }
+
+            $isEdit = true;
         }
 
         $allergens = $this->lookupManager->getProductAllergens();
 
-        return view('product.edit')->with(['product' => $product, 'allergens' => $allergens]);
+        return view('product.edit')->with(['product' => $product, 'allergens' => $allergens, 'isEdit' => $isEdit]);
     }
 
     public function editProduct(Request $request)
