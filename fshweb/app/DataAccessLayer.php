@@ -252,6 +252,13 @@ class DataAccessLayer
         //$product->published = (isset($data['published']) ? 1 : 0);
         $product->published = $data['published'];
 
+        // Sync allergens
+        if(isset($data['allergens']))
+        {
+            $product->allergens()->sync($data['allergens']);
+        }
+
+
         $product->save();
 
         return $product;

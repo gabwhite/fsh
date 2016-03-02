@@ -38,16 +38,25 @@
                 <div class="col-xs-12 well">
                     <h4>Category</h4>
 
-                    <select id="ddlbCategory" class="search-dropdown">
-                        <option v-for="c in categories" v-bind:value="c.id">@{{ c.name }}</option>
+                    <select id="ddlbCategory" name="category1" class="search-dropdown">
+                        <template v-for="c in categories">
+                            <option v-bind:value="c.id" v-if="c.id == selectedCategoryId" selected="selected">@{{ c.name }}</option>
+                            <option v-bind:value="c.id" v-else>@{{ c.name }}</option>
+                        </template>
                     </select>
-                    <select id="ddlbSubCategory" class="search-dropdown">
-                        <option v-for="s in subCategories" v-bind:value="s.id">@{{ s.name }}</option>
+                    <select id="ddlbSubCategory" name="category2" class="search-dropdown">
+                        <template v-for="s in subCategories">
+                            <option v-bind:value="s.id" v-if="s.id == selectedSubCategoryId" selected="selected">@{{ s.name }}</option>
+                            <option v-bind:value="s.id" v-else>@{{ s.name }}</option>
+                        </template>
                     </select>
-                    <select id="ddlbProductType" class="search-dropdown">
-                        <option v-for="p in productTypes" v-bind:value="p.id">@{{ p.name }}</option>
-                    </select>
+                    <select id="ddlbProductType" name="category3" class="search-dropdown">
 
+                        <template v-for="p in productTypes">
+                            <option  v-bind:value="p.id" v-if="p.id == selectedProductTypeId" selected="selected">@{{ p.name }}</option>
+                            <option  v-bind:value="p.id" v-else>@{{ p.name }}</option>
+                        </template>
+                    </select>
 
                 </div>
             </div>
@@ -170,7 +179,18 @@
                             @foreach($allergens as $a)
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" name="allergens[]" value="{{$a->id}}">{{$a->name}}
+
+                                    @foreach($product->allergens as $pa)
+
+                                        @if($a->id == $pa->id)
+                                            <input type="checkbox" name="allergens[]" value="{{$a->id}}" checked="checked">{{$a->name}}
+                                        @else
+                                            <input type="checkbox" name="allergens[]" value="{{$a->id}}">{{$a->name}}
+                                        @endif
+
+                                    @endforeach
+
+
                                 </label>
                             </div>
                             @endforeach
@@ -286,6 +306,7 @@
 
     </div><!-- End of main row -->
 
+
 @endsection
 
 @section('scripts')
@@ -335,7 +356,10 @@
                     gross_weight: { number: true },
                     tare_weight: { number: true },
                     brand: { maxlength: 250 },
-                    uom: { maxlength: 250 }
+                    uom: { maxlength: 250 },
+                    category1: { required: true },
+                    category2: { required: true },
+                    category3: { required: true }
                 }
             });
 

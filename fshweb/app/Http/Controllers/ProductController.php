@@ -140,6 +140,11 @@ class ProductController extends Controller
                 }
 
                 $data = $request->all();
+                if(is_null($request->input('allergens')))
+                {
+                    $data['allergens'] = array();
+                }
+
                 try
                 {
                     // Upload product file if present
@@ -150,6 +155,8 @@ class ProductController extends Controller
                     }
 
                     $product = $this->dataAccess->upsertProduct($productId, $vendorId, $data);
+
+                    // Update categories
 
                     // Update cache entry
                     $this->updateProductCache($product, 'UPDATE');
