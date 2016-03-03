@@ -19,12 +19,10 @@ Route::get('/', function ()
 });
 
 //=================================
-// Product routes
+// Product routes (unprotected)
 //=================================
 Route::get('/product/search', 'ProductController@search');
 Route::post('/product/navsearch', 'ProductController@doSearch');
-Route::get('/product/detail/{id}', 'ProductController@detail');
-
 
 //=================================
 // Contact Us routes
@@ -33,12 +31,17 @@ Route::get('contact', 'PublicController@contactUs');
 Route::post('contact', 'PublicController@contactUsSubmit');
 //=================================
 
-Route::get('vendor/detail/{id}', 'VendorController@detail');
-
-
-// Routes the require authentication
+//=================================
+// Routes that require authentication
+//=================================
 Route::group(['middleware' => 'auth'], function()
 {
+    // Product details
+    Route::get('/product/detail/{id}', 'ProductController@detail');
+
+    // Vendor details
+    Route::get('vendor/detail/{id}', 'VendorController@detail');
+
     Route::get('/profile', 'ProfileController@index');
     Route::get('/profile/edit', 'ProfileController@profileEdit');
     Route::post('/profile/edit', 'ProfileController@profileUpdate');
@@ -63,8 +66,9 @@ Route::group(['middleware' => 'auth'], function()
         Route::post('/vendor/edit/variableupdate', 'VendorController@updateVendorVariable');
     });
 
-
+    //=================================
     // Routes that require admin role
+    //=================================
     Route::group(['middleware' => ['role:admin']], function()
     {
         // Admin routes
@@ -91,33 +95,39 @@ Route::group(['middleware' => 'auth'], function()
         Route::post('admin/category/add', 'AdminController@addCategory');
 
     });
-
 });
 
-
-
+//=================================
 // Authentication routes...
+//=================================
 Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', ['middleware' => 'postlogin', 'uses' => 'Auth\AuthController@postLogin']);
 Route::get('auth/logout', ['middleware' => 'postlogout', 'uses' => 'Auth\AuthController@getLogout']);
 
+//=================================
 // Password reset link request routes...
+//=================================
 Route::get('password/email', 'Auth\PasswordController@getEmail');
 Route::post('password/email', 'Auth\PasswordController@postEmail');
 
+//=================================
 // Password reset routes...
+//=================================
 Route::get('password/reset/{token}', 'Auth\PasswordController@getReset');
 Route::post('password/reset', 'Auth\PasswordController@postReset');
 
+//=================================
 // Registration routes...
+//=================================
 //Route::get('auth/register', 'Auth\AuthController@getRegister');
 Route::get('auth/register', 'Auth\AuthController@getUserRegister');
-
 Route::post('auth/register', 'Auth\AuthController@postRegister');
 Route::get('auth/vendorregister', 'Auth\AuthController@getVendorRegister');
 Route::post('auth/vendorregister', ['middleware' => 'postlogin', 'uses' => 'Auth\AuthController@postVendorRegister']);
 
+//=================================
 // AJAX routes
+//=================================
 Route::get('ajax/getfoodcategories/{format}/{parentId?}', 'AjaxController@getFoodCategoriesForParent');
 Route::get('ajax/getproducts/{categoryId?}', 'AjaxController@getProducts');
 Route::get('ajax/getcountries', 'AjaxController@getCountries');

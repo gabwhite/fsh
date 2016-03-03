@@ -117,6 +117,8 @@
 
                                     <div class="col-xs-12 col-md-10 drop-padding">
 
+                                        @if (Auth::check())
+
                                         <p>@{{p.description}}</p>
 
                                         <div class="col-xs-12 search-details">
@@ -126,6 +128,8 @@
 
                                             <p>Product Code: @{{p.mpc}}</p>
                                         </div>
+
+                                        @endif
 
                                         <a class="goto-item" href="{{url('product/detail')}}/@{{ p.id }}">View Product Details</a>
                                     </div>
