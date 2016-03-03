@@ -83,6 +83,7 @@ fsh.search = (function ($, document)
         initTree();
 
         lastSearchQuery = retrieveSearchQuery();
+        deleteSearchQuery();
 
         if(existingQuery !== "")
         {
@@ -203,7 +204,8 @@ fsh.search = (function ($, document)
         $categoryTree.off("changed.jstree").on("changed.jstree", function(e, data)
         {
             saveTreeState(data.node);
-
+            currentSearchType = "fc";
+            $searchQueryTb.val("");
             getProducts(buildSearchUrl(data.node.id, currentSearchType, $sortBy.val(), $pageSize.val()));
             //getProducts(_productUrl + "/" + data.node.id + sprintf(productSearchQueryStringFormat, currentSearchType, $sortBy.val(), $pageSize.val()));
         });
@@ -319,6 +321,10 @@ fsh.search = (function ($, document)
         {
             $searchQueryTb.val(searchQuery.query);
         }
+        else
+        {
+            $searchQueryTb.val("");
+        }
     };
 
     var storeSearchQuery = function()
@@ -331,6 +337,11 @@ fsh.search = (function ($, document)
     var retrieveSearchQuery = function()
     {
         return Lockr.get("lastSearchQuery");
+    };
+
+    var deleteSearchQuery = function()
+    {
+        Lockr.rm("lastSearchQuery");
     };
 
     var saveTreeState = function(nodeChosen)
