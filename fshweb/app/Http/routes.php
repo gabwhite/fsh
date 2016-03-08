@@ -19,6 +19,12 @@ Route::get('/', function ()
 });
 
 //=================================
+// Vendor Sign Up page (unprotected)
+//=================================
+// Vendor sign up route
+Route::get('welcome', 'PublicController@vendorReg');
+
+//=================================
 // Product routes (unprotected)
 //=================================
 Route::get('/product/search', 'ProductController@search');

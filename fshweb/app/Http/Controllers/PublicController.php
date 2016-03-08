@@ -34,6 +34,11 @@ class PublicController extends Controller
         //
     }
 
+    public function vendorReg()
+    {
+        return view('welcome');
+    }
+
     public function contactUs()
     {
         return view('contact');

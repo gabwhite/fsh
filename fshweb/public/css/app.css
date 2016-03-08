@@ -316,8 +316,8 @@ th {
 
 @font-face {
   font-family: 'Glyphicons Halflings';
-  src: url("/fonts/glyphicons-halflings-regular.eot");
-  src: url("/fonts/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("/fonts/glyphicons-halflings-regular.woff2") format("woff2"), url("/fonts/glyphicons-halflings-regular.woff") format("woff"), url("/fonts/glyphicons-halflings-regular.ttf") format("truetype"), url("/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg");
+  src: url("../fonts/bootstrap/glyphicons-halflings-regular.eot");
+  src: url("../fonts/bootstrap/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"), url("../fonts/bootstrap/glyphicons-halflings-regular.woff2") format("woff2"), url("../fonts/bootstrap/glyphicons-halflings-regular.woff") format("woff"), url("../fonts/bootstrap/glyphicons-halflings-regular.ttf") format("truetype"), url("../fonts/bootstrap/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg");
 }
 
 .glyphicon {
@@ -8559,6 +8559,11 @@ h2.subhead {
   }
 }
 
+h2.page-subhead {
+  color: white;
+  font-weight: 400;
+}
+
 h2.item-subhead {
   text-align: left;
   border-bottom: 2px solid #de5328;
@@ -9427,6 +9432,10 @@ li.menu-item a,
   }
 }
 
+.navbar-nav > li > a {
+  padding: 0;
+}
+
 li.menu-item .btn-primary,
 li.menu-item .btn-sm,
 li.menu-item .btn-group-sm > .btn {
@@ -9440,7 +9449,7 @@ li.menu-item .btn-group-sm > .btn {
   li.menu-item .btn-primary,
   li.menu-item .btn-sm,
   li.menu-item .btn-group-sm > .btn {
-    margin: 10px;
+    margin: 5px;
     height: 50px;
     padding: 10px 30px;
     font-size: 16px;
@@ -9454,7 +9463,7 @@ li.menu-item.sign-in {
 
 @media (min-width: 768px) {
   li.menu-item.sign-in {
-    margin: 25px 10px 0 10px;
+    margin: 20px 10px 0 10px;
   }
 }
 
@@ -9621,6 +9630,21 @@ span.username {
 .item-header {
   text-align: left;
   margin-top: 30px;
+}
+
+.vendor-reg-header {
+  margin-bottom: 0;
+  background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74, 75, 75, 0.5)), url("/img/headers/contact-bg.jpg") no-repeat;
+}
+
+.cta {
+  background: #4b4a4a;
+  padding: 20px;
+  margin-bottom: 4%;
+}
+
+.cta h2 {
+  margin-top: 10px;
 }
 
 .vendor-profile {

@@ -1,31 +1,100 @@
 @extends('layouts.master')
 
-@section('title', 'Page Title')
+@section('title', 'Information for Vendors')
 
 @section('css')
 
 @endsection
 
-@section('sidebar')
-    @parent
+@section('sectionheader')
 
+<section class='clearfix container-wrap main-title vendor-reg-header'>
+    <div class='container text-center'>
+    	<h1 class="page-title">Connect with your prospects through your products.</h1>
+		<h2 class="page-subhead">Every day Chefs are looking to learn more about products and what is available on the market. Let them see everything you have to offer.</h2>
+		<a href="/auth/register"><button class="btn-primary">Sign Up</button></a>
+    </div>
+</section>
+
+<section class="clearfix container-wrap cta">
+	<h2 class="page-subhead text-center">Sign up today for a Free 1 Year Premium Subscription, with no set up costs.</h2>
+</section>
 @endsection
 
 @section('content')
 
 <div class="row">
 
-    <div class="col-md-12">
+    <div class="col-xs-12 text-center">
+		<h2>A sourcing library for Chefs –  A lead generation system for you!</h2>
+		<h3>Show your products and grow your brand.</h3>
+		
+		<div class="well col-xs-12 col-sm-4">
+			<div class="col-xs-12 table-header">
+				<h3>Starter</h3>
+				<p>Free</p>
+			</div>
 
+			<div class="col-xs-12 table-body">
+				<p>150 Products</p>
+				<p>Vendor Profile Page</p>
+				<p>Item Description</p>
+				<p>Product Specs</p>
+				<p>Ingredient Deck</p>
+				<p>Benefit Statement</p>
+				<p>Preparation Instructions</p>
 
-        <div class="row">
+				<a href="/auth/register"><button class="btn-primary">Sign Up</button></a>
+			</div>
+		</div>
+		<div class="well col-xs-12 col-sm-4">
+			<div class="col-xs-12 table-header">
+				<h3>Premium</h3>
+				<p>$39 / Month</p>
+			</div>
 
-            <div class="col-md-12">
+			<div class="col-xs-12 table-body">
+				<p>150 Products</p>
+				<p>Vendor Profile Page</p>
+				<p>Item Description</p>
+				<p>Product Specs</p>
+				<p>Ingredient Deck</p>
+				<p>Benefit Statement</p>
+				<p>Preparation Instructions</p>
+				<p>Nutrionals</p>
+				<p>Allergens</p>
+				<p>Samples Request Button</p>
+				<p>Monthly Portfolio Activity Reports</p>
 
-                <h1>HOME PAGE CONTENT</h1>
-            </div>
-        </div>
+				<a href="/auth/register"><button class="btn-primary">Sign Up</button></a>
+			</div>
+		</div>
+		<div class="well col-xs-12 col-sm-4">
+			<div class="col-xs-12 table-header">
+				<h3>Enterprise</h3>
+				<p>$199 / Month</p>
+			</div>
 
+			<div class="col-xs-12 table-body">
+				<p>150 Products</p>
+				<p>Vendor Profile Page</p>
+				<p>Item Description</p>
+				<p>Product Specs</p>
+				<p>Ingredient Deck</p>
+				<p>Benefit Statement</p>
+				<p>Preparation Instructions</p>
+				<p>Nutrionals</p>
+				<p>Allergens</p>
+				<p>Samples Request Button</p>
+				<p>Monthly Portfolio Activity Reports</p>
+				<p>Priority Placement</p>
+				<p>Featured Products on Landing Page</p>
+				<p>Member Newsletter Marketing</p>
+				<p>Vendor Blog / Article Publishing</p>
+
+				<a href="/auth/register"><button class="btn-primary">Sign Up</button></a>
+			</div>
+		</div>
     </div>
 
 </div>

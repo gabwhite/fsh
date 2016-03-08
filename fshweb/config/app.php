@@ -149,8 +149,8 @@ return [
 
         Zizaco\Entrust\EntrustServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
-        Intervention\Image\ImageServiceProvider::class,
-        Laravel\Socialite\SocialiteServiceProvider::class
+        Intervention\Image\ImageServiceProvider::class
+        //Laravel\Socialite\SocialiteServiceProvider::class
 
     ],
 
@@ -203,8 +203,8 @@ return [
 
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
         'Debugbar'  => Barryvdh\Debugbar\Facade::class,
-        'Image'     => Intervention\Image\Facades\Image::class,
-        'Socialite' => Laravel\Socialite\Facades\Socialite::class
+        'Image'     => Intervention\Image\Facades\Image::class
+        //'Socialite' => Laravel\Socialite\Facades\Socialite::class
 
 
     ],

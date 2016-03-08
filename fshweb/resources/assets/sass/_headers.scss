@@ -126,6 +126,10 @@ li.menu-item a,
 	}
 }
 
+.navbar-nav > li > a {
+	padding: 0;
+}
+
 // Logged Out Menu
 
 li.menu-item .btn-primary {
@@ -134,7 +138,7 @@ li.menu-item .btn-primary {
 	padding: 5px 10px;
 	font-size: 14px;
 	@include breakpoint(tablet){
-		margin: 10px;
+		margin: 5px;
 		height: 50px;
 		padding: 10px 30px;
 		font-size: 16px;
@@ -145,7 +149,7 @@ li.menu-item.sign-in {
 	margin-top: 17px;
 	margin-right: 0;
 	@include breakpoint(tablet){
-		margin: 25px 10px 0 10px;
+		margin: 20px 10px 0 10px;
 	}
 }
 
@@ -301,7 +305,23 @@ span.username {
 	.container, .auth-check {
 		//padding-right: 0;
 	}
+}
 
+// Vendor Registration
+
+.vendor-reg-header {
+	margin-bottom: 0;
+	background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74, 75, 75, 0.5)), url("/img/headers/contact-bg.jpg") no-repeat;
+}
+
+.cta {
+	background: $body;
+	padding: 20px;
+	margin-bottom: 4%;
+
+	h2 {
+		margin-top: 10px;
+	}
 }
 
 // Vendor profile 
