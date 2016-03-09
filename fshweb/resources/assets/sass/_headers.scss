@@ -311,7 +311,9 @@ span.username {
 
 .vendor-reg-header {
 	margin-bottom: 0;
-	background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74, 75, 75, 0.5)), url("/img/headers/contact-bg.jpg") no-repeat;
+	background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74, 75, 75, 0.5)), url("/img/headers/food-salad.jpg") no-repeat;
+	background-size: cover;
+	background-attachment: fixed;
 }
 
 .cta {

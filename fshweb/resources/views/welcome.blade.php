@@ -11,6 +11,11 @@
 <section class='clearfix container-wrap main-title vendor-reg-header'>
     <div class='container text-center'>
     	<h1 class="page-title">Connect with your prospects through your products.</h1>
+
+		<video width= "600" poster="/img/video-poster.png" src="/img/FSH-VendorVideo.mp4" controls>
+		</video>
+		<button class="btn center-block play-vid">Play</button>
+
 		<h2 class="page-subhead">Every day Chefs are looking to learn more about products and what is available on the market. Let them see everything you have to offer.</h2>
 		<a href="/auth/register"><button class="btn-primary">Sign Up</button></a>
     </div>
@@ -102,6 +107,12 @@
 @endsection
 
 @section('scripts')
-
+	<script>
+		$(document).ready(function(){
+           $(".play-vid").on("click", function(){
+           		$("video")[0].play();
+           });
+        });
+	</script>
 
 @endsection
