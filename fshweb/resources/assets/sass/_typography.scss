@@ -17,10 +17,12 @@ h4, h5, h6 {
 
 h1 {
     font-size: 30px; 
+    border-bottom: none!important;
     @include breakpoint(tablet) {
         font-size: 36px;
     }
 }
+
 
 h1.page-title {
 	font-weight: 600;
@@ -72,6 +74,11 @@ h2.subhead {
 	@include breakpoint(tablet){
 		font-size: 24px;
 	}
+}
+
+h2.vendor-subhead {
+    @extend h2.subhead;
+    font-size: 30px;
 }
 
 h2.page-subhead {
@@ -372,9 +379,7 @@ div#wpcf-field-product-image {
     text-align: center;
 }
 
-h1 {
-    border-bottom: none!important;
-}
+
 
 .home-page section.container-wrap.main-color {
     background-color: #de5328;
