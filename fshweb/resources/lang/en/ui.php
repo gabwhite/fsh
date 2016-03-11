@@ -14,7 +14,7 @@ return [
     'navigation_productsearch' => 'Product Search',
     'navigation_industryforums' => 'Industry Forums',
     'navigation_tools' => 'Tools &#038; Resources',
-    'navigation_vendorreg' => 'Vendor Registration',
+    'navigation_vendorreg' => 'Info for Vendors',
     'navigation_userreg' => 'Sign Up',
     'navigation_profile' => 'Profile',
     'navigation_login' => 'Sign In',

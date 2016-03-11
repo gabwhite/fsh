@@ -186,4 +186,32 @@ a.edit .btn-primary {
 	font-weight: 700;
 }
 
+/*----------  Play button  ----------*/
+ .btn-icon {
+ 	background: none;
+ 	border: 0;
+ 	position: absolute;
+ 	top: 15%;
+ 	left: 35%;
+ 	@include breakpoint(sm-mobile){
+ 		top: 25%;
+ 		left: 43%;
+ 	}
+ 	@include breakpoint(tablet){
+ 		top: 30%;
+ 		left: 45%;
+ 	}
+
+ 	img {
+ 		width: 60%;
+ 		@include breakpoint(sm-mobile){
+			width: 80%;
+ 		}
+ 		@include breakpoint(tablet){
+ 			width: 90%;
+ 		}
+ 	}
+ }
+
+
 /*=====  End of Forms and Buttons  ======*/

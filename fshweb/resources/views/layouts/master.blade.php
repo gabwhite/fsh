@@ -50,7 +50,7 @@
 
             <div class="container clearfix">
                 <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="col-xs-5 col-md-3">
+                <div class="col-xs-4 col-md-3">
                     <div class="navbar-header">
 
                         <a href="{{url('/')}}" class="navbar-brand"> 
@@ -60,15 +60,13 @@
                 </div>
             
 
-                <div class="col-xs-7 col-md-4 pull-right">    
+                <div class="col-xs-8 col-md-5 col-lg-4 pull-right reset-padding">    
 
                     <!-- Collect the nav links, forms, and other content for toggling -->
 
                     <ul class="nav navbar-nav">
                         @if (Auth::check())
                         
-
-                            
                             <li role="presentation" class="dropdown">
                                 <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
                                     @if(\Session::has(config('app.session_key_avatar')))
@@ -100,15 +98,15 @@
                             
                         @else
 
-                            <!-- <li class="menu-item">
-                                <a title="{{trans('ui.navigation_vendorreg')}}" href="{{url('auth/vendorregister')}}">{{trans('ui.navigation_vendorreg')}}</a>
-                            </li> -->
+                            <li class="logged-out sign-in">
+                                <a title="{{trans('ui.navigation_vendorreg')}}" href="{{url('/welcome')}}">{{trans('ui.navigation_vendorreg')}}</a>
+                            </li>
 
-                            <li class="menu-item pull-right sign-in">
+                            <li class="logged-out sign-in">
                                 <a title="{{trans('ui.navigation_login')}}" href="{{url('auth/login')}}">{{trans('ui.navigation_login')}}</a>
                             </li>
 
-                            <li class="menu-item pull-right">
+                            <li class="logged-out">
                                 <a title="{{trans('ui.navigation_vendorreg')}}" href="{{url('auth/register')}}"><button class=" btn-primary">{{trans('ui.navigation_userreg')}}</button></a>
                             </li>
                         
@@ -124,7 +122,7 @@
                     </ul>
                 </div>
                 
-                <div class="col-xs-12 col-md-5">
+                <div class="col-xs-12 col-md-4 col-lg-5 reset-padding">
                     
                     <form class="navbar-form pull-right" id="frmNavigationSearch" method="post" action="{{url('product/navsearch')}}">
                         <div class="form-group">

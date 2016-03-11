@@ -11,10 +11,11 @@
 <section class='clearfix container-wrap main-title vendor-reg-header'>
     <div class='container text-center'>
     	<h1 class="page-title">Connect with your prospects through your products.</h1>
-
-		<video width= "600" poster="/img/video-poster.png" src="/img/FSH-VendorVideo.mp4" controls>
-		</video>
-		<button class="btn center-block play-vid">Play</button>
+		<div class="video-container">
+			<video poster="/img/video-poster.png" src="/img/FSH-VendorVideo.mp4" controls>
+			</video>
+			<button class="btn-icon center-block play-vid"><img src="/img/icons/play-button.svg" alt="play video"></button>
+		</div>
 
 		<h2 class="page-subhead">Every day Chefs are looking to learn more about products and what is available on the market. Let them see everything you have to offer.</h2>
 		<a href="/auth/vendorregister"><button class="btn-primary">Sign Up</button></a>
@@ -119,6 +120,7 @@
 		$(document).ready(function(){
            $(".play-vid").on("click", function(){
            		$("video")[0].play();
+           		$(this).hide();
            });
         });
 	</script>

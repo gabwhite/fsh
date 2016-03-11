@@ -19,6 +19,10 @@ nav.navbar {
 
 .navbar-nav {
 	float: right;
+	margin-right: 0;
+	@include breakpoint(tablet){
+		margin-right: -15px;
+	}
 }
 
 .navbar-header {
@@ -132,28 +136,42 @@ li.menu-item a,
 
 // Logged Out Menu
 
-li.menu-item .btn-primary {
-	margin: 10px 20px 10px 0 ;
-	height: 35px;
-	padding: 5px 10px;
+li.logged-out {
+	@extend li.list-item;
+	display: inline-block;
+	margin: 0 7px;
+}
+
+li.logged-out .btn-primary {
+	margin: 0;
+	padding: 0;
 	font-size: 14px;
+	background: none;
+	border: 0;
+	color: $primary-button;
+	height: 30px;
 	@include breakpoint(tablet){
+		background: $primary-button;
+		border: 1px solid $button-hover;
 		margin: 5px;
 		height: 50px;
 		padding: 10px 30px;
 		font-size: 16px;
+		color: white;
+
+		&:hover, &:active, &:focus {
+			background: $button-hover;
+		}
 	}
 }
 
-li.menu-item.sign-in {
-	margin-top: 17px;
+li.logged-out.sign-in {
+	margin-top: 5px;
 	margin-right: 0;
 	@include breakpoint(tablet){
 		margin: 20px 10px 0 10px;
 	}
 }
-
-
 /*----------  Dropdown Nav menu  ----------*/
 
 ul.dropdown-menu {
@@ -187,15 +205,11 @@ li.menu-item {
 
 .navbar-nav .open ul.dropdown-menu > li > a {
 	color: $primary;
-	//width: 320px;
 	padding: 15px 15px 15px 50px;
 	border-bottom: 1px solid $border;
 	font-weight: 600;
 	font-size: 16px;
 	@include transition;
-	// @include breakpoint(mobile-sm){
-	// 	width: 480px
-	// }
 	@include breakpoint(tablet){
 		width: auto;
 		text-align: left;
@@ -314,6 +328,16 @@ span.username {
 	background: linear-gradient(rgba(74, 75, 75, 0.5), rgba(74, 75, 75, 0.5)), url("/img/headers/food-salad.jpg") no-repeat;
 	background-size: cover;
 	background-attachment: fixed;
+}
+
+.video-container {
+	width: 100%;
+	position: relative;
+}
+
+video {
+	max-width: 600px;
+	width: 90%;
 }
 
 .cta {
