@@ -1,0 +1,79 @@
+/*==============================================
+=            Table Styling Section             =
+==============================================*/
+
+.pricing-options {
+	margin-top: 5%;
+}
+
+.price-table {
+	@extend .well;
+	padding: 0;
+	margin-top: 0;
+	
+	@include breakpoint(tablet){
+	border-right-width: 0;
+	margin-top: 100px;
+		&:last-child {
+			border-right-width: 1px;
+		}
+	}
+
+	@include breakpoint(desktop){
+		margin-top: 62px;
+	}
+}
+
+.table-header {
+	padding: 2% 5%;
+	background: $light-grey;
+
+	h3 {
+		font-size: 30px;
+		font-weight: bold;
+		margin-bottom: 0;
+		line-height: 1;
+	}
+
+	p {
+		font-size: 24px;
+		margin-top: 0;
+	}
+}
+
+.premium {
+	margin-top: 0;
+}
+
+.pre-header {
+	background: $primary-dark;
+	color: white;
+	height: 50px;
+	@include breakpoint(tablet){
+		height: 100px;
+	}
+	@include breakpoint(desktop){
+		height: auto;
+	}
+}
+
+.premium .table-header {
+	background: $primary;
+	color: white;
+
+	p {
+		text-decoration: line-through;
+	}
+}
+
+.table-body {
+	padding: 10px 15px;
+
+	p {
+		padding: 20px 0;
+		border-bottom: 1px solid $border;
+		margin-bottom: 0;
+	}
+}
+
+/*=====  End of Table Styling Section   ======*/

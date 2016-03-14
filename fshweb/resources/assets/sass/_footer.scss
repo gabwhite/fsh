@@ -5,10 +5,14 @@
 .socket-color {
 	background: $body;
 	color: white;
-	padding: 2%;
 	font-weight: 700;
 	font-size: 14px;
 	margin-top: 5%;
+	padding: 4% 2%;
+	
+	@include breakpoint(tablet){
+		padding: 2%;
+	}
 
 	p {
 		font-size: 14px;
