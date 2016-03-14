@@ -5,7 +5,7 @@
 @section('sectionheader')
 <section class='clearfix container-wrap main-title register-header'>
     <div class='container'>
-        <h1 class="page-title"> {{trans('ui.navigation_vendorreg')}}</h1>
+        <h1 class="page-title"> {{trans('ui.navigation_userreg')}}</h1>
     </div>
 </section>
 @endsection
