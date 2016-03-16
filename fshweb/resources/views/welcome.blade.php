@@ -96,7 +96,7 @@
 					<p>Ingredient Deck</p>
 					<p>Benefit Statement</p>
 					<p>Preparation Instructions</p>
-					<p>>Nutritional Information</p>
+					<p>Nutritional Information</p>
 					<p>Allergens</p>
 					<p>Samples Request Button</p>
 					<p>Monthly Portfolio Activity Reports</p>
